@@ -6,6 +6,8 @@ This tool makes trading in Path of Exile easy.
 ### Download
 Download here: [TraderForPoe_0.1.zip](https://github.com/labo89/TraderForPoe/releases/download/v0.1/TraderForPoe_0.1.zip)
 
+### Screenshots
+![](https://github.com/labo89/TraderForPoe/blob/master/Screenshots/screen_01.PNG?raw=true "")
 
 ### Prerequisites
 
