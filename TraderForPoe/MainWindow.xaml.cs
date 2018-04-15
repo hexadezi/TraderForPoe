@@ -63,10 +63,10 @@ namespace TraderForPoe
             
             clipMoni.OnClipboardContentChanged += ClipMoni_OnClipboardContentChanged;
             
+            
+            this.Top = Settings.Default.WindowLocation.X;
 
-            this.Top = 0;
-
-            this.Left = (SystemParameters.PrimaryScreenWidth * 0.63);
+            this.Left = Settings.Default.WindowLocation.Y;
 
             // Set variables befor Timer start
             initialFileSize = new FileInfo(filePath).Length;
@@ -233,6 +233,12 @@ namespace TraderForPoe
             nIcon.Visible = false;
             nIcon.Dispose();
             System.Windows.Forms.Application.DoEvents();
+        }
+
+        private void Window_LocationChanged(object sender, EventArgs e)
+        {
+            Settings.Default.WindowLocation = new System.Drawing.Point((int)this.Top, (int)this.Left);
+            Settings.Default.Save();
         }
     }
 }

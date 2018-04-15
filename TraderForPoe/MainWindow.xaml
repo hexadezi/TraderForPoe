@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TraderForPoe"
         mc:Ignorable="d"
         Title="MainWindow" Width="350" SizeToContent="WidthAndHeight" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize"
-        Topmost="True" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="NearestNeighbor" ShowInTaskbar="False" Closing="Window_Closing">
+        Topmost="True" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="NearestNeighbor" ShowInTaskbar="False" Closing="Window_Closing" LocationChanged="Window_LocationChanged">
     <Window.Background>
         <SolidColorBrush Opacity="0"/>
     </Window.Background>

@@ -87,7 +87,7 @@ namespace TraderForPoe
         {
             WhisperMessage = whisper;
 
-            SetTradeType(whisper);
+            SetTradeType(WhisperMessage);
 
             ParseWhisper(WhisperMessage);
         }
