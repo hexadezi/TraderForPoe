@@ -15,7 +15,8 @@ What things you need to install the software and how to install them
 .
 
 ```
-.NET Framework 4.6.1
+- Set your settings in the config file
+- .NET Framework 4.6.1
 ```
 
 ### Installing
