@@ -72,5 +72,17 @@ namespace TraderForPoe.Properties {
                 this["PlayNotificationSound"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files (x86)\\Steam\\steamapps\\common\\Path of Exile\\logs\\Client.txt")]
+        public string PathToClientTxt {
+            get {
+                return ((string)(this["PathToClientTxt"]));
+            }
+            set {
+                this["PathToClientTxt"] = value;
+            }
+        }
     }
 }

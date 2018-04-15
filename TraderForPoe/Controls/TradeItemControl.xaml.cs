@@ -85,7 +85,7 @@ namespace TraderForPoe
 
             try
             {
-                txt_Price.Text = new String(tItem.Price.Where(Char.IsDigit).ToArray());
+                txt_Price.Text = TradeItem.ExtractFloatFromString(tItem.Price);
             }
             catch (Exception)
             { }
@@ -532,7 +532,15 @@ namespace TraderForPoe
 
         private void ClickWhisperCustomerBusy(object sender, RoutedEventArgs e)
         {
-            SendInputToPoe("@" + tItem.Customer + "Hi, I'm busy right now. Shall I write you after?");
+            SendInputToPoe("@" + tItem.Customer + " Hi, I'm busy right now. Shall I write you after?");
+        }
+
+        private void ClickShowStashOverlay(object sender, RoutedEventArgs e)
+        {
+            if (tItem.TradeType == TradeItem.TradeTypes.SELL)
+            {
+                stashGridHighlight.AddButton(tItem);
+            }
         }
     }
 

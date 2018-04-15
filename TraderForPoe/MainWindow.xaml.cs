@@ -2,10 +2,12 @@
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Threading;
+using TraderForPoe.Properties;
 using WindowsInput;
 using WindowsInput.Native;
 
@@ -43,7 +45,7 @@ namespace TraderForPoe
         public static extern IntPtr SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
         // Variables for reading the Client.txt
-        const string filePath = @"C:\Program Files (x86)\Steam\steamapps\common\Path of Exile\logs\Client.txt";
+        string filePath = Settings.Default.PathToClientTxt;
 
         long initialFileSize;
 
@@ -94,6 +96,8 @@ namespace TraderForPoe
 
                 // Make POE the foreground application and send input
                 SetForegroundWindow(poeHandle);
+
+                Thread.Sleep(100);
 
                 // Send LSHIFT and RETURN together
                 iSim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.LSHIFT, VirtualKeyCode.RETURN);
