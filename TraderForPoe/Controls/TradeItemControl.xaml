@@ -65,15 +65,17 @@
                 <Button Click="ClickToCollapseExpandItem">
                     <TextBlock  x:Name="btn_CollExp" Grid.Row="1" TextAlignment="Center" FontSize="13" FontWeight="Bold">⏶</TextBlock>
                 </Button>
+                
                 <Button ToolTip="{Binding Path=Text, ElementName=txt_Item}">
                     <TextBlock  x:Name="txt_Item" FontStyle="Italic" FontWeight="Bold" TextTrimming="CharacterEllipsis" >Caer Blaidd, Wolfpack's Den Underground River Map</TextBlock>
                 </Button>
+                
             </DockPanel>
 
             <DockPanel Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                <Button>
+                <Button Name="btn_Price">
                     <DockPanel>
-                        <TextBlock x:Name="txt_Price">1000</TextBlock>
+                        <TextBlock x:Name="txt_Price"></TextBlock>
                         <Image Name="img_Currency" RenderOptions.BitmapScalingMode="HighQuality"/>
                     </DockPanel>
                 </Button>
@@ -127,6 +129,10 @@
                 </Button>
                 <Button Click="ClickStashIsQuad" Name="btn_stash">
                     <TextBlock x:Name="txt_Stash">Stash</TextBlock>
+                </Button>
+
+                <Button  Click="ClickStashIsQuad" Name="btn_AdditionalText" Width="150" ToolTip="{Binding Path=Text, ElementName=txt_AdditionalText}">
+                    <TextBlock x:Name="txt_AdditionalText" TextTrimming="CharacterEllipsis" >Additional Text in whisper message</TextBlock>
                 </Button>
 
 

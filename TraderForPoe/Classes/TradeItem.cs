@@ -12,13 +12,13 @@ namespace TraderForPoe
     {
         public enum TradeTypes{BUY, SELL};
 
-        Regex poeTradeRegex = new Regex("@(.*) (.*): Hi, I would like to buy your (.*) listed for (.*) in (.*) [(]stash tab \"(.*)[\"]; position: left (.*), top (.*)[)]");
-        Regex poeTradeUnpricedRegex = new Regex("@(.*) (.*): Hi, I would like to buy your (.*) in (.*) [(]stash tab \"(.*)[\"]; position: left (.*), top (.*)[)]");
-        Regex poeTradeCurrencyRegex = new Regex("@(.*) (.*): Hi, I'd like to buy your (.*) for my (.*) in (.*).");
+        Regex poeTradeRegex = new Regex("@(.*) (.*): Hi, I would like to buy your (.*) listed for (.*) in (.*) [(]stash tab \"(.*)[\"]; position: left (.*), top (.*)[)](.*)");
+        Regex poeTradeUnpricedRegex = new Regex("@(.*) (.*): Hi, I would like to buy your (.*) in (.*) [(]stash tab \"(.*)[\"]; position: left (.*), top (.*)[)](.*)");
+        Regex poeTradeCurrencyRegex = new Regex("@(.*) (.*): Hi, I'd like to buy your (.*) for my (.*) in (.*).(.*)");
 
-        Regex poeAppRegEx = new Regex("@(.*) (.*): wtb (.*) listed for (.*) in (.*) [(]stash \"(.*)[\"]; left (.*), top (.*)[)]");
-        Regex poeAppUnpricedRegex = new Regex("@(.*) (.*): wtb (.*) in (.*) [(]stash \"(.*)[\"]; left (.*), top (.*)[)]");
-        Regex poeAppCurrencyRegex = new Regex("@(.*) (.*): I'd like to buy your (.*) for my (.*) in (.*).");
+        Regex poeAppRegEx = new Regex("@(.*) (.*): wtb (.*) listed for (.*) in (.*) [(]stash \"(.*)[\"]; left (.*), top (.*)[)](.*)");
+        Regex poeAppUnpricedRegex = new Regex("@(.*) (.*): wtb (.*) in (.*) [(]stash \"(.*)[\"]; left (.*), top (.*)[)](.*)");
+        Regex poeAppCurrencyRegex = new Regex("@(.*) (.*): I'd like to buy your (.*) for my (.*) in (.*).(.*)");
 
         public TradeItem(string whisper)
         {
@@ -66,9 +66,13 @@ namespace TraderForPoe
 
                     // Set stash position
                     this.StashPosition = new Point(Convert.ToDouble(match.Groups[7].Value), Convert.ToDouble(match.Groups[8].Value));
+
+                    this.AdditionalText = match.Groups[9].Value;
+
+
                 }
             }
-            else if (!whisper.Contains("listed for") && poeTradeUnpricedRegex.IsMatch(whisper))
+            else if (poeTradeUnpricedRegex.IsMatch(whisper))
             {
                 MatchCollection matches = Regex.Matches(whisper, poeTradeUnpricedRegex.ToString());
 
@@ -88,6 +92,8 @@ namespace TraderForPoe
 
                     // Set stash position
                     this.StashPosition = new Point(Convert.ToDouble(match.Groups[6].Value), Convert.ToDouble(match.Groups[7].Value));
+
+                    //this.AdditionalText = match.Groups[8].Value;
                 }
             }
             else if (poeTradeCurrencyRegex.IsMatch(whisper))
@@ -107,6 +113,8 @@ namespace TraderForPoe
 
                     // Set league
                     this.League = match.Groups[5].Value;
+
+                    this.AdditionalText = match.Groups[6].Value;
 
                 }
             }
@@ -133,6 +141,8 @@ namespace TraderForPoe
 
                     // Set stash position
                     this.StashPosition = new Point(Convert.ToDouble(match.Groups[7].Value), Convert.ToDouble(match.Groups[8].Value));
+
+                    this.AdditionalText = match.Groups[9].Value;
                 }
             }
             else if (!whisper.Contains("listed for") && poeAppUnpricedRegex.IsMatch(whisper))
@@ -155,6 +165,8 @@ namespace TraderForPoe
 
                     // Set stash position
                     this.StashPosition = new Point(Convert.ToDouble(match.Groups[6].Value), Convert.ToDouble(match.Groups[7].Value));
+
+                    this.AdditionalText = match.Groups[8].Value;
                 }
             }
             else if (!whisper.Contains("Hi, ") && poeAppCurrencyRegex.IsMatch(whisper))
@@ -174,6 +186,8 @@ namespace TraderForPoe
 
                     // Set league
                     this.League = match.Groups[5].Value; ;
+
+                    this.AdditionalText = match.Groups[6].Value;
                 }
             }
             else
@@ -200,6 +214,12 @@ namespace TraderForPoe
         }
 
         public string Price
+        {
+            get;
+            set;
+        }
+
+        public string AdditionalText
         {
             get;
             set;
