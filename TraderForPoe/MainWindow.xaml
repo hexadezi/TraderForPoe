@@ -17,6 +17,6 @@
                 <Setter Property="Margin" Value="0,0,0,1"/>
             </Style>
         </StackPanel.Resources>
-        <Button Margin="0" Click="Button_Click">Add Control</Button>
+        <!--<Button Margin="0" Click="Button_Click">Add Control</Button>-->
     </StackPanel>
 </Window>

@@ -51,7 +51,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\ico_Application.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\ico_application.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>TraderForPoe.App</StartupObject>
@@ -152,9 +152,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\ico_Application.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.6.1 %28x86 und x64%29</ProductName>
@@ -216,6 +213,9 @@
     <Resource Include="Resources\Currency\curr_tra.png" />
     <Resource Include="Resources\Currency\curr_vaal.png" />
     <Resource Include="Resources\Currency\curr_wis.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ico_application.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
