@@ -85,6 +85,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\ClipboardMonitor.cs" />
     <Compile Include="Controls\StashControl.xaml.cs">
       <DependentUpon>StashControl.xaml</DependentUpon>
     </Compile>

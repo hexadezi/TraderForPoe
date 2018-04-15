@@ -6,7 +6,8 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Threading;
-using TraderForPoe.Windows;
+using WindowsInput;
+using WindowsInput.Native;
 
 namespace TraderForPoe
 {
@@ -26,6 +27,15 @@ namespace TraderForPoe
         const int WS_EX_NOACTIVATE = 134217728;
         const int LSFW_LOCK = 1;
 
+        // Get a handle to an application window.
+        [DllImport("USER32.DLL", CharSet = CharSet.Unicode)]
+        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+        // Activate an application window.
+        [DllImport("USER32.DLL")]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        // Needed to prevent Application taking focus
         [DllImport("user32")]
         public static extern bool LockSetForegroundWindow(uint UINT);
 
@@ -39,13 +49,18 @@ namespace TraderForPoe
 
         long lastReadLength;
 
+        ClipboardMonitor clipMoni = new ClipboardMonitor();
 
+        InputSimulator iSim = new InputSimulator();
 
         public MainWindow()
         {
             InitializeComponent();
 
             Loaded += (object sender, RoutedEventArgs e) => SetNoActiveWindow();
+            
+            clipMoni.OnClipboardContentChanged += ClipMoni_OnClipboardContentChanged;
+            
 
             this.Top = 0;
 
@@ -60,7 +75,36 @@ namespace TraderForPoe
             CreateContextMenu();
         }
 
+        private void ClipMoni_OnClipboardContentChanged(object sender, EventArgs e)
+        {
+            string strClipboard = Clipboard.GetText(TextDataFormat.UnicodeText);
 
+            if (strClipboard.StartsWith("@"))
+            {
+                // Get a handle to POE. The window class and window name were obtained using the Spy++ tool.
+                IntPtr poeHandle = FindWindow("POEWindowClass", "Path of Exile");
+
+                // Verify that POE is a running process.
+                if (poeHandle == IntPtr.Zero)
+                {
+                    // Show message box if POE is not running
+                    MessageBox.Show("Path of Exile is not running.");
+                    return;
+                }
+
+                // Make POE the foreground application and send input
+                SetForegroundWindow(poeHandle);
+
+                // Send LSHIFT and RETURN together
+                iSim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.LSHIFT, VirtualKeyCode.RETURN);
+
+                // Send the input
+                iSim.Keyboard.TextEntry(strClipboard);
+
+                // Send RETURN
+                iSim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+            }
+        }
 
         private void CreateContextMenu()
         {
@@ -167,7 +211,7 @@ namespace TraderForPoe
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
+            if (e.ChangedButton == System.Windows.Input.MouseButton.Left)
                 this.DragMove();
         }
 
