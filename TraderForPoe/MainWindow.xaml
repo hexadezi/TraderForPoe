@@ -1,0 +1,22 @@
+﻿<Window x:Class="TraderForPoe.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TraderForPoe"
+        mc:Ignorable="d"
+        Title="MainWindow" Width="350" SizeToContent="WidthAndHeight" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize"
+        Topmost="True" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="NearestNeighbor" ShowInTaskbar="False" Closing="Window_Closing">
+    <Window.Background>
+        <SolidColorBrush Opacity="0"/>
+    </Window.Background>
+    
+    <StackPanel x:Name="stk_MainPnl" MouseDown="Window_MouseDown">
+        <StackPanel.Resources> 
+            <Style TargetType="{x:Type local:TradeItemControl}">
+                <Setter Property="Margin" Value="0,0,0,1"/>
+            </Style>
+        </StackPanel.Resources>
+        <Button Margin="0" Click="Button_Click">Add Control</Button>
+    </StackPanel>
+</Window>
