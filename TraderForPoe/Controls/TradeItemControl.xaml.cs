@@ -145,8 +145,7 @@ namespace TraderForPoe
             // Make POE the foreground application and send input
             SetForegroundWindow(poeHandle);
 
-            // Send LSHIFT and RETURN together
-            iSim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.LSHIFT, VirtualKeyCode.RETURN);
+            iSim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
 
             // Send the input
             iSim.Keyboard.TextEntry(input);
@@ -195,7 +194,7 @@ namespace TraderForPoe
             // Make POE the foreground application and send input
             SetForegroundWindow(poeHandle);
 
-            iSim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.LSHIFT, VirtualKeyCode.RETURN);
+            iSim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
 
             iSim.Keyboard.TextEntry("@" + tItem.Customer + " ");
         }

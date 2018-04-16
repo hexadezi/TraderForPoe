@@ -102,8 +102,7 @@ namespace TraderForPoe
 
                 Thread.Sleep(100);
 
-                // Send LSHIFT and RETURN together
-                iSim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.LSHIFT, VirtualKeyCode.RETURN);
+                iSim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
 
                 // Send the input
                 iSim.Keyboard.TextEntry(strClipboard);
