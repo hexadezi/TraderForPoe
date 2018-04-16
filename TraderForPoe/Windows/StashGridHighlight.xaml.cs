@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -7,6 +9,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using TraderForPoe.Classes;
 using TraderForPoe.Controls;
 using TraderForPoe.Properties;
 
@@ -28,33 +31,199 @@ namespace TraderForPoe.Windows
         [DllImport("user32")]
         public static extern IntPtr SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
+        // Get a handle to an application window.
+        [DllImport("USER32.DLL", CharSet = CharSet.Unicode)]
+        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+        // Used to get the client area of POE and the height and widht
+        [DllImport("user32.dll")]
+        static extern bool GetClientRect(IntPtr hWnd, out RECT lpRect);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct RECT
+        {
+            public int Left;        // x position of upper-left corner
+            public int Top;         // y position of upper-left corner
+            public int Right;       // x position of lower-right corner
+            public int Bottom;      // y position of lower-right corner
+        }
+
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        IntPtr poeHandle = FindWindow("POEWindowClass", "Path of Exile");
+
+        // Needed to determine if poe window location changed
+        private IntPtr hWinEventHook;
+        protected Hook.WinEventDelegate WinEventDelegate;
+        uint poeProcessId;
 
         public StashGridHighlight()
         {
+            // Verify that POE is a running process.
+            if (poeHandle == IntPtr.Zero)
+            {
+                MessageBox.Show("Path of Exile is not running.");
+                return;
+            }
+
             InitializeComponent();
 
             Loaded += (object sender, RoutedEventArgs e) => SetNoActiveWindow();
 
-            this.Top = (SystemParameters.PrimaryScreenHeight * 0.15) - 70;
-            //this.Top = 162;
+            UpdateLocation();
 
-            this.Height = (SystemParameters.PrimaryScreenHeight * 0.58475925925925924) + 70;
-            //this.Height = 631;
+            WinEventDelegate = new Hook.WinEventDelegate(WinEventCallback);
 
-            this.Left = (SystemParameters.PrimaryScreenWidth * 0.008854166666666666);
-            //this.Left = 17;
+            try
+            {
+                if (poeHandle != IntPtr.Zero)
+                {
+                    uint TargetThreadId = Hook.GetWindowThread(poeHandle);
+                    UnsafeNativeMethods.GetWindowThreadProcessId(poeHandle, out poeProcessId);
+                    hWinEventHook = Hook.WinEventHookOne(Hook.SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE,
+                                                         WinEventDelegate,
+                                                         poeProcessId,
+                                                         TargetThreadId);
+                }
 
-            this.Width = (SystemParameters.PrimaryScreenHeight * 0.58475925925925924);
-            //this.Width = 631;
+            }
+            catch (Exception ex)
+            {
+                //ErrorManager.Logger(this, this.InitializeComponent(), ex.HResult, ex.Data, DateTime.Now);
+                throw ex;
+            }
+        }
 
+        protected void WinEventCallback(IntPtr hWinEventHook, Hook.SWEH_Events eventType, IntPtr hWnd, Hook.SWEH_ObjectId idObject, long idChild, uint dwEventThread, uint dwmsEventTime)
+        {
+            if (hWnd == poeHandle && eventType == Hook.SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE && idObject == (Hook.SWEH_ObjectId)Hook.SWEH_CHILDID_SELF)
+            {
+                UpdateLocation();
+            }
+        }
+        
+        private void UpdateLocation()
+        {
+
+            GetClientRect(poeHandle, out RECT clientRect);
+            GetWindowRect(poeHandle, out RECT windowRect);
+
+            double borderSize = (windowRect.Right - (windowRect.Left + clientRect.Right)) / 2;
+            double titleBarSize = (windowRect.Bottom - (windowRect.Top + clientRect.Bottom)) - borderSize;
+
+            double x = windowRect.Left + borderSize;
+            double y = windowRect.Top + titleBarSize;
+            double h = clientRect.Bottom;
+            double w = clientRect.Right;
+
+            row_1.Height = new GridLength(h * 0.02);
+            row_2.Height = new GridLength(h * 0.035);
+            row_3.Height = GridLength.Auto;
+
+            if ((w / h) < 1.35)
+            {
+                this.Top = y + (h * 0.094);
+
+                this.Left = x + (w * 0.011);
+
+                this.Height = (h * 0.585) + row_1.Height.Value + row_2.Height.Value;
+
+                this.Width = (h * 0.585);
+            }
+            else if ((w / h) < 1.9)
+            {
+                this.Top = y + (h * 0.094);
+
+                this.Left = x + (w * 0.0088);
+
+                this.Height = (h * 0.585) + row_1.Height.Value + row_2.Height.Value;
+
+                this.Width = (h * 0.585);
+            }
+            else if ((w / h) < 1.99)
+            {
+                this.Top = y + (h * 0.097);
+
+                this.Left = x + (w * 0.008);
+
+                this.Height = (h * 0.585) + row_1.Height.Value + row_2.Height.Value;
+
+                this.Width = (h * 0.585);
+            }
+
+            else if ((w / h) < 2.3)
+            {
+
+                this.Top = y + (h * 0.097);
+
+                this.Left = x + (w * 0.007);
+
+                this.Height = (h * 0.585) + row_1.Height.Value + row_2.Height.Value;
+
+                this.Width = (h * 0.585);
+            }
+
+            else if ((w / h) < 2.58)
+            {
+                this.Top = y + (h * 0.096);
+
+                this.Left = x + (w * 0.006);
+
+                this.Height = (h * 0.585) + row_1.Height.Value + row_2.Height.Value;
+
+                this.Width = (h * 0.585);
+
+            }
+
+            else if ((w / h) < 2.8)
+            {
+                this.Top = y + (h * 0.0959);
+
+                this.Left = x + (w * 0.0055);
+
+                this.Height = (h * 0.585) + row_1.Height.Value + row_2.Height.Value;
+
+                this.Width = (h * 0.585);
+
+            }
+
+            else if ((w / h) < 3.1)
+            {
+                this.Top = y + (h * 0.0955);
+
+                this.Left = x + (w * 0.005);
+
+                this.Height = (h * 0.585) + row_1.Height.Value + row_2.Height.Value;
+
+                this.Width = (h * 0.585);
+            }
+
+            else
+	{
+                this.Top = y + (h * 0.094);
+
+                this.Left = x + (w * 0.004);
+
+                this.Height = (h * 0.585) + row_1.Height.Value + row_2.Height.Value;
+
+                this.Width = (h * 0.585);
+            }
+            
+            front_canvas.Width = this.Width;
+
+            front_canvas.Height = this.Height;
         }
 
         public void AddButton(TradeItem tItemArgs)
         {
+            UpdateLocation();
+
             foreach (StashControl item in spnl_Buttons.Children)
             {
-                if (item.GetTItem.Item == tItemArgs.Item && item.GetTItem.Customer == tItemArgs.Customer)
+                if (item.GetTItem.Item == tItemArgs.Item && item.GetTItem.Customer == tItemArgs.Customer && item.GetTItem.Price == tItemArgs.Price)
                 {
                     return;
                 }
@@ -93,56 +262,44 @@ namespace TraderForPoe.Windows
 
             StashControl stashControl = (StashControl)sender;
 
-            double x = stashControl.GetTItem.StashPosition.X - 1;
+            double x = stashControl.GetTItem.StashPosition.X;
 
-            double y = stashControl.GetTItem.StashPosition.Y - 1;
+            double y = stashControl.GetTItem.StashPosition.Y;
 
-            int number = 48;
+            int nbrRectStash = 12;
 
-            double dim = (this.Width) / 12;
+            double rectDimensionX = ((front_canvas.Width) / 12);
 
             foreach (var item in Settings.Default.QuadStash)
             {
                 if (item == stashControl.GetTItem.Stash)
                 {
-                    dim = dim / 2;
+                    rectDimensionX = rectDimensionX / 2;
+                    nbrRectStash = nbrRectStash * 2;
                 }
             }
 
-            int top = 0;
-
-            int left = 0;
-
-            for (int i = 0; i < number; i++)
+            for (int iX = 1; iX <= nbrRectStash; iX++)
             {
                 // Create the rectangle
-                Rectangle rec = new Rectangle()
+                Rectangle rectangleHighlight = new Rectangle()
                 {
-                    Width = dim,
-                    Height = dim,
+                    Width = rectDimensionX,
+                    Height = rectDimensionX,
                     Stroke = Brushes.Red,
                     StrokeThickness = 1,
                 };
-                //front_canvas.Children.Add(rec);
-
-                if (i == x)
+                
+                if (iX == x)
                 {
-                    for (int i2 = 1; i2 < number; i2++)
+
+                    for (int iY = 1; iY <= nbrRectStash; iY++)
                     {
-                        Rectangle rec2 = new Rectangle()
+                        if (iY == y)
                         {
-                            Width = dim,
-                            Height = dim,
-                            Stroke = Brushes.Red,
-                            StrokeThickness = 1,
-                        };
-
-
-                        if (i2 == y)
-                        {
-                            front_canvas.Children.Add(rec2);
-                            Canvas.SetLeft(rec2, left + (i * dim));
-                            Canvas.SetTop(rec2, top + (i2 * dim));
+                            front_canvas.Children.Add(rectangleHighlight);
+                            Canvas.SetLeft(rectangleHighlight, (iX - 1) * rectDimensionX);
+                            Canvas.SetTop(rectangleHighlight, (iY - 1) * rectDimensionX);
                         }
 
                     }
@@ -154,19 +311,23 @@ namespace TraderForPoe.Windows
         public void ClearCanvas()
         {
             this.front_canvas.Children.Clear();
-
         }
 
         internal void RemoveStashControl(TradeItem tItemArgs)
         {
             foreach (StashControl item in spnl_Buttons.Children)
             {
-                if (item.GetTItem.Item == tItemArgs.Item && item.GetTItem.Customer == tItemArgs.Customer)
+                if (item.GetTItem.Item == tItemArgs.Item && item.GetTItem.Customer == tItemArgs.Customer && item.GetTItem.Price == tItemArgs.Price)
                 {
                     spnl_Buttons.Children.Remove(item);
                     break; //important step
                 }
             }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Hook.WinEventUnhook(hWinEventHook);
         }
     }
 }

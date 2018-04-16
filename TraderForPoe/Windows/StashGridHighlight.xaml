@@ -6,21 +6,23 @@
         xmlns:local="clr-namespace:TraderForPoe.Windows"
         mc:Ignorable="d"
         Title="TestGrid" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize"
-        Topmost="True" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="NearestNeighbor" ShowInTaskbar="False">
+        Topmost="True" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="NearestNeighbor" ShowInTaskbar="False" Closing="Window_Closing">
     <Window.Background>
         <SolidColorBrush Opacity="0"/>
     </Window.Background>
     <Border BorderBrush="White" BorderThickness="0">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Name="row_1"/>
+                <RowDefinition Name="row_2"/>
+                <RowDefinition Name="row_3"/>
             </Grid.RowDefinitions>
             <StackPanel Name="spnl_Buttons" Grid.Row="0" Orientation="Horizontal">
-
             </StackPanel>
-            <Canvas Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" Name="front_canvas"/>
+            <StackPanel Grid.Row="1"/>
+            <Canvas Grid.Row="2"  Name="front_canvas"/>
+
+
         </Grid>
     </Border>
 </Window>

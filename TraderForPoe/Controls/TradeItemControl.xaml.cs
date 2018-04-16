@@ -282,8 +282,7 @@ namespace TraderForPoe
             MessageBoxResult dialogResult = System.Windows.MessageBox.Show("Is this a quad stash?", "Quad stash?", MessageBoxButton.YesNo);
             if (dialogResult == MessageBoxResult.Yes)
             {
-                Settings.Default.QuadStash.Add(tItem.Stash);
-                // Saves settings in application configuration file
+                Settings.Default.QuadStash.Add(tItem.Stash.ToString());
                 Settings.Default.Save();
             }
         }
