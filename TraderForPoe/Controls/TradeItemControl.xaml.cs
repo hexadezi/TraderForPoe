@@ -10,6 +10,7 @@ using System.Drawing;
 using TraderForPoe.Properties;
 using System.Linq;
 using System.Windows.Media.Imaging;
+using System.Threading;
 
 namespace TraderForPoe
 {
@@ -110,7 +111,7 @@ namespace TraderForPoe
             }
 
             img_Currency.Source = tItem.PriceCurrencyBitmap;
-            
+
         }
 
         private void StartAnimatioin()
@@ -137,6 +138,9 @@ namespace TraderForPoe
                 MessageBox.Show("Path of Exile is not running.");
                 return;
             }
+
+            // Need to press ALT because the SetForegroundWindow sometimes does not work
+            iSim.Keyboard.KeyPress(VirtualKeyCode.MENU);
 
             // Make POE the foreground application and send input
             SetForegroundWindow(poeHandle);
@@ -185,6 +189,9 @@ namespace TraderForPoe
                 return;
             }
 
+            // Need to press ALT because the SetForegroundWindow sometimes does not work
+            iSim.Keyboard.KeyPress(VirtualKeyCode.MENU);
+
             // Make POE the foreground application and send input
             SetForegroundWindow(poeHandle);
 
@@ -218,6 +225,9 @@ namespace TraderForPoe
                 MessageBox.Show("Path of Exile is not running.");
                 return;
             }
+
+            // Need to press ALT because the SetForegroundWindow sometimes does not work
+            iSim.Keyboard.KeyPress(VirtualKeyCode.MENU);
 
             // Make POE the foreground application and send input
             SetForegroundWindow(poeHandle);

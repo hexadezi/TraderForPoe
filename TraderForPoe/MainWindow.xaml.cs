@@ -94,6 +94,9 @@ namespace TraderForPoe
                     return;
                 }
 
+                // Need to press ALT because the SetForegroundWindow sometimes does not work
+                iSim.Keyboard.KeyPress(VirtualKeyCode.MENU);
+
                 // Make POE the foreground application and send input
                 SetForegroundWindow(poeHandle);
 
