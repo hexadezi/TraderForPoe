@@ -19,7 +19,6 @@ namespace TraderForPoe
     /// </summary>
     public partial class MainWindow : Window
     {
-
         System.Windows.Forms.NotifyIcon nIcon = new System.Windows.Forms.NotifyIcon();
 
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
@@ -44,6 +43,9 @@ namespace TraderForPoe
         [DllImport("user32")]
         public static extern IntPtr SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
+        // Get a handle to POE. The window class and window name were obtained using the Spy++ tool.
+        IntPtr poeHandle = FindWindow("POEWindowClass", "Path of Exile");
+
         // Variables for reading the Client.txt
         string filePath = Settings.Default.PathToClientTxt;
 
@@ -57,13 +59,20 @@ namespace TraderForPoe
 
         public MainWindow()
         {
+            if (poeHandle == IntPtr.Zero)
+            {
+                // Show message box if POE is not running
+                MessageBox.Show("Path of Exile is not running.");
+                return;
+            }
+
             InitializeComponent();
 
             Loaded += (object sender, RoutedEventArgs e) => SetNoActiveWindow();
-            
+
             clipMoni.OnClipboardContentChanged += ClipMoni_OnClipboardContentChanged;
-            
-            
+
+
             this.Top = Settings.Default.WindowLocation.X;
 
             this.Left = Settings.Default.WindowLocation.Y;
@@ -83,9 +92,6 @@ namespace TraderForPoe
 
             if (strClipboard.StartsWith("@"))
             {
-                // Get a handle to POE. The window class and window name were obtained using the Spy++ tool.
-                IntPtr poeHandle = FindWindow("POEWindowClass", "Path of Exile");
-
                 // Verify that POE is a running process.
                 if (poeHandle == IntPtr.Zero)
                 {
