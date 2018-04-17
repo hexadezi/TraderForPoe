@@ -304,7 +304,7 @@ namespace TraderForPoe
                     return Currency.ALCHCHEMY;
                 }
 
-                else if (strPrice.Contains("alt"))
+                else if (strPrice.Contains("alt") && !strPrice.Contains("ex"))
                 {
                     return Currency.ALTERATION;
                 }
