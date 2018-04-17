@@ -96,5 +96,29 @@ namespace TraderForPoe.Properties {
                 this["WindowLocation"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CustomWhisper1 {
+            get {
+                return ((string)(this["CustomWhisper1"]));
+            }
+            set {
+                this["CustomWhisper1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CustomWhisper2 {
+            get {
+                return ((string)(this["CustomWhisper2"]));
+            }
+            set {
+                this["CustomWhisper2"] = value;
+            }
+        }
     }
 }

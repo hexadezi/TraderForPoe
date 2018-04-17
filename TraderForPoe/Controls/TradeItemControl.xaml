@@ -8,6 +8,7 @@
              BorderBrush="#FF5D5D5D" BorderThickness="1" UseLayoutRounding="True" 
              FontFamily="Calibri" >
     <UserControl.Resources>
+
         <Style x:Key="BtnStyle" TargetType="Button">
             <Setter Property="Margin" Value="0,0,2,0"/>
             <Setter Property="MinWidth" Value="20"/>
@@ -25,29 +26,33 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#FF8D8D8D"/>
-                    <!--<Setter Property="BorderBrush" Value="White"/>-->
+                    <Setter Property="Background" Value="#FF767676"/>
                 </Trigger>
                 <Trigger Property="IsPressed" Value="True">
                     <Setter Property="Background" Value="#FFA8A8A8"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
+        
         <Style x:Key="TxtStyle" TargetType="TextBlock">
-            <Setter Property="Padding" Value="3,0,3,0"/>
+            <Setter Property="Padding" Value="2,0,2,0"/>
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
-
             <Setter Property="Height" Value="{Binding ActualHeight, ElementName=Button}"/>
 
         </Style>
+
+        <Style x:Key="CmdStyle" BasedOn="{StaticResource BtnStyle}" TargetType="Button">
+            <Setter Property="Width" Value="20"/>
+        </Style>
+
         <Style BasedOn="{StaticResource BtnStyle}" TargetType="Button"/>
         <Style BasedOn="{StaticResource TxtStyle}" TargetType="TextBlock"/>
     </UserControl.Resources>
 
-    <Border Margin="2,2,0,2">
-        <Grid Name="grd_MainGrid">
+    <StackPanel>
+        <Grid Margin="2,2,2,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -55,72 +60,74 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="22"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-
-
-            <DockPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                <Button Click="ClickToCollapseExpandItem">
+            <DockPanel Grid.Column="0" Grid.ColumnSpan="2">
+                <Button Click="ClickToCollapseExpandItem" Style="{DynamicResource CmdStyle}">
                     <TextBlock  x:Name="btn_CollExp" Grid.Row="1" TextAlignment="Center" FontSize="13" FontWeight="Bold">⏶</TextBlock>
                 </Button>
-                
+
                 <Button ToolTip="{Binding Path=Text, ElementName=txt_Item}" Click="ClickShowStashOverlay">
                     <TextBlock  x:Name="txt_Item" FontStyle="Italic" FontWeight="Bold" TextTrimming="CharacterEllipsis" >Caer Blaidd, Wolfpack's Den Underground River Map</TextBlock>
                 </Button>
-                
+
             </DockPanel>
 
             <DockPanel Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                 <Button Name="btn_Price">
                     <DockPanel>
                         <TextBlock x:Name="txt_Price"></TextBlock>
-                        <Image Name="img_Currency" RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <Image Name="img_Currency" RenderOptions.BitmapScalingMode="HighQuality" Margin="0,0,2,0"/>
                     </DockPanel>
                 </Button>
 
             </DockPanel>
 
             <DockPanel Grid.Column="3" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                <Button ToolTip="Visit customer hideout" Click="ClickVisitHideout">
+                <Button ToolTip="Visit customer hideout" Click="ClickVisitHideout" Style="{DynamicResource CmdStyle}">
                     <TextBlock>🏠</TextBlock>
                 </Button>
-                <Button ToolTip="Invite customer" Click="ClickInviteCustomer">
+                <Button ToolTip="Invite customer" Click="ClickInviteCustomer" Style="{DynamicResource CmdStyle}">
                     <TextBlock>➕</TextBlock>
                 </Button>
 
-                <Button ToolTip="Trade with customer" Click="ClickTradeInvite">
+                <Button ToolTip="Trade with customer" Click="ClickTradeInvite" Style="{DynamicResource CmdStyle}">
                     <TextBlock>💰</TextBlock>
                 </Button>
 
-                <Button ToolTip="Say thanks to customer" Click="ClickThanksForTrade">
+                <Button ToolTip="Say thanks to customer" Click="ClickThanksForTrade" Style="{DynamicResource CmdStyle}">
                     <TextBlock>🤝</TextBlock>
                 </Button>
 
-                <Button ToolTip="Kick yourself" Click="ClickKickMyself">
+                <Button ToolTip="Kick yourself" Click="ClickKickMyself" Style="{DynamicResource CmdStyle}">
                     <TextBlock FontSize="10">➖</TextBlock>
                 </Button>
 
-                <Button ToolTip="Visit own hideout" Click="ClickVisitOwnHideout">
+                <Button ToolTip="Visit own hideout" Click="ClickVisitOwnHideout" Style="{DynamicResource CmdStyle}">
                     <TextBlock>🏡</TextBlock>
                 </Button>
 
-                <Button ToolTip="Tell the customer I'm busy" Click="ClickWhisperCustomerBusy">
+                <Button ToolTip="Tell the customer I'm busy" Click="ClickWhisperCustomerBusy" Style="{DynamicResource CmdStyle}">
                     <TextBlock>🕑</TextBlock>
                 </Button>
 
-                <Button ToolTip="Whisper customer" Click="ClickWhisperCustomer">
+                <Button ToolTip="Whisper customer" Click="ClickWhisperCustomer" Style="{DynamicResource CmdStyle}">
                     <TextBlock>💬</TextBlock>
                 </Button>
 
-                <Button ToolTip="Remove this item" Click="ClickRemoveItem">
+                <Button ToolTip="Remove this item" Click="ClickRemoveItem" Style="{DynamicResource CmdStyle}" Margin="0">
                     <TextBlock>✘</TextBlock>
                 </Button>
 
             </DockPanel>
 
-            <DockPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+        </Grid>
+
+        <Grid Margin="2,2,2,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <DockPanel Grid.Column="0">
                 <Button Click="ClickWhoisCustomer" >
                     <TextBlock x:Name="txt_Customer">ThebestCustomer</TextBlock>
                 </Button>
@@ -130,31 +137,33 @@
                 <Button Click="ClickStashIsQuad" Name="btn_stash">
                     <TextBlock x:Name="txt_Stash">Stash</TextBlock>
                 </Button>
-
-                <Button  Name="btn_AdditionalText" Width="150" ToolTip="{Binding Path=Text, ElementName=txt_AdditionalText}">
+                <Button  Name="btn_AdditionalText" ToolTip="{Binding Path=Text, ElementName=txt_AdditionalText}" HorizontalContentAlignment="Stretch">
                     <TextBlock x:Name="txt_AdditionalText" TextTrimming="CharacterEllipsis" >Additional Text in whisper message</TextBlock>
                 </Button>
-
-
-                <DockPanel HorizontalAlignment="Right" Grid.Column="3" Grid.Row="1">
-                    <Button Click="ClickSearchItem" ToolTip="Perform a search in the stash">
-                        <TextBlock>🔍</TextBlock>
-                    </Button>
-
-                    <Button Click="ClickKickCustomer">
-                        <TextBlock>👞</TextBlock>
-                    </Button>
-
-                    <Button Click="ClickSendWhisperAgain">
-                        <TextBlock FontSize="12">❓</TextBlock>
-                    </Button>
-
-                </DockPanel>
             </DockPanel>
 
+            <DockPanel Grid.Column="1">
+                <Button ToolTip="" Style="{DynamicResource CmdStyle}" Click="ClickCustomWhisper1">
+                    <TextBlock FontSize="15">1</TextBlock>
+                </Button>
 
+                <Button ToolTip="" Style="{DynamicResource CmdStyle}" Click="ClickCustomWhisper2">
+                    <TextBlock FontSize="15">2</TextBlock>
+                </Button>
 
+                <Button Click="ClickSearchItem" ToolTip="Perform a search in the stash" Style="{DynamicResource CmdStyle}">
+                    <TextBlock>🔍</TextBlock>
+                </Button>
+
+                <Button Click="ClickKickCustomer" Style="{DynamicResource CmdStyle}">
+                    <TextBlock>👞</TextBlock>
+                </Button>
+
+                <Button Click="ClickSendWhisperAgain" Style="{DynamicResource CmdStyle}" Margin="0">
+                    <TextBlock FontSize="12">❓</TextBlock>
+                </Button>
+            </DockPanel>
         </Grid>
-    </Border>
+    </StackPanel>
 
 </UserControl>

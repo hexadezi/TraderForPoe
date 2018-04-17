@@ -43,31 +43,41 @@ namespace TraderForPoe
         {
             InitializeComponent();
 
-            if (Settings.Default.CollapsedItems == true)
-            {
-                CollapseExpandItem();
-            }
-
             tItem = tItemArg;
 
-            FillControl(tItemArg);
+            LoadSettings();
+
+            FillControl(tItem);
 
             StartAnimatioin();
 
-            if (Settings.Default.PlayNotificationSound)
-            {
-                System.Media.SystemSounds.Hand.Play();
-            }
+            OpenStashGridHighlightWindow();
 
+
+        }
+        //-----------------------------------------------------------------------------------------
+
+        private void OpenStashGridHighlightWindow()
+        {
             if (stashGridHighlight == null)
             {
                 stashGridHighlight = new StashGridHighlight();
                 stashGridHighlight.Show();
             }
-
         }
 
-        //-----------------------------------------------------------------------------------------
+        private void LoadSettings()
+        {
+            if (Settings.Default.CollapsedItems == true)
+            {
+                CollapseExpandItem();
+            }
+
+            if (Settings.Default.PlayNotificationSound)
+            {
+                System.Media.SystemSounds.Hand.Play();
+            }
+        }
 
         private void FillControl(TradeItem tItemArg)
         {
@@ -97,8 +107,19 @@ namespace TraderForPoe
             }
 
             txt_League.Text = tItem.League;
-            txt_Stash.Text = tItem.Stash;
-            btn_stash.ToolTip = tItem.StashPosition.ToString();
+
+            if (tItem.Stash == null)
+            {
+                btn_stash.Visibility = Visibility.Collapsed;
+                btn_stash.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                txt_Stash.Text = tItem.Stash;
+                btn_stash.ToolTip = tItem.StashPosition.ToString();
+            }
+
+
 
             if (tItem.AdditionalText == "" || tItem.AdditionalText == null)
             {
@@ -240,7 +261,7 @@ namespace TraderForPoe
 
         private void ClickSendWhisperAgain(object sender, RoutedEventArgs e)
         {
-            SendInputToPoe("@" + tItem.Customer + " Hi, I would like to buy your " + tItem.Item + " listed for " + tItem.Price + " in " + tItem.League + " (stash tab \"" + tItem.Stash + "\"; position: left " + tItem.StashPosition.X + ", top " + tItem.StashPosition.Y + ")");
+            //SendInputToPoe("@" + tItem.Customer + " Hi, I would like to buy your " + tItem.Item + " listed for " + tItem.Price + " in " + tItem.League + " (stash tab \"" + tItem.Stash + "\"; position: left " + tItem.StashPosition.X + ", top " + tItem.StashPosition.Y + ")");
         }
 
         private void ClickKickCustomer(object sender, RoutedEventArgs e)
@@ -307,6 +328,16 @@ namespace TraderForPoe
             {
                 stashGridHighlight.AddButton(tItem);
             }
+        }
+
+        private void ClickCustomWhisper1(object sender, RoutedEventArgs e)
+        {
+            SendInputToPoe("@" + tItem.Customer + " " + Settings.Default.CustomWhisper1);
+        }
+
+        private void ClickCustomWhisper2(object sender, RoutedEventArgs e)
+        {
+            SendInputToPoe("@" + tItem.Customer + " " + Settings.Default.CustomWhisper2);
         }
     }
 
