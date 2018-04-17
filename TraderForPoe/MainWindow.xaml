@@ -6,17 +6,14 @@
         xmlns:local="clr-namespace:TraderForPoe"
         mc:Ignorable="d"
         Title="MainWindow" Width="350" SizeToContent="WidthAndHeight" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize"
-        Topmost="True" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="NearestNeighbor" ShowInTaskbar="False" Closing="Window_Closing" LocationChanged="Window_LocationChanged">
-    <Window.Background>
-        <SolidColorBrush Opacity="0"/>
-    </Window.Background>
-    
+        Topmost="True" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="NearestNeighbor" ShowInTaskbar="False" Closing="Window_Closing" 
+        LocationChanged="Window_LocationChanged" Background="Transparent">
+   
     <StackPanel x:Name="stk_MainPnl" MouseDown="Window_MouseDown">
-        <StackPanel.Resources> 
+        <StackPanel.Resources>
             <Style TargetType="{x:Type local:TradeItemControl}">
                 <Setter Property="Margin" Value="0,0,0,1"/>
             </Style>
         </StackPanel.Resources>
-        <!--<Button Margin="0" Click="Button_Click">Add Control</Button>-->
     </StackPanel>
 </Window>

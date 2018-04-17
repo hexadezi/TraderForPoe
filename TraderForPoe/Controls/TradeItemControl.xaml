@@ -6,9 +6,11 @@
              xmlns:local="clr-namespace:TraderForPoe" 
              mc:Ignorable="d" Height="48" Width="450" Foreground="LightGray" Background="#FF292929" 
              BorderBrush="#FF5D5D5D" BorderThickness="1" UseLayoutRounding="True" 
-             FontFamily="Calibri" >
+             FontFamily="Calibri" RenderOptions.BitmapScalingMode="HighQuality">
     <UserControl.Resources>
 
+
+        
         <Style x:Key="BtnStyle" TargetType="Button">
             <Setter Property="Margin" Value="0,0,2,0"/>
             <Setter Property="MinWidth" Value="20"/>
@@ -24,6 +26,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#FF767676"/>
@@ -32,8 +35,9 @@
                     <Setter Property="Background" Value="#FFA8A8A8"/>
                 </Trigger>
             </Style.Triggers>
+
         </Style>
-        
+
         <Style x:Key="TxtStyle" TargetType="TextBlock">
             <Setter Property="Padding" Value="2,0,2,0"/>
             <Setter Property="TextAlignment" Value="Center"/>
@@ -47,6 +51,7 @@
             <Setter Property="Width" Value="20"/>
         </Style>
 
+        
         <Style BasedOn="{StaticResource BtnStyle}" TargetType="Button"/>
         <Style BasedOn="{StaticResource TxtStyle}" TargetType="TextBlock"/>
     </UserControl.Resources>
@@ -78,43 +83,53 @@
                         <Image Name="img_Currency" RenderOptions.BitmapScalingMode="HighQuality" Margin="0,0,2,0"/>
                     </DockPanel>
                 </Button>
-
+ 
             </DockPanel>
 
             <DockPanel Grid.Column="3" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                <Button ToolTip="Visit customer hideout" Click="ClickVisitHideout" Style="{DynamicResource CmdStyle}">
-                    <TextBlock>🏠</TextBlock>
+                <Button ToolTip="Visit customer hideout" Click="ClickVisitHideout" Style="{DynamicResource CmdStyle}" Name="btn_VisitCustomerHideout">
+                    <!--<TextBlock>🏠</TextBlock>-->
+                    <Image Source="pack://application:,,,/Resources/Images/customerHideout.png" Width="16" Height="16"></Image>
                 </Button>
-                <Button ToolTip="Invite customer" Click="ClickInviteCustomer" Style="{DynamicResource CmdStyle}">
-                    <TextBlock>➕</TextBlock>
-                </Button>
-
-                <Button ToolTip="Trade with customer" Click="ClickTradeInvite" Style="{DynamicResource CmdStyle}">
-                    <TextBlock>💰</TextBlock>
+                <Button x:Name="btn_InviteCustomer" ToolTip="Invite customer" Click="ClickInviteCustomer" Style="{DynamicResource CmdStyle}">
+                    <!--<TextBlock>➕</TextBlock>-->
+                    <Image Source="pack://application:,,,/Resources/Images/invite.png" Width="16" Height="16"></Image>
                 </Button>
 
-                <Button ToolTip="Say thanks to customer" Click="ClickThanksForTrade" Style="{DynamicResource CmdStyle}">
-                    <TextBlock>🤝</TextBlock>
+                <Button x:Name="btn_StartTrade" ToolTip="Trade with customer" Click="ClickTradeInvite" Style="{DynamicResource CmdStyle}">
+                    <!--<TextBlock>💰</TextBlock>-->
+                    <Image Source="pack://application:,,,/Resources/Images/trade.png" Width="16" Height="16"></Image>
                 </Button>
 
-                <Button ToolTip="Kick yourself" Click="ClickKickMyself" Style="{DynamicResource CmdStyle}">
-                    <TextBlock FontSize="10">➖</TextBlock>
+                <Button x:Name="btn_SayThanks" ToolTip="Say thanks to customer" Click="ClickThanksForTrade" Style="{DynamicResource CmdStyle}">
+                    <!--<TextBlock>🤝</TextBlock>-->
+                    <Image Source="pack://application:,,,/Resources/Images/handshake.png" Width="16" Height="16"></Image>
                 </Button>
 
-                <Button ToolTip="Visit own hideout" Click="ClickVisitOwnHideout" Style="{DynamicResource CmdStyle}">
-                    <TextBlock>🏡</TextBlock>
+                <Button x:Name="btn_LeaveParty" ToolTip="Kick yourself" Click="ClickKickMyself" Style="{DynamicResource CmdStyle}">
+                    <Image Source="pack://application:,,,/Resources/Images/leave.png" Width="13" Height="13"></Image>
+
+                    <!--<TextBlock FontSize="10">➖</TextBlock>-->
                 </Button>
 
-                <Button ToolTip="Tell the customer I'm busy" Click="ClickWhisperCustomerBusy" Style="{DynamicResource CmdStyle}">
-                    <TextBlock>🕑</TextBlock>
+                <Button x:Name="btn_VisitOwnHideout" ToolTip="Visit own hideout" Click="ClickVisitOwnHideout" Style="{DynamicResource CmdStyle}">
+                    <!--<TextBlock>🏡</TextBlock>-->
+                    <Image Source="pack://application:,,,/Resources/Images/myHideout.png" Width="15" Height="15"></Image>
                 </Button>
 
-                <Button ToolTip="Whisper customer" Click="ClickWhisperCustomer" Style="{DynamicResource CmdStyle}">
-                    <TextBlock>💬</TextBlock>
+                <Button x:Name="btn_SendBusyMessage" ToolTip="Tell the customer I'm busy" Click="ClickWhisperCustomerBusy" Style="{DynamicResource CmdStyle}">
+                    <!--<TextBlock>🕑</TextBlock>-->
+                    <Image Source="pack://application:,,,/Resources/Images/busy.png" Width="14" Height="14"></Image>
                 </Button>
 
-                <Button ToolTip="Remove this item" Click="ClickRemoveItem" Style="{DynamicResource CmdStyle}" Margin="0">
-                    <TextBlock>✘</TextBlock>
+                <Button x:Name="btn_WhisperCustomer" ToolTip="Whisper customer" Click="ClickWhisperCustomer" Style="{DynamicResource CmdStyle}">
+                    <Image Source="pack://application:,,,/Resources/Images/whisper.png" Width="16" Height="16"></Image>
+                    <!--<TextBlock>💬</TextBlock>-->
+                </Button>
+
+                <Button x:Name="btn_RemoveItem" ToolTip="Remove this item" Click="ClickRemoveItem" Style="{DynamicResource CmdStyle}" Margin="0">
+                    <Image Source="pack://application:,,,/Resources/Images/remove.png" Width="16" Height="16"></Image>
+                    <!--<TextBlock>✘</TextBlock>-->
                 </Button>
 
             </DockPanel>
@@ -143,24 +158,30 @@
             </DockPanel>
 
             <DockPanel Grid.Column="1">
-                <Button ToolTip="" Style="{DynamicResource CmdStyle}" Click="ClickCustomWhisper1">
-                    <TextBlock FontSize="15">1</TextBlock>
+                <Button x:Name="btn_SendCustomMessage1" ToolTip="" Style="{DynamicResource CmdStyle}" Click="ClickCustomWhisper1">
+                    <!--<TextBlock FontSize="15">1</TextBlock>-->
+                    <Image Source="pack://application:,,,/Resources/Images/customMessage1.png" Width="18" Height="18"></Image>
                 </Button>
 
-                <Button ToolTip="" Style="{DynamicResource CmdStyle}" Click="ClickCustomWhisper2">
-                    <TextBlock FontSize="15">2</TextBlock>
+                <Button x:Name="btn_SendCustomMessage2" ToolTip="" Style="{DynamicResource CmdStyle}" Click="ClickCustomWhisper2">
+                    <!--<TextBlock FontSize="15">2</TextBlock>-->
+                    <Image Source="pack://application:,,,/Resources/Images/customMessage2.png" Width="18" Height="18"></Image>
                 </Button>
 
-                <Button Click="ClickSearchItem" ToolTip="Perform a search in the stash" Style="{DynamicResource CmdStyle}">
-                    <TextBlock>🔍</TextBlock>
+                <Button x:Name="btn_SearchItem" Click="ClickSearchItem" ToolTip="Perform a search in the stash" Style="{DynamicResource CmdStyle}">
+                    <!--<TextBlock>🔍</TextBlock>-->
+                    <Image Source="pack://application:,,,/Resources/Images/search.png" Width="14" Height="14"></Image>
                 </Button>
 
-                <Button Click="ClickKickCustomer" Style="{DynamicResource CmdStyle}">
-                    <TextBlock>👞</TextBlock>
+                <Button x:Name="btn_KickCustomer" Click="ClickKickCustomer" Style="{DynamicResource CmdStyle}">
+                    <Image Source="pack://application:,,,/Resources/Images/kick.png" Width="17" Height="17"></Image>
+
+                    <!--<TextBlock>👞</TextBlock>-->
                 </Button>
 
-                <Button Click="ClickSendWhisperAgain" Style="{DynamicResource CmdStyle}" Margin="0">
-                    <TextBlock FontSize="12">❓</TextBlock>
+                <Button x:Name="btn_SendWhisperAgain" Click="ClickSendWhisperAgain" Style="{DynamicResource CmdStyle}" Margin="0">
+                    <!--<TextBlock FontSize="12">❓</TextBlock>-->
+                    <Image Source="pack://application:,,,/Resources/Images/resend.png" Width="16" Height="16"></Image>
                 </Button>
             </DockPanel>
         </Grid>

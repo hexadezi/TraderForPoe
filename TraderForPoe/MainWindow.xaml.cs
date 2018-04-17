@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Threading;
 using TraderForPoe.Properties;
+using TraderForPoe.Windows;
 using WindowsInput;
 using WindowsInput.Native;
 
@@ -57,6 +58,8 @@ namespace TraderForPoe
 
         InputSimulator iSim = new InputSimulator();
 
+        About aboutWindow = new About();
+
         public MainWindow()
         {
             if (poeHandle == IntPtr.Zero)
@@ -67,6 +70,8 @@ namespace TraderForPoe
             }
 
             InitializeComponent();
+
+
 
             Loaded += (object sender, RoutedEventArgs e) => SetNoActiveWindow();
 

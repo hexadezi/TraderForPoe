@@ -47,7 +47,7 @@ namespace TraderForPoe
 
             LoadSettings();
 
-            FillControl(tItem);
+            SetupControls(tItem);
 
             StartAnimatioin();
 
@@ -79,16 +79,23 @@ namespace TraderForPoe
             }
         }
 
-        private void FillControl(TradeItem tItemArg)
+        private void SetupControls(TradeItem tItemArg)
         {
-
             if (tItem.TradeType == TradeItem.TradeTypes.BUY)
             {
                 txt_Item.Foreground = System.Windows.Media.Brushes.GreenYellow;
+                btn_InviteCustomer.Visibility = Visibility.Collapsed;
+                btn_StartTrade.Visibility = Visibility.Collapsed;
+                btn_SearchItem.Visibility = Visibility.Collapsed;
+                btn_SendWhisperAgain.Visibility = Visibility.Collapsed;
             }
+
             else if (tItem.TradeType == TradeItem.TradeTypes.SELL)
             {
                 txt_Item.Foreground = System.Windows.Media.Brushes.OrangeRed;
+                btn_VisitCustomerHideout.Visibility = Visibility.Collapsed;
+                btn_VisitOwnHideout.Visibility = Visibility.Collapsed;
+
             }
 
             txt_Customer.Text = tItem.Customer;
