@@ -38,6 +38,7 @@ namespace TraderForPoe.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public bool CollapsedItems {
             get {
                 return ((bool)(this["CollapsedItems"]));
@@ -49,9 +50,14 @@ namespace TraderForPoe.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
-            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>$</string>\r\n</ArrayOfString>")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>QuadStash1</string>
+  <string>QuadStash1</string>
+  <string>QuadStash1</string>
+  <string>QuadStash1</string>
+  <string>QuadStash1</string>
+</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection QuadStash {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["QuadStash"]));
@@ -99,7 +105,7 @@ namespace TraderForPoe.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Give me one second! :)")]
         public string CustomWhisper1 {
             get {
                 return ((string)(this["CustomWhisper1"]));
@@ -111,13 +117,37 @@ namespace TraderForPoe.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Already sold, sorry. :(")]
         public string CustomWhisper2 {
             get {
                 return ((string)(this["CustomWhisper2"]));
             }
             set {
                 this["CustomWhisper2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Thank you very much, good luck and have fun. :)")]
+        public string ThankYouWhisper {
+            get {
+                return ((string)(this["ThankYouWhisper"]));
+            }
+            set {
+                this["ThankYouWhisper"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Hi, I\'m busy right now. Shall I write you after? :)")]
+        public string ImBusyWhisper {
+            get {
+                return ((string)(this["ImBusyWhisper"]));
+            }
+            set {
+                this["ImBusyWhisper"] = value;
             }
         }
     }

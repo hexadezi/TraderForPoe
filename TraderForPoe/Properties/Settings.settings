@@ -5,13 +5,17 @@
     <Setting Name="PlayerName" Type="System.String" Scope="User">
       <Value Profile="(Default)">Labooo</Value>
     </Setting>
-    <Setting Name="CollapsedItems" Type="System.Boolean" Scope="User">
+    <Setting Name="CollapsedItems" Roaming="true" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="QuadStash" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;string&gt;$&lt;/string&gt;
+  &lt;string&gt;QuadStash1&lt;/string&gt;
+  &lt;string&gt;QuadStash1&lt;/string&gt;
+  &lt;string&gt;QuadStash1&lt;/string&gt;
+  &lt;string&gt;QuadStash1&lt;/string&gt;
+  &lt;string&gt;QuadStash1&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="PlayNotificationSound" Type="System.Boolean" Scope="User">
@@ -24,10 +28,16 @@
       <Value Profile="(Default)">0, 0</Value>
     </Setting>
     <Setting Name="CustomWhisper1" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Give me one second! :)</Value>
     </Setting>
     <Setting Name="CustomWhisper2" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Already sold, sorry. :(</Value>
+    </Setting>
+    <Setting Name="ThankYouWhisper" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Thank you very much, good luck and have fun. :)</Value>
+    </Setting>
+    <Setting Name="ImBusyWhisper" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Hi, I'm busy right now. Shall I write you after? :)</Value>
     </Setting>
   </Settings>
 </SettingsFile>

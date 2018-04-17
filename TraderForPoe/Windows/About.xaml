@@ -5,8 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TraderForPoe.Windows"
         mc:Ignorable="d"
-        Title="About" Height="450" Width="800">
-    <Grid>
-        <TextBlock>Icons from: https://icons8.com/</TextBlock>
-    </Grid>
+        Title="About" Height="300" Width="500" FontFamily="Calibri" Foreground="Black" Closing="Window_Closing" ResizeMode="NoResize" WindowStyle="SingleBorderWindow">
+
+    <StackPanel>
+
+        <Grid HorizontalAlignment="Stretch" Background="#333333" Height="87" >
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Foreground="White" FontWeight="Bold">TraderForPoe</TextBlock>
+        </Grid>
+
+        <Canvas>
+            <StackPanel>
+                <TextBlock>Icons from:
+                    <Hyperlink  NavigateUri="https://icons8.com/">https://icons8.com/</Hyperlink>
+                </TextBlock>
+                <TextBlock>Windows Input Simulator Plus from:
+                    <Hyperlink  NavigateUri="https://github.com/TChatzigiannakis/InputSimulatorPlus">https://github.com/TChatzigiannakis/InputSimulatorPlus</Hyperlink>
+                </TextBlock>
+            </StackPanel>
+        </Canvas>
+    </StackPanel>
+
 </Window>

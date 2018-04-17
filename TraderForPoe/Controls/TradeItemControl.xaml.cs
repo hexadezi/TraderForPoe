@@ -326,7 +326,7 @@ namespace TraderForPoe
 
         private void ClickWhisperCustomerBusy(object sender, RoutedEventArgs e)
         {
-            SendInputToPoe("@" + tItem.Customer + " Hi, I'm busy right now. Shall I write you after?");
+            SendInputToPoe("@" + tItem.Customer + " " + Settings.Default.ImBusyWhisper);
         }
 
         private void ClickShowStashOverlay(object sender, RoutedEventArgs e)

@@ -9,13 +9,11 @@
              FontFamily="Calibri" RenderOptions.BitmapScalingMode="HighQuality">
     <UserControl.Resources>
 
-
-        
         <Style x:Key="BtnStyle" TargetType="Button">
             <Setter Property="Margin" Value="0,0,2,0"/>
             <Setter Property="MinWidth" Value="20"/>
             <Setter Property="Height" Value="20"/>
-            <Setter Property="Background" Value="#FF474747"/>
+            <Setter Property="Background" Value="#333333"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -29,10 +27,10 @@
 
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#FF767676"/>
+                    <Setter Property="Background" Value="#474747"/>
                 </Trigger>
                 <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="#FFA8A8A8"/>
+                    <Setter Property="Background" Value="#515151"/>
                 </Trigger>
             </Style.Triggers>
 
@@ -51,7 +49,7 @@
             <Setter Property="Width" Value="20"/>
         </Style>
 
-        
+
         <Style BasedOn="{StaticResource BtnStyle}" TargetType="Button"/>
         <Style BasedOn="{StaticResource TxtStyle}" TargetType="TextBlock"/>
     </UserControl.Resources>
@@ -79,11 +77,11 @@
             <DockPanel Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                 <Button Name="btn_Price">
                     <DockPanel>
-                        <TextBlock x:Name="txt_Price"></TextBlock>
+                        <TextBlock x:Name="txt_Price" FontWeight="Bold"></TextBlock>
                         <Image Name="img_Currency" RenderOptions.BitmapScalingMode="HighQuality" Margin="0,0,2,0"/>
                     </DockPanel>
                 </Button>
- 
+
             </DockPanel>
 
             <DockPanel Grid.Column="3" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Top">

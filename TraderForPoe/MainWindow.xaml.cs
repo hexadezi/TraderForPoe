@@ -60,6 +60,8 @@ namespace TraderForPoe
 
         About aboutWindow = new About();
 
+        UserSettings userSettings = new UserSettings();
+
         public MainWindow()
         {
             if (poeHandle == IntPtr.Zero)
@@ -138,12 +140,12 @@ namespace TraderForPoe
 
         private void CMenu_Settings(object sender, EventArgs e)
         {
-            // TODO: Implementieren
+            userSettings.Show();
         }
 
         private void CMenu_About(object sender, EventArgs e)
         {
-            // TODO: Implementieren
+            aboutWindow.Show();
         }
 
         private void StartDispatcherTimer()
