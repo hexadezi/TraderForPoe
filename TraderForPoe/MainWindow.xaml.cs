@@ -63,7 +63,7 @@ namespace TraderForPoe
             {
                 // Show message box if POE is not running
                 MessageBox.Show("Path of Exile is not running.");
-                return;
+                Application.Current.Shutdown();
             }
 
             InitializeComponent();
