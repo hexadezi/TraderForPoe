@@ -255,6 +255,9 @@
   <ItemGroup>
     <Resource Include="Resources\Images\resend.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\askifinterested.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

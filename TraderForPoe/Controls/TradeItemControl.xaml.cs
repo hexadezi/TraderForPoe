@@ -19,7 +19,7 @@ namespace TraderForPoe
     /// </summary>
     public partial class TradeItemControl : UserControl
     {
-        
+
 
         // Get a handle to an application window.
         [DllImport("USER32.DLL", CharSet = CharSet.Unicode)]
@@ -41,9 +41,9 @@ namespace TraderForPoe
 
         public TradeItemControl(TradeItem tItemArg)
         {
-            InitializeComponent();
-
             tItem = tItemArg;
+
+            InitializeComponent();
 
             LoadSettings();
 
@@ -52,9 +52,8 @@ namespace TraderForPoe
             StartAnimatioin();
 
             OpenStashGridHighlightWindow();
-
-
         }
+
         //-----------------------------------------------------------------------------------------
 
         private void OpenStashGridHighlightWindow()
@@ -87,7 +86,7 @@ namespace TraderForPoe
                 btn_InviteCustomer.Visibility = Visibility.Collapsed;
                 btn_StartTrade.Visibility = Visibility.Collapsed;
                 btn_SearchItem.Visibility = Visibility.Collapsed;
-                btn_SendWhisperAgain.Visibility = Visibility.Collapsed;
+                btn_AskIfInterested.Visibility = Visibility.Collapsed;
             }
 
             else if (tItem.TradeType == TradeItem.TradeTypes.SELL)
@@ -95,6 +94,7 @@ namespace TraderForPoe
                 txt_Item.Foreground = System.Windows.Media.Brushes.OrangeRed;
                 btn_VisitCustomerHideout.Visibility = Visibility.Collapsed;
                 btn_VisitOwnHideout.Visibility = Visibility.Collapsed;
+                btn_SendWhisperAgain.Visibility = Visibility.Collapsed;
 
             }
 
@@ -279,7 +279,9 @@ namespace TraderForPoe
 
         private void ClickSendWhisperAgain(object sender, RoutedEventArgs e)
         {
-            //SendInputToPoe("@" + tItem.Customer + " Hi, I would like to buy your " + tItem.Item + " listed for " + tItem.Price + " in " + tItem.League + " (stash tab \"" + tItem.Stash + "\"; position: left " + tItem.StashPosition.X + ", top " + tItem.StashPosition.Y + ")");
+            string whisper = tItem.WhisperMessage;
+            whisper = whisper.Remove(0, whisper.IndexOf(": ") + 2);
+            SendInputToPoe("@" + tItem.Customer + " " + whisper);
         }
 
         private void ClickKickCustomer(object sender, RoutedEventArgs e)
@@ -296,7 +298,7 @@ namespace TraderForPoe
 
         private void ClickThanksForTrade(object sender, RoutedEventArgs e)
         {
-            SendInputToPoe("@" + tItem.Customer + " "  + Settings.Default.ThankYouWhisper);
+            SendInputToPoe("@" + tItem.Customer + " " + Settings.Default.ThankYouWhisper);
         }
 
         private void ClickKickMyself(object sender, RoutedEventArgs e)
@@ -356,6 +358,11 @@ namespace TraderForPoe
         private void ClickCustomWhisper2(object sender, RoutedEventArgs e)
         {
             SendInputToPoe("@" + tItem.Customer + " " + Settings.Default.CustomWhisper2);
+        }
+
+        private void ClickAskIfInterested(object sender, RoutedEventArgs e)
+        {
+            SendInputToPoe("@" + tItem.Customer + " Hi, are you still interested in " + tItem.Item + " for " + tItem.Price + "?");
         }
     }
 

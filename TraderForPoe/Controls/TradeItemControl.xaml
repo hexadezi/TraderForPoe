@@ -42,6 +42,7 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="13"/>
             <Setter Property="Height" Value="{Binding ActualHeight, ElementName=Button}"/>
 
         </Style>
@@ -78,8 +79,8 @@
             <DockPanel Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                 <Button Name="btn_Price">
                     <DockPanel>
-                        <TextBlock x:Name="txt_Price" FontWeight="Bold"></TextBlock>
-                        <Image Name="img_Currency" RenderOptions.BitmapScalingMode="HighQuality" Margin="0,0,2,0"/>
+                        <TextBlock Margin="5,0,0,0" x:Name="txt_Price" FontWeight="Bold"></TextBlock>
+                        <Image Name="img_Currency" RenderOptions.BitmapScalingMode="HighQuality" Margin="0,0,5,0"/>
                     </DockPanel>
                 </Button>
 
@@ -87,7 +88,7 @@
 
             <DockPanel Grid.Column="3" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
                 <Button ToolTip="Visit customer hideout" Click="ClickVisitHideout" Style="{DynamicResource CmdStyle}" Name="btn_VisitCustomerHideout">
-                    <Image Source="pack://application:,,,/Resources/Images/customerHideout.png" Width="16" Height="16"></Image>
+                    <Image Source="pack://application:,,,/Resources/Images/customerHideout.png" Width="15" Height="15"></Image>
                 </Button>
                 <Button x:Name="btn_InviteCustomer" ToolTip="Invite customer" Click="ClickInviteCustomer" Style="{DynamicResource CmdStyle}">
                     <Image Source="pack://application:,,,/Resources/Images/invite.png" Width="16" Height="16"></Image>
@@ -166,7 +167,11 @@
                 <Button x:Name="btn_SendWhisperAgain" Click="ClickSendWhisperAgain" Style="{DynamicResource CmdStyle}" Margin="0">
                     <Image Source="pack://application:,,,/Resources/Images/resend.png" Width="16" Height="16"></Image>
                 </Button>
-                
+
+                <Button x:Name="btn_AskIfInterested" Click="ClickAskIfInterested" Style="{DynamicResource CmdStyle}" Margin="0">
+                    <Image Source="pack://application:,,,/Resources/Images/askifinterested.png" Width="16" Height="16"></Image>
+                </Button>
+
             </DockPanel>
             
         </Grid>
