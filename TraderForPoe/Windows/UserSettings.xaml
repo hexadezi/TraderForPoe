@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TraderForPoe.Windows"
         mc:Ignorable="d"
-        Title="UserSettings" Height="355.876" Width="718.035" Closing="Window_Closing">
+        Title="UserSettings" Height="362.876" Width="725.035" Closing="Window_Closing" WindowStyle="SingleBorderWindow" ResizeMode="NoResize">
 
     <Canvas>
 

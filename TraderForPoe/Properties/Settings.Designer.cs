@@ -25,7 +25,7 @@ namespace TraderForPoe.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Labooo")]
+        [global::System.Configuration.DefaultSettingValueAttribute("PLAYERNAME")]
         public string PlayerName {
             get {
                 return ((string)(this["PlayerName"]));
@@ -50,14 +50,8 @@ namespace TraderForPoe.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>QuadStash1</string>
-  <string>QuadStash1</string>
-  <string>QuadStash1</string>
-  <string>QuadStash1</string>
-  <string>QuadStash1</string>
-</ArrayOfString>")]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" />")]
         public global::System.Collections.Specialized.StringCollection QuadStash {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["QuadStash"]));
@@ -129,7 +123,7 @@ namespace TraderForPoe.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Thank you very much, good luck and have fun. :)")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Thank you very much, good luck and have a nice day. :)")]
         public string ThankYouWhisper {
             get {
                 return ((string)(this["ThankYouWhisper"]));
