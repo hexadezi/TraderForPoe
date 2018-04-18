@@ -3,6 +3,14 @@ This tool makes trading in Path of Exile easy.
 
 ## Getting Started
 
+### Features
+- Monitors the clipboard for trade whispers
+- Supports poe.trade and poeapp.com
+- Small (1,58 MB)
+- Standalone
+- Fast startup
+
+
 ### Download
 Download here: [TraderForPoe Releases](https://github.com/labo89/TraderForPoe/releases)
 
@@ -11,17 +19,14 @@ Download here: [TraderForPoe Releases](https://github.com/labo89/TraderForPoe/re
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-.
-
+What things you need to run the sofware?
 ```
-- Set your settings in the config file
-- .NET Framework 4.6.1
+.NET Framework 4.6.1
 ```
 
 ### Installing
 
-Just download the .zip file, extract it and start TraderForPoe.exe file.
+Just download the .exe file and execute.
 
 ## License
 
