@@ -22,16 +22,19 @@
       <Value Profile="(Default)">0, 0</Value>
     </Setting>
     <Setting Name="CustomWhisper1" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Give me one second! :)</Value>
+      <Value Profile="(Default)">Give me one second! :) (Sent with TraderForPoe)</Value>
     </Setting>
     <Setting Name="CustomWhisper2" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Already sold, sorry. :(</Value>
+      <Value Profile="(Default)">Already sold, sorry. :( (Sent with TraderForPoe)</Value>
     </Setting>
     <Setting Name="ThankYouWhisper" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Thank you very much, good luck and have a nice day. :)</Value>
+      <Value Profile="(Default)">Thank you very much, good luck and have a nice day. :) (Sent with TraderForPoe)</Value>
     </Setting>
     <Setting Name="ImBusyWhisper" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Hi, I'm busy right now. Shall I write you after? :)</Value>
+      <Value Profile="(Default)">Hi, I'm busy right now. Shall I write you after? :) (Sent with TraderForPoe)</Value>
+    </Setting>
+    <Setting Name="UseClipboardMonitor" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

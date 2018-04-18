@@ -53,8 +53,10 @@ namespace TraderForPoe.Windows
             Settings.Default.CustomWhisper2 = txt_CustomWhisper2.Text;
             Settings.Default.ThankYouWhisper = txt_ThankYouWhisper.Text;
             Settings.Default.ImBusyWhisper = txt_ImBusyWhisper.Text;
-            
+            Settings.Default.UseClipboardMonitor = cbx_UseClipBoardMonitor.IsChecked.Value;
+
             Settings.Default.Save();
+            Settings.Default.Reload();
         }
     }
 }

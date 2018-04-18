@@ -99,7 +99,7 @@ namespace TraderForPoe.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Give me one second! :)")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Give me one second! :) (Sent with TraderForPoe)")]
         public string CustomWhisper1 {
             get {
                 return ((string)(this["CustomWhisper1"]));
@@ -111,7 +111,7 @@ namespace TraderForPoe.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Already sold, sorry. :(")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Already sold, sorry. :( (Sent with TraderForPoe)")]
         public string CustomWhisper2 {
             get {
                 return ((string)(this["CustomWhisper2"]));
@@ -123,7 +123,7 @@ namespace TraderForPoe.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Thank you very much, good luck and have a nice day. :)")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Thank you very much, good luck and have a nice day. :) (Sent with TraderForPoe)")]
         public string ThankYouWhisper {
             get {
                 return ((string)(this["ThankYouWhisper"]));
@@ -135,13 +135,25 @@ namespace TraderForPoe.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Hi, I\'m busy right now. Shall I write you after? :)")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Hi, I\'m busy right now. Shall I write you after? :) (Sent with TraderForPoe)")]
         public string ImBusyWhisper {
             get {
                 return ((string)(this["ImBusyWhisper"]));
             }
             set {
                 this["ImBusyWhisper"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UseClipboardMonitor {
+            get {
+                return ((bool)(this["UseClipboardMonitor"]));
+            }
+            set {
+                this["UseClipboardMonitor"] = value;
             }
         }
     }

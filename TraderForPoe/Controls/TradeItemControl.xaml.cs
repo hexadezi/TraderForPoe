@@ -19,7 +19,7 @@ namespace TraderForPoe
     /// </summary>
     public partial class TradeItemControl : UserControl
     {
-        InputSimulator iSim = new InputSimulator();
+        
 
         // Get a handle to an application window.
         [DllImport("USER32.DLL", CharSet = CharSet.Unicode)]
@@ -167,6 +167,8 @@ namespace TraderForPoe
                 return;
             }
 
+            InputSimulator iSim = new InputSimulator();
+
             // Need to press ALT because the SetForegroundWindow sometimes does not work
             iSim.Keyboard.KeyPress(VirtualKeyCode.MENU);
 
@@ -180,6 +182,8 @@ namespace TraderForPoe
 
             // Send RETURN
             iSim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+
+            iSim = null;
 
         }
 
@@ -215,6 +219,7 @@ namespace TraderForPoe
                 MessageBox.Show("Path of Exile is not running.");
                 return;
             }
+            InputSimulator iSim = new InputSimulator();
 
             // Need to press ALT because the SetForegroundWindow sometimes does not work
             iSim.Keyboard.KeyPress(VirtualKeyCode.MENU);
@@ -225,6 +230,8 @@ namespace TraderForPoe
             iSim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
 
             iSim.Keyboard.TextEntry("@" + tItem.Customer + " ");
+
+            iSim = null;
         }
 
         private void ClickInviteCustomer(object sender, RoutedEventArgs e)
@@ -253,6 +260,8 @@ namespace TraderForPoe
                 return;
             }
 
+            InputSimulator iSim = new InputSimulator();
+
             // Need to press ALT because the SetForegroundWindow sometimes does not work
             iSim.Keyboard.KeyPress(VirtualKeyCode.MENU);
 
@@ -264,6 +273,8 @@ namespace TraderForPoe
             iSim.Keyboard.Sleep(500);
 
             iSim.Keyboard.TextEntry(tItem.Item);
+
+            iSim = null;
         }
 
         private void ClickSendWhisperAgain(object sender, RoutedEventArgs e)
@@ -285,7 +296,7 @@ namespace TraderForPoe
 
         private void ClickThanksForTrade(object sender, RoutedEventArgs e)
         {
-            SendInputToPoe("@" + tItem.Customer + " Thank you for the trade. Good luck and have fun in " + tItem.League + ".");
+            SendInputToPoe("@" + tItem.Customer + " "  + Settings.Default.ThankYouWhisper);
         }
 
         private void ClickKickMyself(object sender, RoutedEventArgs e)

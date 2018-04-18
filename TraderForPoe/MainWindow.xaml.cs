@@ -14,13 +14,11 @@ using WindowsInput.Native;
 
 namespace TraderForPoe
 {
-
-    /// <summary>
-    /// Interaktionslogik für MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         System.Windows.Forms.NotifyIcon nIcon = new System.Windows.Forms.NotifyIcon();
+
+        System.Windows.Forms.ContextMenu cMenu = new System.Windows.Forms.ContextMenu();
 
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
@@ -56,8 +54,6 @@ namespace TraderForPoe
 
         ClipboardMonitor clipMoni = new ClipboardMonitor();
 
-        InputSimulator iSim = new InputSimulator();
-
         About aboutWindow = new About();
 
         UserSettings userSettings = new UserSettings();
@@ -73,24 +69,30 @@ namespace TraderForPoe
 
             InitializeComponent();
 
+            CreateContextMenu();
 
+            LoadSetting();
 
+            StartFileMonitoring();
+        }
+
+        private void LoadSetting()
+        {
+            if (Settings.Default.UseClipboardMonitor == true)
+            {
+                clipMoni.OnClipboardContentChanged += ClipMoni_OnClipboardContentChanged;
+                cMenu.MenuItems[0].Text = "Stop Monitor";
+            }
+            else
+            {
+                cMenu.MenuItems[0].Text = "Start Monitor";
+            }
+
+            // Subscribe to SetNoActiveWindow. Prevent window from focus
             Loaded += (object sender, RoutedEventArgs e) => SetNoActiveWindow();
 
-            clipMoni.OnClipboardContentChanged += ClipMoni_OnClipboardContentChanged;
-
-
             this.Top = Settings.Default.WindowLocation.X;
-
             this.Left = Settings.Default.WindowLocation.Y;
-
-            // Set variables befor Timer start
-            initialFileSize = new FileInfo(filePath).Length;
-            lastReadLength = initialFileSize - 1024;
-
-            StartDispatcherTimer();
-
-            CreateContextMenu();
         }
 
         private void ClipMoni_OnClipboardContentChanged(object sender, EventArgs e)
@@ -107,6 +109,8 @@ namespace TraderForPoe
                     return;
                 }
 
+                InputSimulator iSim = new InputSimulator();
+
                 // Need to press ALT because the SetForegroundWindow sometimes does not work
                 iSim.Keyboard.KeyPress(VirtualKeyCode.MENU);
 
@@ -122,20 +126,41 @@ namespace TraderForPoe
 
                 // Send RETURN
                 iSim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+
+                iSim = null;
             }
         }
 
         private void CreateContextMenu()
         {
             nIcon.MouseClick += NIcon_MouseClick;
-            System.IO.Stream iconStream = Application.GetResourceStream(new Uri("pack://application:,,,/Resources/ico_Application.ico")).Stream;
+            Stream iconStream = Application.GetResourceStream(new Uri("pack://application:,,,/Resources/ico_Application.ico")).Stream;
             nIcon.Icon = new System.Drawing.Icon(iconStream);
             nIcon.Visible = true;
-            System.Windows.Forms.ContextMenu cMenu = new System.Windows.Forms.ContextMenu();
+
+            cMenu.MenuItems.Add(" Monitor", new EventHandler(CMenu_ClipboardMonitor));
             cMenu.MenuItems.Add("Settings", new EventHandler(CMenu_Settings));
             cMenu.MenuItems.Add("About", new EventHandler(CMenu_About));
             cMenu.MenuItems.Add("Exit", new EventHandler(CMenu_Close));
             nIcon.ContextMenu = cMenu;
+        }
+
+        private void CMenu_ClipboardMonitor(object sender, EventArgs e)
+        {
+            if (cMenu.MenuItems[0].Text.StartsWith("Start"))
+            {
+                clipMoni.OnClipboardContentChanged += ClipMoni_OnClipboardContentChanged;
+                cMenu.MenuItems[0].Text = "Stop Monitor";
+            }
+            else if (cMenu.MenuItems[0].Text.StartsWith("Stop"))
+            {
+                clipMoni.OnClipboardContentChanged -= ClipMoni_OnClipboardContentChanged;
+                cMenu.MenuItems[0].Text = "Start Monitor";
+            }
+            else
+            {
+                throw new ArgumentException("Menu item text must start with \"Start\" or \"Stop\"");
+            }
         }
 
         private void CMenu_Settings(object sender, EventArgs e)
@@ -148,10 +173,17 @@ namespace TraderForPoe
             aboutWindow.Show();
         }
 
-        private void StartDispatcherTimer()
+        private void StartFileMonitoring()
         {
+            // Set variables befor Timer start
+            initialFileSize = new FileInfo(filePath).Length;
+
+            lastReadLength = initialFileSize - 1024;
+
             dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
+
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
+
             dispatcherTimer.Start();
         }
 
@@ -241,7 +273,6 @@ namespace TraderForPoe
             TradeItemControl uc = new TradeItemControl(tItem);
             stk_MainPnl.Children.Add(uc);
         }
-
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {

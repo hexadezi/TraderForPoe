@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TraderForPoe.Windows"
         mc:Ignorable="d"
-        Title="UserSettings" Height="362.876" Width="725.035" Closing="Window_Closing" WindowStyle="SingleBorderWindow" ResizeMode="NoResize">
+        Title="UserSettings" Height="366.876" Width="725.035" Closing="Window_Closing" WindowStyle="SingleBorderWindow" ResizeMode="NoResize">
 
     <Canvas>
 
@@ -36,7 +36,7 @@
 
             </Grid>
         </GroupBox>
-        <GroupBox Header="Quad Tabs" Height="158" Canvas.Left="10" Canvas.Top="157" Width="187">
+        <GroupBox Header="Quad Tabs" Height="167" Canvas.Left="10" Canvas.Top="157" Width="187">
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -49,12 +49,13 @@
                 <Button Grid.Column="0" Grid.Row="1" Click="Button_Click">Delete</Button>
             </Grid>
         </GroupBox>
-        <Button Content="Save" Canvas.Left="625" Canvas.Top="295" Width="75" Click="Click_SaveSettings"/>
+        <Button Content="Save" Canvas.Left="625" Canvas.Top="304" Width="75" Click="Click_SaveSettings"/>
         <GroupBox Header="Player Name" Height="Auto" Canvas.Left="202" Canvas.Top="198" Width="498">
             <TextBox Margin="0,2,0,0"  Name="txt_PlayerName" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding PlayerName, Source={StaticResource Settings}}" />
         </GroupBox>
-        <GroupBox Header="Various Settings" Height="69" Canvas.Left="202" Canvas.Top="246" Width="418">
+        <GroupBox Header="Various Settings" Height="78" Canvas.Left="202" Canvas.Top="246" Width="175">
             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <CheckBox Name="cbx_UseClipBoardMonitor" Margin="0,2,0,0" Content="Use Clipboard Monitor" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding UseClipboardMonitor, Source={StaticResource Settings}}"/>
                 <CheckBox Name="cbx_CollapseItems" Margin="0,2,0,0" Content="Collapse Items" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding CollapsedItems, Source={StaticResource Settings}}"/>
                 <CheckBox Name="cbx_PlaySound" Margin="0,2,0,0" Content="Play Sound" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding PlayNotificationSound, Source={StaticResource Settings}}"/>
             </StackPanel>
