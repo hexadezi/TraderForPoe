@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TraderForPoe" 
-             mc:Ignorable="d" Height="48" Width="450" Foreground="LightGray" Background="#FF292929" 
-             BorderBrush="#FF5D5D5D" BorderThickness="1" UseLayoutRounding="True" 
+             mc:Ignorable="d" Width="450" Foreground="LightGray" Background="#FF292929" 
+             BorderBrush="#474747" BorderThickness="1" UseLayoutRounding="True" 
              FontFamily="Calibri" RenderOptions.BitmapScalingMode="HighQuality">
     <UserControl.Resources>
 
@@ -13,7 +13,7 @@
             <Setter Property="Margin" Value="0,0,2,0"/>
             <Setter Property="MinWidth" Value="20"/>
             <Setter Property="Height" Value="20"/>
-            <Setter Property="Background" Value="#333333"/>
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -57,11 +57,12 @@
     </UserControl.Resources>
 
     <StackPanel>
-        <Grid Margin="2,2,2,0">
+        
+        <Grid Margin="2,2,2,2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>  
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
@@ -69,11 +70,11 @@
                 <Button Click="ClickToCollapseExpandItem" Style="{DynamicResource CmdStyle}">
                     <TextBlock  x:Name="btn_CollExp" Grid.Row="1" TextAlignment="Center" FontSize="13" FontWeight="Bold">⏶</TextBlock>
                 </Button>
-
-                <Button ToolTip="{Binding Path=Text, ElementName=txt_Item}" Click="ClickShowStashOverlay">
-                    <TextBlock  x:Name="txt_Item" FontStyle="Italic" FontWeight="Bold" TextTrimming="CharacterEllipsis" >Caer Blaidd, Wolfpack's Den Underground River Map</TextBlock>
-                </Button>
-
+                <StackPanel Orientation="Horizontal">
+                    <Button ToolTip="{Binding Path=Text, ElementName=txt_Item}" Click="ClickShowStashOverlay">
+                        <TextBlock  x:Name="txt_Item" FontStyle="Italic" FontWeight="Bold" TextTrimming="CharacterEllipsis" >Caer Blaidd, Wolfpack's Den Underground River Map</TextBlock>
+                    </Button>
+                </StackPanel>
             </DockPanel>
 
             <DockPanel Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
@@ -83,7 +84,6 @@
                         <Image Name="img_Currency" RenderOptions.BitmapScalingMode="HighQuality" Margin="0,0,5,0"/>
                     </DockPanel>
                 </Button>
-
             </DockPanel>
 
             <DockPanel Grid.Column="3" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
@@ -126,7 +126,7 @@
 
         </Grid>
 
-        <Grid Margin="2,2,2,0">
+        <Grid Name="grd_SecondRow" Margin="2,0,2,2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
@@ -160,22 +160,22 @@
                     <Image Source="pack://application:,,,/Resources/Images/search.png" Width="14" Height="14"></Image>
                 </Button>
 
-                <Button x:Name="btn_KickCustomer" Click="ClickKickCustomer" Style="{DynamicResource CmdStyle}">
+                <Button x:Name="btn_KickCustomer" Click="ClickKickCustomer" ToolTip="Kick the Customer" Style="{DynamicResource CmdStyle}">
                     <Image Source="pack://application:,,,/Resources/Images/kick.png" Width="17" Height="17"></Image>
                 </Button>
 
-                <Button x:Name="btn_SendWhisperAgain" Click="ClickSendWhisperAgain" Style="{DynamicResource CmdStyle}" Margin="0">
+                <Button ToolTip="Send whisper again" x:Name="btn_SendWhisperAgain" Click="ClickSendWhisperAgain" Style="{DynamicResource CmdStyle}" Margin="0">
                     <Image Source="pack://application:,,,/Resources/Images/resend.png" Width="16" Height="16"></Image>
                 </Button>
 
-                <Button x:Name="btn_AskIfInterested" Click="ClickAskIfInterested" Style="{DynamicResource CmdStyle}" Margin="0">
+                <Button ToolTip="Ask customer, if he still is interested" x:Name="btn_AskIfInterested" Click="ClickAskIfInterested" Style="{DynamicResource CmdStyle}" Margin="0">
                     <Image Source="pack://application:,,,/Resources/Images/askifinterested.png" Width="16" Height="16"></Image>
                 </Button>
 
             </DockPanel>
-            
+
         </Grid>
-        
+
     </StackPanel>
 
 </UserControl>

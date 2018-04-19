@@ -20,6 +20,9 @@ namespace TraderForPoe
 
         System.Windows.Forms.ContextMenu cMenu = new System.Windows.Forms.ContextMenu();
 
+        bool mainWindowCollapsed = false;
+
+
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
         // Needed to prevent window getting focus
@@ -67,6 +70,9 @@ namespace TraderForPoe
                 Application.Current.Shutdown();
             }
 
+            TradeItemControl.MoreThanThreeItems += TradeItemControl_MoreThanThreeItems;
+            TradeItemControl.EqualThreeItems += TradeItemControl_LessThanThreeItems;
+
             InitializeComponent();
 
             CreateContextMenu();
@@ -74,6 +80,17 @@ namespace TraderForPoe
             LoadSetting();
 
             StartFileMonitoring();
+        }
+
+        private void TradeItemControl_MoreThanThreeItems(object sender, EventArgs e)
+        {
+            btn_collapseMainWindow.Visibility = Visibility.Visible;
+        }
+
+        private void TradeItemControl_LessThanThreeItems(object sender, EventArgs e)
+        {
+            //ExpandWindow();
+            btn_collapseMainWindow.Visibility = Visibility.Collapsed;
         }
 
         private void LoadSetting()
@@ -285,6 +302,25 @@ namespace TraderForPoe
         {
             Settings.Default.WindowLocation = new System.Drawing.Point((int)this.Top, (int)this.Left);
             Settings.Default.Save();
+        }
+
+        private void ClickCollapseExpandMainwindow(object sender, RoutedEventArgs e)
+        {
+            if (mainWindowCollapsed == false)
+            {
+                btn_collapseMainWindow.Width = this.Width;
+                btn_collapseMainWindow.Content = "⏷";
+                stk_MainPnl.Visibility = Visibility.Collapsed;
+                mainWindowCollapsed = true;
+            }
+            else
+            {
+                btn_collapseMainWindow.Width = btn_collapseMainWindow.MinWidth;
+                btn_collapseMainWindow.Content = "⏶";
+                stk_MainPnl.Visibility = Visibility.Visible;
+                mainWindowCollapsed = false;
+            }
+
         }
     }
 }

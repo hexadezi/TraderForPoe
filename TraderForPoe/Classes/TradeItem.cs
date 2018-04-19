@@ -9,8 +9,11 @@ using System.Windows.Media.Imaging;
 
 namespace TraderForPoe
 {
+
     public class TradeItem
     {
+        private static List<TradeItem> lstTradeItems = new List<TradeItem>();
+
         public TradeTypes TradeType
         {
             get;
@@ -90,9 +93,14 @@ namespace TraderForPoe
             SetTradeType(WhisperMessage);
 
             ParseWhisper(WhisperMessage);
+
+            if (ItemExists(this))
+            {
+                throw new Exception("Item exists");
+            }
+
+            lstTradeItems.Add(this);
         }
-
-
 
         // Set property TradeType
         private void SetTradeType(string whisper)
@@ -653,6 +661,34 @@ namespace TraderForPoe
             else
             {
                 return null;
+            }
+        }
+
+        public static bool ItemExists(TradeItem ti)
+        {
+            foreach (var item in lstTradeItems)
+            {
+                if (item.Item == ti.Item && item.Customer == ti.Customer && item.Price == ti.Price
+                    && item.StashPosition == ti.StashPosition && item.TradeType == ti.TradeType)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+
+        }
+
+        public static void RemoveItemFromList(TradeItem ti)
+        {
+            for (int i = 0; i < lstTradeItems.Count; i++)
+            {
+                if (lstTradeItems[i].Item == ti.Item && lstTradeItems[i].Customer == ti.Customer && 
+                    lstTradeItems[i].Price == ti.Price && lstTradeItems[i].StashPosition == ti.StashPosition 
+                    && lstTradeItems[i].TradeType == ti.TradeType)
+                {
+                    lstTradeItems.RemoveAt(i);
+                }
             }
         }
     }

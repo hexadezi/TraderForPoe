@@ -11,6 +11,7 @@ using TraderForPoe.Properties;
 using System.Linq;
 using System.Windows.Media.Imaging;
 using System.Threading;
+using System.Collections.Generic;
 
 namespace TraderForPoe
 {
@@ -19,6 +20,12 @@ namespace TraderForPoe
     /// </summary>
     public partial class TradeItemControl : UserControl
     {
+
+        private static int intNumberItems = 0;
+
+        public static event EventHandler MoreThanThreeItems;
+
+        public static event EventHandler EqualThreeItems;
 
 
         // Get a handle to an application window.
@@ -31,10 +38,6 @@ namespace TraderForPoe
 
         private static StashGridHighlight stashGridHighlight = null;
 
-        private double dblHeightBeforeCollapse;
-
-        private double dblHeightToCollapse = 26;
-
         private TradeItem tItem;
 
         //-----------------------------------------------------------------------------------------
@@ -42,6 +45,13 @@ namespace TraderForPoe
         public TradeItemControl(TradeItem tItemArg)
         {
             tItem = tItemArg;
+
+            intNumberItems++;
+
+            if (intNumberItems > 3)
+            {
+                OnMoreThanThreeItems();
+            }
 
             InitializeComponent();
 
@@ -52,6 +62,7 @@ namespace TraderForPoe
             StartAnimatioin();
 
             OpenStashGridHighlightWindow();
+
         }
 
         //-----------------------------------------------------------------------------------------
@@ -87,6 +98,7 @@ namespace TraderForPoe
                 btn_StartTrade.Visibility = Visibility.Collapsed;
                 btn_SearchItem.Visibility = Visibility.Collapsed;
                 btn_AskIfInterested.Visibility = Visibility.Collapsed;
+                btn_SendBusyMessage.Visibility = Visibility.Collapsed;
             }
 
             else if (tItem.TradeType == TradeItem.TradeTypes.SELL)
@@ -194,16 +206,15 @@ namespace TraderForPoe
 
         private void CollapseExpandItem()
         {
-            if (this.Height != dblHeightToCollapse)
+            if (this.grd_SecondRow.Visibility == Visibility.Visible)
             {
-                dblHeightBeforeCollapse = this.Height;
-                this.Height = dblHeightToCollapse;
+                this.grd_SecondRow.Visibility = Visibility.Hidden;
+                this.grd_SecondRow.Visibility = Visibility.Collapsed;
                 btn_CollExp.Text = "⏷";
-
             }
             else
             {
-                this.Height = dblHeightBeforeCollapse;
+                this.grd_SecondRow.Visibility = Visibility.Visible;
                 btn_CollExp.Text = "⏶";
             }
         }
@@ -293,6 +304,8 @@ namespace TraderForPoe
         {
             ((StackPanel)Parent).Children.Remove(this);
             stashGridHighlight.RemoveStashControl(tItem);
+            TradeItemControl.RemoveTICfromList(this);
+            TradeItem.RemoveItemFromList(tItem);
             stashGridHighlight.ClearCanvas();
         }
 
@@ -363,6 +376,26 @@ namespace TraderForPoe
         private void ClickAskIfInterested(object sender, RoutedEventArgs e)
         {
             SendInputToPoe("@" + tItem.Customer + " Hi, are you still interested in " + tItem.Item + " for " + tItem.Price + "?");
+        }
+
+        public static void RemoveTICfromList(TradeItemControl tradeItemControl)
+        {
+            intNumberItems--;
+
+            if (intNumberItems == 3)
+            {
+                OnEqualThreeItems();
+            }
+        }
+
+        protected static void OnMoreThanThreeItems()
+        {
+            MoreThanThreeItems?.Invoke(typeof(TradeItemControl), EventArgs.Empty);
+        }
+
+        protected static void OnEqualThreeItems()
+        {
+            EqualThreeItems?.Invoke(typeof(TradeItemControl), EventArgs.Empty);
         }
     }
 
