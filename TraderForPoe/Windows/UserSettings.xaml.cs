@@ -58,5 +58,11 @@ namespace TraderForPoe.Windows
             Settings.Default.Save();
             Settings.Default.Reload();
         }
+
+        private void Click_RestartApp(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+            System.Windows.Application.Current.Shutdown();
+        }
     }
 }

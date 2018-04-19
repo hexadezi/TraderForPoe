@@ -45,8 +45,7 @@ namespace TraderForPoe
         [DllImport("user32")]
         public static extern IntPtr SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
-        // Get a handle to POE. The window class and window name were obtained using the Spy++ tool.
-        IntPtr poeHandle = FindWindow("POEWindowClass", "Path of Exile");
+
 
         // Variables for reading the Client.txt
         string filePath = Settings.Default.PathToClientTxt;
@@ -63,12 +62,6 @@ namespace TraderForPoe
 
         public MainWindow()
         {
-            if (poeHandle == IntPtr.Zero)
-            {
-                // Show message box if POE is not running
-                MessageBox.Show("Path of Exile is not running.");
-                Application.Current.Shutdown();
-            }
 
             TradeItemControl.MoreThanThreeItems += TradeItemControl_MoreThanThreeItems;
             TradeItemControl.EqualThreeItems += TradeItemControl_LessThanThreeItems;
@@ -118,6 +111,8 @@ namespace TraderForPoe
 
             if (strClipboard.StartsWith("@"))
             {
+                // Get a handle to POE. The window class and window name were obtained using the Spy++ tool.
+                IntPtr poeHandle = FindWindow("POEWindowClass", "Path of Exile");
                 // Verify that POE is a running process.
                 if (poeHandle == IntPtr.Zero)
                 {
@@ -192,10 +187,19 @@ namespace TraderForPoe
 
         private void StartFileMonitoring()
         {
-            // Set variables befor Timer start
-            initialFileSize = new FileInfo(filePath).Length;
+            try
+            {
+                // Set variables befor Timer start
+                initialFileSize = new FileInfo(filePath).Length;
 
-            lastReadLength = initialFileSize - 1024;
+                lastReadLength = initialFileSize - 1024;
+            }
+            catch (FileNotFoundException)
+            {
+                System.Windows.Forms.MessageBox.Show("File " + filePath + " not found. \nPlease set the correct path in the settings and restart the application.", "File not found", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                return;
+            }
+
 
             dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
 
@@ -237,16 +241,25 @@ namespace TraderForPoe
                                 {
                                     if (line.Contains(" @"))
                                     {
-                                        try
+                                        // Get a handle to POE. The window class and window name were obtained using the Spy++ tool.
+                                        IntPtr poeHandle = FindWindow("POEWindowClass", "Path of Exile");
+
+                                        // Verify that POE is a running process.
+                                        if (poeHandle != IntPtr.Zero)
                                         {
-                                            TradeItem tItem = new TradeItem(line);
-                                            TradeItemControl uc = new TradeItemControl(tItem);
-                                            stk_MainPnl.Children.Add(uc);
+                                            try
+                                            {
+                                                TradeItem tItem = new TradeItem(line);
+                                                TradeItemControl uc = new TradeItemControl(tItem);
+                                                stk_MainPnl.Children.Add(uc);
+                                            }
+                                            catch (Exception)
+                                            {
+                                                // Ignore Exception. Exception was thrown, because no RegEx pattern matched
+                                            }
                                         }
-                                        catch (Exception)
-                                        {
-                                            // Ignore Exception. Exception was thrown, because no RegEx pattern matched
-                                        }
+
+
 
                                     }
                                 }
@@ -281,14 +294,6 @@ namespace TraderForPoe
         {
             if (e.ChangedButton == System.Windows.Input.MouseButton.Left)
                 this.DragMove();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            String strWhisper = "@From Labooo: wtb Caer Blaidd, Wolfpack's Den Underground River Map listed for 100 alch in bestiary (stash \"~price 1 alt\"; left 2, top 8)";
-            TradeItem tItem = new TradeItem(strWhisper);
-            TradeItemControl uc = new TradeItemControl(tItem);
-            stk_MainPnl.Children.Add(uc);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

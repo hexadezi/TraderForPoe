@@ -50,6 +50,7 @@
             </Grid>
         </GroupBox>
         <Button Content="Save" Canvas.Left="625" Canvas.Top="304" Width="75" Click="Click_SaveSettings"/>
+        <Button Content="Restart" Canvas.Left="545" Canvas.Top="304" Width="75" Click="Click_RestartApp"/>
         <GroupBox Header="Player Name" Height="Auto" Canvas.Left="202" Canvas.Top="198" Width="498">
             <TextBox Margin="0,2,0,0"  Name="txt_PlayerName" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding PlayerName, Source={StaticResource Settings}}" />
         </GroupBox>
