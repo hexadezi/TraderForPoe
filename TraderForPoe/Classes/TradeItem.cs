@@ -9,8 +9,11 @@ using System.Windows.Media.Imaging;
 
 namespace TraderForPoe
 {
+
     public class TradeItem
     {
+        private static List<TradeItem> lstTradeItems = new List<TradeItem>();
+
         public TradeTypes TradeType
         {
             get;
@@ -28,7 +31,23 @@ namespace TraderForPoe
             get;
             set;
         }
+        public Currency ItemCurrency
+        {
+            get;
+            set;
+        }
 
+        public string ItemCurrencyQuant
+        {
+            get;
+            set;
+        }
+
+        public BitmapImage ItemCurrencyBitmap
+        {
+            get;
+            set;
+        }
         public string Price
         {
             get;
@@ -73,6 +92,7 @@ namespace TraderForPoe
         public enum Currency { CHAOS, ALCHCHEMY, ALTERATION, ANCIENT, ANNULMENT, APPRENTICE_SEXTANT, ARMOUR_SCRAP, AUGMENTATION, BAUBLE, BESTIARY_ORB, BINDING_ORB, BLACKSMITH_WHETSTONE, BLESSING_CHAYULAH, BLESSING_ESH, BLESSING_TUL, BLESSING_UUL, BLESSING_XOPH, BLESSE, CHANCE, CHISEL, CHROM, DIVINE, ENGINEER, ETERNAL, EXALTED, FUSING, GEMCUTTERS, HARBINGER_ORB, HORIZON_ORB, IMPRINTED_BESTIARY, JEWELLER, JOURNEYMAN_SEXTANT, MASTER_SEXTANT, MIRROR, PORTAL, REGAL, REGRET, SCOUR, SILVER, SPLINTER_CHAYULA, SPLINTER_ESH, SPLINTER_TUL, SPLINTER_UUL, SPLINTER_XOPH, TRANSMUTE, VAAL, WISDOM };
 
         Regex poeTradeRegex = new Regex("@(.*) (.*): Hi, I would like to buy your (.*) listed for (.*) in (.*) [(]stash tab \"(.*)[\"]; position: left (.*), top (.*)[)](.*)");
+        Regex poeTradeNoLocationRegex = new Regex("@(.*) (.*): Hi, I would like to buy your (.*) listed for (.*) in (.*)");
         Regex poeTradeUnpricedRegex = new Regex("@(.*) (.*): Hi, I would like to buy your (.*) in (.*) [(]stash tab \"(.*)[\"]; position: left (.*), top (.*)[)](.*)");
         Regex poeTradeCurrencyRegex = new Regex("@(.*) (.*): Hi, I'd like to buy your (.*) for my (.*) in (.*).(.*)");
 
@@ -90,9 +110,14 @@ namespace TraderForPoe
             SetTradeType(WhisperMessage);
 
             ParseWhisper(WhisperMessage);
+
+            if (ItemExists(this))
+            {
+                throw new Exception("Item exists");
+            }
+
+            lstTradeItems.Add(this);
         }
-
-
 
         // Set property TradeType
         private void SetTradeType(string whisper)
@@ -170,6 +195,36 @@ namespace TraderForPoe
                     //this.AdditionalText = match.Groups[8].Value;
                 }
             }
+            else if (poeTradeNoLocationRegex.IsMatch(whisper))
+            {
+                MatchCollection matches = Regex.Matches(whisper, poeTradeNoLocationRegex.ToString());
+
+                foreach (Match match in matches)
+                {
+                    // 
+                    this.Customer = match.Groups[2].Value;
+
+                    // Set customer
+                    this.Customer = match.Groups[2].Value;
+
+                    // Set item
+                    this.Item = match.Groups[3].Value;
+
+                    // Set price
+                    this.Price = match.Groups[4].Value;
+
+                    this.PriceCurrency = ParseCurrency(this.Price);
+
+                    this.PriceCurrencyBitmap = SetCurrencyBitmap(this.PriceCurrency);
+
+                    // Set league
+                    this.League = match.Groups[5].Value;
+
+                    this.AdditionalText = match.Groups[9].Value;
+
+                }
+
+            }
             else if (poeTradeCurrencyRegex.IsMatch(whisper))
             {
                 MatchCollection matches = Regex.Matches(whisper, poeTradeCurrencyRegex.ToString());
@@ -188,6 +243,12 @@ namespace TraderForPoe
                     this.PriceCurrency = ParseCurrency(this.Price);
 
                     this.PriceCurrencyBitmap = SetCurrencyBitmap(this.PriceCurrency);
+
+                    this.ItemCurrencyQuant = ExtractFloatFromString(this.Item);
+
+                    this.ItemCurrency = ParseCurrency(this.Item);
+
+                    this.ItemCurrencyBitmap = SetCurrencyBitmap(this.ItemCurrency);
 
                     // Set league
                     this.League = match.Groups[5].Value;
@@ -272,6 +333,12 @@ namespace TraderForPoe
                     this.PriceCurrency = ParseCurrency(this.Price);
 
                     this.PriceCurrencyBitmap = SetCurrencyBitmap(this.PriceCurrency);
+
+                    this.ItemCurrencyQuant = ExtractFloatFromString(this.Item);
+
+                    this.ItemCurrency = ParseCurrency(this.Item);
+
+                    this.ItemCurrencyBitmap = SetCurrencyBitmap(this.ItemCurrency);
 
                     // Set league
                     this.League = match.Groups[5].Value; ;
@@ -534,7 +601,7 @@ namespace TraderForPoe
 
         private BitmapImage SetCurrencyBitmap(Currency c)
         {
-            switch (PriceCurrency)
+            switch (c)
             {
                 case Currency.CHAOS:
                     return new BitmapImage(new Uri("pack://application:,,,/Resources/Currency/curr_chaos.png"));
@@ -653,6 +720,34 @@ namespace TraderForPoe
             else
             {
                 return null;
+            }
+        }
+
+        public static bool ItemExists(TradeItem ti)
+        {
+            foreach (var item in lstTradeItems)
+            {
+                if (item.Item == ti.Item && item.Customer == ti.Customer && item.Price == ti.Price
+                    && item.StashPosition == ti.StashPosition && item.TradeType == ti.TradeType)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+
+        }
+
+        public static void RemoveItemFromList(TradeItem ti)
+        {
+            for (int i = 0; i < lstTradeItems.Count; i++)
+            {
+                if (lstTradeItems[i].Item == ti.Item && lstTradeItems[i].Customer == ti.Customer && 
+                    lstTradeItems[i].Price == ti.Price && lstTradeItems[i].StashPosition == ti.StashPosition 
+                    && lstTradeItems[i].TradeType == ti.TradeType)
+                {
+                    lstTradeItems.RemoveAt(i);
+                }
             }
         }
     }
