@@ -31,7 +31,23 @@ namespace TraderForPoe
             get;
             set;
         }
+        public Currency ItemCurrency
+        {
+            get;
+            set;
+        }
 
+        public string ItemCurrencyQuant
+        {
+            get;
+            set;
+        }
+
+        public BitmapImage ItemCurrencyBitmap
+        {
+            get;
+            set;
+        }
         public string Price
         {
             get;
@@ -197,6 +213,12 @@ namespace TraderForPoe
 
                     this.PriceCurrencyBitmap = SetCurrencyBitmap(this.PriceCurrency);
 
+                    this.ItemCurrencyQuant = ExtractFloatFromString(this.Item);
+
+                    this.ItemCurrency = ParseCurrency(this.Item);
+
+                    this.ItemCurrencyBitmap = SetCurrencyBitmap(this.ItemCurrency);
+
                     // Set league
                     this.League = match.Groups[5].Value;
 
@@ -280,6 +302,12 @@ namespace TraderForPoe
                     this.PriceCurrency = ParseCurrency(this.Price);
 
                     this.PriceCurrencyBitmap = SetCurrencyBitmap(this.PriceCurrency);
+
+                    this.ItemCurrencyQuant = ExtractFloatFromString(this.Item);
+
+                    this.ItemCurrency = ParseCurrency(this.Item);
+
+                    this.ItemCurrencyBitmap = SetCurrencyBitmap(this.ItemCurrency);
 
                     // Set league
                     this.League = match.Groups[5].Value; ;
@@ -542,7 +570,7 @@ namespace TraderForPoe
 
         private BitmapImage SetCurrencyBitmap(Currency c)
         {
-            switch (PriceCurrency)
+            switch (c)
             {
                 case Currency.CHAOS:
                     return new BitmapImage(new Uri("pack://application:,,,/Resources/Currency/curr_chaos.png"));

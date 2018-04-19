@@ -43,6 +43,7 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="White"/>
             <Setter Property="Height" Value="{Binding ActualHeight, ElementName=Button}"/>
 
         </Style>
@@ -70,10 +71,45 @@
                 <Button Click="ClickToCollapseExpandItem" Style="{DynamicResource CmdStyle}">
                     <TextBlock  x:Name="btn_CollExp" Grid.Row="1" TextAlignment="Center" FontSize="13" FontWeight="Bold">⏶</TextBlock>
                 </Button>
-                <StackPanel Orientation="Horizontal">
+
+                <StackPanel Name="spnl_Item" Orientation="Horizontal">
                     <Button ToolTip="{Binding Path=Text, ElementName=txt_Item}" Click="ClickShowStashOverlay">
-                        <TextBlock  x:Name="txt_Item" FontStyle="Italic" FontWeight="Bold" TextTrimming="CharacterEllipsis" >Caer Blaidd, Wolfpack's Den Underground River Map</TextBlock>
+                        <DockPanel>
+                            <TextBlock  x:Name="txt_Item" FontStyle="Italic" FontWeight="Bold" TextTrimming="CharacterEllipsis" ></TextBlock>
+                            <Image Name="img_ItemCurrency" Width="16" Margin="5,0,0,0" RenderOptions.BitmapScalingMode="HighQuality"/>
+                        </DockPanel>
                     </Button>
+                </StackPanel>
+
+                <StackPanel Name="spnl_CurrencyRatio" Orientation="Horizontal" Margin="15,0,0,0">
+                    <StackPanel.Resources>
+
+                        <Style x:Key="CurrStyle" TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="TextAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="FontSize" Value="13"/>
+                        </Style>
+
+                        <Style BasedOn="{StaticResource CurrStyle}" TargetType="TextBlock"/>
+                    </StackPanel.Resources>
+
+                    <TextBlock FontSize="16">(</TextBlock>
+                    <DockPanel>
+                        <TextBlock Name="txt_Ratio1"></TextBlock>
+                        <Image Name="img_Ratio1" Width="16" RenderOptions.BitmapScalingMode="HighQuality" Margin="5,0,0,0"/>
+                    </DockPanel>
+                    <TextBlock Margin="5,0,5,0" >=</TextBlock>
+
+                    <DockPanel>
+                        <TextBlock Name="txt_Ratio2"></TextBlock>
+                        <Image Name="img_Ratio2" Width="16" RenderOptions.BitmapScalingMode="HighQuality" Margin="5,0,0,0"/>
+                    </DockPanel>
+
+                    <TextBlock FontSize="16">)</TextBlock>
+
                 </StackPanel>
             </DockPanel>
 

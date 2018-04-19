@@ -110,33 +110,105 @@ namespace TraderForPoe
 
             }
 
-            txt_Customer.Text = tItem.Customer;
-            txt_Item.Text = tItem.Item;
 
-            try
+
+
+
+            if (tItem.ItemIsCurrency == true)
             {
-                txt_Price.Text = TradeItem.ExtractFloatFromString(tItem.Price);
-            }
-            catch (Exception)
-            { }
 
-            if (tItem.Price == null)
-            {
-                txt_Price.Text = "--";
-            }
+                txt_Customer.Text = tItem.Customer;
+                txt_Item.Text = tItem.ItemCurrencyQuant;
+                img_ItemCurrency.Source = tItem.ItemCurrencyBitmap;
+                txt_League.Text = tItem.League;
 
-            txt_League.Text = tItem.League;
+                try
+                {
+                    txt_Price.Text = TradeItem.ExtractFloatFromString(tItem.Price);
+                }
+                catch (Exception)
+                { }
 
-            if (tItem.Stash == null)
-            {
+
+                if (tItem.Stash == null)
+                {
+                    btn_stash.Visibility = Visibility.Collapsed;
+                    btn_stash.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    txt_Stash.Text = tItem.Stash;
+                    btn_stash.ToolTip = tItem.StashPosition.ToString();
+                }
+
+                double dblPrice = 0;
+                double dblItemPrice = 0;
+                try
+                {
+                    dblPrice = Double.Parse(TradeItem.ExtractFloatFromString(tItem.Price));
+                    dblItemPrice = Double.Parse(TradeItem.ExtractFloatFromString(tItem.ItemCurrencyQuant));
+                }
+                catch (Exception) { }
+
+
+
+                if ((dblItemPrice / dblPrice) >= 1)
+                {
+                    txt_Ratio1.Text = "1";
+                    img_Ratio1.Source = tItem.PriceCurrencyBitmap;
+
+                    txt_Ratio2.Text = (dblItemPrice / dblPrice).ToString();
+                    img_Ratio2.Source = tItem.ItemCurrencyBitmap;
+                }
+                else
+                {
+                    txt_Ratio1.Text = "1";
+                    img_Ratio1.Source = tItem.ItemCurrencyBitmap;
+
+                    txt_Ratio2.Text = (dblPrice / dblItemPrice).ToString();
+                    img_Ratio2.Source = tItem.PriceCurrencyBitmap;
+                }
+
                 btn_stash.Visibility = Visibility.Collapsed;
                 btn_stash.Visibility = Visibility.Hidden;
             }
+
+
+
+
+
             else
             {
-                txt_Stash.Text = tItem.Stash;
-                btn_stash.ToolTip = tItem.StashPosition.ToString();
+                txt_Customer.Text = tItem.Customer;
+                txt_Item.Text = tItem.Item;
+                spnl_CurrencyRatio.Visibility = Visibility.Collapsed;
+                try
+                {
+                    txt_Price.Text = TradeItem.ExtractFloatFromString(tItem.Price);
+                }
+                catch (Exception)
+                { }
+
+                if (tItem.Price == null)
+                {
+                    txt_Price.Text = "--";
+                }
+
+                txt_League.Text = tItem.League;
+
+                if (tItem.Stash == null)
+                {
+                    btn_stash.Visibility = Visibility.Collapsed;
+                    btn_stash.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    txt_Stash.Text = tItem.Stash;
+                    btn_stash.ToolTip = tItem.StashPosition.ToString();
+                }
             }
+
+
 
 
 
