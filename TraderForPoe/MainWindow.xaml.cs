@@ -192,7 +192,7 @@ namespace TraderForPoe
                 // Set variables befor Timer start
                 initialFileSize = new FileInfo(filePath).Length;
 
-                lastReadLength = initialFileSize - 1024;
+                lastReadLength = initialFileSize;
             }
             catch (FileNotFoundException)
             {
@@ -225,47 +225,42 @@ namespace TraderForPoe
                         fs.Seek(lastReadLength, SeekOrigin.Begin);
                         var buffer = new byte[1024];
 
-                        while (true)
+                        var bytesRead = fs.Read(buffer, 0, buffer.Length);
+                        lastReadLength += bytesRead;
+
+
+                        var text = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+
+                        using (var reader = new StringReader(text))
                         {
-                            var bytesRead = fs.Read(buffer, 0, buffer.Length);
-                            lastReadLength += bytesRead;
-
-                            if (bytesRead == 0)
-                                break;
-
-                            var text = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-
-                            using (var reader = new StringReader(text))
+                            for (string line = reader.ReadLine(); line != null; line = reader.ReadLine())
                             {
-                                for (string line = reader.ReadLine(); line != null; line = reader.ReadLine())
+                                if (line.Contains(" @"))
                                 {
-                                    if (line.Contains(" @"))
+                                    // Get a handle to POE. The window class and window name were obtained using the Spy++ tool.
+                                    IntPtr poeHandle = FindWindow("POEWindowClass", "Path of Exile");
+
+                                    // Verify that POE is a running process.
+                                    if (poeHandle != IntPtr.Zero)
                                     {
-                                        // Get a handle to POE. The window class and window name were obtained using the Spy++ tool.
-                                        IntPtr poeHandle = FindWindow("POEWindowClass", "Path of Exile");
-
-                                        // Verify that POE is a running process.
-                                        if (poeHandle != IntPtr.Zero)
+                                        try
                                         {
-                                            try
-                                            {
-                                                TradeItem tItem = new TradeItem(line);
-                                                TradeItemControl uc = new TradeItemControl(tItem);
-                                                stk_MainPnl.Children.Add(uc);
-                                            }
-                                            catch (Exception)
-                                            {
-                                                // Ignore Exception. Exception was thrown, because no RegEx pattern matched
-                                            }
+                                            TradeItem tItem = new TradeItem(line);
+                                            TradeItemControl uc = new TradeItemControl(tItem);
+                                            stk_MainPnl.Children.Add(uc);
                                         }
-
-
-
+                                        catch (Exception)
+                                        {
+                                            // Ignore Exception. Exception was thrown, because no RegEx pattern matched
+                                        }
                                     }
+
+
+
                                 }
                             }
-
                         }
+
                     }
                 }
             }
