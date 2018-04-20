@@ -54,6 +54,7 @@ namespace TraderForPoe.Windows
             Settings.Default.ThankYouWhisper = txt_ThankYouWhisper.Text;
             Settings.Default.ImBusyWhisper = txt_ImBusyWhisper.Text;
             Settings.Default.UseClipboardMonitor = cbx_UseClipBoardMonitor.IsChecked.Value;
+            Settings.Default.CloseItemAfterTrade = cbx_RemoveAfterTrade.IsChecked.Value;
 
             Settings.Default.Save();
             Settings.Default.Reload();

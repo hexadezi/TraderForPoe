@@ -54,12 +54,13 @@
         <GroupBox Header="Player Name" Height="Auto" Canvas.Left="202" Canvas.Top="198" Width="498">
             <TextBox Margin="0,2,0,0"  Name="txt_PlayerName" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding PlayerName, Source={StaticResource Settings}}" />
         </GroupBox>
-        <GroupBox Header="Various Settings" Height="78" Canvas.Left="202" Canvas.Top="246" Width="175">
-            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <CheckBox Name="cbx_UseClipBoardMonitor" Margin="0,2,0,0" Content="Use Clipboard Monitor" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding UseClipboardMonitor, Source={StaticResource Settings}}"/>
-                <CheckBox Name="cbx_CollapseItems" Margin="0,2,0,0" Content="Collapse Items" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding CollapsedItems, Source={StaticResource Settings}}"/>
-                <CheckBox Name="cbx_PlaySound" Margin="0,2,0,0" Content="Play Sound" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding PlayNotificationSound, Source={StaticResource Settings}}"/>
-            </StackPanel>
+        <GroupBox Header="Various Settings" Height="78" Canvas.Left="202" Canvas.Top="246" Width="338">
+            <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <CheckBox Name="cbx_UseClipBoardMonitor" Margin="0,2,0,0" Content="Use clipboard monitor" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding UseClipboardMonitor, Source={StaticResource Settings}}"/>
+                <CheckBox Name="cbx_CollapseItems" Margin="0,2,0,0" Content="Collapse items" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding CollapsedItems, Source={StaticResource Settings}}"/>
+                <CheckBox Name="cbx_PlaySound" Margin="0,2,0,0" Content="Play sound" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding PlayNotificationSound, Source={StaticResource Settings}}"/>
+                <CheckBox Name="cbx_RemoveAfterTrade" Margin="0,2,0,0" Content="Remove item after trade" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding CloseItemAfterTrade, Source={StaticResource Settings}}"/>
+            </WrapPanel>
 
         </GroupBox>
 

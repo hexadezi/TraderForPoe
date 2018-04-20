@@ -374,6 +374,11 @@ namespace TraderForPoe
 
         private void ClickRemoveItem(object sender, RoutedEventArgs e)
         {
+            RemoveItem();
+        }
+
+        private void RemoveItem()
+        {
             ((StackPanel)Parent).Children.Remove(this);
             stashGridHighlight.RemoveStashControl(tItem);
             TradeItemControl.RemoveTICfromList(this);
@@ -390,6 +395,11 @@ namespace TraderForPoe
         {
             //TODO: Implementieren
             SendInputToPoe("/kick " + Settings.Default.PlayerName);
+
+            if (tItem.TradeType == TradeItem.TradeTypes.SELL && Settings.Default.CloseItemAfterTrade == true)
+            {
+                RemoveItem();
+            }
         }
 
         private void ClickWhoisCustomer(object sender, RoutedEventArgs e)
@@ -410,6 +420,10 @@ namespace TraderForPoe
         private void ClickVisitOwnHideout(object sender, RoutedEventArgs e)
         {
             SendInputToPoe("/hideout");
+            if (tItem.TradeType == TradeItem.TradeTypes.BUY && Settings.Default.CloseItemAfterTrade == true)
+            {
+                RemoveItem();
+            }
         }
 
         private void ClickStashIsQuad(object sender, RoutedEventArgs e)
