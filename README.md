@@ -22,6 +22,7 @@ Download here: [TraderForPoe Releases](https://github.com/labo89/TraderForPoe/re
 What things you need to run the sofware?
 ```
 .NET Framework 4.6.1
+Display mode has to be windowed or windowed fullscreen
 ```
 
 ### Installing
