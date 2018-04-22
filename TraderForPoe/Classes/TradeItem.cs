@@ -227,6 +227,8 @@ namespace TraderForPoe
             }
             else if (poeTradeCurrencyRegex.IsMatch(whisper))
             {
+                this.ItemIsCurrency = true;
+
                 MatchCollection matches = Regex.Matches(whisper, poeTradeCurrencyRegex.ToString());
 
                 foreach (Match match in matches)
@@ -244,11 +246,21 @@ namespace TraderForPoe
 
                     this.PriceCurrencyBitmap = SetCurrencyBitmap(this.PriceCurrency);
 
-                    this.ItemCurrencyQuant = ExtractFloatFromString(this.Item);
+                    //Catch ex. If ex thrown, the item could not be parsed. ItemIsCurrency will be set to false, so the item will be treated as normal item
 
-                    this.ItemCurrency = ParseCurrency(this.Item);
+                    try
+                    {
+                        this.ItemCurrencyQuant = ExtractFloatFromString(this.Item);
 
-                    this.ItemCurrencyBitmap = SetCurrencyBitmap(this.ItemCurrency);
+                        this.ItemCurrency = ParseCurrency(this.Item);
+
+                        this.ItemCurrencyBitmap = SetCurrencyBitmap(this.ItemCurrency);
+                    }
+                    catch (Exception)
+                    {
+                        this.ItemIsCurrency = false;
+                    }
+
 
                     // Set league
                     this.League = match.Groups[5].Value;
@@ -257,7 +269,6 @@ namespace TraderForPoe
 
                 }
 
-                this.ItemIsCurrency = true;
 
             }
             else if (poeAppRegEx.IsMatch(whisper))
@@ -317,6 +328,8 @@ namespace TraderForPoe
             }
             else if (!whisper.Contains("Hi, ") && poeAppCurrencyRegex.IsMatch(whisper))
             {
+                this.ItemIsCurrency = true;
+
                 MatchCollection matches = Regex.Matches(whisper, poeAppCurrencyRegex.ToString());
 
                 foreach (Match match in matches)
@@ -334,11 +347,18 @@ namespace TraderForPoe
 
                     this.PriceCurrencyBitmap = SetCurrencyBitmap(this.PriceCurrency);
 
-                    this.ItemCurrencyQuant = ExtractFloatFromString(this.Item);
+                    try
+                    {
+                        this.ItemCurrencyQuant = ExtractFloatFromString(this.Item);
 
-                    this.ItemCurrency = ParseCurrency(this.Item);
+                        this.ItemCurrency = ParseCurrency(this.Item);
 
-                    this.ItemCurrencyBitmap = SetCurrencyBitmap(this.ItemCurrency);
+                        this.ItemCurrencyBitmap = SetCurrencyBitmap(this.ItemCurrency);
+                    }
+                    catch (Exception)
+                    {
+                        this.ItemIsCurrency = false;
+                    }
 
                     // Set league
                     this.League = match.Groups[5].Value; ;
@@ -346,7 +366,6 @@ namespace TraderForPoe
                     this.AdditionalText = match.Groups[6].Value;
                 }
 
-                this.ItemIsCurrency = true;
 
             }
             else
@@ -466,7 +485,7 @@ namespace TraderForPoe
                     return Currency.CHROM;
                 }
 
-                else if ((strPrice.Contains("divine") || strPrice.Contains("div")) && !strPrice.Contains("vessel") )
+                else if ((strPrice.Contains("divine") || strPrice.Contains("div")) && !strPrice.Contains("vessel"))
                 {
                     return Currency.DIVINE;
                 }
@@ -749,8 +768,8 @@ namespace TraderForPoe
         {
             for (int i = 0; i < lstTradeItems.Count; i++)
             {
-                if (lstTradeItems[i].Item == ti.Item && lstTradeItems[i].Customer == ti.Customer && 
-                    lstTradeItems[i].Price == ti.Price && lstTradeItems[i].StashPosition == ti.StashPosition 
+                if (lstTradeItems[i].Item == ti.Item && lstTradeItems[i].Customer == ti.Customer &&
+                    lstTradeItems[i].Price == ti.Price && lstTradeItems[i].StashPosition == ti.StashPosition
                     && lstTradeItems[i].TradeType == ti.TradeType)
                 {
                     lstTradeItems.RemoveAt(i);
