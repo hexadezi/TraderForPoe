@@ -22,21 +22,21 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Margin="0,0,0,5" Grid.Column="0" Content="Thank you whisper" HorizontalAlignment="Left" FontWeight="SemiBold"/>
+                <Label Margin="0,0,0,5" Grid.Column="0" Content="Thank you whisper" HorizontalAlignment="Left"/>
                 <TextBox Name="txt_ThankYouWhisper" Margin="0,0,0,5" Grid.Column="1" VerticalContentAlignment="Center" TextWrapping="NoWrap" Text="{Binding ThankYouWhisper, Source={StaticResource Settings}}"/>
 
-                <Label Margin="0,0,0,5" Grid.Column="0" Grid.Row="1" Content="I am busy whisper" HorizontalAlignment="Left" FontWeight="SemiBold"/>
+                <Label Margin="0,0,0,5" Grid.Column="0" Grid.Row="1" Content="I am busy whisper" HorizontalAlignment="Left"/>
                 <TextBox Name="txt_ImBusyWhisper" Margin="0,0,0,5"  Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center" TextWrapping="NoWrap" Text="{Binding ImBusyWhisper, Source={StaticResource Settings}}"/>
 
-                <Label Margin="0,0,0,5" Grid.Column="0" Grid.Row="2" Content="Custom whisper 1" HorizontalAlignment="Left" FontWeight="SemiBold"/>
+                <Label Margin="0,0,0,5" Grid.Column="0" Grid.Row="2" Content="Custom whisper 1" HorizontalAlignment="Left"/>
                 <TextBox Name="txt_CustomWhisper1" Margin="0,0,0,5"  Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center" TextWrapping="NoWrap" Text="{Binding CustomWhisper1, Source={StaticResource Settings}}"/>
 
-                <Label Grid.Column="0" Grid.Row="3" Content="Custom whisper 2" HorizontalAlignment="Left" FontWeight="SemiBold"/>
+                <Label Grid.Column="0" Grid.Row="3" Content="Custom whisper 2" HorizontalAlignment="Left"/>
                 <TextBox Name="txt_CustomWhisper2" Grid.Column="1" Grid.Row="3" VerticalContentAlignment="Center" TextWrapping="NoWrap" Text="{Binding CustomWhisper2, Source={StaticResource Settings},Mode=TwoWay}"/>
 
             </Grid>
         </GroupBox>
-        <GroupBox Header="Quad Tabs" Height="167" Canvas.Left="10" Canvas.Top="157" Width="187">
+        <GroupBox Header="Quad tabs" Height="167" Canvas.Left="10" Canvas.Top="157" Width="187">
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -51,15 +51,15 @@
         </GroupBox>
         <Button Content="Save" Canvas.Left="625" Canvas.Top="304" Width="75" Click="Click_SaveSettings"/>
         <Button Content="Restart" Canvas.Left="545" Canvas.Top="304" Width="75" Click="Click_RestartApp"/>
-        <GroupBox Header="Player Name" Height="Auto" Canvas.Left="202" Canvas.Top="198" Width="498">
+        <GroupBox Header="Character name" Height="Auto" Canvas.Left="202" Canvas.Top="198" Width="498">
             <TextBox Margin="0,2,0,0"  Name="txt_PlayerName" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding PlayerName, Source={StaticResource Settings}}" />
         </GroupBox>
         <GroupBox Header="Various Settings" Height="78" Canvas.Left="202" Canvas.Top="246" Width="338">
             <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <CheckBox Name="cbx_UseClipBoardMonitor" Margin="0,2,0,0" Content="Use clipboard monitor" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding UseClipboardMonitor, Source={StaticResource Settings}}"/>
-                <CheckBox Name="cbx_CollapseItems" Margin="0,2,0,0" Content="Collapse items" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding CollapsedItems, Source={StaticResource Settings}}"/>
-                <CheckBox Name="cbx_PlaySound" Margin="0,2,0,0" Content="Play sound" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding PlayNotificationSound, Source={StaticResource Settings}}"/>
-                <CheckBox Name="cbx_RemoveAfterTrade" Margin="0,2,0,0" Content="Remove item after trade" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding CloseItemAfterTrade, Source={StaticResource Settings}}"/>
+                <CheckBox Name="cbx_UseClipBoardMonitor" Margin="0,2,5,5" Content="Use clipboard monitor" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding UseClipboardMonitor, Source={StaticResource Settings}}"/>
+                <CheckBox Name="cbx_CollapseItems" Margin="0,0,5,5" Content="Collapse items" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding CollapsedItems, Source={StaticResource Settings}}"/>
+                <CheckBox Name="cbx_PlaySound" Margin="0,0,5,5" Content="Play sound" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding PlayNotificationSound, Source={StaticResource Settings}}"/>
+                <CheckBox Name="cbx_RemoveAfterTrade" Margin="0,0,5,5" Content="Remove item after trade" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding CloseItemAfterTrade, Source={StaticResource Settings}}"/>
             </WrapPanel>
 
         </GroupBox>

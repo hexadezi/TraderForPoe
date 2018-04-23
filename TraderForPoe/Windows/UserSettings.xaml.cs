@@ -58,6 +58,9 @@ namespace TraderForPoe.Windows
 
             Settings.Default.Save();
             Settings.Default.Reload();
+
+            System.Windows.Forms.MessageBox.Show("Settings saved successfully.", "Success", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+
         }
 
         private void Click_RestartApp(object sender, RoutedEventArgs e)
