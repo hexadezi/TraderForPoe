@@ -11,8 +11,8 @@
 
         <Style x:Key="BtnStyle" TargetType="Button">
             <Setter Property="Margin" Value="0,0,2,0"/>
-            <Setter Property="MinWidth" Value="20"/>
-            <Setter Property="Height" Value="20"/>
+            <Setter Property="MinWidth" Value="22"/>
+            <Setter Property="Height" Value="22"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Template">
@@ -81,9 +81,9 @@
                     </Button>
                 </StackPanel>
 
-                <StackPanel Name="spnl_CurrencyRatio" Orientation="Horizontal" Margin="10,0,0,0">
+                <StackPanel Name="spnl_CurrencyRatio" Orientation="Horizontal" Margin="5,0,0,0">
+                    
                     <StackPanel.Resources>
-
                         <Style x:Key="CurrStyle" TargetType="TextBlock">
                             <Setter Property="Foreground" Value="White"/>
                             <Setter Property="TextAlignment" Value="Center"/>
@@ -92,7 +92,6 @@
                             <Setter Property="FontWeight" Value="Bold"/>
                             <Setter Property="FontSize" Value="13"/>
                         </Style>
-
                         <Style BasedOn="{StaticResource CurrStyle}" TargetType="TextBlock"/>
                     </StackPanel.Resources>
 
@@ -113,16 +112,16 @@
                 </StackPanel>
             </DockPanel>
 
-            <DockPanel Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+            <DockPanel Grid.Column="2" HorizontalAlignment="Stretch">
                 <Button Name="btn_Price">
                     <DockPanel>
                         <TextBlock Margin="5,0,0,0" x:Name="txt_Price" FontWeight="Bold"></TextBlock>
-                        <Image Name="img_Currency" RenderOptions.BitmapScalingMode="HighQuality" Margin="0,0,5,0"/>
+                        <Image Name="img_Currency" RenderOptions.BitmapScalingMode="HighQuality" Margin="0,0,5,0" Height="16"/>
                     </DockPanel>
                 </Button>
             </DockPanel>
 
-            <DockPanel Grid.Column="3" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <DockPanel Grid.Column="3" Grid.Row="0">
                 <Button ToolTip="Visit customer hideout" Click="ClickVisitHideout" Style="{DynamicResource CmdStyle}" Name="btn_VisitCustomerHideout">
                     <Image Source="pack://application:,,,/Resources/Images/customerHideout.png" Width="15" Height="15"></Image>
                 </Button>
@@ -185,11 +184,11 @@
 
             <DockPanel Grid.Column="1">
                 <Button x:Name="btn_SendCustomMessage1" ToolTip="{Binding CustomWhisper1, Source={StaticResource Settings}}" Style="{DynamicResource CmdStyle}" Click="ClickCustomWhisper1">
-                    <Image Source="pack://application:,,,/Resources/Images/customMessage1.png" Width="18" Height="18"></Image>
+                    <Image Source="pack://application:,,,/Resources/Images/customMessage1.png" Width="16" Height="16"></Image>
                 </Button>
 
                 <Button x:Name="btn_SendCustomMessage2" ToolTip="" Style="{DynamicResource CmdStyle}" Click="ClickCustomWhisper2">
-                    <Image Source="pack://application:,,,/Resources/Images/customMessage2.png" Width="18" Height="18" ToolTip="{Binding CustomWhisper2, Source={StaticResource Settings}}"></Image>
+                    <Image Source="pack://application:,,,/Resources/Images/customMessage2.png" Width="16" Height="16" ToolTip="{Binding CustomWhisper2, Source={StaticResource Settings}}"></Image>
                 </Button>
 
                 <Button x:Name="btn_SearchItem" Click="ClickSearchItem" ToolTip="Perform a search in the stash" Style="{DynamicResource CmdStyle}">
@@ -197,7 +196,7 @@
                 </Button>
 
                 <Button x:Name="btn_KickCustomer" Click="ClickKickCustomer" ToolTip="Kick the Customer" Style="{DynamicResource CmdStyle}">
-                    <Image Source="pack://application:,,,/Resources/Images/kick.png" Width="17" Height="17"></Image>
+                    <Image Source="pack://application:,,,/Resources/Images/kick.png" Width="16" Height="16"></Image>
                 </Button>
 
                 <Button ToolTip="Send whisper again" x:Name="btn_SendWhisperAgain" Click="ClickSendWhisperAgain" Style="{DynamicResource CmdStyle}" Margin="0">
