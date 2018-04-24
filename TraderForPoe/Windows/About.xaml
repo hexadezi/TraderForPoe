@@ -14,12 +14,15 @@
         </Grid>
 
         <Canvas>
-            <StackPanel>
+            <StackPanel Margin="5">
                 <TextBlock>Icons from:
-                    <Hyperlink  NavigateUri="https://icons8.com/">https://icons8.com/</Hyperlink>
+                    <Hyperlink  NavigateUri="https://icons8.com/" RequestNavigate="OnRequestNavigate">https://icons8.com/</Hyperlink>
                 </TextBlock>
                 <TextBlock>Windows Input Simulator Plus from:
-                    <Hyperlink  NavigateUri="https://github.com/TChatzigiannakis/InputSimulatorPlus">https://github.com/TChatzigiannakis/InputSimulatorPlus</Hyperlink>
+                    <Hyperlink  NavigateUri="https://github.com/TChatzigiannakis/InputSimulatorPlus" RequestNavigate="OnRequestNavigate">https://github.com/TChatzigiannakis/InputSimulatorPlus</Hyperlink>
+                </TextBlock>
+                <TextBlock>Notification sound from:
+                    <Hyperlink  NavigateUri="https://notificationsounds.com" RequestNavigate="OnRequestNavigate">https://notificationsounds.com</Hyperlink>
                 </TextBlock>
             </StackPanel>
         </Canvas>

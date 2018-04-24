@@ -78,12 +78,13 @@ namespace TraderForPoe
         private void TradeItemControl_MoreThanThreeItems(object sender, EventArgs e)
         {
             btn_collapseMainWindow.Visibility = Visibility.Visible;
+            brd_collapseMainWindow.Visibility = Visibility.Visible;
         }
 
         private void TradeItemControl_LessThanThreeItems(object sender, EventArgs e)
         {
-            //ExpandWindow();
             btn_collapseMainWindow.Visibility = Visibility.Collapsed;
+            brd_collapseMainWindow.Visibility = Visibility.Collapsed;
         }
 
         private void LoadSetting()
