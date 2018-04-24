@@ -12,6 +12,7 @@ using System.Linq;
 using System.Windows.Media.Imaging;
 using System.Threading;
 using System.Collections.Generic;
+using System.Media;
 
 namespace TraderForPoe
 {
@@ -39,6 +40,7 @@ namespace TraderForPoe
         private static StashGridHighlight stashGridHighlight = null;
 
         private TradeItem tItem;
+
 
         //-----------------------------------------------------------------------------------------
 
@@ -85,7 +87,8 @@ namespace TraderForPoe
 
             if (Settings.Default.PlayNotificationSound)
             {
-                System.Media.SystemSounds.Hand.Play();
+                SoundPlayer player = new SoundPlayer(Properties.Resources.notification);
+                player.Play();
             }
         }
 
