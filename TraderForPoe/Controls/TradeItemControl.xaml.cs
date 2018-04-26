@@ -319,7 +319,7 @@ namespace TraderForPoe
         private void ClickInviteCustomer(object sender, RoutedEventArgs e)
         {
             SendInputToPoe("/invite " + tItem.Customer);
-            if (tItem.TradeType == TradeItem.TradeTypes.SELL)
+            if (tItem.TradeType == TradeItem.TradeTypes.SELL && tItem.Stash != "")
             {
                 stashGridHighlight.AddButton(tItem);
             }
