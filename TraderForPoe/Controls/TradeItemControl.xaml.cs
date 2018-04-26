@@ -37,7 +37,7 @@ namespace TraderForPoe
         [DllImport("USER32.DLL")]
         public static extern bool SetForegroundWindow(IntPtr hWnd);
 
-        private static StashGridHighlight stashGridHighlight = null;
+        private static StashGridHighlight stashGridHighlight = new StashGridHighlight();
 
         private TradeItem tItem;
 
@@ -71,11 +71,7 @@ namespace TraderForPoe
 
         private void OpenStashGridHighlightWindow()
         {
-            if (stashGridHighlight == null)
-            {
-                stashGridHighlight = new StashGridHighlight();
-                stashGridHighlight.Show();
-            }
+            stashGridHighlight.Show();
         }
 
         private void LoadSettings()
