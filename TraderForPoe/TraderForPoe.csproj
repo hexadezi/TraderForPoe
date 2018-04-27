@@ -235,28 +235,6 @@
     <Resource Include="Resources\ico_application.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\customerHideout.png" />
-    <Resource Include="Resources\Images\myHideout.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\busy.png" />
-    <Resource Include="Resources\Images\customMessage1.png" />
-    <Resource Include="Resources\Images\customMessage2.png" />
-    <Resource Include="Resources\Images\handshake.png" />
-    <Resource Include="Resources\Images\kick.png" />
-    <Resource Include="Resources\Images\leave.png" />
-    <Resource Include="Resources\Images\remove.png" />
-    <Resource Include="Resources\Images\search.png" />
-    <Resource Include="Resources\Images\trade.png" />
-    <Resource Include="Resources\Images\whisper.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\invite.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\resend.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\askifinterested.png" />
   </ItemGroup>
   <ItemGroup>
@@ -264,6 +242,51 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\notification.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\invite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\trade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\thanks.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\leave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\customerHideout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\clock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\message-text.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\customMessage1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\customMessage2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\magnify.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\account-minus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\repeat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\comment-question.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

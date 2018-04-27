@@ -16,7 +16,7 @@
         <Canvas>
             <StackPanel Margin="5">
                 <TextBlock>Icons from:
-                    <Hyperlink  NavigateUri="https://icons8.com/" RequestNavigate="OnRequestNavigate">https://icons8.com/</Hyperlink>
+                    <Hyperlink  NavigateUri="https://materialdesignicons.com/" RequestNavigate="OnRequestNavigate">https://materialdesignicons.com/</Hyperlink>
                 </TextBlock>
                 <TextBlock>Windows Input Simulator Plus from:
                     <Hyperlink  NavigateUri="https://github.com/TChatzigiannakis/InputSimulatorPlus" RequestNavigate="OnRequestNavigate">https://github.com/TChatzigiannakis/InputSimulatorPlus</Hyperlink>

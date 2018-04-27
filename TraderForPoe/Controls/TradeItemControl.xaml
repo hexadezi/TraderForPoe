@@ -123,38 +123,38 @@
 
             <DockPanel Grid.Column="3" Grid.Row="0">
                 <Button ToolTip="Visit customer hideout" Click="ClickVisitHideout" Style="{DynamicResource CmdStyle}" Name="btn_VisitCustomerHideout">
-                    <Image Source="pack://application:,,,/Resources/Images/customerHideout.png" Width="15" Height="15"></Image>
+                    <Image Source="pack://application:,,,/Resources/Images/customerHideout.png" Width="20" Height="20"></Image>
                 </Button>
                 <Button x:Name="btn_InviteCustomer" ToolTip="Invite customer" Click="ClickInviteCustomer" Style="{DynamicResource CmdStyle}">
-                    <Image Source="pack://application:,,,/Resources/Images/invite.png" Width="16" Height="16"></Image>
+                    <Image Source="pack://application:,,,/Resources/Images/invite.png"  Width="20" Height="20"></Image>
                 </Button>
 
                 <Button x:Name="btn_StartTrade" ToolTip="Trade with customer" Click="ClickTradeInvite" Style="{DynamicResource CmdStyle}">
-                    <Image Source="pack://application:,,,/Resources/Images/trade.png" Width="16" Height="16"></Image>
+                    <Image Source="pack://application:,,,/Resources/Images/trade.png" Width="20" Height="20"></Image>
                 </Button>
 
                 <Button x:Name="btn_SayThanks" ToolTip="Say thanks to customer" Click="ClickThanksForTrade" Style="{DynamicResource CmdStyle}">
-                    <Image Source="pack://application:,,,/Resources/Images/handshake.png" Width="16" Height="16"></Image>
+                    <Image Source="pack://application:,,,/Resources/Images/thanks.png" Width="18" Height="18"></Image>
                 </Button>
 
                 <Button x:Name="btn_LeaveParty" ToolTip="Kick yourself" Click="ClickKickMyself" Style="{DynamicResource CmdStyle}">
-                    <Image Source="pack://application:,,,/Resources/Images/leave.png" Width="13" Height="13"></Image>
+                    <Image Source="pack://application:,,,/Resources/Images/leave.png" Width="20" Height="20"></Image>
                 </Button>
 
                 <Button x:Name="btn_VisitOwnHideout" ToolTip="Visit own hideout" Click="ClickVisitOwnHideout" Style="{DynamicResource CmdStyle}">
-                    <Image Source="pack://application:,,,/Resources/Images/myHideout.png" Width="15" Height="15"></Image>
+                    <Image Source="pack://application:,,,/Resources/Images/home.png" Width="20" Height="20"></Image>
                 </Button>
 
                 <Button x:Name="btn_SendBusyMessage" ToolTip="Tell the customer I'm busy" Click="ClickWhisperCustomerBusy" Style="{DynamicResource CmdStyle}">
-                    <Image Source="pack://application:,,,/Resources/Images/busy.png" Width="14" Height="14"></Image>
+                    <Image Source="pack://application:,,,/Resources/Images/clock.png" Width="20" Height="20"></Image>
                 </Button>
 
                 <Button x:Name="btn_WhisperCustomer" ToolTip="Whisper customer" Click="ClickWhisperCustomer" Style="{DynamicResource CmdStyle}">
-                    <Image Source="pack://application:,,,/Resources/Images/whisper.png" Width="16" Height="16"></Image>
+                    <Image Source="pack://application:,,,/Resources/Images/message-text.png" Width="20" Height="20"></Image>
                 </Button>
 
                 <Button x:Name="btn_RemoveItem" ToolTip="Remove this item" Click="ClickRemoveItem" Style="{DynamicResource CmdStyle}" Margin="0">
-                    <Image Source="pack://application:,,,/Resources/Images/remove.png" Width="16" Height="16"></Image>
+                    <Image Source="pack://application:,,,/Resources/Images/remove.png" Width="20" Height="20"></Image>
                 </Button>
 
             </DockPanel>
@@ -184,27 +184,27 @@
 
             <DockPanel Grid.Column="1">
                 <Button x:Name="btn_SendCustomMessage1" ToolTip="{Binding CustomWhisper1, Source={StaticResource Settings}}" Style="{DynamicResource CmdStyle}" Click="ClickCustomWhisper1">
-                    <Image Source="pack://application:,,,/Resources/Images/customMessage1.png" Width="16" Height="16"></Image>
+                    <Image Source="pack://application:,,,/Resources/Images/customMessage1.png" Width="20" Height="20"></Image>
                 </Button>
 
                 <Button x:Name="btn_SendCustomMessage2" ToolTip="" Style="{DynamicResource CmdStyle}" Click="ClickCustomWhisper2">
-                    <Image Source="pack://application:,,,/Resources/Images/customMessage2.png" Width="16" Height="16" ToolTip="{Binding CustomWhisper2, Source={StaticResource Settings}}"></Image>
+                    <Image Source="pack://application:,,,/Resources/Images/customMessage2.png" Width="20" Height="20" ToolTip="{Binding CustomWhisper2, Source={StaticResource Settings}}"></Image>
                 </Button>
 
                 <Button x:Name="btn_SearchItem" Click="ClickSearchItem" ToolTip="Perform a search in the stash" Style="{DynamicResource CmdStyle}">
-                    <Image Source="pack://application:,,,/Resources/Images/search.png" Width="14" Height="14"></Image>
+                    <Image Source="pack://application:,,,/Resources/Images/magnify.png" Width="20" Height="20"></Image>
                 </Button>
 
                 <Button x:Name="btn_KickCustomer" Click="ClickKickCustomer" ToolTip="Kick the Customer" Style="{DynamicResource CmdStyle}">
-                    <Image Source="pack://application:,,,/Resources/Images/kick.png" Width="16" Height="16"></Image>
+                    <Image Source="pack://application:,,,/Resources/Images/account-minus.png" Width="20" Height="20"></Image>
                 </Button>
 
                 <Button ToolTip="Send whisper again" x:Name="btn_SendWhisperAgain" Click="ClickSendWhisperAgain" Style="{DynamicResource CmdStyle}" Margin="0">
-                    <Image Source="pack://application:,,,/Resources/Images/resend.png" Width="16" Height="16"></Image>
+                    <Image Source="pack://application:,,,/Resources/Images/repeat.png" Width="20" Height="20"></Image>
                 </Button>
 
                 <Button ToolTip="Ask customer, if he still is interested" x:Name="btn_AskIfInterested" Click="ClickAskIfInterested" Style="{DynamicResource CmdStyle}" Margin="0">
-                    <Image Source="pack://application:,,,/Resources/Images/askifinterested.png" Width="16" Height="16"></Image>
+                    <Image Source="pack://application:,,,/Resources/Images/comment-question.png" Width="20" Height="20"></Image>
                 </Button>
 
             </DockPanel>
