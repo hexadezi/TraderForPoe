@@ -16,15 +16,6 @@ namespace TraderForPoe
 {
     public partial class MainWindow : Window
     {
-        System.Windows.Forms.NotifyIcon nIcon = new System.Windows.Forms.NotifyIcon();
-
-        System.Windows.Forms.ContextMenu cMenu = new System.Windows.Forms.ContextMenu();
-
-        bool mainWindowCollapsed = false;
-
-
-        DispatcherTimer dispatcherTimer = new DispatcherTimer();
-
         // Needed to prevent window getting focus
         const int GWL_EXSTYLE = -20;
         const int WS_EX_NOACTIVATE = 134217728;
@@ -45,14 +36,9 @@ namespace TraderForPoe
         [DllImport("user32")]
         public static extern IntPtr SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
+        System.Windows.Forms.NotifyIcon nIcon = new System.Windows.Forms.NotifyIcon();
 
-
-        // Variables for reading the Client.txt
-        string filePath = Settings.Default.PathToClientTxt;
-
-        long initialFileSize;
-
-        long lastReadLength;
+        System.Windows.Forms.ContextMenu cMenu = new System.Windows.Forms.ContextMenu();
 
         ClipboardMonitor clipMoni = new ClipboardMonitor();
 
@@ -60,11 +46,20 @@ namespace TraderForPoe
 
         UserSettings userSettings = new UserSettings();
 
+        bool mainWindowCollapsed = false;
+
+        DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        // Variables for reading the Client.txt
+        string filePath = Settings.Default.PathToClientTxt;
+
+        long initialFileSize;
+
+        long lastReadLength;
+
+
         public MainWindow()
         {
-
-            TradeItemControl.MoreThanThreeItems += TradeItemControl_MoreThanThreeItems;
-            TradeItemControl.EqualThreeItems += TradeItemControl_LessThanThreeItems;
+            SubscribeToEvents();
 
             InitializeComponent();
 
@@ -73,6 +68,12 @@ namespace TraderForPoe
             LoadSetting();
 
             StartFileMonitoring();
+        }
+
+        private void SubscribeToEvents()
+        {
+            TradeItemControl.MoreThanThreeItems += TradeItemControl_MoreThanThreeItems;
+            TradeItemControl.EqualThreeItems += TradeItemControl_LessThanThreeItems;
         }
 
         private void TradeItemControl_MoreThanThreeItems(object sender, EventArgs e)
@@ -103,6 +104,7 @@ namespace TraderForPoe
             Loaded += (object sender, RoutedEventArgs e) => SetNoActiveWindow();
 
             this.Top = Settings.Default.WindowLocation.X;
+
             this.Left = Settings.Default.WindowLocation.Y;
         }
 

@@ -50,6 +50,7 @@ namespace TraderForPoe.Windows
         }
 
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
+
         IntPtr poeHandle = FindWindow("POEWindowClass", "Path of Exile");
 
         // Needed to determine if poe window location changed
@@ -70,7 +71,7 @@ namespace TraderForPoe.Windows
 
             Loaded += (object sender, RoutedEventArgs e) => SetNoActiveWindow();
 
-            UpdateLocation();
+            UpdateLocationAndSize();
 
             WinEventDelegate = new Hook.WinEventDelegate(WinEventCallback);
 
@@ -98,11 +99,11 @@ namespace TraderForPoe.Windows
         {
             if (hWnd == poeHandle && eventType == Hook.SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE && idObject == (Hook.SWEH_ObjectId)Hook.SWEH_CHILDID_SELF)
             {
-                UpdateLocation();
+                UpdateLocationAndSize();
             }
         }
-        
-        private void UpdateLocation()
+
+        private void UpdateLocationAndSize()
         {
 
             GetClientRect(poeHandle, out RECT clientRect);
@@ -199,7 +200,7 @@ namespace TraderForPoe.Windows
             }
 
             else
-	{
+            {
                 this.Top = y + (h * 0.094);
 
                 this.Left = x + (w * 0.004);
@@ -208,7 +209,7 @@ namespace TraderForPoe.Windows
 
                 this.Width = (h * 0.585);
             }
-            
+
             front_canvas.Width = this.Width;
 
             front_canvas.Height = this.Height;
@@ -216,20 +217,29 @@ namespace TraderForPoe.Windows
 
         public void AddButton(TradeItem tItemArgs)
         {
-            UpdateLocation();
+            UpdateLocationAndSize();
 
+            if (ContainsItem(tItemArgs) == false)
+            {
+                StashControl sCtrl = new StashControl(tItemArgs);
+
+                sCtrl.MouseEnter += MouseEnterDrawRectangle;
+
+                spnl_Buttons.Children.Add(sCtrl);
+            }
+
+        }
+
+        private bool ContainsItem(TradeItem tItemArgs)
+        {
             foreach (StashControl item in spnl_Buttons.Children)
             {
                 if (item.GetTItem.Item == tItemArgs.Item && item.GetTItem.Customer == tItemArgs.Customer && item.GetTItem.Price == tItemArgs.Price)
                 {
-                    return;
+                    return true;
                 }
             }
-            StashControl sCtrl = new StashControl(tItemArgs);
-
-            sCtrl.MouseEnter += MouseEnterDrawPoint;
-
-            spnl_Buttons.Children.Add(sCtrl);
+            return false;
         }
 
         private void SetNoActiveWindow()
@@ -251,22 +261,28 @@ namespace TraderForPoe.Windows
             front_canvas.Children.Clear();
         }
 
-        private void MouseEnterDrawPoint(object sender, System.Windows.Input.MouseEventArgs e)
+        private void MouseEnterDrawRectangle(object sender, System.Windows.Input.MouseEventArgs e)
         {
+            // Clear canvas before drawing new rectangle
             front_canvas.Children.Clear();
 
+            // Start timer to clear canvas after some time
             StartDispatcherTimer();
 
+            // Cast sender as StashControl
             StashControl stashControl = (StashControl)sender;
 
             double x = stashControl.GetTItem.StashPosition.X;
 
             double y = stashControl.GetTItem.StashPosition.Y;
 
+            // Nomber of stash columns
             int nbrRectStash = 12;
 
+            // Set rectangle size by dividing canvas by number of columns
             double rectDimensionX = ((front_canvas.Width) / 12);
 
+            // Check if stash is quad. If true divide rectangle size and multiply number of columns by 2
             foreach (var item in Settings.Default.QuadStash)
             {
                 if (item == stashControl.GetTItem.Stash)
@@ -286,7 +302,7 @@ namespace TraderForPoe.Windows
                     Stroke = Brushes.Red,
                     StrokeThickness = 1,
                 };
-                
+
                 if (iX == x)
                 {
 
@@ -324,6 +340,7 @@ namespace TraderForPoe.Windows
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            // Unhook event when closing
             Hook.WinEventUnhook(hWinEventHook);
         }
     }
