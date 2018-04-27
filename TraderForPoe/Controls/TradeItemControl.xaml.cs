@@ -6,12 +6,7 @@ using WindowsInput;
 using System.Runtime.InteropServices;
 using WindowsInput.Native;
 using TraderForPoe.Windows;
-using System.Drawing;
 using TraderForPoe.Properties;
-using System.Linq;
-using System.Windows.Media.Imaging;
-using System.Threading;
-using System.Collections.Generic;
 using System.Media;
 
 namespace TraderForPoe

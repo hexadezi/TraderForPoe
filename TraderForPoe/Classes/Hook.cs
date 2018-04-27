@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TraderForPoe.Classes
 {
-        public class Hook
+    public class Hook
         {
             public static long SWEH_CHILDID_SELF = 0;
 
