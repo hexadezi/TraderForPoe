@@ -99,6 +99,7 @@ namespace TraderForPoe.Windows
         {
             if (hWnd == poeHandle && eventType == Hook.SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE && idObject == (Hook.SWEH_ObjectId)Hook.SWEH_CHILDID_SELF)
             {
+                // Occurs when POE window is moved or size changed
                 UpdateLocationAndSize();
             }
         }
