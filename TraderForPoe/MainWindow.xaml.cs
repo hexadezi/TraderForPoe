@@ -143,6 +143,8 @@ namespace TraderForPoe
                 iSim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
 
                 iSim = null;
+
+                Clipboard.Clear();
             }
         }
 
