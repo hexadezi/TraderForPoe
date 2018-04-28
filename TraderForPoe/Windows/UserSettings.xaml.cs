@@ -16,17 +16,11 @@ namespace TraderForPoe.Windows
             InitializeComponent();
         }
 
+
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = true;
             this.Visibility = Visibility.Hidden;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            IEditableCollectionView items = lsb_QuadStash.Items;
-            items.RemoveAt(lsb_QuadStash.SelectedIndex);
-            lsb_QuadStash.Items.Refresh();
         }
         
         private void Click_SaveSettings(object sender, RoutedEventArgs e)
@@ -54,6 +48,28 @@ namespace TraderForPoe.Windows
         {
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
             System.Windows.Application.Current.Shutdown();
+        }
+
+        private void Window_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            lsb_QuadStash.Items.Refresh();
+        }
+
+        private void Click_DeleteQuadStash(object sender, RoutedEventArgs e)
+        {
+            IEditableCollectionView items = lsb_QuadStash.Items;
+            items.RemoveAt(lsb_QuadStash.SelectedIndex);
+        }
+
+        private void Window_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Window_SourceUpdated(object sender, System.Windows.Data.DataTransferEventArgs e)
+        {
+            Settings.Default.Reload();
+            lsb_QuadStash.Items.Refresh();
         }
     }
 }

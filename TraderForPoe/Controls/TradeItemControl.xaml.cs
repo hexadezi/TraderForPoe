@@ -8,6 +8,7 @@ using WindowsInput.Native;
 using TraderForPoe.Windows;
 using TraderForPoe.Properties;
 using System.Media;
+using System.ComponentModel;
 
 namespace TraderForPoe
 {
@@ -430,8 +431,12 @@ namespace TraderForPoe
             MessageBoxResult dialogResult = MessageBox.Show("Is this a quad stash?", "Quad stash?", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (dialogResult == MessageBoxResult.Yes)
             {
-                Settings.Default.QuadStash.Add(tItem.Stash.ToString());
-                Settings.Default.Save();
+                if (!Settings.Default.QuadStash.Contains(tItem.Stash.ToString()))
+                {
+                    Settings.Default.QuadStash.Add(tItem.Stash.ToString());
+                    Settings.Default.Save();
+                }
+
             }
         }
 

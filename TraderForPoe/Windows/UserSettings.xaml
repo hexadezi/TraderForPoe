@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TraderForPoe.Windows"
         mc:Ignorable="d"
-        Title="UserSettings" Height="366.876" Width="725.035" Closing="Window_Closing" WindowStyle="SingleBorderWindow" ResizeMode="NoResize">
+        Title="UserSettings" Height="366.876" Width="725.035" Closing="Window_Closing" WindowStyle="SingleBorderWindow" ResizeMode="NoResize" IsVisibleChanged="Window_IsVisibleChanged" SourceUpdated="Window_SourceUpdated">
 
     <Canvas>
 
@@ -46,8 +46,8 @@
                     <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
                 <!--<ListBox Name="lsb_QuadStash" Grid.Column="0" Grid.Row="0" SelectedItem="{Binding SelectedItem}" DataContext="{Binding Mode=OneWay, Source={StaticResource Settings}}" ItemsSource="{Binding QuadStash}" Margin="0,2,0,5"/>-->
-                <ListBox Name="lsb_QuadStash" Grid.Column="0" Grid.Row="0" Margin="0,2,0,5" ItemsSource="{Binding QuadStash, Source={StaticResource Settings}}"/>
-                <Button Grid.Column="0" Grid.Row="1" Click="Button_Click">Delete</Button>
+                <ListBox Name="lsb_QuadStash" Grid.Column="0" Grid.Row="0" Margin="0,2,0,5" ItemsSource="{Binding QuadStash, Source={StaticResource Settings}, Mode=TwoWay}"/>
+                <Button Grid.Column="0" Grid.Row="1" Click="Click_DeleteQuadStash">Delete</Button>
             </Grid>
         </GroupBox>
         <Button Content="Save" Canvas.Left="625" Canvas.Top="304" Width="75" Click="Click_SaveSettings"/>
