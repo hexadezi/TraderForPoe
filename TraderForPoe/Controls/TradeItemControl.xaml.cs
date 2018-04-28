@@ -427,7 +427,7 @@ namespace TraderForPoe
 
         private void ClickStashIsQuad(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult dialogResult = System.Windows.MessageBox.Show("Is this a quad stash?", "Quad stash?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult dialogResult = MessageBox.Show("Is this a quad stash?", "Quad stash?", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (dialogResult == MessageBoxResult.Yes)
             {
                 Settings.Default.QuadStash.Add(tItem.Stash.ToString());

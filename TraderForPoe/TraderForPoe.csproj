@@ -288,6 +288,9 @@
   <ItemGroup>
     <Resource Include="Resources\Images\comment-question.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Currency\curr_offering_to_the_goddess.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

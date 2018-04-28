@@ -89,7 +89,7 @@ namespace TraderForPoe
 
         public enum TradeTypes { BUY, SELL };
 
-        public enum Currency { CHAOS, ALCHCHEMY, ALTERATION, ANCIENT, ANNULMENT, APPRENTICE_SEXTANT, ARMOUR_SCRAP, AUGMENTATION, BAUBLE, BESTIARY_ORB, BINDING_ORB, BLACKSMITH_WHETSTONE, BLESSING_CHAYULAH, BLESSING_ESH, BLESSING_TUL, BLESSING_UUL, BLESSING_XOPH, BLESSE, CHANCE, CHISEL, CHROM, DIVINE, ENGINEER, ETERNAL, EXALTED, FUSING, GEMCUTTERS, HARBINGER_ORB, HORIZON_ORB, IMPRINTED_BESTIARY, JEWELLER, JOURNEYMAN_SEXTANT, MASTER_SEXTANT, MIRROR, PORTAL, REGAL, REGRET, SCOUR, SILVER, SPLINTER_CHAYULA, SPLINTER_ESH, SPLINTER_TUL, SPLINTER_UUL, SPLINTER_XOPH, TRANSMUTE, VAAL, WISDOM, DIVINE_VESSEL };
+        public enum Currency { CHAOS, ALCHCHEMY, ALTERATION, ANCIENT, ANNULMENT, APPRENTICE_SEXTANT, ARMOUR_SCRAP, AUGMENTATION, BAUBLE, BESTIARY_ORB, BINDING_ORB, BLACKSMITH_WHETSTONE, BLESSING_CHAYULAH, BLESSING_ESH, BLESSING_TUL, BLESSING_UUL, BLESSING_XOPH, BLESSE, CHANCE, CHISEL, CHROM, DIVINE, ENGINEER, ETERNAL, EXALTED, FUSING, GEMCUTTERS, HARBINGER_ORB, HORIZON_ORB, IMPRINTED_BESTIARY, JEWELLER, JOURNEYMAN_SEXTANT, MASTER_SEXTANT, MIRROR, PORTAL, REGAL, REGRET, SCOUR, SILVER, SPLINTER_CHAYULA, SPLINTER_ESH, SPLINTER_TUL, SPLINTER_UUL, SPLINTER_XOPH, TRANSMUTE, VAAL, WISDOM, DIVINE_VESSEL, OFFERING_GODDESS };
 
         Regex poeTradeRegex = new Regex("@(.*) (.*): Hi, I would like to buy your (.*) listed for (.*) in (.*) [(]stash tab \"(.*)[\"]; position: left (.*), top (.*)[)](.*)");
         Regex poeTradeNoLocationRegex = new Regex("@(.*) (.*): Hi, I would like to buy your (.*) listed for (.*) in (.*)");
@@ -619,6 +619,11 @@ namespace TraderForPoe
                 {
                     return Currency.DIVINE_VESSEL;
                 }
+
+                else if (strPrice.Contains("offering") || strPrice.Contains("offer"))
+                {
+                    return Currency.OFFERING_GODDESS;
+                }
             }
             throw new Exception("Currency not found");
         }
@@ -723,6 +728,8 @@ namespace TraderForPoe
                     return new BitmapImage(new Uri("pack://application:,,,/Resources/Currency/curr_wis.png"));
                 case Currency.DIVINE_VESSEL:
                     return new BitmapImage(new Uri("pack://application:,,,/Resources/Currency/curr_divine_vessel.png"));
+                case Currency.OFFERING_GODDESS:
+                    return new BitmapImage(new Uri("pack://application:,,,/Resources/Currency/curr_offering_to_the_goddess.png"));
                 default:
                     throw new ArgumentException();
             }

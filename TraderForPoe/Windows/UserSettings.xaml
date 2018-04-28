@@ -45,7 +45,8 @@
                     <RowDefinition/>
                     <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
-                <ListBox Name="lsb_QuadStash" Grid.Column="0" Grid.Row="0" SelectedItem="{Binding SelectedItem}" DataContext="{Binding Mode=OneWay, Source={StaticResource Settings}}" ItemsSource="{Binding QuadStash}" Margin="0,2,0,5"/>
+                <!--<ListBox Name="lsb_QuadStash" Grid.Column="0" Grid.Row="0" SelectedItem="{Binding SelectedItem}" DataContext="{Binding Mode=OneWay, Source={StaticResource Settings}}" ItemsSource="{Binding QuadStash}" Margin="0,2,0,5"/>-->
+                <ListBox Name="lsb_QuadStash" Grid.Column="0" Grid.Row="0" Margin="0,2,0,5" ItemsSource="{Binding QuadStash, Source={StaticResource Settings}}"/>
                 <Button Grid.Column="0" Grid.Row="1" Click="Button_Click">Delete</Button>
             </Grid>
         </GroupBox>
