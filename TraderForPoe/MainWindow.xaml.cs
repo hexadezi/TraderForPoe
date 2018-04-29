@@ -254,9 +254,25 @@ namespace TraderForPoe
                                             TradeItemControl uc = new TradeItemControl(tItem);
                                             stk_MainPnl.Children.Add(uc);
                                         }
-                                        catch (Exception)
+                                        catch (NoCurrencyBitmapFoundException ex)
                                         {
-                                            // Ignore Exception. Exception was thrown, because no RegEx pattern matched
+                                            //System.Windows.Forms.MessageBox.Show(ex.Message, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                                        }
+                                        catch (NoCurrencyFoundException ex)
+                                        {
+                                            //System.Windows.Forms.MessageBox.Show(ex.Message, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                                        }
+                                        catch (NoRegExMatchException ex)
+                                        {
+                                            //System.Windows.Forms.MessageBox.Show(ex.Message, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                                        }
+                                        catch (TradeItemExistsException ex)
+                                        {
+                                            //System.Windows.Forms.MessageBox.Show(ex.Message, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            System.Windows.Forms.MessageBox.Show(ex.Message, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
                                         }
                                     }
 
@@ -269,8 +285,10 @@ namespace TraderForPoe
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                System.Windows.Forms.MessageBox.Show(ex.Message, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+
             }
         }
 

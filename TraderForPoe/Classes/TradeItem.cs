@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -113,7 +114,7 @@ namespace TraderForPoe
 
             if (ItemExists(this))
             {
-                throw new Exception("Item exists");
+                throw new TradeItemExistsException("Item exists");
             }
 
             lstTradeItems.Add(this);
@@ -370,7 +371,7 @@ namespace TraderForPoe
             }
             else
             {
-                throw new Exception("No RegEx match");
+                throw new NoRegExMatchException("No RegEx match");
             }
         }
 
@@ -625,7 +626,7 @@ namespace TraderForPoe
                     return Currency.OFFERING_GODDESS;
                 }
             }
-            throw new Exception("Currency not found");
+            throw new NoCurrencyFoundException("Currency " + s + " not found");
         }
 
         private BitmapImage SetCurrencyBitmap(Currency c)
@@ -731,14 +732,14 @@ namespace TraderForPoe
                 case Currency.OFFERING_GODDESS:
                     return new BitmapImage(new Uri("pack://application:,,,/Resources/Currency/curr_offering_to_the_goddess.png"));
                 default:
-                    throw new ArgumentException();
+                    throw new NoCurrencyBitmapFoundException("No bitmap found for: " + c);
             }
         }
 
         private static string FirstCharToUpper(string input)
         {
             if (String.IsNullOrEmpty(input))
-                throw new ArgumentException("ARGH!");
+                throw new ArgumentException("ARGH! Can not set first char to upper: " + input);
             return input.First().ToString().ToUpper() + input.Substring(1);
         }
 
@@ -782,6 +783,86 @@ namespace TraderForPoe
                     lstTradeItems.RemoveAt(i);
                 }
             }
+        }
+    }
+
+    [Serializable]
+    internal class NoCurrencyBitmapFoundException : Exception
+    {
+        public NoCurrencyBitmapFoundException()
+        {
+        }
+
+        public NoCurrencyBitmapFoundException(string message) : base(message)
+        {
+        }
+
+        public NoCurrencyBitmapFoundException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected NoCurrencyBitmapFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+    }
+
+    [Serializable]
+    internal class NoCurrencyFoundException : Exception
+    {
+        public NoCurrencyFoundException()
+        {
+        }
+
+        public NoCurrencyFoundException(string message) : base(message)
+        {
+        }
+
+        public NoCurrencyFoundException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected NoCurrencyFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+    }
+
+    [Serializable]
+    internal class NoRegExMatchException : Exception
+    {
+        public NoRegExMatchException()
+        {
+        }
+
+        public NoRegExMatchException(string message) : base(message)
+        {
+        }
+
+        public NoRegExMatchException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected NoRegExMatchException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+    }
+
+    [Serializable]
+    internal class TradeItemExistsException : Exception
+    {
+        public TradeItemExistsException()
+        {
+        }
+
+        public TradeItemExistsException(string message) : base(message)
+        {
+        }
+
+        public TradeItemExistsException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected TradeItemExistsException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
         }
     }
 
