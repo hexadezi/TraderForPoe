@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using TraderForPoe.Properties;
 
 namespace TraderForPoe
 {
@@ -13,5 +14,14 @@ namespace TraderForPoe
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            if (Settings.Default.UpgradeSettingsRequired)
+            {
+                Settings.Default.Upgrade();
+                Settings.Default.UpgradeSettingsRequired = false;
+                Settings.Default.Save();
+            }
+        }
     }
 }
