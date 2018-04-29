@@ -2,6 +2,7 @@
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
@@ -56,6 +57,8 @@ namespace TraderForPoe
 
         long lastReadLength;
 
+        Regex customerJoinedRegEx = new Regex(".* : (.*) has joined the area");
+        Regex customerLeftRegEx = new Regex(".* : (.*) has left the area");
 
         public MainWindow()
         {
@@ -240,6 +243,8 @@ namespace TraderForPoe
                         {
                             for (string line = reader.ReadLine(); line != null; line = reader.ReadLine())
                             {
+
+                                // Check for trade whispers
                                 if (line.Contains(" @"))
                                 {
                                     // Get a handle to POE. The window class and window name were obtained using the Spy++ tool.
@@ -279,6 +284,41 @@ namespace TraderForPoe
 
 
                                 }
+
+                                // Check if customer joined or left
+                                if (customerJoinedRegEx.IsMatch(line))
+                                {
+                                    MatchCollection matches = Regex.Matches(line, customerJoinedRegEx.ToString());
+
+                                    foreach (Match match in matches)
+                                    {
+                                        foreach (TradeItemControl item in stk_MainPnl.Children)
+                                        {
+                                            if (item.tItem.Customer == match.Groups[1].Value)
+                                            {
+                                                item.CustomerJoined();
+                                            }
+                                        }
+                                    }
+                                }
+
+
+                                if (customerLeftRegEx.IsMatch(line))
+                                {
+                                    MatchCollection matches = Regex.Matches(line, customerLeftRegEx.ToString());
+
+                                    foreach (Match match in matches)
+                                    {
+                                        foreach (TradeItemControl item in stk_MainPnl.Children)
+                                        {
+                                            if (item.tItem.Customer == match.Groups[1].Value)
+                                            {
+                                                item.CustomerLeft();
+                                            }
+                                        }
+                                    }
+                                }
+
                             }
                         }
 

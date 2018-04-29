@@ -11,6 +11,7 @@ using System.Media;
 using System.ComponentModel;
 using System.Windows.Threading;
 using System.Diagnostics;
+using System.Windows.Media;
 
 namespace TraderForPoe
 {
@@ -37,7 +38,7 @@ namespace TraderForPoe
 
         private static StashGridHighlight stashGridHighlight;
 
-        private TradeItem tItem;
+        public TradeItem tItem;
 
         Stopwatch stopwatch = new Stopwatch();
 
@@ -514,6 +515,15 @@ namespace TraderForPoe
         protected static void OnEqualThreeItems()
         {
             EqualThreeItems?.Invoke(typeof(TradeItemControl), EventArgs.Empty);
+        }
+
+        public void CustomerJoined()
+        {
+            txt_Customer.Foreground = Brushes.GreenYellow;
+        }
+        public void CustomerLeft()
+        {
+            txt_Customer.Foreground = Brushes.White;
         }
     }
 
