@@ -9,6 +9,8 @@ using TraderForPoe.Windows;
 using TraderForPoe.Properties;
 using System.Media;
 using System.ComponentModel;
+using System.Windows.Threading;
+using System.Diagnostics;
 
 namespace TraderForPoe
 {
@@ -37,6 +39,7 @@ namespace TraderForPoe
 
         private TradeItem tItem;
 
+        Stopwatch stopwatch = new Stopwatch();
 
         //-----------------------------------------------------------------------------------------
 
@@ -53,6 +56,7 @@ namespace TraderForPoe
 
             InitializeComponent();
 
+
             LoadSettings();
 
             SetupControls(tItem);
@@ -61,9 +65,33 @@ namespace TraderForPoe
 
             OpenStashGridHighlightWindow();
 
+            StartTime();
         }
 
+
         //-----------------------------------------------------------------------------------------
+
+        private void StartTime()
+        {
+
+            DispatcherTimer dispatcherTimer = new DispatcherTimer()
+            {
+                Interval = TimeSpan.FromMilliseconds(200)
+            };
+
+            dispatcherTimer.Tick += Timer_Tick;
+
+            stopwatch.Start();
+            dispatcherTimer.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            TimeSpan ts = stopwatch.Elapsed;
+            string currentTime = String.Format("{0:00}:{1:00}",
+                ts.Minutes, ts.Seconds);
+            txt_Time.Text = currentTime;
+        }
 
         private void OpenStashGridHighlightWindow()
         {

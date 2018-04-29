@@ -5,8 +5,6 @@
              xmlns:properties="clr-namespace:TraderForPoe.Properties"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        
-        
-        
+
     </Application.Resources>
 </Application>

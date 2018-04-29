@@ -102,13 +102,13 @@
 
                     <TextBlock FontSize="16">(</TextBlock>
                     <DockPanel>
-                        <TextBlock Name="txt_Ratio1">#1.#</TextBlock>
+                        <TextBlock Name="txt_Ratio1">1</TextBlock>
                         <Image Name="img_Ratio1" Width="19" Height="19" RenderOptions.BitmapScalingMode="HighQuality" Margin="5,0,0,0"/>
                     </DockPanel>
                     <TextBlock Margin="5,0,5,0" >=</TextBlock>
 
                     <DockPanel>
-                        <TextBlock Name="txt_Ratio2">#2.#</TextBlock>
+                        <TextBlock Name="txt_Ratio2">2</TextBlock>
                         <Image Name="img_Ratio2" Width="19"  Height="19" RenderOptions.BitmapScalingMode="HighQuality" Margin="5,0,0,0"/>
                     </DockPanel>
 
@@ -121,9 +121,13 @@
                 <Button Name="btn_Price">
                     <DockPanel>
                         <TextBlock Margin="5,0,0,0" x:Name="txt_Price" FontWeight="Bold"></TextBlock>
-                        <Image Name="img_Currency" RenderOptions.BitmapScalingMode="HighQuality" Margin="0,0,5,0" Height="19"/>
+                        <Image Name="img_Currency" RenderOptions.BitmapScalingMode="HighQuality" Margin="0,0,0,0" Height="19"/>
                     </DockPanel>
                 </Button>
+
+
+                <TextBlock Margin="5,0,5,0" x:Name="txt_Time" FontWeight="Bold">00:00</TextBlock>
+
             </DockPanel>
 
             <DockPanel Grid.Column="3" Grid.Row="0">
@@ -148,10 +152,6 @@
 
                 <Button x:Name="btn_VisitOwnHideout" ToolTip="Visit own hideout" Click="ClickVisitOwnHideout" Style="{DynamicResource CmdStyle}">
                     <Image Source="pack://application:,,,/Resources/Images/home.png" Height="19" Width="19"></Image>
-                </Button>
-
-                <Button x:Name="btn_SendBusyMessage" ToolTip="Tell the customer I'm busy" Click="ClickWhisperCustomerBusy" Style="{DynamicResource CmdStyle}">
-                    <Image Source="pack://application:,,,/Resources/Images/clock.png" Height="19" Width="19"></Image>
                 </Button>
 
                 <Button x:Name="btn_WhisperCustomer" ToolTip="Whisper customer" Click="ClickWhisperCustomer" Style="{DynamicResource CmdStyle}">
@@ -196,6 +196,10 @@
                     <Image Source="pack://application:,,,/Resources/Images/customMessage2.png"  Height="19" Width="19"></Image>
                 </Button>
 
+                <Button x:Name="btn_SendBusyMessage" ToolTip="Tell the customer I'm busy" Click="ClickWhisperCustomerBusy" Style="{DynamicResource CmdStyle}">
+                    <Image Source="pack://application:,,,/Resources/Images/clock.png" Height="19" Width="19"></Image>
+                </Button>
+                
                 <Button x:Name="btn_SearchItem" Click="ClickSearchItem" ToolTip="Perform a search in the stash" Style="{DynamicResource CmdStyle}">
                     <Image Source="pack://application:,,,/Resources/Images/magnify.png" Height="19" Width="19"></Image>
                 </Button>
