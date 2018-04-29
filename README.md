@@ -16,7 +16,7 @@ This tool makes trading in Path of Exile easy. It parses all incoming and outgoi
 Download here: [TraderForPoe Releases](https://github.com/labo89/TraderForPoe/releases)
 
 ### Screenshots
-![](https://github.com/labo89/TraderForPoe/blob/master/Screenshots/screen_04.PNG?raw=true "")
+![](https://github.com/labo89/TraderForPoe/blob/master/Screenshots/screen_05.PNG?raw=true "")
 
 ### Prerequisites
 
