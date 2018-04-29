@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TraderForPoe.Windows"
+        xmlns:properties="clr-namespace:TraderForPoe.Properties"
         mc:Ignorable="d"
-        Title="UserSettings" Height="366.876" Width="725.035" Closing="Window_Closing" WindowStyle="SingleBorderWindow" ResizeMode="NoResize" IsVisibleChanged="Window_IsVisibleChanged" SourceUpdated="Window_SourceUpdated">
+        Title="UserSettings" Height="366.876" Width="725.035" Closing="Window_Closing" WindowStyle="SingleBorderWindow" ResizeMode="NoResize">
 
     <Canvas>
 
@@ -23,16 +24,16 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Margin="0,0,0,5" Grid.Column="0" Content="Thank you whisper" HorizontalAlignment="Left"/>
-                <TextBox Name="txt_ThankYouWhisper" Margin="0,0,0,5" Grid.Column="1" VerticalContentAlignment="Center" TextWrapping="NoWrap" Text="{Binding ThankYouWhisper, Source={StaticResource Settings}}"/>
+                <TextBox Name="txt_ThankYouWhisper" Margin="0,0,0,5" Grid.Column="1" VerticalContentAlignment="Center" TextWrapping="NoWrap" Text="{Binding Source={x:Static properties:Settings.Default}, Path=ThankYouWhisper}" />
 
                 <Label Margin="0,0,0,5" Grid.Column="0" Grid.Row="1" Content="I am busy whisper" HorizontalAlignment="Left"/>
-                <TextBox Name="txt_ImBusyWhisper" Margin="0,0,0,5"  Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center" TextWrapping="NoWrap" Text="{Binding ImBusyWhisper, Source={StaticResource Settings}}"/>
+                <TextBox Name="txt_ImBusyWhisper" Margin="0,0,0,5"  Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center" TextWrapping="NoWrap" Text="{Binding Source={x:Static properties:Settings.Default}, Path=ImBusyWhisper}"/>
 
                 <Label Margin="0,0,0,5" Grid.Column="0" Grid.Row="2" Content="Custom whisper 1" HorizontalAlignment="Left"/>
-                <TextBox Name="txt_CustomWhisper1" Margin="0,0,0,5"  Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center" TextWrapping="NoWrap" Text="{Binding CustomWhisper1, Source={StaticResource Settings}}"/>
+                <TextBox Name="txt_CustomWhisper1" Margin="0,0,0,5"  Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center" TextWrapping="NoWrap" Text="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper1}"/>
 
                 <Label Grid.Column="0" Grid.Row="3" Content="Custom whisper 2" HorizontalAlignment="Left"/>
-                <TextBox Name="txt_CustomWhisper2" Grid.Column="1" Grid.Row="3" VerticalContentAlignment="Center" TextWrapping="NoWrap" Text="{Binding CustomWhisper2, Source={StaticResource Settings},Mode=TwoWay}"/>
+                <TextBox Name="txt_CustomWhisper2" Grid.Column="1" Grid.Row="3" VerticalContentAlignment="Center" TextWrapping="NoWrap" Text="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper2}"/>
 
             </Grid>
         </GroupBox>
@@ -45,28 +46,27 @@
                     <RowDefinition/>
                     <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
-                <!--<ListBox Name="lsb_QuadStash" Grid.Column="0" Grid.Row="0" SelectedItem="{Binding SelectedItem}" DataContext="{Binding Mode=OneWay, Source={StaticResource Settings}}" ItemsSource="{Binding QuadStash}" Margin="0,2,0,5"/>-->
-                <ListBox Name="lsb_QuadStash" Grid.Column="0" Grid.Row="0" Margin="0,2,0,5" ItemsSource="{Binding QuadStash, Source={StaticResource Settings}, Mode=TwoWay}"/>
+                <ListBox Name="lsb_QuadStash" Grid.Column="0" Grid.Row="0" Margin="0,2,0,5" ItemsSource="{Binding Source={x:Static properties:Settings.Default}, Path=QuadStash}"/>
                 <Button Grid.Column="0" Grid.Row="1" Click="Click_DeleteQuadStash">Delete</Button>
             </Grid>
         </GroupBox>
         <Button Content="Save" Canvas.Left="625" Canvas.Top="304" Width="75" Click="Click_SaveSettings"/>
         <Button Content="Restart" Canvas.Left="545" Canvas.Top="304" Width="75" Click="Click_RestartApp"/>
         <GroupBox Header="Character name" Height="Auto" Canvas.Left="202" Canvas.Top="198" Width="498">
-            <TextBox Margin="0,2,0,0"  Name="txt_PlayerName" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding PlayerName, Source={StaticResource Settings}}" />
+            <TextBox Margin="0,2,0,0"  Name="txt_PlayerName" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Source={x:Static properties:Settings.Default}, Path=PlayerName}" />
         </GroupBox>
         <GroupBox Header="Various Settings" Height="78" Canvas.Left="202" Canvas.Top="246" Width="338">
             <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <CheckBox Name="cbx_UseClipBoardMonitor" Margin="0,2,5,5" Content="Use clipboard monitor" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding UseClipboardMonitor, Source={StaticResource Settings}}"/>
-                <CheckBox Name="cbx_CollapseItems" Margin="0,0,5,5" Content="Collapse items" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding CollapsedItems, Source={StaticResource Settings}}"/>
-                <CheckBox Name="cbx_PlaySound" Margin="0,0,5,5" Content="Play sound" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding PlayNotificationSound, Source={StaticResource Settings}}"/>
-                <CheckBox Name="cbx_RemoveAfterTrade" Margin="0,0,5,5" Content="Remove item after trade" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding CloseItemAfterTrade, Source={StaticResource Settings}}"/>
+                <CheckBox Name="cbx_UseClipBoardMonitor" Margin="0,2,5,5" Content="Use clipboard monitor" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=UseClipboardMonitor}"/>
+                <CheckBox Name="cbx_CollapseItems" Margin="0,0,5,5" Content="Collapse items" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CollapsedItems}"/>
+                <CheckBox Name="cbx_PlaySound" Margin="0,0,5,5" Content="Play sound" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=PlayNotificationSound}"/>
+                <CheckBox Name="cbx_RemoveAfterTrade" Margin="0,0,5,5" Content="Remove item after trade" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterTrade}"/>
             </WrapPanel>
 
         </GroupBox>
 
         <GroupBox Header="Path to Client.txt" Height="Auto" Canvas.Left="202" Canvas.Top="157" Width="498">
-            <TextBox Name="txt_PathToClientTxt" HorizontalAlignment="Stretch" Text="{Binding PathToClientTxt, Source={StaticResource Settings}}" VerticalAlignment="Stretch"/>
+            <TextBox Name="txt_PathToClientTxt" HorizontalAlignment="Stretch" Text="{Binding Source={x:Static properties:Settings.Default}, Path=PathToClientTxt}" VerticalAlignment="Stretch"/>
         </GroupBox>
 
     </Canvas>

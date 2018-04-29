@@ -50,11 +50,11 @@ namespace TraderForPoe.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
-            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" />")]
-        public global::System.Collections.Specialized.StringCollection QuadStash {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?><ArrayOfString xmlns:xsi=\"http://www.w3.or" +
+            "g/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" />")]
+        public global::System.Collections.ObjectModel.ObservableCollection<System.String> QuadStash {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["QuadStash"]));
+                return ((global::System.Collections.ObjectModel.ObservableCollection<System.String>)(this["QuadStash"]));
             }
             set {
                 this["QuadStash"] = value;
@@ -167,6 +167,18 @@ namespace TraderForPoe.Properties {
             }
             set {
                 this["CloseItemAfterTrade"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Einstellung {
+            get {
+                return ((string)(this["Einstellung"]));
+            }
+            set {
+                this["Einstellung"] = value;
             }
         }
     }
