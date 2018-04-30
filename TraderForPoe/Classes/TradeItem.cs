@@ -411,6 +411,16 @@ namespace TraderForPoe
                     return Currency.APPRENTICE_SEXTANT;
                 }
 
+                else if (strPrice.Contains("journeyman") && strPrice.Contains("sextant"))
+                {
+                    return Currency.JOURNEYMAN_SEXTANT;
+                }
+
+                else if (strPrice.Contains("master") && strPrice.Contains("sextant"))
+                {
+                    return Currency.MASTER_SEXTANT;
+                }
+
                 else if (strPrice.Contains("armour") || strPrice.Contains("scrap"))
                 {
                     return Currency.ARMOUR_SCRAP;
@@ -534,16 +544,6 @@ namespace TraderForPoe
                 else if (strPrice.Contains("jew"))
                 {
                     return Currency.JEWELLER;
-                }
-
-                else if (strPrice.Contains("journeyman") && strPrice.Contains("sextant"))
-                {
-                    return Currency.JOURNEYMAN_SEXTANT;
-                }
-
-                else if (strPrice.Contains("master") && strPrice.Contains("sextant"))
-                {
-                    return Currency.MASTER_SEXTANT;
                 }
 
                 else if (strPrice.Contains("mir") || strPrice.Contains("kal"))
