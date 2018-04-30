@@ -51,7 +51,6 @@ namespace TraderForPoe
 
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
         // Variables for reading the Client.txt
-        string filePath = Settings.Default.PathToClientTxt;
 
         long initialFileSize;
 
@@ -68,9 +67,39 @@ namespace TraderForPoe
 
             CreateContextMenu();
 
+            CheckForClientTxt();
+
             LoadSetting();
 
             StartFileMonitoring();
+        }
+
+        private void CheckForClientTxt()
+        {
+            if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), @"Grinding Gear Games\Path of Exile\logs\Client.txt")))
+            {
+                Settings.Default.PathToClientTxt = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), @"Grinding Gear Games\Path of Exile\logs\Client.txt");
+                Settings.Default.Save();
+                return;
+            }
+            else if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), @"Steam\steamapps\common\Path of Exile\logs\Client.txt")))
+            {
+                Settings.Default.PathToClientTxt = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), @"Steam\steamapps\common\Path of Exile\logs\Client.txt");
+                Settings.Default.Save();
+                return;
+            }
+            else if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), @"Grinding Gear Games\Path of Exile\logs\Client.txt")))
+            {
+                Settings.Default.PathToClientTxt = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), @"Grinding Gear Games\Path of Exile\logs\Client.txt");
+                Settings.Default.Save();
+                return;
+            }
+            else if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), @"Steam\steamapps\common\Path of Exile\logs\Client.txt")))
+            {
+                Settings.Default.PathToClientTxt = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), @"Steam\steamapps\common\Path of Exile\logs\Client.txt");
+                Settings.Default.Save();
+                return;
+            }
         }
 
         private void SubscribeToEvents()
@@ -195,29 +224,37 @@ namespace TraderForPoe
 
         private void StartFileMonitoring()
         {
-            try
+            string filePath = Settings.Default.PathToClientTxt;
+            if (!String.IsNullOrEmpty(filePath))
             {
-                // Set variables befor Timer start
-                initialFileSize = new FileInfo(filePath).Length;
+                try
+                {
+                    // Set variables befor Timer start
+                    initialFileSize = new FileInfo(filePath).Length;
 
-                lastReadLength = initialFileSize;
+                    lastReadLength = initialFileSize;
+
+                    dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
+
+                    dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
+
+                    dispatcherTimer.Start();
+                }
+                catch (FileNotFoundException ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.Message, "Exception", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                }
             }
-            catch (FileNotFoundException)
+            else
             {
-                System.Windows.Forms.MessageBox.Show("File " + filePath + " not found. \nPlease set the correct path in the settings and restart the application.", "File not found", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
-                return;
+                System.Windows.Forms.MessageBox.Show("No Client.txt found \nPlease set the correct path in the settings and restart the application.", "File not found", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
             }
-
-
-            dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
-
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
-
-            dispatcherTimer.Start();
         }
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
+            string filePath = Settings.Default.PathToClientTxt;
+
             if (lastReadLength < 0)
             {
                 lastReadLength = 0;
@@ -259,19 +296,19 @@ namespace TraderForPoe
                                             TradeItemControl uc = new TradeItemControl(tItem);
                                             stk_MainPnl.Children.Add(uc);
                                         }
-                                        catch (NoCurrencyBitmapFoundException ex)
+                                        catch (NoCurrencyBitmapFoundException)
                                         {
                                             //System.Windows.Forms.MessageBox.Show(ex.Message, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
                                         }
-                                        catch (NoCurrencyFoundException ex)
+                                        catch (NoCurrencyFoundException)
                                         {
                                             //System.Windows.Forms.MessageBox.Show(ex.Message, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
                                         }
-                                        catch (NoRegExMatchException ex)
+                                        catch (NoRegExMatchException)
                                         {
                                             //System.Windows.Forms.MessageBox.Show(ex.Message, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
                                         }
-                                        catch (TradeItemExistsException ex)
+                                        catch (TradeItemExistsException)
                                         {
                                             //System.Windows.Forms.MessageBox.Show(ex.Message, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
                                         }

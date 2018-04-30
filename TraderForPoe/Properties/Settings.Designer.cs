@@ -63,7 +63,7 @@ namespace TraderForPoe.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files (x86)\\Steam\\steamapps\\common\\Path of Exile\\logs\\Client.txt")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string PathToClientTxt {
             get {
                 return ((string)(this["PathToClientTxt"]));
