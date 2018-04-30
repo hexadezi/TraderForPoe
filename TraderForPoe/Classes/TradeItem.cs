@@ -501,7 +501,7 @@ namespace TraderForPoe
                     return Currency.ETERNAL;
                 }
 
-                else if (strPrice.Contains("ex") || strPrice.Contains("exa") || strPrice.Contains("exalted") && !strPrice.Contains("shard"))
+                else if ((strPrice.Contains("ex") || strPrice.Contains("exa") || strPrice.Contains("exalted")) && !strPrice.Contains("shard") && !strPrice.Contains("sext"))
                 {
                     return Currency.EXALTED;
                 }

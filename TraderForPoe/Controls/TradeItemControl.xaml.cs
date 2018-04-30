@@ -89,8 +89,7 @@ namespace TraderForPoe
         private void Timer_Tick(object sender, EventArgs e)
         {
             TimeSpan ts = stopwatch.Elapsed;
-            string currentTime = String.Format("{0:00}:{1:00}",
-                ts.Minutes, ts.Seconds);
+            string currentTime = String.Format("{0:00}:{1:00}", ts.Minutes, ts.Seconds);
             txt_Time.Text = currentTime;
         }
 
