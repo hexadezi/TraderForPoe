@@ -371,7 +371,7 @@ namespace TraderForPoe
             }
             else
             {
-                throw new NoRegExMatchException("No RegEx match");
+                throw new NoRegExMatchException("No RegEx match for:\n" + whisper);
             }
         }
 
