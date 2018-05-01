@@ -140,9 +140,35 @@ namespace TraderForPoe
             this.Left = Settings.Default.WindowLocation.Y;
         }
 
+        private string GetClipboardText()
+        {
+            string strClipboard = string.Empty;
+
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    strClipboard = Clipboard.GetText(TextDataFormat.UnicodeText);
+                    return strClipboard;
+                }
+                catch (System.Runtime.InteropServices.COMException ex)
+                {
+                    //fix for OpenClipboard Failed (Exception from HRESULT: 0x800401D0 (CLIPBRD_E_CANT_OPEN))
+                    //https://stackoverflow.com/questions/12769264/openclipboard-failed-when-copy-pasting-data-from-wpf-datagrid
+                    //https://stackoverflow.com/questions/68666/clipbrd-e-cant-open-error-when-setting-the-clipboard-from-net
+                    if (ex.ErrorCode == -2147221040)
+                        System.Threading.Thread.Sleep(10);
+                    else
+                        throw new Exception("Unable to get Clipboard text.");
+                }
+            }
+
+            return strClipboard;
+        }
+
         private void ClipMoni_OnClipboardContentChanged(object sender, EventArgs e)
         {
-            string strClipboard = Clipboard.GetText(TextDataFormat.UnicodeText);
+            string strClipboard = GetClipboardText();
 
             if (strClipboard.StartsWith("@"))
             {
