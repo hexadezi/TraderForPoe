@@ -183,6 +183,7 @@ namespace TraderForPoe
         private void CreateContextMenu()
         {
             nIcon.MouseClick += NIcon_MouseClick;
+            nIcon.MouseDoubleClick += NIcon_MouseDoubleClick;
             Stream iconStream = Application.GetResourceStream(new Uri("pack://application:,,,/Resources/ico_Application.ico")).Stream;
             nIcon.Icon = new System.Drawing.Icon(iconStream);
             nIcon.Visible = true;
@@ -192,6 +193,11 @@ namespace TraderForPoe
             cMenu.MenuItems.Add("About", new EventHandler(CMenu_About));
             cMenu.MenuItems.Add("Exit", new EventHandler(CMenu_Close));
             nIcon.ContextMenu = cMenu;
+        }
+
+        private void NIcon_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            userSettings.Show();
         }
 
         private void CMenu_ClipboardMonitor(object sender, EventArgs e)
@@ -376,6 +382,7 @@ namespace TraderForPoe
 
         private void NIcon_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+            
         }
 
         private void SetNoActiveWindow()

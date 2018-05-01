@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:TraderForPoe.Windows"
         xmlns:properties="clr-namespace:TraderForPoe.Properties"
         mc:Ignorable="d"
-        Title="UserSettings" Height="366.876" Width="725.035" Closing="Window_Closing" WindowStyle="SingleBorderWindow" ResizeMode="NoResize">
+        Title="UserSettings" Height="366.876" Width="725.035" Closing="Window_Closing" 
+        WindowStyle="SingleBorderWindow" ResizeMode="NoResize" Topmost="True">
 
     <Canvas>
 
