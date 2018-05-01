@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Net;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -72,6 +74,50 @@ namespace TraderForPoe
             LoadSetting();
 
             StartFileMonitoring();
+        }
+
+        private void UpdateApplication()
+        {
+            if (MessageBox.Show("Do you want to Update? Application will be restarted, if an update is available.", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                WebClient webClient = new WebClient();
+
+                string[] updateString = webClient.DownloadString("https://raw.githubusercontent.com/labo89/TraderForPoe/master/update").Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+
+                double thisVersion = Convert.ToDouble(Assembly.GetEntryAssembly().GetName().Version.ToString().Substring(0, 3), System.Globalization.CultureInfo.InvariantCulture);
+
+                double onlineVersion = Convert.ToDouble(updateString[0], System.Globalization.CultureInfo.InvariantCulture);
+
+                string downloadLink = updateString[1];
+
+                string newExePath = Path.GetTempPath() + "TraderForPoe.exe";
+
+                if (onlineVersion > thisVersion)
+                {
+                    using (WebClient wc = new WebClient())
+                    {
+                        wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
+                        wc.DownloadFileAsync(new System.Uri(downloadLink), newExePath);
+                    }
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("No updates available", "No updates", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void Wc_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        {
+            File.Delete(Path.GetTempPath() + "TraderForPoe.bak");
+
+            File.Move(Assembly.GetEntryAssembly().Location, Path.GetTempPath() + "TraderForPoe.bak");
+
+            File.Move(Path.GetTempPath() + "TraderForPoe.exe", AppDomain.CurrentDomain.BaseDirectory + "TraderForPoe.exe");
+
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+
+            Application.Current.Shutdown();
         }
 
         private void CheckForClientTxt()
@@ -216,9 +262,15 @@ namespace TraderForPoe
 
             cMenu.MenuItems.Add(" Monitor", new EventHandler(CMenu_ClipboardMonitor));
             cMenu.MenuItems.Add("Settings", new EventHandler(CMenu_Settings));
+            cMenu.MenuItems.Add("Update", new EventHandler(CMenu_Update));
             cMenu.MenuItems.Add("About", new EventHandler(CMenu_About));
             cMenu.MenuItems.Add("Exit", new EventHandler(CMenu_Close));
             nIcon.ContextMenu = cMenu;
+        }
+
+        private void CMenu_Update(object sender, EventArgs e)
+        {
+            UpdateApplication();
         }
 
         private void NIcon_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -408,7 +460,7 @@ namespace TraderForPoe
 
         private void NIcon_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            
+
         }
 
         private void SetNoActiveWindow()

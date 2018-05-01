@@ -421,7 +421,6 @@ namespace TraderForPoe
 
         private void ClickKickMyself(object sender, RoutedEventArgs e)
         {
-            //TODO: Implementieren
             SendInputToPoe("/kick " + Settings.Default.PlayerName);
 
             if (tItem.TradeType == TradeItem.TradeTypes.SELL && Settings.Default.CloseItemAfterTrade == true)
