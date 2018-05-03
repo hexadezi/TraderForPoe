@@ -291,6 +291,12 @@
   <ItemGroup>
     <Resource Include="Resources\Currency\curr_offering_to_the_goddess.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Currency\curr_sacrifice_dawn.png" />
+    <Resource Include="Resources\Currency\curr_sacrifice_dusk.png" />
+    <Resource Include="Resources\Currency\curr_sacrifice_midnight.png" />
+    <Resource Include="Resources\Currency\curr_sacrifice_noon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

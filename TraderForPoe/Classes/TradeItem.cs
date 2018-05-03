@@ -90,7 +90,7 @@ namespace TraderForPoe
 
         public enum TradeTypes { BUY, SELL };
 
-        public enum Currency { CHAOS, ALCHCHEMY, ALTERATION, ANCIENT, ANNULMENT, APPRENTICE_SEXTANT, ARMOUR_SCRAP, AUGMENTATION, BAUBLE, BESTIARY_ORB, BINDING_ORB, BLACKSMITH_WHETSTONE, BLESSING_CHAYULAH, BLESSING_ESH, BLESSING_TUL, BLESSING_UUL, BLESSING_XOPH, BLESSE, CHANCE, CHISEL, CHROM, DIVINE, ENGINEER, ETERNAL, EXALTED, FUSING, GEMCUTTERS, HARBINGER_ORB, HORIZON_ORB, IMPRINTED_BESTIARY, JEWELLER, JOURNEYMAN_SEXTANT, MASTER_SEXTANT, MIRROR, PORTAL, REGAL, REGRET, SCOUR, SILVER, SPLINTER_CHAYULA, SPLINTER_ESH, SPLINTER_TUL, SPLINTER_UUL, SPLINTER_XOPH, TRANSMUTE, VAAL, WISDOM, DIVINE_VESSEL, OFFERING_GODDESS };
+        public enum Currency { CHAOS, ALCHCHEMY, ALTERATION, ANCIENT, ANNULMENT, APPRENTICE_SEXTANT, ARMOUR_SCRAP, AUGMENTATION, BAUBLE, BESTIARY_ORB, BINDING_ORB, BLACKSMITH_WHETSTONE, BLESSING_CHAYULAH, BLESSING_ESH, BLESSING_TUL, BLESSING_UUL, BLESSING_XOPH, BLESSE, CHANCE, CHISEL, CHROM, DIVINE, ENGINEER, ETERNAL, EXALTED, FUSING, GEMCUTTERS, HARBINGER_ORB, HORIZON_ORB, IMPRINTED_BESTIARY, JEWELLER, JOURNEYMAN_SEXTANT, MASTER_SEXTANT, MIRROR, PORTAL, REGAL, REGRET, SCOUR, SILVER, SPLINTER_CHAYULA, SPLINTER_ESH, SPLINTER_TUL, SPLINTER_UUL, SPLINTER_XOPH, TRANSMUTE, VAAL, WISDOM, DIVINE_VESSEL, OFFERING_GODDESS, SACRIFICE_DAWN, SACRIFICE_DUSK, SACRIFICE_MIDNIGHT, SACRIFICE_NOON };
 
         Regex poeTradeRegex = new Regex("@(.*) (.*): Hi, I would like to buy your (.*) listed for (.*) in (.*) [(]stash tab \"(.*)[\"]; position: left ([0-9]*), top ([0-9]*)[)](.*)");
         Regex poeTradeNoLocationRegex = new Regex("@(.*) (.*): Hi, I would like to buy your (.*) listed for (.*) in (.*)");
@@ -566,6 +566,26 @@ namespace TraderForPoe
                     return Currency.REGRET;
                 }
 
+                else if (strPrice.Contains("dawn"))
+                {
+                    return Currency.SACRIFICE_DAWN;
+                }
+
+                else if (strPrice.Contains("dusk"))
+                {
+                    return Currency.SACRIFICE_DUSK;
+                }
+
+                else if (strPrice.Contains("midnight"))
+                {
+                    return Currency.SACRIFICE_MIDNIGHT;
+                }
+
+                else if (strPrice.Contains("noon"))
+                {
+                    return Currency.SACRIFICE_NOON;
+                }
+
                 else if (strPrice.Contains("scour"))
                 {
                     return Currency.SCOUR;
@@ -707,6 +727,14 @@ namespace TraderForPoe
                     return new BitmapImage(new Uri("pack://application:,,,/Resources/Currency/curr_regal.png"));
                 case Currency.REGRET:
                     return new BitmapImage(new Uri("pack://application:,,,/Resources/Currency/curr_regret.png"));
+                case Currency.SACRIFICE_DAWN:
+                    return new BitmapImage(new Uri("pack://application:,,,/Resources/Currency/curr_sacrifice_dawn.png"));
+                case Currency.SACRIFICE_DUSK:
+                    return new BitmapImage(new Uri("pack://application:,,,/Resources/Currency/curr_sacrifice_dusk.png"));
+                case Currency.SACRIFICE_MIDNIGHT:
+                    return new BitmapImage(new Uri("pack://application:,,,/Resources/Currency/curr_sacrifice_midnight.png"));
+                case Currency.SACRIFICE_NOON:
+                    return new BitmapImage(new Uri("pack://application:,,,/Resources/Currency/curr_sacrifice_noon.png"));
                 case Currency.SCOUR:
                     return new BitmapImage(new Uri("pack://application:,,,/Resources/Currency/curr_scour.png"));
                 case Currency.SILVER:
