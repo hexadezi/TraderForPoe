@@ -26,15 +26,19 @@
 
                 <Label Margin="0,0,0,5" Grid.Column="0" Content="Thank you whisper" HorizontalAlignment="Left"/>
                 <TextBox Name="txt_ThankYouWhisper" Margin="0,0,0,5" Grid.Column="1" VerticalContentAlignment="Center" TextWrapping="NoWrap" Text="{Binding Source={x:Static properties:Settings.Default}, Path=ThankYouWhisper}" />
+                <CheckBox Name="cbx_ThankYouWhisper" Margin="0,2,5,5" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Close item after clicking Thank You whisper?" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterThankYouWhisper}"/>
 
                 <Label Margin="0,0,0,5" Grid.Column="0" Grid.Row="1" Content="I am busy whisper" HorizontalAlignment="Left"/>
                 <TextBox Name="txt_ImBusyWhisper" Margin="0,0,0,5"  Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center" TextWrapping="NoWrap" Text="{Binding Source={x:Static properties:Settings.Default}, Path=ImBusyWhisper}"/>
+                <CheckBox Name="cbx_ImBusyWhisper" Margin="0,2,5,5" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Close item after clicking Im Busy whisper?" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterImBusyWhisper}"/>
 
                 <Label Margin="0,0,0,5" Grid.Column="0" Grid.Row="2" Content="Custom whisper 1" HorizontalAlignment="Left"/>
                 <TextBox Name="txt_CustomWhisper1" Margin="0,0,0,5"  Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center" TextWrapping="NoWrap" Text="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper1}"/>
+                <CheckBox Name="cbx_CustomWhisper1" Margin="0,2,5,5" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Close item after clicking Custom whisper1?" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterCustomWhisper1}"/>
 
                 <Label Grid.Column="0" Grid.Row="3" Content="Custom whisper 2" HorizontalAlignment="Left"/>
                 <TextBox Name="txt_CustomWhisper2" Grid.Column="1" Grid.Row="3" VerticalContentAlignment="Center" TextWrapping="NoWrap" Text="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper2}"/>
+                <CheckBox Name="cbx_CustomWhisper2" Margin="0,2,5,5" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Close item after clicking Custom whisper2?" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterCustomWhisper2}"/>
 
             </Grid>
         </GroupBox>

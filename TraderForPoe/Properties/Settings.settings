@@ -20,14 +20,26 @@
     <Setting Name="CustomWhisper1" Type="System.String" Scope="User">
       <Value Profile="(Default)">Give me one second! :) (Sent with TraderForPoe)</Value>
     </Setting>
+    <Setting Name="CloseItemAfterCustomWhisper1" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
     <Setting Name="CustomWhisper2" Type="System.String" Scope="User">
       <Value Profile="(Default)">Already sold, sorry. :( (Sent with TraderForPoe)</Value>
+    </Setting>
+    <Setting Name="CloseItemAfterCustomWhisper2" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ThankYouWhisper" Type="System.String" Scope="User">
       <Value Profile="(Default)">Thank you very much, good luck and have a nice day. :) (Sent with TraderForPoe)</Value>
     </Setting>
+    <Setting Name="CloseItemAfterThankYouWhisper" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
     <Setting Name="ImBusyWhisper" Type="System.String" Scope="User">
       <Value Profile="(Default)">Hi, I'm busy right now. Shall I write you after? :) (Sent with TraderForPoe)</Value>
+    </Setting>
+    <Setting Name="CloseItemAfterImBusyWhisper" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="UseClipboardMonitor" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
