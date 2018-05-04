@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Reflection;
+using System.Windows;
 
 namespace TraderForPoe.Windows
 {
@@ -10,6 +11,7 @@ namespace TraderForPoe.Windows
         public About()
         {
             InitializeComponent();
+            appName.Text += " " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
