@@ -75,18 +75,6 @@ namespace TraderForPoe.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
-        public global::System.Drawing.Point WindowLocation {
-            get {
-                return ((global::System.Drawing.Point)(this["WindowLocation"]));
-            }
-            set {
-                this["WindowLocation"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Give me one second! :) (Sent with TraderForPoe)")]
         public string CustomWhisper1 {
             get {
@@ -228,6 +216,30 @@ namespace TraderForPoe.Properties {
             }
             set {
                 this["UpgradeSettingsRequired"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double PosTop {
+            get {
+                return ((double)(this["PosTop"]));
+            }
+            set {
+                this["PosTop"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double PosLeft {
+            get {
+                return ((double)(this["PosLeft"]));
+            }
+            set {
+                this["PosLeft"] = value;
             }
         }
     }

@@ -181,9 +181,9 @@ namespace TraderForPoe
             // Subscribe to SetNoActiveWindow. Prevent window from focus
             Loaded += (object sender, RoutedEventArgs e) => SetNoActiveWindow();
 
-            this.Top = Settings.Default.WindowLocation.X;
+            this.Top = Settings.Default.PosTop;
 
-            this.Left = Settings.Default.WindowLocation.Y;
+            this.Left = Settings.Default.PosLeft;
         }
 
         private string GetClipboardText()
@@ -490,7 +490,8 @@ namespace TraderForPoe
 
         private void Window_LocationChanged(object sender, EventArgs e)
         {
-            Settings.Default.WindowLocation = new System.Drawing.Point((int)this.Left, (int)this.Top);
+            Settings.Default.PosLeft = this.Left;
+            Settings.Default.PosTop = this.Top;
             Settings.Default.Save();
         }
 
