@@ -485,7 +485,7 @@ namespace TraderForPoe
 
         private void Window_LocationChanged(object sender, EventArgs e)
         {
-            Settings.Default.WindowLocation = new System.Drawing.Point((int)this.Top, (int)this.Left);
+            Settings.Default.WindowLocation = new System.Drawing.Point((int)this.Left, (int)this.Top);
             Settings.Default.Save();
         }
 

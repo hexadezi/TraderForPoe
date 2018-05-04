@@ -71,7 +71,10 @@
         </GroupBox>
 
         <GroupBox Header="Path to Client.txt" Height="Auto" Canvas.Left="202" Canvas.Top="157" Width="498">
-            <TextBox Name="txt_PathToClientTxt" HorizontalAlignment="Stretch" Text="{Binding Source={x:Static properties:Settings.Default}, Path=PathToClientTxt}" VerticalAlignment="Stretch"/>
+            <DockPanel >
+                <Button DockPanel.Dock="Right" Margin="5,0,0,0" Padding="5,0,5,0" HorizontalAlignment="Right" Click="Click_SearchFile">Open</Button>
+                <TextBox Name="txt_PathToClientTxt" Text="{Binding Source={x:Static properties:Settings.Default}, Path=PathToClientTxt}" VerticalAlignment="Stretch"/>
+            </DockPanel>
         </GroupBox>
 
     </Canvas>

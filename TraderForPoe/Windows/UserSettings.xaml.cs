@@ -1,6 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using Microsoft.Win32;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.IO;
 using System.Windows;
 using TraderForPoe.Properties;
 
@@ -22,7 +24,7 @@ namespace TraderForPoe.Windows
             e.Cancel = true;
             this.Visibility = Visibility.Hidden;
         }
-        
+
         private void Click_SaveSettings(object sender, RoutedEventArgs e)
         {
             Settings.Default.Save();
@@ -42,5 +44,20 @@ namespace TraderForPoe.Windows
             Settings.Default.QuadStash.Remove(lsb_QuadStash.SelectedItem.ToString());
         }
 
+        private void Click_SearchFile(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Multiselect = false,
+                Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                txt_PathToClientTxt.Text = openFileDialog.FileName;
+                txt_PathToClientTxt.Focus();
+                txt_PathToClientTxt.CaretIndex = txt_PathToClientTxt.Text.Length;
+            }
+        }
     }
 }
