@@ -417,7 +417,12 @@ namespace TraderForPoe
         private void ClickThanksForTrade(object sender, RoutedEventArgs e)
         {
             SendInputToPoe("@" + tItem.Customer + " " + Settings.Default.ThankYouWhisper);
-        }
+
+            if (Settings.Default.CloseItemAfterThankYouWhisper == true)
+            {
+                RemoveItem();
+            }
+		}
 
         private void ClickKickMyself(object sender, RoutedEventArgs e)
         {
@@ -470,6 +475,11 @@ namespace TraderForPoe
         private void ClickWhisperCustomerBusy(object sender, RoutedEventArgs e)
         {
             SendInputToPoe("@" + tItem.Customer + " " + Settings.Default.ImBusyWhisper);
+
+            if (Settings.Default.CloseItemAfterImBusyWhisper == true)
+            {
+                RemoveItem();
+            }
         }
 
         private void ClickShowStashOverlay(object sender, RoutedEventArgs e)
@@ -483,11 +493,21 @@ namespace TraderForPoe
         private void ClickCustomWhisper1(object sender, RoutedEventArgs e)
         {
             SendInputToPoe("@" + tItem.Customer + " " + Settings.Default.CustomWhisper1);
+
+            if (Settings.Default.CloseItemAfterCustomWhisper1 == true)
+            {
+                RemoveItem();
+            }
         }
 
         private void ClickCustomWhisper2(object sender, RoutedEventArgs e)
         {
             SendInputToPoe("@" + tItem.Customer + " " + Settings.Default.CustomWhisper2);
+
+            if (Settings.Default.CloseItemAfterCustomWhisper2 == true)
+            {
+                RemoveItem();
+            }
         }
 
         private void ClickAskIfInterested(object sender, RoutedEventArgs e)

@@ -99,6 +99,18 @@ namespace TraderForPoe.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CloseItemAfterCustomWhisper1 {
+            get {
+                return ((bool)(this["CloseItemAfterCustomWhisper1"]));
+            }
+            set {
+                this["CloseItemAfterCustomWhisper1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Already sold, sorry. :( (Sent with TraderForPoe)")]
         public string CustomWhisper2 {
             get {
@@ -106,6 +118,18 @@ namespace TraderForPoe.Properties {
             }
             set {
                 this["CustomWhisper2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CloseItemAfterCustomWhisper2 {
+            get {
+                return ((bool)(this["CloseItemAfterCustomWhisper2"]));
+            }
+            set {
+                this["CloseItemAfterCustomWhisper2"] = value;
             }
         }
         
@@ -123,6 +147,18 @@ namespace TraderForPoe.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CloseItemAfterThankYouWhisper {
+            get {
+                return ((bool)(this["CloseItemAfterThankYouWhisper"]));
+            }
+            set {
+                this["CloseItemAfterThankYouWhisper"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Hi, I\'m busy right now. Shall I write you after? :) (Sent with TraderForPoe)")]
         public string ImBusyWhisper {
             get {
@@ -130,6 +166,18 @@ namespace TraderForPoe.Properties {
             }
             set {
                 this["ImBusyWhisper"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CloseItemAfterImBusyWhisper {
+            get {
+                return ((bool)(this["CloseItemAfterImBusyWhisper"]));
+            }
+            set {
+                this["CloseItemAfterImBusyWhisper"] = value;
             }
         }
         
