@@ -327,11 +327,13 @@ namespace TraderForPoe
                 catch (FileNotFoundException ex)
                 {
                     System.Windows.Forms.MessageBox.Show(ex.Message, "Exception", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                    userSettings.Show();
                 }
             }
             else
             {
                 System.Windows.Forms.MessageBox.Show("No Client.txt found \nPlease set the correct path in the settings and restart the application.", "File not found", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                userSettings.Show();
             }
         }
 
@@ -445,6 +447,9 @@ namespace TraderForPoe
 
                     }
                 }
+            }
+            catch (FileNotFoundException) {
+                dispatcherTimer.Tick -= DispatcherTimer_Tick;
             }
             catch (Exception ex)
             {
