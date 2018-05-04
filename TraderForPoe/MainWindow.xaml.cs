@@ -205,7 +205,7 @@ namespace TraderForPoe
                     if (ex.ErrorCode == -2147221040)
                         System.Threading.Thread.Sleep(10);
                     else
-                        throw new Exception("Unable to get Clipboard text.");
+                        throw new Exception("Unable to get Clipboard text. Message: \n" + ex.Message);
                 }
             }
 
