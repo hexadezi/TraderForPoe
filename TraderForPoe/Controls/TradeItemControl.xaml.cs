@@ -127,6 +127,7 @@ namespace TraderForPoe
                 btn_SearchItem.Visibility = Visibility.Collapsed;
                 btn_AskIfInterested.Visibility = Visibility.Collapsed;
                 btn_SendBusyMessage.Visibility = Visibility.Collapsed;
+                btn_stash.Click -= ClickStashIsQuad;
             }
 
             else if (tItem.TradeType == TradeItem.TradeTypes.SELL)
@@ -422,7 +423,7 @@ namespace TraderForPoe
             {
                 RemoveItem();
             }
-		}
+        }
 
         private void ClickKickMyself(object sender, RoutedEventArgs e)
         {
