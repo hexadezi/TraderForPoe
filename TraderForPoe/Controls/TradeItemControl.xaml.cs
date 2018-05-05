@@ -119,8 +119,15 @@ namespace TraderForPoe
 
         private void SetupControls(TradeItem tItemArg)
         {
-            btn_Item.ToolTip = tItem.Item.ToString();
-            btn_Price.ToolTip = tItem.Price.ToString();
+            if (!String.IsNullOrEmpty(tItem.Item.ToString()))
+            {
+                btn_Item.ToolTip = tItem.Item.ToString();
+            }
+
+            if (!String.IsNullOrEmpty(tItem.Price))
+            {
+                btn_Price.ToolTip = tItem.Price.ToString();
+            }
 
             if (tItem.TradeType == TradeItem.TradeTypes.BUY)
             {
@@ -142,7 +149,7 @@ namespace TraderForPoe
 
             }
 
-            
+
             if (tItem.ItemIsCurrency == true)
             {
 
@@ -218,7 +225,7 @@ namespace TraderForPoe
                 catch (Exception)
                 { }
 
-                if (tItem.Price == null)
+                if (String.IsNullOrEmpty(tItem.Price))
                 {
                     txt_Price.Text = "--";
                 }
@@ -241,7 +248,7 @@ namespace TraderForPoe
 
 
 
-            if (tItem.AdditionalText == "" || tItem.AdditionalText == null)
+            if (String.IsNullOrEmpty(tItem.AdditionalText))
             {
                 btn_AdditionalText.Visibility = Visibility.Collapsed;
                 btn_AdditionalText.Visibility = Visibility.Hidden;
