@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Threading;
+using TraderForPoe.Classes;
 using TraderForPoe.Properties;
 using TraderForPoe.Windows;
 using WindowsInput;
@@ -66,6 +67,8 @@ namespace TraderForPoe
 
         public MainWindow()
         {
+            CheckForUpdates();
+
             SubscribeToEvents();
 
             InitializeComponent();
@@ -79,48 +82,18 @@ namespace TraderForPoe
             StartFileMonitoring();
         }
 
-        private void UpdateApplication()
+        private void CheckForUpdates()
         {
-            if (MessageBox.Show("Do you want to Update? Application will be restarted, if an update is available.", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (Settings.Default.CheckForUpdatesOnStart)
             {
-                WebClient webClient = new WebClient();
-
-                string[] updateString = webClient.DownloadString("https://raw.githubusercontent.com/labo89/TraderForPoe/master/update").Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
-
-                double thisVersion = Convert.ToDouble(Assembly.GetEntryAssembly().GetName().Version.ToString().Substring(0, 3), System.Globalization.CultureInfo.InvariantCulture);
-
-                double onlineVersion = Convert.ToDouble(updateString[0], System.Globalization.CultureInfo.InvariantCulture);
-
-                string downloadLink = updateString[1];
-
-                string newExePath = Path.GetTempPath() + "TraderForPoe.exe";
-
-                if (onlineVersion > thisVersion)
+                if (Updater.UpdateIsAvailable())
                 {
-                    using (WebClient wc = new WebClient())
+                    if (MessageBox.Show("A new version is available. Do you want to Update? Application will be restarted.", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
-                        wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
-                        wc.DownloadFileAsync(new System.Uri(downloadLink), newExePath);
+                        Updater.StartUpdate();
                     }
                 }
-                else
-                {
-                    System.Windows.Forms.MessageBox.Show("No updates available", "No updates", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
-                }
             }
-        }
-
-        private void Wc_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
-        {
-            File.Delete(Path.GetTempPath() + "TraderForPoe.bak");
-
-            File.Move(Assembly.GetEntryAssembly().Location, Path.GetTempPath() + "TraderForPoe.bak");
-
-            File.Move(Path.GetTempPath() + "TraderForPoe.exe", AppDomain.CurrentDomain.BaseDirectory + "TraderForPoe.exe");
-
-            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-
-            Application.Current.Shutdown();
         }
 
         private void CheckForClientTxt()
@@ -131,19 +104,22 @@ namespace TraderForPoe
                 Settings.Default.Save();
                 return;
             }
-            else if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), @"Steam\steamapps\common\Path of Exile\logs\Client.txt")))
+
+            if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), @"Steam\steamapps\common\Path of Exile\logs\Client.txt")))
             {
                 Settings.Default.PathToClientTxt = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), @"Steam\steamapps\common\Path of Exile\logs\Client.txt");
                 Settings.Default.Save();
                 return;
             }
-            else if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), @"Grinding Gear Games\Path of Exile\logs\Client.txt")))
+
+            if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), @"Grinding Gear Games\Path of Exile\logs\Client.txt")))
             {
                 Settings.Default.PathToClientTxt = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), @"Grinding Gear Games\Path of Exile\logs\Client.txt");
                 Settings.Default.Save();
                 return;
             }
-            else if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), @"Steam\steamapps\common\Path of Exile\logs\Client.txt")))
+
+            if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), @"Steam\steamapps\common\Path of Exile\logs\Client.txt")))
             {
                 Settings.Default.PathToClientTxt = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), @"Steam\steamapps\common\Path of Exile\logs\Client.txt");
                 Settings.Default.Save();
@@ -273,7 +249,17 @@ namespace TraderForPoe
 
         private void CMenu_Update(object sender, EventArgs e)
         {
-            UpdateApplication();
+            if (Updater.UpdateIsAvailable())
+            {
+                if (MessageBox.Show("A new version is available. Do you want to Update? Application will be restarted.", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    Updater.StartUpdate();
+                }
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("No updates available", "No updates", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+            }
         }
 
         private void NIcon_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)

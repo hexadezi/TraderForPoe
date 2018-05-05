@@ -254,5 +254,17 @@ namespace TraderForPoe.Properties {
                 this["HideIfPoeNotForeGround"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CheckForUpdatesOnStart {
+            get {
+                return ((bool)(this["CheckForUpdatesOnStart"]));
+            }
+            set {
+                this["CheckForUpdatesOnStart"] = value;
+            }
+        }
     }
 }

@@ -67,6 +67,7 @@
                 <CheckBox Name="cbx_PlaySound" Margin="0,0,5,5" Content="Play sound" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=PlayNotificationSound}"/>
                 <CheckBox Name="cbx_RemoveAfterTrade" Margin="0,0,5,5" Content="Remove item after trade" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterTrade}"/>
                 <CheckBox Name="cbx_HideIfPoeNotForeground" Margin="0,0,5,5" Content="Hide if not foreground" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=HideIfPoeNotForeGround}"/>
+                <CheckBox Name="cbx_CheckForUpdatesOnStart" Margin="0,0,5,5" Content="Check for updates on start" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CheckForUpdatesOnStart}"/>
             </WrapPanel>
 
         </GroupBox>

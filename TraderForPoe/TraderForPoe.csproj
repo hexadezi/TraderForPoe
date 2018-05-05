@@ -94,6 +94,7 @@
     </ApplicationDefinition>
     <Compile Include="Classes\ClipboardMonitor.cs" />
     <Compile Include="Classes\Hook.cs" />
+    <Compile Include="Classes\Updater.cs" />
     <Compile Include="Controls\StashControl.xaml.cs">
       <DependentUpon>StashControl.xaml</DependentUpon>
     </Compile>
