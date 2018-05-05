@@ -119,6 +119,9 @@ namespace TraderForPoe
 
         private void SetupControls(TradeItem tItemArg)
         {
+            btn_Item.ToolTip = tItem.Item.ToString();
+            btn_Price.ToolTip = tItem.Price.ToString();
+
             if (tItem.TradeType == TradeItem.TradeTypes.BUY)
             {
                 txt_Item.Foreground = System.Windows.Media.Brushes.GreenYellow;
@@ -139,10 +142,7 @@ namespace TraderForPoe
 
             }
 
-
-
-
-
+            
             if (tItem.ItemIsCurrency == true)
             {
 
@@ -150,8 +150,6 @@ namespace TraderForPoe
                 txt_Item.Text = tItem.ItemCurrencyQuant;
                 img_ItemCurrency.Source = tItem.ItemCurrencyBitmap;
                 txt_League.Text = tItem.League;
-                btn_Item.ToolTip = tItem.Item.ToString();
-                btn_Price.ToolTip = tItem.Price.ToString();
 
                 try
                 {
