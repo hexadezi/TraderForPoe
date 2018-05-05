@@ -78,7 +78,7 @@
                 </Button>
 
                 <StackPanel Name="spnl_Item" Orientation="Horizontal">
-                    <Button ToolTip="{Binding Path=Text, ElementName=txt_Item}" Click="ClickShowStashOverlay">
+                    <Button Name="btn_Item" Click="ClickShowStashOverlay">
                         <DockPanel>
                             <TextBlock  x:Name="txt_Item" FontStyle="Italic" FontWeight="Bold" TextTrimming="CharacterEllipsis" >#ITEM#</TextBlock>
                             <Image Name="img_ItemCurrency" Width="19" Height="19" Margin="5,0,0,0" RenderOptions.BitmapScalingMode="HighQuality"/>

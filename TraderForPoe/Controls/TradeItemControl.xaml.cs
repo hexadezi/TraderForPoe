@@ -150,6 +150,8 @@ namespace TraderForPoe
                 txt_Item.Text = tItem.ItemCurrencyQuant;
                 img_ItemCurrency.Source = tItem.ItemCurrencyBitmap;
                 txt_League.Text = tItem.League;
+                btn_Item.ToolTip = tItem.Item.ToString();
+                btn_Price.ToolTip = tItem.Price.ToString();
 
                 try
                 {
