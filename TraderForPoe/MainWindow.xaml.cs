@@ -28,6 +28,9 @@ namespace TraderForPoe
         [DllImport("USER32.DLL", CharSet = CharSet.Unicode)]
         public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+
         // Activate an application window.
         [DllImport("USER32.DLL")]
         public static extern bool SetForegroundWindow(IntPtr hWnd);
@@ -341,6 +344,8 @@ namespace TraderForPoe
         {
             string filePath = Settings.Default.PathToClientTxt;
 
+            CheckIfPoeIsForegroundWindow();
+
             if (lastReadLength < 0)
             {
                 lastReadLength = 0;
@@ -448,13 +453,25 @@ namespace TraderForPoe
                     }
                 }
             }
-            catch (FileNotFoundException) {
+            catch (FileNotFoundException)
+            {
                 dispatcherTimer.Tick -= DispatcherTimer_Tick;
             }
             catch (Exception ex)
             {
                 System.Windows.Forms.MessageBox.Show(ex.Message, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
 
+            }
+        }
+
+        private void CheckIfPoeIsForegroundWindow()
+        {
+            if (Settings.Default.HideIfPoeNotForeGround)
+            {
+                if (GetForegroundWindow() != FindWindow("POEWindowClass", "Path of Exile"))
+                    Hide();
+                else
+                    Show();
             }
         }
 

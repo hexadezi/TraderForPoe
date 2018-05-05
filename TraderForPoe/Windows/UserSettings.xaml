@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TraderForPoe.Windows"
         xmlns:properties="clr-namespace:TraderForPoe.Properties"
         mc:Ignorable="d"
-        Title="UserSettings" Height="366.876" Width="725.035" Closing="Window_Closing" 
+        Title="UserSettings" Height="381.876" Width="725.035" Closing="Window_Closing" 
         WindowStyle="SingleBorderWindow" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen">
 
     <Canvas>
@@ -42,7 +42,7 @@
 
             </Grid>
         </GroupBox>
-        <GroupBox Header="Quad tabs" Height="167" Canvas.Left="10" Canvas.Top="157" Width="187">
+        <GroupBox Header="Quad tabs" Height="186" Canvas.Left="10" Canvas.Top="157" Width="187">
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -55,17 +55,18 @@
                 <Button Grid.Column="0" Grid.Row="1" Click="Click_DeleteQuadStash">Delete</Button>
             </Grid>
         </GroupBox>
-        <Button Content="Save" Canvas.Left="625" Canvas.Top="304" Width="75" Click="Click_SaveSettings"/>
-        <Button Content="Restart" Canvas.Left="545" Canvas.Top="304" Width="75" Click="Click_RestartApp"/>
+        <Button Content="Save" Canvas.Left="625" Canvas.Top="323" Width="75" Click="Click_SaveSettings"/>
+        <Button Content="Restart" Canvas.Left="625" Canvas.Top="298" Width="75" Click="Click_RestartApp"/>
         <GroupBox Header="Character name" Height="Auto" Canvas.Left="202" Canvas.Top="198" Width="498">
             <TextBox Margin="0,2,0,0"  Name="txt_PlayerName" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Source={x:Static properties:Settings.Default}, Path=PlayerName}" />
         </GroupBox>
-        <GroupBox Header="Various Settings" Height="78" Canvas.Left="202" Canvas.Top="246" Width="338">
+        <GroupBox Header="Various Settings" Height="97" Canvas.Left="202" Canvas.Top="246" Width="418">
             <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <CheckBox Name="cbx_UseClipBoardMonitor" Margin="0,2,5,5" Content="Use clipboard monitor" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=UseClipboardMonitor}"/>
                 <CheckBox Name="cbx_CollapseItems" Margin="0,0,5,5" Content="Collapse items" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CollapsedItems}"/>
                 <CheckBox Name="cbx_PlaySound" Margin="0,0,5,5" Content="Play sound" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=PlayNotificationSound}"/>
                 <CheckBox Name="cbx_RemoveAfterTrade" Margin="0,0,5,5" Content="Remove item after trade" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterTrade}"/>
+                <CheckBox Name="cbx_HideIfPoeNotForeground" Margin="0,0,5,5" Content="Hide if not foreground" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=HideIfPoeNotForeGround}"/>
             </WrapPanel>
 
         </GroupBox>

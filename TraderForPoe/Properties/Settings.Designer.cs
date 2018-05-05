@@ -242,5 +242,17 @@ namespace TraderForPoe.Properties {
                 this["PosLeft"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool HideIfPoeNotForeGround {
+            get {
+                return ((bool)(this["HideIfPoeNotForeGround"]));
+            }
+            set {
+                this["HideIfPoeNotForeGround"] = value;
+            }
+        }
     }
 }
