@@ -160,7 +160,7 @@ namespace TraderForPoe
 
                 try
                 {
-                    txt_Price.Text = TradeItem.ExtractFloatFromString(tItem.Price);
+                    txt_Price.Text = TradeItem.ExtractPointNumberFromString(tItem.Price);
                 }
                 catch (Exception)
                 { }
@@ -181,8 +181,8 @@ namespace TraderForPoe
                 double dblItemPrice = 0;
                 try
                 {
-                    dblPrice = Double.Parse(TradeItem.ExtractFloatFromString(tItem.Price));
-                    dblItemPrice = Double.Parse(TradeItem.ExtractFloatFromString(tItem.ItemCurrencyQuant));
+                    dblPrice = Double.Parse(TradeItem.ExtractPointNumberFromString(tItem.Price));
+                    dblItemPrice = Double.Parse(TradeItem.ExtractPointNumberFromString(tItem.ItemCurrencyQuant));
                 }
                 catch (Exception) { }
 
@@ -220,7 +220,7 @@ namespace TraderForPoe
                 spnl_CurrencyRatio.Visibility = Visibility.Collapsed;
                 try
                 {
-                    txt_Price.Text = TradeItem.ExtractFloatFromString(tItem.Price);
+                    txt_Price.Text = TradeItem.ExtractPointNumberFromString(tItem.Price);
                 }
                 catch (Exception)
                 { }

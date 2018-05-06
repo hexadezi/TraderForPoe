@@ -1,7 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Net;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -65,6 +63,10 @@ namespace TraderForPoe
         Regex customerJoinedRegEx = new Regex(".* : (.*) has joined the area");
         Regex customerLeftRegEx = new Regex(".* : (.*) has left the area");
 
+
+
+
+
         public MainWindow()
         {
             CheckForUpdates();
@@ -81,6 +83,11 @@ namespace TraderForPoe
 
             StartFileMonitoring();
         }
+
+
+
+
+
 
         private void CheckForUpdates()
         {

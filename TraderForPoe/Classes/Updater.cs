@@ -12,6 +12,10 @@ namespace TraderForPoe.Classes
 {
     static class Updater
     {
+        /// <summary>
+        /// Check if a newer version is available
+        /// </summary>
+        /// <returns>Returns true if update is available</returns>
         public static bool UpdateIsAvailable()
         {
             WebClient webClient = new WebClient();

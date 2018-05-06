@@ -251,7 +251,7 @@ namespace TraderForPoe
 
                     try
                     {
-                        this.ItemCurrencyQuant = ExtractFloatFromString(this.Item);
+                        this.ItemCurrencyQuant = ExtractPointNumberFromString(this.Item);
 
                         this.ItemCurrency = ParseCurrency(this.Item);
 
@@ -350,7 +350,7 @@ namespace TraderForPoe
 
                     try
                     {
-                        this.ItemCurrencyQuant = ExtractFloatFromString(this.Item);
+                        this.ItemCurrencyQuant = ExtractPointNumberFromString(this.Item);
 
                         this.ItemCurrency = ParseCurrency(this.Item);
 
@@ -770,8 +770,12 @@ namespace TraderForPoe
                 throw new ArgumentException("ARGH! Can not set first char to upper: " + input);
             return input.First().ToString().ToUpper() + input.Substring(1);
         }
-
-        public static string ExtractFloatFromString(string s)
+        /// <summary>
+        /// Returns the point number from a string.
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns>Point number if successfull, null if not</returns>
+        public static string ExtractPointNumberFromString(string s)
         {
             var match = Regex.Match(s, @"([-+]?[0-9]*\.?[0-9]+)");
 
