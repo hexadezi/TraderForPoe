@@ -220,7 +220,7 @@ namespace TraderForPoe.Windows
         {
             UpdateLocationAndSize();
 
-            if (ContainsItem(tItemArgs) == false)
+            if (ContainsItem(tItemArgs) == false && !String.IsNullOrEmpty(tItemArgs.Stash))
             {
                 StashControl sCtrl = new StashControl(tItemArgs);
 
@@ -235,7 +235,7 @@ namespace TraderForPoe.Windows
         {
             foreach (StashControl item in spnl_Buttons.Children)
             {
-                if (item.GetTItem.Item == tItemArgs.Item && item.GetTItem.Customer == tItemArgs.Customer && item.GetTItem.Price == tItemArgs.Price)
+                if (item.GetTItem.Item == tItemArgs.Item && item.GetTItem.Customer == tItemArgs.Customer && item.GetTItem.Price == tItemArgs.Price && item.GetTItem.StashPosition == tItemArgs.StashPosition)
                 {
                     return true;
                 }
