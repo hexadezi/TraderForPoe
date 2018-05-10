@@ -486,6 +486,15 @@ namespace TraderForPoe
                 }
 
             }
+            if (dialogResult == MessageBoxResult.No)
+            {
+                if (Settings.Default.QuadStash.Contains(tItem.Stash.ToString()))
+                {
+                    Settings.Default.QuadStash.Remove(tItem.Stash.ToString());
+                    Settings.Default.Save();
+                }
+
+            }
         }
 
         private void ClickWhisperCustomerBusy(object sender, RoutedEventArgs e)
