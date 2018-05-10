@@ -406,6 +406,14 @@ namespace TraderForPoe
         private void ClickKickCustomer(object sender, RoutedEventArgs e)
         {
             SendInputToPoe("/kick " + tItem.Customer);
+
+            if (Settings.Default.CloseItemAfterTrade == true)
+            {
+                RemoveItem();
+            }
+
+
+
         }
 
         private void ClickRemoveItem(object sender, RoutedEventArgs e)
