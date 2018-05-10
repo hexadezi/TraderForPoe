@@ -199,13 +199,9 @@
                 <Button x:Name="btn_SendBusyMessage" ToolTip="Tell the customer I'm busy" Click="ClickWhisperCustomerBusy" Style="{DynamicResource CmdStyle}">
                     <Image Source="pack://application:,,,/Resources/Images/clock.png" Height="19" Width="19"></Image>
                 </Button>
-                
+
                 <Button x:Name="btn_SearchItem" Click="ClickSearchItem" ToolTip="Perform a search in the stash" Style="{DynamicResource CmdStyle}">
                     <Image Source="pack://application:,,,/Resources/Images/magnify.png" Height="19" Width="19"></Image>
-                </Button>
-
-                <Button x:Name="btn_KickCustomer" Click="ClickKickCustomer" ToolTip="Kick the Customer" Style="{DynamicResource CmdStyle}">
-                    <Image Source="pack://application:,,,/Resources/Images/account-minus.png" Height="19" Width="19"></Image>
                 </Button>
 
                 <Button ToolTip="Send whisper again" x:Name="btn_SendWhisperAgain" Click="ClickSendWhisperAgain" Style="{DynamicResource CmdStyle}" Margin="0">
