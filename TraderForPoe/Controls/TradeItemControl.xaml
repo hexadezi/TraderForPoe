@@ -146,7 +146,7 @@
                     <Image Source="pack://application:,,,/Resources/Images/thanks.png" Height="18" Width="18"></Image>
                 </Button>
 
-                <Button x:Name="btn_LeaveParty" ToolTip="Kick yourself" Click="ClickKickMyself" Style="{DynamicResource CmdStyle}">
+                <Button x:Name="btn_LeaveParty" ToolTip="Left click will kick yourself. Right click will kick customer." Click="ClickKickMyself" MouseRightButtonUp="RightClickKickCustomer" Style="{DynamicResource CmdStyle}">
                     <Image Source="pack://application:,,,/Resources/Images/leave.png" Height="19" Width="19"></Image>
                 </Button>
 

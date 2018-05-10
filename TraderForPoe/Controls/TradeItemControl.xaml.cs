@@ -442,6 +442,7 @@ namespace TraderForPoe
 
         private void ClickKickMyself(object sender, RoutedEventArgs e)
         {
+
             SendInputToPoe("/kick " + Settings.Default.PlayerName);
 
             if (tItem.TradeType == TradeItem.TradeTypes.SELL && Settings.Default.CloseItemAfterTrade == true)
@@ -567,6 +568,16 @@ namespace TraderForPoe
         public void CustomerLeft()
         {
             txt_Customer.Foreground = Brushes.White;
+        }
+
+        private void RightClickKickCustomer(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            SendInputToPoe("/kick " + tItem.Customer);
+
+            if (Settings.Default.CloseItemAfterTrade == true)
+            {
+                RemoveItem();
+            }
         }
     }
 
