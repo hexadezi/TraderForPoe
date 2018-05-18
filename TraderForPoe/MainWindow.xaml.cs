@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Threading;
 using TraderForPoe.Classes;
+using TraderForPoe.Controls;
 using TraderForPoe.Properties;
 using TraderForPoe.Windows;
 using WindowsInput;
@@ -43,7 +44,9 @@ namespace TraderForPoe
 
         System.Windows.Forms.NotifyIcon nIcon = new System.Windows.Forms.NotifyIcon();
 
-        System.Windows.Forms.ContextMenu cMenu = new System.Windows.Forms.ContextMenu();
+        System.Windows.Forms.ContextMenuStrip cMenu = new System.Windows.Forms.ContextMenuStrip();
+
+        System.Windows.Forms.ToolStripMenuItem itmHistory = new System.Windows.Forms.ToolStripMenuItem("History");
 
         ClipboardMonitor clipMoni = new ClipboardMonitor();
 
@@ -138,6 +141,13 @@ namespace TraderForPoe
         {
             TradeItemControl.MoreThanThreeItems += TradeItemControl_MoreThanThreeItems;
             TradeItemControl.EqualThreeItems += TradeItemControl_LessThanThreeItems;
+
+            CustMenuItem.OnItemCountExceed += CustMenuItem_OnItemCountExceed;
+        }
+
+        private void CustMenuItem_OnItemCountExceed(object sender, EventArgs e)
+        {
+            itmHistory.DropDownItems.RemoveAt(0);
         }
 
         private void TradeItemControl_MoreThanThreeItems(object sender, EventArgs e)
@@ -157,11 +167,11 @@ namespace TraderForPoe
             if (Settings.Default.UseClipboardMonitor == true)
             {
                 clipMoni.OnClipboardContentChanged += ClipMoni_OnClipboardContentChanged;
-                cMenu.MenuItems[0].Text = "Stop Monitor";
+                cMenu.Items[0].Text = "Stop Monitor";
             }
             else
             {
-                cMenu.MenuItems[0].Text = "Start Monitor";
+                cMenu.Items[0].Text = "Start Monitor";
             }
 
             // Subscribe to SetNoActiveWindow. Prevent window from focus
@@ -246,12 +256,29 @@ namespace TraderForPoe
             nIcon.Icon = new System.Drawing.Icon(iconStream);
             nIcon.Visible = true;
 
-            cMenu.MenuItems.Add(" Monitor", new EventHandler(CMenu_ClipboardMonitor));
-            cMenu.MenuItems.Add("Settings", new EventHandler(CMenu_Settings));
-            cMenu.MenuItems.Add("Update", new EventHandler(CMenu_Update));
-            cMenu.MenuItems.Add("About", new EventHandler(CMenu_About));
-            cMenu.MenuItems.Add("Exit", new EventHandler(CMenu_Close));
-            nIcon.ContextMenu = cMenu;
+            var monitor = cMenu.Items.Add("Monitor");
+            monitor.Click += CMenu_ClipboardMonitor;
+
+            cMenu.Items.Add(itmHistory);
+
+            var settings = cMenu.Items.Add("Settings");
+            settings.Click += CMenu_Settings;
+
+            var update = cMenu.Items.Add("Update");
+            update.Click += CMenu_Update;
+
+            var about = cMenu.Items.Add("About");
+            about.Click += CMenu_About;
+
+            var exit = cMenu.Items.Add("Exit");
+            exit.Click += CMenu_Close;
+
+            nIcon.ContextMenuStrip = cMenu;
+        }
+
+        private void CMenu_RestorItem(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void CMenu_Update(object sender, EventArgs e)
@@ -276,15 +303,15 @@ namespace TraderForPoe
 
         private void CMenu_ClipboardMonitor(object sender, EventArgs e)
         {
-            if (cMenu.MenuItems[0].Text.StartsWith("Start"))
+            if (cMenu.Items[0].Text.StartsWith("Start"))
             {
                 clipMoni.OnClipboardContentChanged += ClipMoni_OnClipboardContentChanged;
-                cMenu.MenuItems[0].Text = "Stop Monitor";
+                cMenu.Items[0].Text = "Stop Monitor";
             }
-            else if (cMenu.MenuItems[0].Text.StartsWith("Stop"))
+            else if (cMenu.Items[0].Text.StartsWith("Stop"))
             {
                 clipMoni.OnClipboardContentChanged -= ClipMoni_OnClipboardContentChanged;
-                cMenu.MenuItems[0].Text = "Start Monitor";
+                cMenu.Items[0].Text = "Start Monitor";
             }
             else
             {
@@ -379,6 +406,9 @@ namespace TraderForPoe
                                             TradeItem tItem = new TradeItem(line);
                                             TradeItemControl uc = new TradeItemControl(tItem);
                                             stk_MainPnl.Children.Add(uc);
+                                            var customMenuItem = new CustMenuItem(uc);
+                                            customMenuItem.Click += CustomMenuItem_Click;
+                                            itmHistory.DropDownItems.Add(customMenuItem);
                                         }
                                         catch (NoCurrencyBitmapFoundException)
                                         {
@@ -454,6 +484,15 @@ namespace TraderForPoe
             {
                 System.Windows.Forms.MessageBox.Show(ex.Message, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
 
+            }
+        }
+
+        private void CustomMenuItem_Click(object sender, EventArgs e)
+        {
+            var s = sender as CustMenuItem;
+            if (!stk_MainPnl.Children.Contains(s.GetTradeItemCtrl))
+            {
+                stk_MainPnl.Children.Add(s.GetTradeItemCtrl);
             }
         }
 

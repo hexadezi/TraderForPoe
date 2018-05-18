@@ -95,6 +95,9 @@
     <Compile Include="Classes\ClipboardMonitor.cs" />
     <Compile Include="Classes\Hook.cs" />
     <Compile Include="Classes\Updater.cs" />
+    <Compile Include="Controls\CustMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\StashControl.xaml.cs">
       <DependentUpon>StashControl.xaml</DependentUpon>
     </Compile>
@@ -288,9 +291,6 @@
     <Resource Include="Resources\Images\magnify.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\account-minus.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\repeat.png" />
   </ItemGroup>
   <ItemGroup>
@@ -307,6 +307,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Currency\curr_perandus_coin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrowBuy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrowSell.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
