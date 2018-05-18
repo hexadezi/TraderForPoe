@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using TraderForPoe.Properties;
 
 namespace TraderForPoe.Controls
 {
@@ -31,7 +32,7 @@ namespace TraderForPoe.Controls
                 Image = Properties.Resources.arrowSell;
             }
 
-            if (countItems > 3)
+            if (countItems > Settings.Default.HistoryItemsCount)
             {
                 if (OnItemCountExceed != null)
                 {

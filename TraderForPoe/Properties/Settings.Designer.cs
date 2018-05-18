@@ -266,5 +266,17 @@ namespace TraderForPoe.Properties {
                 this["CheckForUpdatesOnStart"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int HistoryItemsCount {
+            get {
+                return ((int)(this["HistoryItemsCount"]));
+            }
+            set {
+                this["HistoryItemsCount"] = value;
+            }
+        }
     }
 }
