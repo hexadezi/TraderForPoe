@@ -99,6 +99,10 @@ namespace TraderForPoe
             {
                 stashGridHighlight = new StashGridHighlight();
             }
+            else if (stashGridHighlight.Visibility == Visibility.Collapsed || stashGridHighlight.Visibility == Visibility.Hidden)
+            {
+                stashGridHighlight.Visibility = Visibility.Visible;
+            }
 
             stashGridHighlight.Show();
         }
