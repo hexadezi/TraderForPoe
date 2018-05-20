@@ -64,11 +64,10 @@ namespace TraderForPoe
         long lastReadLength;
 
         Regex customerJoinedRegEx = new Regex(".* : (.*) has joined the area");
+
         Regex customerLeftRegEx = new Regex(".* : (.*) has left the area");
 
-
-
-
+        
 
         public MainWindow()
         {
@@ -86,9 +85,6 @@ namespace TraderForPoe
 
             StartFileMonitoring();
         }
-
-
-
 
 
 
@@ -141,12 +137,12 @@ namespace TraderForPoe
         {
             TradeItemControl.MoreThanThreeItems += TradeItemControl_MoreThanThreeItems;
             TradeItemControl.EqualThreeItems += TradeItemControl_LessThanThreeItems;
-
             CustMenuItem.OnItemCountExceed += CustMenuItem_OnItemCountExceed;
         }
 
         private void CustMenuItem_OnItemCountExceed(object sender, EventArgs e)
         {
+            // remove the first item in history list, if limit is reached
             itmHistory.DropDownItems.RemoveAt(0);
         }
 
@@ -276,11 +272,6 @@ namespace TraderForPoe
             nIcon.ContextMenuStrip = cMenu;
         }
 
-        private void CMenu_RestorItem(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         private void CMenu_Update(object sender, EventArgs e)
         {
             if (Updater.UpdateIsAvailable())
@@ -391,7 +382,6 @@ namespace TraderForPoe
                         {
                             for (string line = reader.ReadLine(); line != null; line = reader.ReadLine())
                             {
-
                                 // Check for trade whispers
                                 if (line.Contains(" @"))
                                 {
@@ -431,13 +421,10 @@ namespace TraderForPoe
                                             System.Windows.Forms.MessageBox.Show(ex.Message, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
                                         }
                                     }
-
-
-
                                 }
 
                                 // Check if customer joined or left
-                                if (customerJoinedRegEx.IsMatch(line))
+                                else if (customerJoinedRegEx.IsMatch(line))
                                 {
                                     MatchCollection matches = Regex.Matches(line, customerJoinedRegEx.ToString());
 
@@ -453,8 +440,8 @@ namespace TraderForPoe
                                     }
                                 }
 
-
-                                if (customerLeftRegEx.IsMatch(line))
+                                // Check if customer left
+                                else if (customerLeftRegEx.IsMatch(line))
                                 {
                                     MatchCollection matches = Regex.Matches(line, customerLeftRegEx.ToString());
 
@@ -487,9 +474,12 @@ namespace TraderForPoe
             }
         }
 
+        // Handle click event for the history menu item
         private void CustomMenuItem_Click(object sender, EventArgs e)
         {
             var s = sender as CustMenuItem;
+
+            // Avoid exception by checking if the item is already in the panel
             if (!stk_MainPnl.Children.Contains(s.GetTradeItemCtrl))
             {
                 stk_MainPnl.Children.Add(s.GetTradeItemCtrl);

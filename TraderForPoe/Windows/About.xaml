@@ -10,20 +10,17 @@
     <StackPanel>
 
         <Grid HorizontalAlignment="Stretch" Background="#333333" Height="87" >
-            <TextBlock Name="appName" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" Foreground="White" FontWeight="Bold">TraderForPoe </TextBlock>
+            <TextBlock Name="appName" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" Foreground="White" FontWeight="Bold">TraderForPoe</TextBlock>
         </Grid>
 
         <Canvas>
             <StackPanel Margin="5">
-                <TextBlock>Icons from:
-                    <Hyperlink  NavigateUri="https://materialdesignicons.com/" RequestNavigate="OnRequestNavigate">https://materialdesignicons.com/</Hyperlink>
-                </TextBlock>
-                <TextBlock>Windows Input Simulator Plus from:
-                    <Hyperlink  NavigateUri="https://github.com/TChatzigiannakis/InputSimulatorPlus" RequestNavigate="OnRequestNavigate">https://github.com/TChatzigiannakis/InputSimulatorPlus</Hyperlink>
-                </TextBlock>
-                <TextBlock>Notification sound from:
-                    <Hyperlink  NavigateUri="https://notificationsounds.com" RequestNavigate="OnRequestNavigate">https://notificationsounds.com</Hyperlink>
-                </TextBlock>
+                <TextBlock Padding="5,0,0,0">Icons from:</TextBlock>
+                <TextBlock Padding="10,0,0,10"><Hyperlink  NavigateUri="https://materialdesignicons.com/" RequestNavigate="OnRequestNavigate">https://materialdesignicons.com/</Hyperlink></TextBlock>
+                <TextBlock Padding="5,0,0,0">Windows Input Simulator Plus from:</TextBlock>
+                <TextBlock Padding="10,0,0,10"><Hyperlink  NavigateUri="https://github.com/TChatzigiannakis/InputSimulatorPlus" RequestNavigate="OnRequestNavigate">https://github.com/TChatzigiannakis/InputSimulatorPlus</Hyperlink></TextBlock>
+                <TextBlock Padding="5,0,0,0">Notification sound from:</TextBlock>
+                <TextBlock Padding="10,0,0,10"><Hyperlink  NavigateUri="https://notificationsounds.com" RequestNavigate="OnRequestNavigate">https://notificationsounds.com</Hyperlink></TextBlock>
             </StackPanel>
         </Canvas>
     </StackPanel>
