@@ -196,6 +196,14 @@
                     <Image Source="pack://application:,,,/Resources/Images/customMessage2.png"  Height="19" Width="19"></Image>
                 </Button>
 
+                <Button x:Name="btn_SendCustomMessage3" ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper3}" Style="{DynamicResource CmdStyle}" Click="ClickCustomWhisper3">
+                    <Image Source="pack://application:,,,/Resources/Images/customMessage3.png"  Height="19" Width="19"></Image>
+                </Button>
+
+                <Button x:Name="btn_SendCustomMessage4" ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper4}" Style="{DynamicResource CmdStyle}" Click="ClickCustomWhisper4">
+                    <Image Source="pack://application:,,,/Resources/Images/customMessage4.png"  Height="19" Width="19"></Image>
+                </Button>
+
                 <Button x:Name="btn_SendBusyMessage" ToolTip="Tell the customer I'm busy" Click="ClickWhisperCustomerBusy" Style="{DynamicResource CmdStyle}">
                     <Image Source="pack://application:,,,/Resources/Images/clock.png" Height="19" Width="19"></Image>
                 </Button>

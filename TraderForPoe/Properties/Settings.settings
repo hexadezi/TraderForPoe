@@ -67,5 +67,17 @@
     <Setting Name="HistoryItemsCount" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">20</Value>
     </Setting>
+    <Setting Name="CustomWhisper3" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Item sold? :) (Sent with TraderForPoe)</Value>
+    </Setting>
+    <Setting Name="CustomWhisper4" Type="System.String" Scope="User">
+      <Value Profile="(Default)">I am in lab! :) (Sent with TraderForPoe)</Value>
+    </Setting>
+    <Setting Name="CloseItemAfterCustomWhisper3" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CloseItemAfterCustomWhisper4" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

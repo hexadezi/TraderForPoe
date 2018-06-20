@@ -278,5 +278,53 @@ namespace TraderForPoe.Properties {
                 this["HistoryItemsCount"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Item sold? :) (Sent with TraderForPoe)")]
+        public string CustomWhisper3 {
+            get {
+                return ((string)(this["CustomWhisper3"]));
+            }
+            set {
+                this["CustomWhisper3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("I am in lab! :) (Sent with TraderForPoe)")]
+        public string CustomWhisper4 {
+            get {
+                return ((string)(this["CustomWhisper4"]));
+            }
+            set {
+                this["CustomWhisper4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CloseItemAfterCustomWhisper3 {
+            get {
+                return ((bool)(this["CloseItemAfterCustomWhisper3"]));
+            }
+            set {
+                this["CloseItemAfterCustomWhisper3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CloseItemAfterCustomWhisper4 {
+            get {
+                return ((bool)(this["CloseItemAfterCustomWhisper4"]));
+            }
+            set {
+                this["CloseItemAfterCustomWhisper4"] = value;
+            }
+        }
     }
 }

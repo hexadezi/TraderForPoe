@@ -6,14 +6,16 @@
         xmlns:local="clr-namespace:TraderForPoe.Windows"
         xmlns:properties="clr-namespace:TraderForPoe.Properties"
         mc:Ignorable="d"
-        Title="UserSettings" Height="381.876" Width="725.035" Closing="Window_Closing" 
+        Title="UserSettings" Height="468.876" Width="722.035" Closing="Window_Closing" 
         WindowStyle="SingleBorderWindow" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen">
 
     <Canvas>
 
-        <GroupBox Header="Whisper Messages" Height="Auto" Canvas.Left="10" Canvas.Top="10" Width="690">
+        <GroupBox Header="Whisper Messages" Height="214" Canvas.Left="10" Canvas.Top="10" Width="690">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -34,15 +36,23 @@
 
                 <Label Margin="0,0,0,5" Grid.Column="0" Grid.Row="2" Content="Custom whisper 1" HorizontalAlignment="Left"/>
                 <TextBox Name="txt_CustomWhisper1" Margin="0,0,0,5"  Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center" TextWrapping="NoWrap" Text="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper1}"/>
-                <CheckBox Name="cbx_CustomWhisper1" Margin="0,2,5,5" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Close item after clicking Custom whisper1?" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterCustomWhisper1}"/>
+                <CheckBox Name="cbx_CustomWhisper1" Margin="0,2,5,5" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Close item after clicking Custom whisper 1?" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterCustomWhisper1}"/>
 
-                <Label Grid.Column="0" Grid.Row="3" Content="Custom whisper 2" HorizontalAlignment="Left"/>
-                <TextBox Name="txt_CustomWhisper2" Grid.Column="1" Grid.Row="3" VerticalContentAlignment="Center" TextWrapping="NoWrap" Text="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper2}"/>
-                <CheckBox Name="cbx_CustomWhisper2" Margin="0,2,5,5" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Close item after clicking Custom whisper2?" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterCustomWhisper2}"/>
+                <Label Margin="0,0,0,5" Grid.Column="0" Grid.Row="3" Content="Custom whisper 2" HorizontalAlignment="Left"/>
+                <TextBox Name="txt_CustomWhisper2" Margin="0,0,0,5"  Grid.Column="1" Grid.Row="3" VerticalContentAlignment="Center" TextWrapping="NoWrap" Text="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper2}"/>
+                <CheckBox Name="cbx_CustomWhisper2" Margin="0,2,5,5" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Close item after clicking Custom whisper 2?" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterCustomWhisper2}"/>
+
+                <Label Margin="0,0,0,5" Grid.Column="0" Grid.Row="4" Content="Custom whisper 3" HorizontalAlignment="Left"/>
+                <TextBox Name="txt_CustomWhisper3" Margin="0,0,0,5"  Grid.Column="1" Grid.Row="4" VerticalContentAlignment="Center" TextWrapping="NoWrap" Text="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper3}"/>
+                <CheckBox Name="cbx_CustomWhisper3" Margin="0,2,5,5" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Close item after clicking Custom whisper 3?" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterCustomWhisper3}"/>
+
+                <Label Margin="0,0,0,5"  Grid.Column="0" Grid.Row="5" Content="Custom whisper 4" HorizontalAlignment="Left"/>
+                <TextBox Name="txt_CustomWhisper4" Margin="0,0,0,5"  Grid.Column="1" Grid.Row="5" VerticalContentAlignment="Center" TextWrapping="NoWrap" Text="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper4}"/>
+                <CheckBox Name="cbx_CustomWhisper4" Margin="0,2,5,5" Grid.Column="2" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Close item after clicking Custom whisper 4?" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterCustomWhisper4}"/>
 
             </Grid>
         </GroupBox>
-        <GroupBox Header="Quad tabs" Height="186" Canvas.Left="10" Canvas.Top="157" Width="187">
+        <GroupBox Header="Quad tabs" Height="186" Canvas.Left="10" Canvas.Top="233" Width="187">
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -55,12 +65,12 @@
                 <Button Grid.Column="0" Grid.Row="1" Click="Click_DeleteQuadStash">Delete</Button>
             </Grid>
         </GroupBox>
-        <Button Content="Save" Canvas.Left="625" Canvas.Top="323" Width="75" Click="Click_SaveSettings"/>
-        <Button Content="Restart" Canvas.Left="625" Canvas.Top="298" Width="75" Click="Click_RestartApp"/>
-        <GroupBox Header="Character name" Height="Auto" Canvas.Left="202" Canvas.Top="198" Width="498">
+        <Button Content="Save" Canvas.Left="625" Canvas.Top="399" Width="75" Click="Click_SaveSettings"/>
+        <Button Content="Restart" Canvas.Left="625" Canvas.Top="374" Width="75" Click="Click_RestartApp"/>
+        <GroupBox Header="Character name" Height="Auto" Canvas.Left="202" Canvas.Top="274" Width="498">
             <TextBox Margin="0,2,0,0"  Name="txt_PlayerName" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Source={x:Static properties:Settings.Default}, Path=PlayerName}" />
         </GroupBox>
-        <GroupBox Header="Various Settings" Height="97" Canvas.Left="202" Canvas.Top="246" Width="418">
+        <GroupBox Header="Various Settings" Height="97" Canvas.Left="202" Canvas.Top="322" Width="418">
             <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <CheckBox Name="cbx_UseClipBoardMonitor" Margin="0,2,5,5" Content="Use clipboard monitor" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=UseClipboardMonitor}"/>
                 <CheckBox Name="cbx_CollapseItems" Margin="0,0,5,5" Content="Collapse items" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CollapsedItems}"/>
@@ -72,7 +82,7 @@
 
         </GroupBox>
 
-        <GroupBox Header="Path to Client.txt" Height="Auto" Canvas.Left="202" Canvas.Top="157" Width="498">
+        <GroupBox Header="Path to Client.txt" Height="Auto" Canvas.Left="202" Canvas.Top="233" Width="498">
             <DockPanel >
                 <Button DockPanel.Dock="Right" Margin="5,0,0,0" Padding="5,0,5,0" HorizontalAlignment="Right" Click="Click_SearchFile">Open</Button>
                 <TextBox Name="txt_PathToClientTxt" Text="{Binding Source={x:Static properties:Settings.Default}, Path=PathToClientTxt}" VerticalAlignment="Stretch"/>

@@ -570,6 +570,26 @@ namespace TraderForPoe
                 RemoveItem();
             }
         }
+
+        private void ClickCustomWhisper3(object sender, RoutedEventArgs e)
+        {
+            SendInputToPoe("@" + tItem.Customer + " " + Settings.Default.CustomWhisper3);
+
+            if (Settings.Default.CloseItemAfterCustomWhisper3 == true)
+            {
+                RemoveItem();
+            }
+        }
+
+        private void ClickCustomWhisper4(object sender, RoutedEventArgs e)
+        {
+            SendInputToPoe("@" + tItem.Customer + " " + Settings.Default.CustomWhisper4);
+
+            if (Settings.Default.CloseItemAfterCustomWhisper4 == true)
+            {
+                RemoveItem();
+            }
+        }
     }
 
 
