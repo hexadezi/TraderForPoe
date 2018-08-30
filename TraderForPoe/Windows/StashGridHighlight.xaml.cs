@@ -286,7 +286,7 @@ namespace TraderForPoe.Windows
             // Check if stash is quad. If true divide rectangle size and multiply number of columns by 2
             foreach (var item in Settings.Default.QuadStash)
             {
-                if (item == stashControl.GetTItem.Stash)
+                if (item == stashControl.GetTItem.Stash || ((x>12 && x<25) || (y>12 && y<25)))
                 {
                     rectDimensionX = rectDimensionX / 2;
                     nbrRectStash = nbrRectStash * 2;
