@@ -284,14 +284,23 @@ namespace TraderForPoe.Windows
             double rectDimensionX = ((front_canvas.Width) / 12);
 
             // Check if stash is quad. If true divide rectangle size and multiply number of columns by 2
-            foreach (var item in Settings.Default.QuadStash)
+            if ((x > 12 && x < 25) || (y > 12 && y < 25))
             {
-                if (item == stashControl.GetTItem.Stash)
+                rectDimensionX = rectDimensionX / 2;
+                nbrRectStash = nbrRectStash * 2;
+            }
+            else
+            {
+                foreach (var item in Settings.Default.QuadStash)
                 {
-                    rectDimensionX = rectDimensionX / 2;
-                    nbrRectStash = nbrRectStash * 2;
+                    if (item == stashControl.GetTItem.Stash)
+                    {
+                        rectDimensionX = rectDimensionX / 2;
+                        nbrRectStash = nbrRectStash * 2;
+                    }
                 }
             }
+
 
             for (int iX = 1; iX <= nbrRectStash; iX++)
             {
