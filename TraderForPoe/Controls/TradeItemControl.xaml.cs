@@ -271,7 +271,7 @@ namespace TraderForPoe
             DoubleAnimation dAnim = new DoubleAnimation()
             {
                 From = 0.0,
-                To = 1.0,
+                To = Settings.Default.ControlOpacity,
                 Duration = new Duration(TimeSpan.FromMilliseconds(180))
             };
 
