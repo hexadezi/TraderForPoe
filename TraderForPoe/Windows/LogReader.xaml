@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TraderForPoe.ViewModel"
         mc:Ignorable="d"
         Title="LogReader" Height="300" Width="754">
    
@@ -16,8 +15,8 @@
     <Grid>
         <DockPanel>
             <WrapPanel DockPanel.Dock="Bottom" FlowDirection="RightToLeft">
-                <Button Content="Start"></Button>
-                <Button Content="Stop"></Button>
+                <Button Content="Start" Click="Button_Click_1"></Button>
+                <Button Content="Stop" Click="Button_Click"></Button>
             </WrapPanel>
             <ListBox Name="lbLines" ItemsSource="{Binding lines}" DisplayMemberPath="PropLine"/>
         </DockPanel>

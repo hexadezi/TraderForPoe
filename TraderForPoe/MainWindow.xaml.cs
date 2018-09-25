@@ -11,7 +11,6 @@ using System.Windows.Threading;
 using TraderForPoe.Classes;
 using TraderForPoe.Controls;
 using TraderForPoe.Properties;
-using TraderForPoe.ViewModel;
 using TraderForPoe.Windows;
 using WindowsInput;
 using WindowsInput.Native;
@@ -69,6 +68,8 @@ namespace TraderForPoe
         Regex customerLeftRegEx = new Regex(".* : (.*) has left the area");
 
         LogReader logReader;
+
+        LogMonitor logMonitor;
         
         public MainWindow()
         {
@@ -87,9 +88,15 @@ namespace TraderForPoe
 
             //StartFileMonitoring();
 
-            logReader = new LogReader(this.Dispatcher);
+            logMonitor = new LogMonitor(@"C:\Program Files (x86)\Steam\steamapps\common\Path of Exile\logs\Client.txt");
 
-            logReader.Show();
+            logMonitor.Start();
+
+            new LogReader(logMonitor).Show();
+
+            new LogReader(logMonitor).Show();
+
+            new LogReader(logMonitor).Show();
         }
 
 

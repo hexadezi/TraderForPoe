@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 
 namespace TraderForPoe.Classes
@@ -15,7 +9,7 @@ namespace TraderForPoe.Classes
         public string Line { get; set; }
     }
 
-    class LogMonitor
+    public class LogMonitor
     {
         private readonly string path;
         private readonly string delimiter;
