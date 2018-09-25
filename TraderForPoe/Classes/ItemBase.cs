@@ -325,113 +325,113 @@ namespace TraderForPoe.Classes
             switch (itemAsType)
             {
                 case ItemType.CHAOS:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_chaos.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_chaos.png"));
                 case ItemType.ALCHCHEMY:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_alch.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_alch.png"));
                 case ItemType.ALTERATION:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_alt.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_alt.png"));
                 case ItemType.ANCIENT:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_ancient.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_ancient.png"));
                 case ItemType.ANNULMENT:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_annul.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_annul.png"));
                 case ItemType.APPRENTICE_SEXTANT:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_appr_carto_sextant.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_appr_carto_sextant.png"));
                 case ItemType.ARMOUR_SCRAP:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_armour_scrap.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_armour_scrap.png"));
                 case ItemType.AUGMENTATION:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_aug.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_aug.png"));
                 case ItemType.BAUBLE:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_bauble.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_bauble.png"));
                 case ItemType.BESTIARY_ORB:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_bestiary_orb.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_bestiary_orb.png"));
                 case ItemType.BINDING_ORB:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_binding.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_binding.png"));
                 case ItemType.BLACKSMITH_WHETSTONE:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_black_whetstone.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_black_whetstone.png"));
                 case ItemType.BLESSING_CHAYULAH:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_bless_chayula.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_bless_chayula.png"));
                 case ItemType.BLESSING_ESH:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_bless_chayula.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_bless_chayula.png"));
                 case ItemType.BLESSING_TUL:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_bless_tul.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_bless_tul.png"));
                 case ItemType.BLESSING_UUL:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_bless_uul.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_bless_uul.png"));
                 case ItemType.BLESSING_XOPH:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_bless_xoph.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_bless_xoph.png"));
                 case ItemType.BLESSE:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_blessed.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_blessed.png"));
                 case ItemType.CHANCE:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_chance.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_chance.png"));
                 case ItemType.CHISEL:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_chisel.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_chisel.png"));
                 case ItemType.CHROM:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_chrom.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_chrom.png"));
                 case ItemType.DIVINE:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_divine.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_divine.png"));
                 case ItemType.ENGINEER:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_engineer.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_engineer.png"));
                 case ItemType.ETERNAL:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_eternal.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_eternal.png"));
                 case ItemType.EXALTED:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_ex.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_ex.png"));
                 case ItemType.FUSING:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_fuse.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_fuse.png"));
                 case ItemType.GEMCUTTERS:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_gcp.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_gcp.png"));
                 case ItemType.HARBINGER_ORB:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_harbinger.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_harbinger.png"));
                 case ItemType.HORIZON_ORB:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_horizon.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_horizon.png"));
                 case ItemType.IMPRINTED_BESTIARY:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_impr_bestiary.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_impr_bestiary.png"));
                 case ItemType.JEWELLER:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_jew.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_jew.png"));
                 case ItemType.JOURNEYMAN_SEXTANT:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_journ_carto_sextant.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_journ_carto_sextant.png"));
                 case ItemType.MASTER_SEXTANT:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_master_carto_sextant.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_master_carto_sextant.png"));
                 case ItemType.MIRROR:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_mirror.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_mirror.png"));
                 case ItemType.PERANDUS_COIN:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_perandus_coin.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_perandus_coin.png"));
                 case ItemType.PORTAL:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_port.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_port.png"));
                 case ItemType.REGAL:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_regal.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_regal.png"));
                 case ItemType.REGRET:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_regret.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_regret.png"));
                 case ItemType.SACRIFICE_DAWN:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_sacrifice_dawn.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_sacrifice_dawn.png"));
                 case ItemType.SACRIFICE_DUSK:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_sacrifice_dusk.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_sacrifice_dusk.png"));
                 case ItemType.SACRIFICE_MIDNIGHT:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_sacrifice_midnight.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_sacrifice_midnight.png"));
                 case ItemType.SACRIFICE_NOON:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_sacrifice_noon.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_sacrifice_noon.png"));
                 case ItemType.SCOUR:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_scour.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_scour.png"));
                 case ItemType.SILVER:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_silver.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_silver.png"));
                 case ItemType.SPLINTER_CHAYULA:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_splinter_chayula.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_splinter_chayula.png"));
                 case ItemType.SPLINTER_ESH:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_splinter_esh.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_splinter_esh.png"));
                 case ItemType.SPLINTER_TUL:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_splinter_tul.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_splinter_tul.png"));
                 case ItemType.SPLINTER_UUL:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_splinter_uul.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_splinter_uul.png"));
                 case ItemType.SPLINTER_XOPH:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_splinter_xoph.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_splinter_xoph.png"));
                 case ItemType.TRANSMUTE:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_tra.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_tra.png"));
                 case ItemType.VAAL:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_vaal.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_vaal.png"));
                 case ItemType.WISDOM:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_wis.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_wis.png"));
                 case ItemType.DIVINE_VESSEL:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_divine_vessel.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_divine_vessel.png"));
                 case ItemType.OFFERING_GODDESS:
-                    return new BitmapImage(new Uri("pack://application:,,,/WpfPoeTradeObject;component/Resources/Currency/curr_offering_to_the_goddess.png"));
+                    return new BitmapImage(new Uri("pack://application:,,,/TraderForPoe;component/Resources/Currency/curr_offering_to_the_goddess.png"));
                 case ItemType.UNKNOWN:
                     return null;
                 default:
