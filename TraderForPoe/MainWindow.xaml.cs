@@ -162,7 +162,7 @@ namespace TraderForPoe
         {
             if (Settings.Default.UseClipboardMonitor == true)
             {
-                clipMoni.OnClipboardContentChanged += ClipMoni_OnClipboardContentChanged;
+                clipMoni.OnChange += ClipMoni_OnClipboardContentChanged;
                 cMenu.Items[0].Text = "Stop Monitor";
             }
             else
@@ -296,12 +296,12 @@ namespace TraderForPoe
         {
             if (cMenu.Items[0].Text.StartsWith("Start"))
             {
-                clipMoni.OnClipboardContentChanged += ClipMoni_OnClipboardContentChanged;
+                clipMoni.OnChange += ClipMoni_OnClipboardContentChanged;
                 cMenu.Items[0].Text = "Stop Monitor";
             }
             else if (cMenu.Items[0].Text.StartsWith("Stop"))
             {
-                clipMoni.OnClipboardContentChanged -= ClipMoni_OnClipboardContentChanged;
+                clipMoni.OnChange -= ClipMoni_OnClipboardContentChanged;
                 cMenu.Items[0].Text = "Start Monitor";
             }
             else

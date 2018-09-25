@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Windows;
 using System.Windows.Interop;
 
 namespace TraderForPoe
 {
+    public class ClipboardTextEventArgs : EventArgs
+    {
+        public string Line { get; set; }
+    }
     public sealed class ClipboardMonitor : IDisposable
     {
         private static class NativeMethods
@@ -52,15 +57,38 @@ namespace TraderForPoe
         {
             if (msg == NativeMethods.WM_CLIPBOARDUPDATE)
             {
-                OnClipboardContentChanged?.Invoke(this, EventArgs.Empty);
+                if (Clipboard.ContainsText())
+                {
+
+                    for (int i = 0; i < 10; i++)
+                    {
+                        try
+                        {
+                            OnChange?.Invoke(this, new ClipboardTextEventArgs { Line = Clipboard.GetText(TextDataFormat.UnicodeText) });
+                            break;
+                        }
+                        catch (COMException ex)
+                        {
+                            //fix for OpenClipboard Failed (Exception from HRESULT: 0x800401D0 (CLIPBRD_E_CANT_OPEN))
+                            //https://stackoverflow.com/questions/12769264/openclipboard-failed-when-copy-pasting-data-from-wpf-datagrid
+                            //https://stackoverflow.com/questions/68666/clipbrd-e-cant-open-error-when-setting-the-clipboard-from-net
+                            if (ex.ErrorCode == -2147221040)
+                                System.Threading.Thread.Sleep(10);
+                            else
+                                throw new Exception("Unable to get Clipboard text. Message: \n" + ex.Message);
+                        }
+                    }
+
+
+                }
             }
 
             return IntPtr.Zero;
         }
 
         /// <summary>
-        /// Occurs when the clipboard content changes.
+        /// Occurs when the clipboard content changes and the content is text.
         /// </summary>
-        public event EventHandler OnClipboardContentChanged;
+        public event EventHandler<ClipboardTextEventArgs> OnChange;
     }
 }
