@@ -94,6 +94,7 @@
     </ApplicationDefinition>
     <Compile Include="Classes\ClipboardMonitor.cs" />
     <Compile Include="Classes\Hook.cs" />
+    <Compile Include="Classes\LogMonitor.cs" />
     <Compile Include="Classes\Updater.cs" />
     <Compile Include="Controls\CustMenuItem.cs">
       <SubType>Component</SubType>
