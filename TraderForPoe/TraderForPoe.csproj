@@ -116,8 +116,12 @@
       <DependentUpon>TradeItemControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="ViewModel\LogReaderViewModel.cs" />
     <Compile Include="Windows\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\LogReader.xaml.cs">
+      <DependentUpon>LogReader.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\StashGridHighlight.xaml.cs">
       <DependentUpon>StashGridHighlight.xaml</DependentUpon>
@@ -146,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\LogReader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

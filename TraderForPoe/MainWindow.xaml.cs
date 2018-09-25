@@ -11,6 +11,7 @@ using System.Windows.Threading;
 using TraderForPoe.Classes;
 using TraderForPoe.Controls;
 using TraderForPoe.Properties;
+using TraderForPoe.ViewModel;
 using TraderForPoe.Windows;
 using WindowsInput;
 using WindowsInput.Native;
@@ -67,23 +68,28 @@ namespace TraderForPoe
 
         Regex customerLeftRegEx = new Regex(".* : (.*) has left the area");
 
+        LogReader logReader;
         
-
         public MainWindow()
         {
-            CheckForUpdates();
 
-            SubscribeToEvents();
+            //CheckForUpdates();
+
+            //SubscribeToEvents();
 
             InitializeComponent();
 
-            CreateContextMenu();
+            //CreateContextMenu();
 
-            CheckForClientTxt();
+            //CheckForClientTxt();
 
-            LoadSetting();
+            //LoadSetting();
 
-            StartFileMonitoring();
+            //StartFileMonitoring();
+
+            logReader = new LogReader(this.Dispatcher);
+
+            logReader.Show();
         }
 
 
