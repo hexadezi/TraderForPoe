@@ -50,7 +50,7 @@ namespace TraderForPoe
 
         private System.Windows.Forms.NotifyIcon nIcon = new System.Windows.Forms.NotifyIcon();
 
-        private UserSettings userSettings = new UserSettings();
+        //private UserSettings userSettings = new UserSettings();
 
         private LogMonitorViewModel lmvm;
 
@@ -239,7 +239,7 @@ namespace TraderForPoe
 
         private void CMenu_Settings(object sender, EventArgs e)
         {
-            userSettings.Show();
+            new UserSettings().ShowDialog();
         }
 
         private void CMenu_Update(object sender, EventArgs e)
@@ -478,7 +478,7 @@ namespace TraderForPoe
 
         private void NIcon_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            userSettings.Show();
+            new UserSettings().ShowDialog();
         }
 
         private void SetNoActiveWindow()
@@ -509,13 +509,13 @@ namespace TraderForPoe
                 catch (FileNotFoundException ex)
                 {
                     System.Windows.Forms.MessageBox.Show(ex.Message, "Exception", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
-                    userSettings.Show();
+                    new UserSettings().ShowDialog();
                 }
             }
             else
             {
                 System.Windows.Forms.MessageBox.Show("No Client.txt found \nPlease set the correct path in the settings and restart the application.", "File not found", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
-                userSettings.Show();
+                new UserSettings().ShowDialog();
             }
         }
 

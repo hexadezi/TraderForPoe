@@ -13,10 +13,23 @@ namespace TraderForPoe.Windows
     /// </summary>
     public partial class LogMonitor : Window
     {
-        public LogMonitor(LogMonitorViewModel lrvm)
+        LogMonitorViewModel lmvr;
+        public LogMonitor(LogMonitorViewModel lmvrArg)
         {
             InitializeComponent();
-            this.DataContext = lrvm;
+            this.DataContext = lmvrArg;
+            lmvr = lmvrArg;
+            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            lmvr.Stop();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            lmvr.Start();
         }
     }
 }

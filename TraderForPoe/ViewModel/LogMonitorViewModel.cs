@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using TraderForPoe.Classes;
 
 namespace TraderForPoe.ViewModel
@@ -24,6 +25,15 @@ namespace TraderForPoe.ViewModel
         private void LogReader_OnLineAddition(object sender, LogReaderLineEventArgs e)
         {
             lines.Add(e.Line);
+        }
+
+        public void Stop()
+        {
+            logReader.Stop();
+        }
+        public void Start()
+        {
+            logReader.Start();
         }
     }
 }
