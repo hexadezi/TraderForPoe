@@ -1,42 +1,44 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
-using System.Timers;
+using System.Text;
+using System.Windows.Threading;
 
 namespace TraderForPoe.Classes
 {
-    public class LogFileMonitorLineEventArgs : EventArgs
+    public class LogReaderLineEventArgs : EventArgs
     {
         public string Line { get; set; }
     }
 
-    public class LogMonitor
+    public class LogReader
     {
         private readonly string path;
         private readonly string delimiter;
-        private readonly Timer timer;
+        private readonly DispatcherTimer timer;
         private string buffer;
         private long size;
         private bool monitoring;
 
-        public event EventHandler<LogFileMonitorLineEventArgs> OnLineAddition;
+        public event EventHandler<LogReaderLineEventArgs> OnLineAddition;
 
-        public double Interval
+        public TimeSpan Interval
         {
             get { return this.timer.Interval; }
             set { this.timer.Interval = value; }
         }
 
-        public LogMonitor(string path, string delimiter = "\n", double interval = 200)
+        public LogReader(string path, TimeSpan interval, string delimiter = "\n")
         {
             this.path = path;
+
             this.delimiter = delimiter;
 
-            this.timer = new Timer
+            this.timer = new DispatcherTimer
             {
-                AutoReset = true,
-                Interval = interval
+                Interval = interval,
             };
-            this.timer.Elapsed += this.Check;
+            timer.Tick += this.Check;
         }
 
         public void Start()
@@ -62,7 +64,7 @@ namespace TraderForPoe.Classes
             }
         }
 
-        private void Check(object s, ElapsedEventArgs e)
+        private void Check(object sender, EventArgs e)
         {
             if (!this.StartMonitoring()) return;
 
@@ -71,7 +73,7 @@ namespace TraderForPoe.Classes
             if (this.size >= newSize) return;
 
             using (var stream = File.Open(this.path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            using (var sr = new StreamReader(stream))
+            using (var sr = new StreamReader(stream, Encoding.UTF8))
             {
                 sr.BaseStream.Seek(this.size, SeekOrigin.Begin);
 
@@ -99,7 +101,7 @@ namespace TraderForPoe.Classes
 
                 foreach (var line in lines)
                 {
-                    this.OnLineAddition(this, new LogFileMonitorLineEventArgs { Line = line.Trim() });
+                    this.OnLineAddition(this, new LogReaderLineEventArgs { Line = line.Trim() });
                 }
             }
 

@@ -4,10 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TraderForPoe"
+        xmlns:p="clr-namespace:TraderForPoe.Properties"
         mc:Ignorable="d"
-        Title="MainWindow" Width="350" SizeToContent="WidthAndHeight" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize"
-        Topmost="True" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="NearestNeighbor" ShowInTaskbar="False" Closing="Window_Closing" 
-        LocationChanged="Window_LocationChanged" Background="Transparent">
+        Title="MainWindow" Width="350"  WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize"
+        Topmost="True" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="NearestNeighbor" ShowInTaskbar="False" 
+        Closing="Window_Closing" 
+        LocationChanged="Window_LocationChanged"
+        Left="{Binding Source={x:Static p:Settings.Default}, Path=PosLeft, Mode=TwoWay}"
+        Top="{Binding Source={x:Static p:Settings.Default}, Path=PosTop, Mode=TwoWay}"
+         Background="Aqua" Height="100" MouseDown="Window_MouseDown">
 
     <Window.Resources>
 

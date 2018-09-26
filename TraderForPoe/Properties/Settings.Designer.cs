@@ -221,7 +221,7 @@ namespace TraderForPoe.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
         public double PosTop {
             get {
                 return ((double)(this["PosTop"]));
@@ -233,7 +233,7 @@ namespace TraderForPoe.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
         public double PosLeft {
             get {
                 return ((double)(this["PosLeft"]));

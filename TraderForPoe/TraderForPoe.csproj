@@ -96,7 +96,7 @@
     <Compile Include="Classes\Hook.cs" />
     <Compile Include="Classes\Item.cs" />
     <Compile Include="Classes\ItemBase.cs" />
-    <Compile Include="Classes\LogMonitor.cs" />
+    <Compile Include="Classes\LogReader.cs" />
     <Compile Include="Classes\Poe.cs" />
     <Compile Include="Classes\TradeObject.cs" />
     <Compile Include="Classes\Updater.cs" />
@@ -116,11 +116,12 @@
       <DependentUpon>TradeItemControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="ViewModel\LogMonitorViewModel.cs" />
     <Compile Include="Windows\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\LogReader.xaml.cs">
-      <DependentUpon>LogReader.xaml</DependentUpon>
+    <Compile Include="Windows\LogMonitor.xaml.cs">
+      <DependentUpon>LogMonitor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\StashGridHighlight.xaml.cs">
       <DependentUpon>StashGridHighlight.xaml</DependentUpon>
@@ -152,7 +153,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\LogReader.xaml">
+    <Page Include="Windows\LogMonitor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

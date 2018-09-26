@@ -11,6 +11,7 @@ using System.Windows.Threading;
 using TraderForPoe.Classes;
 using TraderForPoe.Controls;
 using TraderForPoe.Properties;
+using TraderForPoe.ViewModel;
 using TraderForPoe.Windows;
 using WindowsInput;
 using WindowsInput.Native;
@@ -20,67 +21,48 @@ namespace TraderForPoe
     public partial class MainWindow : Window
     {
         // Needed to prevent window getting focus
-        const int GWL_EXSTYLE = -20;
-        const int WS_EX_NOACTIVATE = 134217728;
-        const int LSFW_LOCK = 1;
+        private const int GWL_EXSTYLE = -20;
 
-        // Get a handle to an application window.
-        [DllImport("USER32.DLL", CharSet = CharSet.Unicode)]
-        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+        private const int LSFW_LOCK = 1;
+        private const int WS_EX_NOACTIVATE = 134217728;
+        private About aboutWindow = new About();
 
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetForegroundWindow();
+        private ClipboardMonitor clipMoni = new ClipboardMonitor();
 
-        // Activate an application window.
-        [DllImport("USER32.DLL")]
-        public static extern bool SetForegroundWindow(IntPtr hWnd);
+        private System.Windows.Forms.ContextMenuStrip cMenu = new System.Windows.Forms.ContextMenuStrip();
 
-        // Needed to prevent Application taking focus
-        [DllImport("user32")]
-        public static extern bool LockSetForegroundWindow(uint UINT);
+        private Regex customerJoinedRegEx = new Regex(".* : (.*) has joined the area");
 
-        [DllImport("user32")]
-        public static extern IntPtr SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+        private Regex customerLeftRegEx = new Regex(".* : (.*) has left the area");
 
-        System.Windows.Forms.NotifyIcon nIcon = new System.Windows.Forms.NotifyIcon();
+        private DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
-        System.Windows.Forms.ContextMenuStrip cMenu = new System.Windows.Forms.ContextMenuStrip();
+        private long initialFileSize;
 
-        System.Windows.Forms.ToolStripMenuItem itmHistory = new System.Windows.Forms.ToolStripMenuItem("History");
+        private System.Windows.Forms.ToolStripMenuItem itmHistory = new System.Windows.Forms.ToolStripMenuItem("History");
 
-        ClipboardMonitor clipMoni = new ClipboardMonitor();
-
-        About aboutWindow = new About();
-
-        UserSettings userSettings = new UserSettings();
-
-        bool mainWindowCollapsed = false;
-
-        DispatcherTimer dispatcherTimer = new DispatcherTimer();
         // Variables for reading the Client.txt
+        private long lastReadLength;
 
-        long initialFileSize;
+        private Classes.LogReader logReader;
 
-        long lastReadLength;
+        private bool mainWindowCollapsed = false;
 
-        Regex customerJoinedRegEx = new Regex(".* : (.*) has joined the area");
+        private System.Windows.Forms.NotifyIcon nIcon = new System.Windows.Forms.NotifyIcon();
 
-        Regex customerLeftRegEx = new Regex(".* : (.*) has left the area");
+        private UserSettings userSettings = new UserSettings();
 
-        LogReader logReader;
+        private LogMonitorViewModel lmvm;
 
-        LogMonitor logMonitor;
-        
         public MainWindow()
         {
+            CheckForUpdates();
 
-            //CheckForUpdates();
-
-            //SubscribeToEvents();
+            SubscribeToEvents();
 
             InitializeComponent();
 
-            //CreateContextMenu();
+            CreateContextMenu();
 
             //CheckForClientTxt();
 
@@ -88,32 +70,30 @@ namespace TraderForPoe
 
             //StartFileMonitoring();
 
-            logMonitor = new LogMonitor(@"C:\Program Files (x86)\Steam\steamapps\common\Path of Exile\logs\Client.txt");
+            logReader = new Classes.LogReader(@"C:\Users\labin\Desktop\log.txt", TimeSpan.FromMilliseconds(200));
 
-            logMonitor.Start();
+            lmvm = new LogMonitorViewModel(logReader);
 
-            new LogReader(logMonitor).Show();
-
-            new LogReader(logMonitor).Show();
-
-            new LogReader(logMonitor).Show();
+            logReader.Start();
         }
 
+        // Get a handle to an application window.
+        [DllImport("USER32.DLL", CharSet = CharSet.Unicode)]
+        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
+        // Needed to prevent Application taking focus
+        [DllImport("user32")]
+        public static extern bool LockSetForegroundWindow(uint UINT);
 
-        private void CheckForUpdates()
-        {
-            if (Settings.Default.CheckForUpdatesOnStart)
-            {
-                if (Updater.UpdateIsAvailable())
-                {
-                    if (MessageBox.Show("A new version is available. Do you want to Update? Application will be restarted.", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                    {
-                        Updater.StartUpdate();
-                    }
-                }
-            }
-        }
+        // Activate an application window.
+        [DllImport("USER32.DLL")]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        [DllImport("user32")]
+        public static extern IntPtr SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
 
         private void CheckForClientTxt()
         {
@@ -146,75 +126,47 @@ namespace TraderForPoe
             }
         }
 
-        private void SubscribeToEvents()
+        private void CheckForUpdates()
         {
-            TradeItemControl.MoreThanThreeItems += TradeItemControl_MoreThanThreeItems;
-            TradeItemControl.EqualThreeItems += TradeItemControl_LessThanThreeItems;
-            CustMenuItem.OnItemCountExceed += CustMenuItem_OnItemCountExceed;
-        }
-
-        private void CustMenuItem_OnItemCountExceed(object sender, EventArgs e)
-        {
-            // remove the first item in history list, if limit is reached
-            itmHistory.DropDownItems.RemoveAt(0);
-        }
-
-        private void TradeItemControl_MoreThanThreeItems(object sender, EventArgs e)
-        {
-            btn_collapseMainWindow.Visibility = Visibility.Visible;
-            brd_collapseMainWindow.Visibility = Visibility.Visible;
-        }
-
-        private void TradeItemControl_LessThanThreeItems(object sender, EventArgs e)
-        {
-            btn_collapseMainWindow.Visibility = Visibility.Collapsed;
-            brd_collapseMainWindow.Visibility = Visibility.Collapsed;
-        }
-
-        private void LoadSetting()
-        {
-            if (Settings.Default.UseClipboardMonitor == true)
+            if (Settings.Default.CheckForUpdatesOnStart)
             {
-                clipMoni.OnChange += ClipMoni_OnClipboardContentChanged;
-                cMenu.Items[0].Text = "Stop Monitor";
+                if (Updater.UpdateIsAvailable())
+                {
+                    if (MessageBox.Show("A new version is available. Do you want to Update? Application will be restarted.", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        Updater.StartUpdate();
+                    }
+                }
+            }
+        }
+
+        private void CheckIfPoeIsForegroundWindow()
+        {
+            if (Settings.Default.HideIfPoeNotForeGround)
+            {
+                if (GetForegroundWindow() != FindWindow("POEWindowClass", "Path of Exile"))
+                    Hide();
+                else
+                    Show();
+            }
+        }
+
+        private void ClickCollapseExpandMainwindow(object sender, RoutedEventArgs e)
+        {
+            if (mainWindowCollapsed == false)
+            {
+                btn_collapseMainWindow.Width = this.Width;
+                btn_collapseMainWindow.Content = "⏷";
+                stk_MainPnl.Visibility = Visibility.Collapsed;
+                mainWindowCollapsed = true;
             }
             else
             {
-                cMenu.Items[0].Text = "Start Monitor";
+                btn_collapseMainWindow.Width = btn_collapseMainWindow.MinWidth;
+                btn_collapseMainWindow.Content = "⏶";
+                stk_MainPnl.Visibility = Visibility.Visible;
+                mainWindowCollapsed = false;
             }
-
-            // Subscribe to SetNoActiveWindow. Prevent window from focus
-            Loaded += (object sender, RoutedEventArgs e) => SetNoActiveWindow();
-
-            this.Top = Settings.Default.PosTop;
-
-            this.Left = Settings.Default.PosLeft;
-        }
-
-        private string GetClipboardText()
-        {
-            string strClipboard = string.Empty;
-
-            for (int i = 0; i < 10; i++)
-            {
-                try
-                {
-                    strClipboard = Clipboard.GetText(TextDataFormat.UnicodeText);
-                    return strClipboard;
-                }
-                catch (System.Runtime.InteropServices.COMException ex)
-                {
-                    //fix for OpenClipboard Failed (Exception from HRESULT: 0x800401D0 (CLIPBRD_E_CANT_OPEN))
-                    //https://stackoverflow.com/questions/12769264/openclipboard-failed-when-copy-pasting-data-from-wpf-datagrid
-                    //https://stackoverflow.com/questions/68666/clipbrd-e-cant-open-error-when-setting-the-clipboard-from-net
-                    if (ex.ErrorCode == -2147221040)
-                        System.Threading.Thread.Sleep(10);
-                    else
-                        throw new Exception("Unable to get Clipboard text. Message: \n" + ex.Message);
-                }
-            }
-
-            return strClipboard;
         }
 
         private void ClipMoni_OnClipboardContentChanged(object sender, EventArgs e)
@@ -257,52 +209,9 @@ namespace TraderForPoe
             }
         }
 
-        private void CreateContextMenu()
+        private void CMenu_About(object sender, EventArgs e)
         {
-            nIcon.MouseClick += NIcon_MouseClick;
-            nIcon.MouseDoubleClick += NIcon_MouseDoubleClick;
-            Stream iconStream = Application.GetResourceStream(new Uri("pack://application:,,,/Resources/ico_Application.ico")).Stream;
-            nIcon.Icon = new System.Drawing.Icon(iconStream);
-            nIcon.Visible = true;
-
-            var monitor = cMenu.Items.Add("Monitor");
-            monitor.Click += CMenu_ClipboardMonitor;
-
-            cMenu.Items.Add(itmHistory);
-
-            var settings = cMenu.Items.Add("Settings");
-            settings.Click += CMenu_Settings;
-
-            var update = cMenu.Items.Add("Update");
-            update.Click += CMenu_Update;
-
-            var about = cMenu.Items.Add("About");
-            about.Click += CMenu_About;
-
-            var exit = cMenu.Items.Add("Exit");
-            exit.Click += CMenu_Close;
-
-            nIcon.ContextMenuStrip = cMenu;
-        }
-
-        private void CMenu_Update(object sender, EventArgs e)
-        {
-            if (Updater.UpdateIsAvailable())
-            {
-                if (MessageBox.Show("A new version is available. Do you want to Update? Application will be restarted.", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                {
-                    Updater.StartUpdate();
-                }
-            }
-            else
-            {
-                System.Windows.Forms.MessageBox.Show("No updates available", "No updates", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
-            }
-        }
-
-        private void NIcon_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            userSettings.Show();
+            aboutWindow.Show();
         }
 
         private void CMenu_ClipboardMonitor(object sender, EventArgs e)
@@ -323,44 +232,82 @@ namespace TraderForPoe
             }
         }
 
+        private void CMenu_Close(object sender, EventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
         private void CMenu_Settings(object sender, EventArgs e)
         {
             userSettings.Show();
         }
 
-        private void CMenu_About(object sender, EventArgs e)
+        private void CMenu_Update(object sender, EventArgs e)
         {
-            aboutWindow.Show();
-        }
-
-        private void StartFileMonitoring()
-        {
-            string filePath = Settings.Default.PathToClientTxt;
-            if (!String.IsNullOrEmpty(filePath))
+            if (Updater.UpdateIsAvailable())
             {
-                try
+                if (MessageBox.Show("A new version is available. Do you want to Update? Application will be restarted.", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    // Set variables befor Timer start
-                    initialFileSize = new FileInfo(filePath).Length;
-
-                    lastReadLength = initialFileSize;
-
-                    dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
-
-                    dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
-
-                    dispatcherTimer.Start();
-                }
-                catch (FileNotFoundException ex)
-                {
-                    System.Windows.Forms.MessageBox.Show(ex.Message, "Exception", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
-                    userSettings.Show();
+                    Updater.StartUpdate();
                 }
             }
             else
             {
-                System.Windows.Forms.MessageBox.Show("No Client.txt found \nPlease set the correct path in the settings and restart the application.", "File not found", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
-                userSettings.Show();
+                System.Windows.Forms.MessageBox.Show("No updates available", "No updates", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+            }
+        }
+
+        private void CreateContextMenu()
+        {
+            nIcon.MouseClick += NIcon_MouseClick;
+            nIcon.MouseDoubleClick += NIcon_MouseDoubleClick;
+            Stream iconStream = Application.GetResourceStream(new Uri("pack://application:,,,/Resources/ico_Application.ico")).Stream;
+            nIcon.Icon = new System.Drawing.Icon(iconStream);
+            nIcon.Visible = true;
+
+            var monitor = cMenu.Items.Add("Monitor");
+            monitor.Click += CMenu_ClipboardMonitor;
+
+            cMenu.Items.Add(itmHistory);
+
+            var settings = cMenu.Items.Add("Settings");
+            settings.Click += CMenu_Settings;
+
+            var log = cMenu.Items.Add("Log");
+            log.Click += CMenu_Log; ;
+
+            var update = cMenu.Items.Add("Update");
+            update.Click += CMenu_Update;
+
+            var about = cMenu.Items.Add("About");
+            about.Click += CMenu_About;
+
+            var exit = cMenu.Items.Add("Exit");
+            exit.Click += CMenu_Close;
+
+            nIcon.ContextMenuStrip = cMenu;
+        }
+
+        private void CMenu_Log(object sender, EventArgs e)
+        {
+            new LogMonitor(lmvm).Show();
+        }
+
+        private void CustMenuItem_OnItemCountExceed(object sender, EventArgs e)
+        {
+            // remove the first item in history list, if limit is reached
+            itmHistory.DropDownItems.RemoveAt(0);
+        }
+
+        // Handle click event for the history menu item
+        private void CustomMenuItem_Click(object sender, EventArgs e)
+        {
+            var s = sender as CustMenuItem;
+
+            // Avoid exception by checking if the item is already in the panel
+            if (!stk_MainPnl.Children.Contains(s.GetTradeItemCtrl))
+            {
+                stk_MainPnl.Children.Add(s.GetTradeItemCtrl);
             }
         }
 
@@ -387,7 +334,6 @@ namespace TraderForPoe
 
                         var bytesRead = fs.Read(buffer, 0, buffer.Length);
                         lastReadLength += bytesRead;
-
 
                         var text = Encoding.UTF8.GetString(buffer, 0, bytesRead);
 
@@ -469,10 +415,8 @@ namespace TraderForPoe
                                         }
                                     }
                                 }
-
                             }
                         }
-
                     }
                 }
             }
@@ -483,41 +427,58 @@ namespace TraderForPoe
             catch (Exception ex)
             {
                 System.Windows.Forms.MessageBox.Show(ex.Message, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
-
             }
         }
 
-        // Handle click event for the history menu item
-        private void CustomMenuItem_Click(object sender, EventArgs e)
+        private string GetClipboardText()
         {
-            var s = sender as CustMenuItem;
+            string strClipboard = string.Empty;
 
-            // Avoid exception by checking if the item is already in the panel
-            if (!stk_MainPnl.Children.Contains(s.GetTradeItemCtrl))
+            for (int i = 0; i < 10; i++)
             {
-                stk_MainPnl.Children.Add(s.GetTradeItemCtrl);
+                try
+                {
+                    strClipboard = Clipboard.GetText(TextDataFormat.UnicodeText);
+                    return strClipboard;
+                }
+                catch (System.Runtime.InteropServices.COMException ex)
+                {
+                    //fix for OpenClipboard Failed (Exception from HRESULT: 0x800401D0 (CLIPBRD_E_CANT_OPEN))
+                    //https://stackoverflow.com/questions/12769264/openclipboard-failed-when-copy-pasting-data-from-wpf-datagrid
+                    //https://stackoverflow.com/questions/68666/clipbrd-e-cant-open-error-when-setting-the-clipboard-from-net
+                    if (ex.ErrorCode == -2147221040)
+                        System.Threading.Thread.Sleep(10);
+                    else
+                        throw new Exception("Unable to get Clipboard text. Message: \n" + ex.Message);
+                }
             }
+
+            return strClipboard;
         }
 
-        private void CheckIfPoeIsForegroundWindow()
+        private void LoadSetting()
         {
-            if (Settings.Default.HideIfPoeNotForeGround)
+            if (Settings.Default.UseClipboardMonitor == true)
             {
-                if (GetForegroundWindow() != FindWindow("POEWindowClass", "Path of Exile"))
-                    Hide();
-                else
-                    Show();
+                clipMoni.OnChange += ClipMoni_OnClipboardContentChanged;
+                cMenu.Items[0].Text = "Stop Monitor";
             }
-        }
+            else
+            {
+                cMenu.Items[0].Text = "Start Monitor";
+            }
 
-        private void CMenu_Close(object sender, EventArgs e)
-        {
-            Application.Current.Shutdown();
+            // Subscribe to SetNoActiveWindow. Prevent window from focus
+            Loaded += (object sender, RoutedEventArgs e) => SetNoActiveWindow();
         }
 
         private void NIcon_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+        }
 
+        private void NIcon_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            userSettings.Show();
         }
 
         private void SetNoActiveWindow()
@@ -527,43 +488,73 @@ namespace TraderForPoe
             LockSetForegroundWindow(LSFW_LOCK);
         }
 
+        private void StartFileMonitoring()
+        {
+            string filePath = Settings.Default.PathToClientTxt;
+            if (!String.IsNullOrEmpty(filePath))
+            {
+                try
+                {
+                    // Set variables befor Timer start
+                    initialFileSize = new FileInfo(filePath).Length;
+
+                    lastReadLength = initialFileSize;
+
+                    dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
+
+                    dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
+
+                    dispatcherTimer.Start();
+                }
+                catch (FileNotFoundException ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.Message, "Exception", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                    userSettings.Show();
+                }
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("No Client.txt found \nPlease set the correct path in the settings and restart the application.", "File not found", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                userSettings.Show();
+            }
+        }
+
+        private void SubscribeToEvents()
+        {
+            TradeItemControl.MoreThanThreeItems += TradeItemControl_MoreThanThreeItems;
+            TradeItemControl.EqualThreeItems += TradeItemControl_LessThanThreeItems;
+            CustMenuItem.OnItemCountExceed += CustMenuItem_OnItemCountExceed;
+        }
+
+        private void TradeItemControl_LessThanThreeItems(object sender, EventArgs e)
+        {
+            btn_collapseMainWindow.Visibility = Visibility.Collapsed;
+            brd_collapseMainWindow.Visibility = Visibility.Collapsed;
+        }
+
+        private void TradeItemControl_MoreThanThreeItems(object sender, EventArgs e)
+        {
+            btn_collapseMainWindow.Visibility = Visibility.Visible;
+            brd_collapseMainWindow.Visibility = Visibility.Visible;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Properties.Settings.Default.Save();
+            nIcon.Visible = false;
+            nIcon.Dispose();
+            System.Windows.Forms.Application.DoEvents();
+        }
+
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == System.Windows.Input.MouseButton.Left)
                 this.DragMove();
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            nIcon.Visible = false;
-            nIcon.Dispose();
-            System.Windows.Forms.Application.DoEvents();
-        }
-
         private void Window_LocationChanged(object sender, EventArgs e)
         {
-            Settings.Default.PosLeft = this.Left;
-            Settings.Default.PosTop = this.Top;
-            Settings.Default.Save();
-        }
-
-        private void ClickCollapseExpandMainwindow(object sender, RoutedEventArgs e)
-        {
-            if (mainWindowCollapsed == false)
-            {
-                btn_collapseMainWindow.Width = this.Width;
-                btn_collapseMainWindow.Content = "⏷";
-                stk_MainPnl.Visibility = Visibility.Collapsed;
-                mainWindowCollapsed = true;
-            }
-            else
-            {
-                btn_collapseMainWindow.Width = btn_collapseMainWindow.MinWidth;
-                btn_collapseMainWindow.Content = "⏶";
-                stk_MainPnl.Visibility = Visibility.Visible;
-                mainWindowCollapsed = false;
-            }
-
+            Properties.Settings.Default.Save();
         }
     }
 }
