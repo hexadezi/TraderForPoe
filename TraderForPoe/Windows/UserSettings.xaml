@@ -52,6 +52,7 @@
 
             </Grid>
         </GroupBox>
+        
         <GroupBox Header="Quad tabs" Height="186" Canvas.Left="10" Canvas.Top="233" Width="187">
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.ColumnDefinitions>

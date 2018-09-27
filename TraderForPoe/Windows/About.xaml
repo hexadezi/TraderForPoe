@@ -9,7 +9,7 @@
 
     <StackPanel>
 
-        <Grid HorizontalAlignment="Stretch" Background="#333333" Height="87" >
+        <Grid HorizontalAlignment="Stretch" Background="#FF3779C7" Height="87" >
             <TextBlock Name="appName" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" Foreground="White" FontWeight="Bold">TraderForPoe</TextBlock>
         </Grid>
 

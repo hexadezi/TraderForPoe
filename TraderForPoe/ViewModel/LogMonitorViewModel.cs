@@ -5,12 +5,6 @@ namespace TraderForPoe.ViewModel
 {
     public class LogMonitorViewModel
     {
-        private ObservableCollection<string> lines = new ObservableCollection<string>();
-
-        public RelayCommand CmdStart { get; private set; }
-        public RelayCommand CmdStop { get; private set; }
-        public RelayCommand CmdClear { get; private set; }
-
         private LogReader logReader;
 
         public LogMonitorViewModel(LogReader logReaderArg)
@@ -22,24 +16,24 @@ namespace TraderForPoe.ViewModel
             CmdStart = new RelayCommand(
                 () => logReader.Start());
 
-            CmdStop= new RelayCommand(
+            CmdStop = new RelayCommand(
                 () => logReader.Stop());
 
-            CmdClear= new RelayCommand(
-                () => lines.Clear());
+            CmdClear = new RelayCommand(
+                () => Lines.Clear());
         }
 
-        public ObservableCollection<string> Lines
-        {
-            get { return lines; }
-        }
+        public RelayCommand CmdClear { get; private set; }
+
+        public RelayCommand CmdStart { get; private set; }
+
+        public RelayCommand CmdStop { get; private set; }
+
+        public ObservableCollection<string> Lines { get; } = new ObservableCollection<string>();
 
         private void LogReader_OnLineAddition(object sender, LogReaderLineEventArgs e)
         {
-            lines.Add(e.Line);
+            Lines.Add(e.Line);
         }
-        
-
-
     }
 }
