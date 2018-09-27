@@ -15,8 +15,8 @@
     <Grid>
         <DockPanel>
             <WrapPanel DockPanel.Dock="Bottom" FlowDirection="RightToLeft">
-                <Button Content="Start" Click="Button_Click_1"></Button>
-                <Button Content="Stop" Click="Button_Click"></Button>
+                <Button Content="Start" Command="{Binding CmdStart}"></Button>
+                <Button Content="Stop" Command="{Binding CmdStop}"></Button>
             </WrapPanel>
             <ListBox Name="lbLines" ItemsSource="{Binding Lines}"/>
         </DockPanel>

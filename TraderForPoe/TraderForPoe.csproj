@@ -117,6 +117,7 @@
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="ViewModel\LogMonitorViewModel.cs" />
+    <Compile Include="Classes\RelayCommand.cs" />
     <Compile Include="Windows\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>

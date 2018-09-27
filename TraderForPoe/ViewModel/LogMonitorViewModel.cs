@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using TraderForPoe.Classes;
 
 namespace TraderForPoe.ViewModel
@@ -8,6 +7,9 @@ namespace TraderForPoe.ViewModel
     {
         private ObservableCollection<string> lines = new ObservableCollection<string>();
 
+        public RelayCommand CmdStart { get; private set; }
+        public RelayCommand CmdStop { get; private set; }
+
         private LogReader logReader;
 
         public LogMonitorViewModel(LogReader logReaderArg)
@@ -15,6 +17,12 @@ namespace TraderForPoe.ViewModel
             logReader = logReaderArg;
 
             logReader.OnLineAddition += LogReader_OnLineAddition;
+
+            CmdStart = new RelayCommand(
+                () => logReader.Start());
+
+            CmdStop= new RelayCommand(
+                () => logReader.Stop());
         }
 
         public ObservableCollection<string> Lines
@@ -26,14 +34,8 @@ namespace TraderForPoe.ViewModel
         {
             lines.Add(e.Line);
         }
+        
 
-        public void Stop()
-        {
-            logReader.Stop();
-        }
-        public void Start()
-        {
-            logReader.Start();
-        }
+
     }
 }

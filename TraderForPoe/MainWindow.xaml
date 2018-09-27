@@ -12,7 +12,7 @@
         LocationChanged="Window_LocationChanged"
         Left="{Binding Source={x:Static p:Settings.Default}, Path=PosLeft, Mode=TwoWay}"
         Top="{Binding Source={x:Static p:Settings.Default}, Path=PosTop, Mode=TwoWay}"
-         Background="Aqua" Height="100" MouseDown="Window_MouseDown">
+        Background="Aqua" Height="100" MouseDown="Window_MouseDown">
 
     <Window.Resources>
 
