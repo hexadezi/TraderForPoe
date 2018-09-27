@@ -9,6 +9,7 @@ namespace TraderForPoe.ViewModel
 
         public RelayCommand CmdStart { get; private set; }
         public RelayCommand CmdStop { get; private set; }
+        public RelayCommand CmdClear { get; private set; }
 
         private LogReader logReader;
 
@@ -23,6 +24,9 @@ namespace TraderForPoe.ViewModel
 
             CmdStop= new RelayCommand(
                 () => logReader.Stop());
+
+            CmdClear= new RelayCommand(
+                () => lines.Clear());
         }
 
         public ObservableCollection<string> Lines

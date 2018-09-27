@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="LogReader" Height="300" Width="505.724">
+        Title="Log Reader" Height="300" Width="505.724">
    
     <Window.Resources>
         <Style TargetType="Button">
@@ -17,6 +17,7 @@
             <WrapPanel DockPanel.Dock="Bottom" FlowDirection="RightToLeft">
                 <Button Content="Start" Command="{Binding CmdStart}"></Button>
                 <Button Content="Stop" Command="{Binding CmdStop}"></Button>
+                <Button Content="Clear" Command="{Binding CmdClear}"></Button>
             </WrapPanel>
             <ListBox Name="lbLines" ItemsSource="{Binding Lines}"/>
         </DockPanel>

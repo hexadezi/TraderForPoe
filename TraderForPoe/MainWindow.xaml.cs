@@ -261,7 +261,7 @@ namespace TraderForPoe
         {
             nIcon.MouseClick += NIcon_MouseClick;
             nIcon.MouseDoubleClick += NIcon_MouseDoubleClick;
-            Stream iconStream = Application.GetResourceStream(new Uri("pack://application:,,,/Resources/ico_Application.ico")).Stream;
+            Stream iconStream = Application.GetResourceStream(new Uri("pack://application:,,,/Resources/application.ico")).Stream;
             nIcon.Icon = new System.Drawing.Icon(iconStream);
             nIcon.Visible = true;
 

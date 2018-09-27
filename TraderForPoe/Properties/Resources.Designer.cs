@@ -81,16 +81,6 @@ namespace TraderForPoe.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
-        /// </summary>
-        public static System.Drawing.Icon ico_Application {
-            get {
-                object obj = ResourceManager.GetObject("ico_Application", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.IO.UnmanagedMemoryStream ähnlich wie System.IO.MemoryStream.
         /// </summary>
         public static System.IO.UnmanagedMemoryStream notification {

@@ -52,7 +52,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\ico_application.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\application.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>TraderForPoe.App</StartupObject>
@@ -257,9 +257,6 @@
     <Resource Include="Resources\Currency\curr_wis.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\ico_application.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\askifinterested.png" />
   </ItemGroup>
   <ItemGroup>
@@ -332,7 +329,12 @@
     <Resource Include="Resources\Images\customMessage3.png" />
     <Resource Include="Resources\Images\customMessage4.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="application_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\application.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
