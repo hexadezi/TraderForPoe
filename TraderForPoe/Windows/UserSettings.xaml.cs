@@ -14,17 +14,11 @@ namespace TraderForPoe.Windows
             InitializeComponent();
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = true;
-            this.Visibility = Visibility.Hidden;
-        }
-
         private void Click_SaveSettings(object sender, RoutedEventArgs e)
         {
             Settings.Default.Save();
             Settings.Default.Reload();
-            System.Windows.Forms.MessageBox.Show("Settings saved successfully.", "Success", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+            System.Windows.MessageBox.Show("Settings saved successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void Click_RestartApp(object sender, RoutedEventArgs e)
