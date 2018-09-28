@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using WindowsInput;
 using WindowsInput.Native;
 
 namespace TraderForPoe.Classes
 {
-    static class Poe
+    internal static class Poe
     {
         /// <summary>
         /// Retrieves a handle to the top-level window whose class name and window name match the specified strings.
@@ -18,7 +14,7 @@ namespace TraderForPoe.Classes
         /// <param name="lpWindowName"></param>
         /// <returns></returns>
         [DllImport("USER32.DLL", CharSet = CharSet.Unicode)]
-        static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+        private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
         /// <summary>
         /// Brings the thread that created the specified window into the foreground and activates the window
@@ -26,7 +22,7 @@ namespace TraderForPoe.Classes
         /// <param name="hWnd"></param>
         /// <returns></returns>
         [DllImport("USER32.DLL")]
-        static extern bool SetForegroundWindow(IntPtr hWnd);
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
 
         /// <summary>
         /// Verify that POE is a running process.
@@ -57,7 +53,7 @@ namespace TraderForPoe.Classes
         /// Send a string to the chat window of poe.
         /// </summary>
         /// <param name="arg">Chat message to send</param>
-        public static void SendCommand(string arg)
+        public static void SendCommand(string arg, bool send = true)
         {
             if (IsRunning())
             {
@@ -77,8 +73,11 @@ namespace TraderForPoe.Classes
                 // Send the input
                 iSim.Keyboard.TextEntry(arg);
 
-                // Send RETURN
-                iSim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+                if (send)
+                {
+                    // Send RETURN
+                    iSim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+                }
             }
             else
             {
@@ -94,6 +93,16 @@ namespace TraderForPoe.Classes
         public static void WhisperPlayer(string character, string message)
         {
             SendCommand("@" + character + " " + message);
+        }
+
+        /// <summary>
+        /// Place a whisper in the chat window but do not send
+        /// </summary>
+        /// <param name="character"></param>
+        /// <param name="message"></param>
+        public static void WhisperPlayerNoSend(string character, string message)
+        {
+            SendCommand("@" + character + " " + message, false);
         }
 
         /// <summary>

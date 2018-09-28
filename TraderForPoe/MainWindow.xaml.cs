@@ -44,16 +44,14 @@ namespace TraderForPoe
         // Variables for reading the Client.txt
         private long lastReadLength;
 
+        private LogMonitorViewModel lmvm;
         private Classes.LogReader logReader;
 
         private bool mainWindowCollapsed = false;
 
         private System.Windows.Forms.NotifyIcon nIcon = new System.Windows.Forms.NotifyIcon();
 
-        //private UserSettings userSettings = new UserSettings();
-
-        private LogMonitorViewModel lmvm;
-
+        private UserSettingsViewModel usvm;
         public MainWindow()
         {
             CheckForUpdates();
@@ -73,6 +71,7 @@ namespace TraderForPoe
             logReader = new Classes.LogReader(@"C:\Users\labin\Desktop\log.txt", TimeSpan.FromMilliseconds(200));
 
             lmvm = new LogMonitorViewModel(logReader);
+            usvm = new UserSettingsViewModel();
 
             logReader.Start();
         }
@@ -237,6 +236,11 @@ namespace TraderForPoe
             Application.Current.Shutdown();
         }
 
+        private void CMenu_Log(object sender, EventArgs e)
+        {
+            new LogMonitor(lmvm).Show();
+        }
+
         private void CMenu_Settings(object sender, EventArgs e)
         {
             new UserSettings().ShowDialog();
@@ -287,12 +291,6 @@ namespace TraderForPoe
 
             nIcon.ContextMenuStrip = cMenu;
         }
-
-        private void CMenu_Log(object sender, EventArgs e)
-        {
-            new LogMonitor(lmvm).Show();
-        }
-
         private void CustMenuItem_OnItemCountExceed(object sender, EventArgs e)
         {
             // remove the first item in history list, if limit is reached
@@ -546,15 +544,15 @@ namespace TraderForPoe
             System.Windows.Forms.Application.DoEvents();
         }
 
+        private void Window_LocationChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Save();
+        }
+
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == System.Windows.Input.MouseButton.Left)
                 this.DragMove();
-        }
-
-        private void Window_LocationChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.Save();
         }
     }
 }

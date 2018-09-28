@@ -1,8 +1,4 @@
 ﻿using Microsoft.Win32;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.IO;
 using System.Windows;
 using TraderForPoe.Properties;
 
@@ -13,7 +9,6 @@ namespace TraderForPoe.Windows
     /// </summary>
     public partial class UserSettings : Window
     {
-
         public UserSettings()
         {
             InitializeComponent();
@@ -30,7 +25,6 @@ namespace TraderForPoe.Windows
             Settings.Default.Save();
             Settings.Default.Reload();
             System.Windows.Forms.MessageBox.Show("Settings saved successfully.", "Success", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
-
         }
 
         private void Click_RestartApp(object sender, RoutedEventArgs e)
@@ -57,6 +51,14 @@ namespace TraderForPoe.Windows
                 txt_PathToClientTxt.Text = openFileDialog.FileName;
                 txt_PathToClientTxt.Focus();
                 txt_PathToClientTxt.CaretIndex = txt_PathToClientTxt.Text.Length;
+            }
+        }
+
+        private void Click_AddQuadStash(object sender, RoutedEventArgs e)
+        {
+            if (!Settings.Default.QuadStash.Contains(txt_QuadStash.Text))
+            {
+                Settings.Default.QuadStash.Add(txt_QuadStash.Text);
             }
         }
     }
