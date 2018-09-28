@@ -50,10 +50,10 @@
         <tb:TaskbarIcon IconSource="Resources\application.ico" ToolTipText="hello world">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Monitor" />
-                    <MenuItem Header="History" />
-                    <MenuItem Header="Log file" />
-                    <MenuItem Header="Settings" />
+                    <MenuItem Header="Monitor"/>
+                    <MenuItem Header="History"/>
+                    <MenuItem Header="Log file"/>
+                    <MenuItem Header="Settings"/>
                     <Separator />
                     <MenuItem Header="Update" />
                     <MenuItem Header="About" />

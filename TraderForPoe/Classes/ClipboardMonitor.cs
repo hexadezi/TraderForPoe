@@ -53,6 +53,18 @@ namespace TraderForPoe
             hwndSource.Dispose();
         }
 
+        public void Stop()
+        {
+            hwndSource.RemoveHook(WndProc);
+            NativeMethods.RemoveClipboardFormatListener(hwndSource.Handle);
+        }
+
+        public void Start()
+        {
+            hwndSource.AddHook(WndProc);
+            NativeMethods.AddClipboardFormatListener(hwndSource.Handle);
+        }
+
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             if (msg == NativeMethods.WM_CLIPBOARDUPDATE)
