@@ -13,6 +13,7 @@ namespace TraderForPoe.Classes
         private const int GWL_EXSTYLE = -20;
 
         private const int LSFW_LOCK = 1;
+
         private const int WS_EX_NOACTIVATE = 134217728;
 
         public static long SWEH_CHILDID_SELF = 0;

@@ -23,23 +23,21 @@
                     <GridView x:Name="grdNames">
                         <GridViewColumn Header="Type"  DisplayMemberBinding="{Binding TradeType}"/>
                         <GridViewColumn Header="Customer"  DisplayMemberBinding="{Binding Customer}"/>
-                        <GridViewColumn Header="Amount"  DisplayMemberBinding="{Binding Item.Amount}"/>
                         <GridViewColumn Header="Item">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" >
-                                        <Image RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding TargetNullValue=Collapsed}" Height="30" Source="{Binding Item.Image}" />
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding Item.Amount, StringFormat='{}{0}\ x '}"/>
                                         <TextBlock VerticalAlignment="Center" Text="{Binding Item.ItemAsString}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Amount"  DisplayMemberBinding="{Binding Item.Price.Amount}"/>
-                        <GridViewColumn Header="Item" >
+                        <GridViewColumn Header="Price" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" >
-                                        <Image RenderOptions.BitmapScalingMode="HighQuality" Visibility="{Binding TargetNullValue=Collapsed}" Height="30" Source="{Binding Item.Price.Image}" />
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding Item.Amount, StringFormat='{}{0}\ x '}"/>
                                         <TextBlock VerticalAlignment="Center" Text="{Binding Item.Price.ItemAsString}" />
                                     </StackPanel>
                                 </DataTemplate>

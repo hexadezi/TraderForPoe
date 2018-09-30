@@ -99,6 +99,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\ClipboardMonitor.cs" />
+    <Compile Include="Classes\CustomWindow.cs" />
+    <Compile Include="Classes\LogFileCheck.cs" />
     <Compile Include="Classes\WinAPI.cs" />
     <Compile Include="Classes\Item.cs" />
     <Compile Include="Classes\ItemBase.cs" />
@@ -124,6 +126,7 @@
     <Compile Include="Settings.cs" />
     <Compile Include="ViewModel\LogMonitorViewModel.cs" />
     <Compile Include="Classes\RelayCommand.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\NotifyIconViewModel.cs" />
     <Compile Include="ViewModel\TradeHistoryViewModel.cs" />
     <Compile Include="ViewModel\UserSettingsViewModel.cs" />

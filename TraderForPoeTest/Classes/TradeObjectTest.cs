@@ -27,7 +27,7 @@ namespace TraderForPoeTest
         public void CheckIfWhisperIsTradeWhisperPoeTradeAllTest()
         {
             string whisper = "@To Labooooooo: Hi, I would like to buy your Cybil's Paw Thresher Claw listed for 1 jewellers in Bestiary (stash tab \"~b/o 0 alt\"; position: left 23, top 8)";
-            bool actual = TradeObject.IsTradeWhisper(whisper);
+            bool actual = TradeObject.IsLogTradeWhisper(whisper);
             Assert.IsTrue(actual);
         }
 
@@ -35,7 +35,7 @@ namespace TraderForPoeTest
         public void CheckIfWhisperIsTradeWhisperPoeTradeNoStashTest()
         {
             string whisper = "@To Labooooooo: Hi, I would like to buy your Cybil's Paw Thresher Claw listed for 1 jewellers in Bestiary";
-            bool actual = TradeObject.IsTradeWhisper(whisper);
+            bool actual = TradeObject.IsLogTradeWhisper(whisper);
             Assert.IsTrue(actual);
         }
 
@@ -43,7 +43,7 @@ namespace TraderForPoeTest
         public void CheckIfWhisperIsTradeWhisperPoeTradeNoPriceTest()
         {
             string whisper = "@To Labooooooo: Hi, I would like to buy your Cybil's Paw Thresher Claw listed in Bestiary (stash tab \"~b / o 0 alt\"; position: left 23, top 8)";
-            bool actual = TradeObject.IsTradeWhisper(whisper);
+            bool actual = TradeObject.IsLogTradeWhisper(whisper);
             Assert.IsTrue(actual);
         }
 
@@ -51,7 +51,7 @@ namespace TraderForPoeTest
         public void CheckIfWhisperIsTradeWhisperPoeTradeBuyCurrencyTest()
         {
             string whisper = "@To Labooooooo: Hi, I'd like to buy your 260 chaos for my 2 exalted in Bestiary.";
-            bool actual = TradeObject.IsTradeWhisper(whisper);
+            bool actual = TradeObject.IsLogTradeWhisper(whisper);
             Assert.IsTrue(actual);
         }
 
@@ -62,7 +62,7 @@ namespace TraderForPoeTest
         public void CheckIfWhisperIsTradeWhisperPoeAppAllTest()
         {
             string whisper = "@To Labooooooo: wtb Cybil's Paw Thresher Claw listed for 1 Orb of Chance in bestiary (stash \"BIG\"; left 5, top 3)";
-            bool actual = TradeObject.IsTradeWhisper(whisper);
+            bool actual = TradeObject.IsLogTradeWhisper(whisper);
             Assert.IsTrue(actual);
         }
 
@@ -70,7 +70,7 @@ namespace TraderForPoeTest
         public void CheckIfWhisperIsTradeWhisperPoeAppNoPriceTest()
         {
             string whisper = "@To Labooooooo: wtb Cybil's Paw Thresher Claw in bestiary (stash \"BIG\"; left 5, top 3)";
-            bool actual = TradeObject.IsTradeWhisper(whisper);
+            bool actual = TradeObject.IsLogTradeWhisper(whisper);
             Assert.IsTrue(actual);
         }
 
@@ -78,7 +78,7 @@ namespace TraderForPoeTest
         public void CheckIfWhisperIsTradeWhisperPoeAppBuyCurrencyTest()
         {
             string whisper = "@To Labooooooo: I'd like to buy your 260 Chaos Orb for my 2 Exalted Orb in bestiary.";
-            bool actual = TradeObject.IsTradeWhisper(whisper);
+            bool actual = TradeObject.IsLogTradeWhisper(whisper);
             Assert.IsTrue(actual);
         }
 
