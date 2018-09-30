@@ -47,21 +47,21 @@
 
     <StackPanel Orientation="Horizontal">
 
-        <tb:TaskbarIcon IconSource="Resources\application.ico" ToolTipText="hello world">
+        <tb:TaskbarIcon Name="notifyIcon" IconSource="Resources\application.ico" ToolTipText="hello world">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Monitor"/>
-                    <MenuItem Header="History"/>
-                    <MenuItem Header="Log file"/>
-                    <MenuItem Header="Settings"/>
+                    <MenuItem Header="Monitor" IsCheckable="True" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=UseClipboardMonitor}"/>
+                    <MenuItem Header="History" Command="{Binding CmdHistory}"/>
+                    <MenuItem Header="Log file" Command="{Binding CmdLog}"/>
+                    <MenuItem Header="Settings" Command="{Binding CmdSettings}"/>
                     <Separator />
-                    <MenuItem Header="Update" />
-                    <MenuItem Header="About" />
-                    <MenuItem Header="Quit" />
+                    <MenuItem Header="Restart" Command="{Binding CmdRestart}"/>
+                    <MenuItem Header="Update" Command="{Binding CmdUpdate}"/>
+                    <MenuItem Header="About" Command="{Binding CmdAbout}"/>
+                    <MenuItem Header="Quit" Command="{Binding CmdQuit}"/>
                 </ContextMenu>
             </tb:TaskbarIcon.ContextMenu>
         </tb:TaskbarIcon>
-
         <StackPanel x:Name="stk_MainPnl" MouseDown="Window_MouseDown" CanVerticallyScroll="True">
             <StackPanel.Resources>
                 <Style TargetType="{x:Type local:TradeItemControl}">

@@ -55,7 +55,7 @@ namespace TraderForPoe.Windows
 
         // Needed to determine if poe window location changed
         private IntPtr hWinEventHook;
-        protected Hook.WinEventDelegate WinEventDelegate;
+        protected WinAPI.WinEventDelegate WinEventDelegate;
         uint poeProcessId;
 
         public StashGridHighlight()
@@ -73,15 +73,15 @@ namespace TraderForPoe.Windows
 
             UpdateLocationAndSize();
 
-            WinEventDelegate = new Hook.WinEventDelegate(WinEventCallback);
+            WinEventDelegate = new WinAPI.WinEventDelegate(WinEventCallback);
 
             try
             {
                 if (poeHandle != IntPtr.Zero)
                 {
-                    uint TargetThreadId = Hook.GetWindowThread(poeHandle);
+                    uint TargetThreadId = WinAPI.GetWindowThread(poeHandle);
                     UnsafeNativeMethods.GetWindowThreadProcessId(poeHandle, out poeProcessId);
-                    hWinEventHook = Hook.WinEventHookOne(Hook.SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE,
+                    hWinEventHook = WinAPI.WinEventHookOne(WinAPI.SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE,
                                                          WinEventDelegate,
                                                          poeProcessId,
                                                          TargetThreadId);
@@ -95,9 +95,9 @@ namespace TraderForPoe.Windows
             }
         }
 
-        protected void WinEventCallback(IntPtr hWinEventHook, Hook.SWEH_Events eventType, IntPtr hWnd, Hook.SWEH_ObjectId idObject, long idChild, uint dwEventThread, uint dwmsEventTime)
+        protected void WinEventCallback(IntPtr hWinEventHook, WinAPI.SWEH_Events eventType, IntPtr hWnd, WinAPI.SWEH_ObjectId idObject, long idChild, uint dwEventThread, uint dwmsEventTime)
         {
-            if (hWnd == poeHandle && eventType == Hook.SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE && idObject == (Hook.SWEH_ObjectId)Hook.SWEH_CHILDID_SELF)
+            if (hWnd == poeHandle && eventType == WinAPI.SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE && idObject == (WinAPI.SWEH_ObjectId)WinAPI.SWEH_CHILDID_SELF)
             {
                 // Occurs when POE window is moved or size changed
                 UpdateLocationAndSize();
@@ -351,7 +351,7 @@ namespace TraderForPoe.Windows
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // Unhook event when closing
-            Hook.WinEventUnhook(hWinEventHook);
+            WinAPI.WinEventUnhook(hWinEventHook);
         }
     }
 }

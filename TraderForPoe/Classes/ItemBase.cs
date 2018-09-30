@@ -25,13 +25,6 @@ namespace TraderForPoe.Classes
     /// </summary>
     public class ItemBase
     {
-        private readonly string myVar = "hallooooo";
-
-        public string Test
-        {
-            get { return myVar; }
-        }
-
         public ItemBase(string itemArg, decimal amountArg = 1)
         {
             this.itemAsString = itemArg;

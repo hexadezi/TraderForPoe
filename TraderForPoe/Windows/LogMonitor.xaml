@@ -19,7 +19,7 @@
                 <Button Content="Stop" Command="{Binding CmdStop}"></Button>
                 <Button Content="Clear" Command="{Binding CmdClear}"></Button>
             </WrapPanel>
-            <ListBox Name="lbLines" ItemsSource="{Binding Lines}"/>
+            <ListBox Name="lbLines" FontFamily="Consolas" ItemsSource="{Binding Lines}"/>
         </DockPanel>
     </Grid>
 </Window>

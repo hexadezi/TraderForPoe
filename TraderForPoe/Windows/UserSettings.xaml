@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:TraderForPoe.Windows"
         xmlns:properties="clr-namespace:TraderForPoe.Properties"
         mc:Ignorable="d"
-        Title="Settings" Height="400" Width="800"
-        WindowStyle="SingleBorderWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Settings" Height="410" Width="800"
+        WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <Style TargetType="Button">

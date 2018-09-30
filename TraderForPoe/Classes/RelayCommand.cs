@@ -10,6 +10,7 @@ namespace TraderForPoe.ViewModel
     public class RelayCommand : ICommand
     {
         private readonly Func<bool> canExecuteEvaluator;
+
         private readonly Action methodToExecute;
 
         public RelayCommand(Action methodToExecute, Func<bool> canExecuteEvaluator)
@@ -19,10 +20,11 @@ namespace TraderForPoe.ViewModel
         }
 
         public RelayCommand(Action methodToExecute)
-            : this(methodToExecute, () => true)
-        { }
+            : this(methodToExecute, null)
+        {
+        }
 
-        event EventHandler ICommand.CanExecuteChanged
+        public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
@@ -30,12 +32,20 @@ namespace TraderForPoe.ViewModel
 
         public bool CanExecute(object parameter)
         {
-            return canExecuteEvaluator.Invoke();
+            if (this.canExecuteEvaluator == null)
+            {
+                return true;
+            }
+            else
+            {
+                bool result = this.canExecuteEvaluator.Invoke();
+                return result;
+            }
         }
 
         public void Execute(object parameter)
         {
-            methodToExecute.Invoke();
+            this.methodToExecute.Invoke();
         }
     }
 }

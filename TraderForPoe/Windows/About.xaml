@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TraderForPoe.Windows"
         mc:Ignorable="d"
-        Title="About" Height="300" Width="500" FontFamily="Calibri" Foreground="Black" Closing="Window_Closing" ResizeMode="NoResize" WindowStyle="SingleBorderWindow">
+        Title="About" Height="300" Width="500" FontFamily="Calibri" Foreground="Black" 
+        Closing="Window_Closing" ResizeMode="NoResize" WindowStyle="SingleBorderWindow"
+        WindowStartupLocation="CenterScreen">
 
     <StackPanel>
 

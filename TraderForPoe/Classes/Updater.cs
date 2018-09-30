@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace TraderForPoe.Classes
 {
-    static class Updater
+    internal static class Updater
     {
         /// <summary>
         /// Check if a newer version is available
@@ -33,6 +29,21 @@ namespace TraderForPoe.Classes
             else
             {
                 return false;
+            }
+        }
+
+        public static void CheckForUpdate()
+        {
+            if (UpdateIsAvailable())
+            {
+                if (MessageBox.Show("A new version is available. Do you want to Update? Application will be restarted.", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions.ServiceNotification) == MessageBoxResult.Yes)
+                {
+                    StartUpdate();
+                }
+            }
+            else
+            {
+                MessageBox.Show("No updates available", "No Updates", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.ServiceNotification);
             }
         }
 
@@ -65,6 +76,5 @@ namespace TraderForPoe.Classes
 
             Application.Current.Shutdown();
         }
-
     }
 }

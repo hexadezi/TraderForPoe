@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -10,16 +12,16 @@ namespace TraderForPoe.Classes
 
     public class TradeObject
     {
+        public static ObservableCollection<TradeObject> TradeObjectList { get; set; } = new ObservableCollection<TradeObject>();
+
         /// <summary>
         /// Constructor for the TradeObject
         /// </summary>
         public TradeObject(string whisper)
         {
             ParseWhisper(whisper);
-            lstTradeObjects.Add(this);
+            TradeObjectList.Add(this);
         }
-
-        private static List<TradeObject> lstTradeObjects = new List<TradeObject>();
 
         private TradeTypeEnum tradeType;
 
@@ -273,9 +275,15 @@ namespace TraderForPoe.Classes
             }
         }
 
+        public override string ToString()
+        {
+            //TODO Korrekt implementieren
+            return customer + "\n" + item.ItemAsString + "\n" + tradeType + "\n" + Stash;
+        }
+
         public static bool IsTradeWhisper(string arg)
         {
-            if (arg.StartsWith("@") && (arg.Contains("d like to buy your ") || arg.Contains(": wtb ")))
+            if ((arg.Contains("@From") || arg.Contains("@To") && (arg.Contains("d like to buy your ") || arg.Contains(": wtb "))))
             {
                 return true;
             }
@@ -287,7 +295,7 @@ namespace TraderForPoe.Classes
 
         public static bool ItemExists(TradeObject arg)
         {
-            foreach (var to in lstTradeObjects)
+            foreach (var to in TradeObjectList)
             {
                 if (to.Item == arg.Item &&
                     to.Customer == arg.Customer &&
@@ -304,15 +312,15 @@ namespace TraderForPoe.Classes
 
         public static void RemoveItemFromList(TradeObject arg)
         {
-            for (int i = 0; i < lstTradeObjects.Count; i++)
+            for (int i = 0; i < TradeObjectList.Count; i++)
             {
-                if (lstTradeObjects[i].Item == arg.Item &&
-                    lstTradeObjects[i].Customer == arg.Customer &&
-                    lstTradeObjects[i].Item.Price.Amount == arg.Item.Price.Amount &&
-                    lstTradeObjects[i].Position == arg.Position &&
-                    lstTradeObjects[i].TradeType == arg.TradeType)
+                if (TradeObjectList[i].Item == arg.Item &&
+                    TradeObjectList[i].Customer == arg.Customer &&
+                    TradeObjectList[i].Item.Price.Amount == arg.Item.Price.Amount &&
+                    TradeObjectList[i].Position == arg.Position &&
+                    TradeObjectList[i].TradeType == arg.TradeType)
                 {
-                    lstTradeObjects.RemoveAt(i);
+                    TradeObjectList.RemoveAt(i);
                 }
             }
         }

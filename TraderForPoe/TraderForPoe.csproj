@@ -63,6 +63,9 @@
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>TFP_SIG.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Costura, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
       <HintPath>..\packages\Costura.Fody.2.0.0\lib\net452\Costura.dll</HintPath>
@@ -96,7 +99,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\ClipboardMonitor.cs" />
-    <Compile Include="Classes\Hook.cs" />
+    <Compile Include="Classes\WinAPI.cs" />
     <Compile Include="Classes\Item.cs" />
     <Compile Include="Classes\ItemBase.cs" />
     <Compile Include="Classes\LogReader.cs" />
@@ -121,6 +124,8 @@
     <Compile Include="Settings.cs" />
     <Compile Include="ViewModel\LogMonitorViewModel.cs" />
     <Compile Include="Classes\RelayCommand.cs" />
+    <Compile Include="ViewModel\NotifyIconViewModel.cs" />
+    <Compile Include="ViewModel\TradeHistoryViewModel.cs" />
     <Compile Include="ViewModel\UserSettingsViewModel.cs" />
     <Compile Include="Windows\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
@@ -130,6 +135,9 @@
     </Compile>
     <Compile Include="Windows\StashGridHighlight.xaml.cs">
       <DependentUpon>StashGridHighlight.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TradeHistory.xaml.cs">
+      <DependentUpon>TradeHistory.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\UserSettings.xaml.cs">
       <DependentUpon>UserSettings.xaml</DependentUpon>
@@ -163,6 +171,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\StashGridHighlight.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TradeHistory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

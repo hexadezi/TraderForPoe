@@ -27,6 +27,7 @@ namespace TraderForPoe.Classes
 
         public decimal Ratio
         {
+            //TODO Implement ratio
             get { return ratio; }
             set { ratio = value; }
         }
