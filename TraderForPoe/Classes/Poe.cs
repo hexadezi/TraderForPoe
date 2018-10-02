@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Threading;
 using WindowsInput;
 using WindowsInput.Native;
 
@@ -59,10 +60,10 @@ namespace TraderForPoe.Classes
             {
                 InputSimulator iSim = new InputSimulator();
 
-                // Make POE the foreground application and send input
+                //Make POE the foreground application and send input
                 SetForegroundWindow(GetHandle());
 
-                //Thread.Sleep(100);
+                Thread.Sleep(50);
 
                 // Need to press ALT because the SetForegroundWindow sometimes does not work
                 iSim.Keyboard.KeyPress(VirtualKeyCode.MENU);
@@ -147,6 +148,14 @@ namespace TraderForPoe.Classes
         public static void VisitOwnHideout()
         {
             SendCommand("/hideout");
+        }
+
+        /// <summary>
+        /// Make POE the foreground application and send input
+        /// </summary>
+        public static void ActivatePoeWindow()
+        {
+            SetForegroundWindow(GetHandle());
         }
     }
 }

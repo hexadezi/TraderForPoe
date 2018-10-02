@@ -1,0 +1,229 @@
+﻿<UserControl x:Class="TraderForPoe.Controls.CustomTestCtrl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TraderForPoe.Controls"
+             xmlns:properties="clr-namespace:TraderForPoe.Properties"
+             mc:Ignorable="d" Width="450" Foreground="LightGray" Background="#FF292929" 
+             BorderBrush="#474747" BorderThickness="1" UseLayoutRounding="True" 
+             FontFamily="Calibri" RenderOptions.BitmapScalingMode="HighQuality"> 
+    <UserControl.Resources>
+
+        <Style x:Key="BtnStyle" TargetType="Button">
+            <Setter Property="Margin" Value="0,0,2,0"/>
+            <Setter Property="MinWidth" Value="22"/>
+            <Setter Property="MinHeight" Value="22"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#474747"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#515151"/>
+                </Trigger>
+            </Style.Triggers>
+
+        </Style>
+
+        <Style x:Key="TxtStyle" TargetType="TextBlock">
+            <Setter Property="Padding" Value="2,0,2,0"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Height" Value="{Binding ActualHeight, ElementName=Button}"/>
+
+        </Style>
+
+        <Style x:Key="CmdStyle" BasedOn="{StaticResource BtnStyle}" TargetType="Button">
+            <Setter Property="Width" Value="20"/>
+        </Style>
+
+
+        <Style BasedOn="{StaticResource BtnStyle}" TargetType="Button"/>
+        <Style BasedOn="{StaticResource TxtStyle}" TargetType="TextBlock"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Margin="2,2,2,2" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <DockPanel Grid.Column="0" Grid.ColumnSpan="2">
+                <Button Click="ClickToCollapseExpandItem" Style="{DynamicResource CmdStyle}">
+                    <TextBlock  x:Name="btn_CollExp" Grid.Row="1" TextAlignment="Center" FontSize="13" FontWeight="Bold">⏶</TextBlock>
+                </Button>
+
+                <StackPanel Name="spnl_Item" Orientation="Horizontal">
+                    <Button Name="btn_Item" Click="ClickShowStashOverlay">
+                        <DockPanel>
+                            <TextBlock  x:Name="txt_Item" FontStyle="Italic" FontWeight="Bold" TextTrimming="CharacterEllipsis" >#ITEM#</TextBlock>
+                            <Image Name="img_ItemCurrency" Width="19" Height="19" Margin="5,0,0,0" RenderOptions.BitmapScalingMode="HighQuality"/>
+                        </DockPanel>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Name="spnl_CurrencyRatio" Orientation="Horizontal" Margin="5,0,0,0">
+
+                    <StackPanel.Resources>
+                        <Style x:Key="CurrStyle" TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="TextAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="FontSize" Value="13"/>
+                        </Style>
+                        <Style BasedOn="{StaticResource CurrStyle}" TargetType="TextBlock"/>
+                    </StackPanel.Resources>
+
+                    <TextBlock FontSize="16">(</TextBlock>
+                    <DockPanel>
+                        <TextBlock Name="txt_Ratio1">1</TextBlock>
+                        <Image Name="img_Ratio1" Width="19" Height="19" RenderOptions.BitmapScalingMode="HighQuality" Margin="5,0,0,0"/>
+                    </DockPanel>
+                    <TextBlock Margin="5,0,5,0" >=</TextBlock>
+
+                    <DockPanel>
+                        <TextBlock Name="txt_Ratio2">2</TextBlock>
+                        <Image Name="img_Ratio2" Width="19"  Height="19" RenderOptions.BitmapScalingMode="HighQuality" Margin="5,0,0,0"/>
+                    </DockPanel>
+
+                    <TextBlock FontSize="16">)</TextBlock>
+
+                </StackPanel>
+            </DockPanel>
+
+            <DockPanel Grid.Column="2" HorizontalAlignment="Stretch">
+                <Button Name="btn_Price">
+                    <DockPanel>
+                        <TextBlock Margin="5,0,0,0" x:Name="txt_Price" FontWeight="Bold"></TextBlock>
+                        <Image Name="img_Currency" RenderOptions.BitmapScalingMode="HighQuality" Margin="0,0,0,0" Height="19"/>
+                    </DockPanel>
+                </Button>
+
+
+                <TextBlock Margin="5,0,5,0" x:Name="txt_Time" FontWeight="Bold">00:00</TextBlock>
+
+            </DockPanel>
+
+            <DockPanel Grid.Column="3" Grid.Row="0">
+                <Button ToolTip="Visit customer hideout" Click="ClickVisitHideout" Style="{DynamicResource CmdStyle}" Name="btn_VisitCustomerHideout">
+                    <Image Source="pack://application:,,,/Resources/Images/customerHideout.png" Height="19" Width="19"></Image>
+                </Button>
+                <Button x:Name="btn_InviteCustomer" ToolTip="Invite customer" Click="ClickInviteCustomer" Style="{DynamicResource CmdStyle}">
+                    <Image Source="pack://application:,,,/Resources/Images/invite.png" Height="20" Width="20"></Image>
+                </Button>
+
+                <Button x:Name="btn_StartTrade" ToolTip="Trade with customer" Click="ClickTradeInvite" Style="{DynamicResource CmdStyle}">
+                    <Image Source="pack://application:,,,/Resources/Images/trade.png" Height="19" Width="19"></Image>
+                </Button>
+
+                <Button x:Name="btn_SayThanks" ToolTip="Say thanks to customer" Click="ClickThanksForTrade" Style="{DynamicResource CmdStyle}">
+                    <Image Source="pack://application:,,,/Resources/Images/thanks.png" Height="18" Width="18"></Image>
+                </Button>
+
+                <Button x:Name="btn_LeaveParty" ToolTip="Left click will kick yourself. Right click will kick customer." Click="ClickKickMyself" MouseRightButtonUp="RightClickKickCustomer" Style="{DynamicResource CmdStyle}">
+                    <Image Source="pack://application:,,,/Resources/Images/leave.png" Height="19" Width="19"></Image>
+                </Button>
+
+                <Button x:Name="btn_VisitOwnHideout" ToolTip="Visit own hideout" Click="ClickVisitOwnHideout" Style="{DynamicResource CmdStyle}">
+                    <Image Source="pack://application:,,,/Resources/Images/home.png" Height="19" Width="19"></Image>
+                </Button>
+
+                <Button x:Name="btn_WhisperCustomer" ToolTip="Whisper customer" Click="ClickWhisperCustomer" Style="{DynamicResource CmdStyle}">
+                    <Image Source="pack://application:,,,/Resources/Images/message-text.png" Height="19" Width="19"></Image>
+                </Button>
+
+                <Button x:Name="btn_RemoveItem" ToolTip="Remove this item" Click="ClickRemoveItem" Style="{DynamicResource CmdStyle}" Margin="0">
+                    <Image Source="pack://application:,,,/Resources/Images/remove.png" Height="19" Width="19"></Image>
+                </Button>
+
+            </DockPanel>
+
+        </Grid>
+
+        <Grid Name="grd_SecondRow" Margin="2,0,2,2"  Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <DockPanel Grid.Column="0">
+                <Button Click="ClickWhoisCustomer" >
+                    <TextBlock x:Name="txt_Customer">#CUSTOMER#</TextBlock>
+                </Button>
+                <Button Click="ClickToWikiLeague">
+                    <TextBlock x:Name="txt_League" >#LEAGUE#</TextBlock>
+                </Button>
+                <Button Click="ClickStashIsQuad" Name="btn_stash">
+                    <TextBlock x:Name="txt_Stash">#STASH#</TextBlock>
+                </Button>
+                <Button  Name="btn_AdditionalText" ToolTip="{Binding Path=Text, ElementName=txt_AdditionalText}" HorizontalContentAlignment="Stretch">
+                    <TextBlock x:Name="txt_AdditionalText" TextTrimming="CharacterEllipsis" >#ADDITIONAL TEXT#</TextBlock>
+                </Button>
+            </DockPanel>
+
+            <DockPanel Grid.Column="1">
+                <Button x:Name="btn_SendCustomMessage1" ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper1}" Style="{DynamicResource CmdStyle}" Click="ClickCustomWhisper1">
+                    <Image Source="pack://application:,,,/Resources/Images/customMessage1.png" Height="19" Width="19"></Image>
+                </Button>
+
+                <Button x:Name="btn_SendCustomMessage2" ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper2}" Style="{DynamicResource CmdStyle}" Click="ClickCustomWhisper2">
+                    <Image Source="pack://application:,,,/Resources/Images/customMessage2.png"  Height="19" Width="19"></Image>
+                </Button>
+
+                <Button x:Name="btn_SendCustomMessage3" ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper3}" Style="{DynamicResource CmdStyle}" Click="ClickCustomWhisper3">
+                    <Image Source="pack://application:,,,/Resources/Images/customMessage3.png"  Height="19" Width="19"></Image>
+                </Button>
+
+                <Button x:Name="btn_SendCustomMessage4" ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper4}" Style="{DynamicResource CmdStyle}" Click="ClickCustomWhisper4">
+                    <Image Source="pack://application:,,,/Resources/Images/customMessage4.png"  Height="19" Width="19"></Image>
+                </Button>
+
+                <Button x:Name="btn_SendBusyMessage" ToolTip="Tell the customer I'm busy" Click="ClickWhisperCustomerBusy" Style="{DynamicResource CmdStyle}">
+                    <Image Source="pack://application:,,,/Resources/Images/clock.png" Height="19" Width="19"></Image>
+                </Button>
+
+                <Button x:Name="btn_SearchItem" Click="ClickSearchItem" ToolTip="Perform a search in the stash" Style="{DynamicResource CmdStyle}">
+                    <Image Source="pack://application:,,,/Resources/Images/magnify.png" Height="19" Width="19"></Image>
+                </Button>
+
+                <Button ToolTip="Send whisper again" x:Name="btn_SendWhisperAgain" Click="ClickSendWhisperAgain" Style="{DynamicResource CmdStyle}" Margin="0">
+                    <Image Source="pack://application:,,,/Resources/Images/repeat.png" Height="19" Width="19"></Image>
+                </Button>
+
+                <Button ToolTip="Ask customer, if he still is interested" x:Name="btn_AskIfInterested" Click="ClickAskIfInterested" Style="{DynamicResource CmdStyle}" Margin="0">
+                    <Image Source="pack://application:,,,/Resources/Images/comment-question.png" Height="19" Width="19"></Image>
+                </Button>
+
+            </DockPanel>
+
+        </Grid>
+
+    </Grid>
+
+</UserControl>

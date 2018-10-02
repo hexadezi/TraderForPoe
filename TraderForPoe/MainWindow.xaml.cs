@@ -36,9 +36,9 @@ namespace TraderForPoe
             logReader = new LogReader(Settings.Default.PathToClientTxt, TimeSpan.FromMilliseconds(200));
             lmvm = new LogMonitorViewModel(logReader);
             usvm = new UserSettingsViewModel();
-            notifyIcon.DataContext = new NotifyIconViewModel();
-            notifyIcon.UpdateLayout();
 
+            notifyIcon.DataContext = new NotifyIconViewModel();
+            
             logReader.Start();
 
             logReader.OnLineAddition += LogReader_OnLineAddition;
@@ -61,8 +61,9 @@ namespace TraderForPoe
             {
                 new TradeObject(e.Line);
                 TradeItem tItem = new TradeItem(e.Line);
-                TradeItemControl uc = new TradeItemControl(tItem);
+                CustomTestCtrl uc = new CustomTestCtrl(tItem);
                 stk_MainPnl.Children.Add(uc);
+
             }
         }
 
