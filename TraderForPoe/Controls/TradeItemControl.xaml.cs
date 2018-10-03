@@ -362,7 +362,7 @@ namespace TraderForPoe
             SendInputToPoe("/invite " + tItem.Customer);
             if (tItem.TradeType == TradeItem.TradeTypes.SELL && tItem.Stash != "")
             {
-                stashGridHighlight.AddButton(tItem);
+                //stashGridHighlight.AddButton(tItem);
             }
         }
 
@@ -415,9 +415,9 @@ namespace TraderForPoe
         private void RemoveItem()
         {
             ((StackPanel)Parent).Children.Remove(this);
-            stashGridHighlight.RemoveStashControl(tItem);
+            //stashGridHighlight.RemoveStashControl(tItem);
             TradeItemControl.RemoveTICfromList(this);
-            TradeItem.RemoveItemFromList(tItem);
+            //TradeItem.RemoveItemFromList(tItem);
             stashGridHighlight.ClearCanvas();
         }
 
@@ -503,7 +503,7 @@ namespace TraderForPoe
         {
             if (tItem.TradeType == TradeItem.TradeTypes.SELL)
             {
-                stashGridHighlight.AddButton(tItem);
+                //stashGridHighlight.AddButton(tItem);
             }
         }
 

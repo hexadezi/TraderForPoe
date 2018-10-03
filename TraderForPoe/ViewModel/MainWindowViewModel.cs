@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TraderForPoe.Classes;
+using TraderForPoe.Controls;
 
 namespace TraderForPoe.ViewModel
 {
@@ -13,5 +15,8 @@ namespace TraderForPoe.ViewModel
         {
             LogFileCheck.CheckForClientTxt();
         }
+        
+        public static ObservableCollection<CustomTestCtrl> TradeControlList { get; set; } = CustomTestCtrl.TradeControlList;
+
     }
 }

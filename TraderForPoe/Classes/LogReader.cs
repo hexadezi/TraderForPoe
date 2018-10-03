@@ -1,32 +1,20 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Text;
 using System.Windows.Threading;
 
 namespace TraderForPoe.Classes
 {
-    public class LogReaderLineEventArgs : EventArgs
+    public class LogReader : INotifyPropertyChanged
     {
-        public string Line { get; set; }
-    }
-
-    public class LogReader
-    {
-        private readonly string path;
         private readonly string delimiter;
+        private readonly string path;
         private readonly DispatcherTimer timer;
         private string buffer;
-        private long size;
+        private bool isRunning;
         private bool monitoring;
-
-        public event EventHandler<LogReaderLineEventArgs> OnLineAddition;
-
-        public TimeSpan Interval
-        {
-            get { return this.timer.Interval; }
-            set { this.timer.Interval = value; }
-        }
-
+        private long size;
         public LogReader(string path, TimeSpan interval, string delimiter = "\n")
         {
             this.path = path;
@@ -40,27 +28,46 @@ namespace TraderForPoe.Classes
             timer.Tick += this.Check;
         }
 
+        public event EventHandler<LogReaderLineEventArgs> OnLineAddition;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public TimeSpan Interval
+        {
+            get { return this.timer.Interval; }
+            set { this.timer.Interval = value; }
+        }
+        public bool IsRunning
+        {
+            get { return this.isRunning; }
+            set
+            {
+                if (this.isRunning != value)
+                {
+                    this.isRunning = value;
+                    this.NotifyPropertyChanged("IsRunning");
+                }
+            }
+        }
+
+        public void NotifyPropertyChanged(string propName)
+        {
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+        }
         public void Start()
         {
             this.size = new FileInfo(this.path).Length;
 
             this.timer.Start();
+
+            this.isRunning = true;
         }
 
         public void Stop()
         {
             this.timer.Stop();
-        }
-
-        private bool StartMonitoring()
-        {
-            lock (this.timer)
-            {
-                if (this.monitoring) return true;
-
-                this.monitoring = true;
-                return false;
-            }
+            this.isRunning = false;
         }
 
         private void Check(object sender, EventArgs e)
@@ -108,5 +115,21 @@ namespace TraderForPoe.Classes
 
             lock (this.timer) this.monitoring = false;
         }
+
+        private bool StartMonitoring()
+        {
+            lock (this.timer)
+            {
+                if (this.monitoring) return true;
+
+                this.monitoring = true;
+                return false;
+            }
+        }
+    }
+
+    public class LogReaderLineEventArgs : EventArgs
+    {
+        public string Line { get; set; }
     }
 }

@@ -9,7 +9,7 @@ using TraderForPoe.ViewModel;
 
 namespace TraderForPoe
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : NotActivatableWindow
     {
         public MainWindowViewModel mvvm;
 
@@ -21,13 +21,13 @@ namespace TraderForPoe
         
         public static UserSettingsViewModel usvm;
         public static LogMonitorViewModel lmvm;
-        private LogReader logReader;
+        public static LogReader logReader;
 
         public MainWindow()
         {
-            //mvvm = new MainWindowViewModel();
+            mvvm = new MainWindowViewModel();
 
-            //this.DataContext = mvvm;
+            this.DataContext = mvvm;
 
             InitializeComponent();
 
@@ -36,9 +36,7 @@ namespace TraderForPoe
             logReader = new LogReader(Settings.Default.PathToClientTxt, TimeSpan.FromMilliseconds(200));
             lmvm = new LogMonitorViewModel(logReader);
             usvm = new UserSettingsViewModel();
-
-            notifyIcon.DataContext = new NotifyIconViewModel();
-            
+                        
             logReader.Start();
 
             logReader.OnLineAddition += LogReader_OnLineAddition;
@@ -60,9 +58,9 @@ namespace TraderForPoe
             if (TradeObject.IsLogTradeWhisper(e.Line))
             {
                 new TradeObject(e.Line);
-                TradeItem tItem = new TradeItem(e.Line);
+                TradeObject tItem = new TradeObject(e.Line);
                 CustomTestCtrl uc = new CustomTestCtrl(tItem);
-                stk_MainPnl.Children.Add(uc);
+                //stk_MainPnl.Children.Add(uc);
 
             }
         }
@@ -85,40 +83,18 @@ namespace TraderForPoe
             {
                 btn_collapseMainWindow.Width = this.Width;
                 btn_collapseMainWindow.Content = "⏷";
-                stk_MainPnl.Visibility = Visibility.Collapsed;
+                //stk_MainPnl.Visibility = Visibility.Collapsed;
                 mainWindowCollapsed = true;
             }
             else
             {
                 btn_collapseMainWindow.Width = btn_collapseMainWindow.MinWidth;
                 btn_collapseMainWindow.Content = "⏶";
-                stk_MainPnl.Visibility = Visibility.Visible;
+                //stk_MainPnl.Visibility = Visibility.Visible;
                 mainWindowCollapsed = false;
             }
         }
 
-        // Handle click event for the history menu item
-        private void CustomMenuItem_Click(object sender, EventArgs e)
-        {
-            var s = sender as CustMenuItem;
-
-            // Avoid exception by checking if the item is already in the panel
-            if (!stk_MainPnl.Children.Contains(s.GetTradeItemCtrl))
-            {
-                stk_MainPnl.Children.Add(s.GetTradeItemCtrl);
-            }
-        }
-
-        private void DispatcherTimer_Tick(object sender, EventArgs e)
-        {
-            CheckIfPoeIsForegroundWindow();
-
-            TradeItem tItem = new TradeItem("");
-            TradeItemControl uc = new TradeItemControl(tItem);
-            stk_MainPnl.Children.Add(uc);
-            var customMenuItem = new CustMenuItem(uc);
-            customMenuItem.Click += CustomMenuItem_Click;
-        }
 
         private void SubscribeToEvents()
         {

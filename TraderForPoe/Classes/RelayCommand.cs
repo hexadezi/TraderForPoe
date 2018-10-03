@@ -19,8 +19,7 @@ namespace TraderForPoe.ViewModel
             this.canExecuteEvaluator = canExecuteEvaluator;
         }
 
-        public RelayCommand(Action methodToExecute)
-            : this(methodToExecute, null)
+        public RelayCommand(Action methodToExecute) : this(methodToExecute, null)
         {
         }
 

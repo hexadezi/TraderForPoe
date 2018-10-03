@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using TraderForPoe.Classes;
 
 namespace TraderForPoe.Controls
 {
@@ -7,14 +8,14 @@ namespace TraderForPoe.Controls
     /// </summary>
     public partial class StashControl : UserControl
     {
-        public StashControl(TradeItem tItemArgs)
+        public StashControl(TradeObject tItemArgs)
         {
             InitializeComponent();
             GetTItem = tItemArgs;
             txt_StashName.Text = GetTItem.Stash;
         }
 
-        public TradeItem GetTItem { get; set; }
+        public TradeObject GetTItem { get; set; }
 
     }
 

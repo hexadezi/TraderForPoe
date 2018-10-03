@@ -9,7 +9,7 @@ using System.Windows.Interop;
 
 namespace TraderForPoe.Classes
 {
-    public class CustomWindow : Window
+    public class NotActivatableWindow : Window
     {
         [DllImport("user32.dll")]
         public static extern IntPtr SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);

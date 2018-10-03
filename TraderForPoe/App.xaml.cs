@@ -30,6 +30,7 @@ namespace TraderForPoe
         {
             base.OnStartup(e);
 
+            new MainWindow();
             //create the notifyicon (it's a resource declared in NotifyIconResources.xaml
             notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
         }

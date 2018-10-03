@@ -19,6 +19,7 @@ namespace TraderForPoe.Classes
         /// </summary>
         public TradeObject(string whisper)
         {
+            this.whisper = whisper;
             ParseWhisper(whisper);
             TradeObjectList.Add(this);
         }
@@ -30,6 +31,15 @@ namespace TraderForPoe.Classes
             get { return tradeType; }
             set { tradeType = value; }
         }
+
+        private string whisper;
+
+        public string Whisper
+        {
+            get { return whisper; }
+            set { whisper = value; }
+        }
+
 
         private string customer;
 

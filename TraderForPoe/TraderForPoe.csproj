@@ -96,7 +96,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\ClipboardMonitor.cs" />
-    <Compile Include="Classes\CustomWindow.cs" />
+    <Compile Include="Classes\NotActivatableWindow.cs" />
     <Compile Include="Classes\LogFileCheck.cs" />
     <Compile Include="Classes\WinAPI.cs" />
     <Compile Include="Classes\Item.cs" />
@@ -169,7 +169,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\NotifyIconResources.xaml">
+    <Page Include="Dictionaries\NotifyIconResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

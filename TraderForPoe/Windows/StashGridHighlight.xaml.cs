@@ -216,7 +216,7 @@ namespace TraderForPoe.Windows
             front_canvas.Height = this.Height;
         }
 
-        public void AddButton(TradeItem tItemArgs)
+        public void AddButton(TradeObject tItemArgs)
         {
             UpdateLocationAndSize();
 
@@ -231,11 +231,11 @@ namespace TraderForPoe.Windows
 
         }
 
-        private bool ContainsItem(TradeItem tItemArgs)
+        private bool ContainsItem(TradeObject tItemArgs)
         {
             foreach (StashControl item in spnl_Buttons.Children)
             {
-                if (item.GetTItem.Item == tItemArgs.Item && item.GetTItem.Customer == tItemArgs.Customer && item.GetTItem.Price == tItemArgs.Price && item.GetTItem.StashPosition == tItemArgs.StashPosition)
+                if (item.GetTItem.Item.ItemAsString == tItemArgs.Item.ItemAsString && item.GetTItem.Customer == tItemArgs.Customer && item.GetTItem.Item.Price.ItemAsString == tItemArgs.Item.Price.ItemAsString && item.GetTItem.Position == tItemArgs.Position)
                 {
                     return true;
                 }
@@ -273,9 +273,9 @@ namespace TraderForPoe.Windows
             // Cast sender as StashControl
             StashControl stashControl = (StashControl)sender;
 
-            double x = stashControl.GetTItem.StashPosition.X;
+            double x = stashControl.GetTItem.Position.X;
 
-            double y = stashControl.GetTItem.StashPosition.Y;
+            double y = stashControl.GetTItem.Position.Y;
 
             // Nomber of stash columns
             int nbrRectStash = 12;
@@ -336,11 +336,11 @@ namespace TraderForPoe.Windows
             this.front_canvas.Children.Clear();
         }
 
-        internal void RemoveStashControl(TradeItem tItemArgs)
+        internal void RemoveStashControl(TradeObject tItemArgs)
         {
             foreach (StashControl item in spnl_Buttons.Children)
             {
-                if (item.GetTItem.Item == tItemArgs.Item && item.GetTItem.Customer == tItemArgs.Customer && item.GetTItem.Price == tItemArgs.Price)
+                if (item.GetTItem.Item == tItemArgs.Item && item.GetTItem.Customer == tItemArgs.Customer && item.GetTItem.Item.Price.ItemAsString == tItemArgs.Item.Price.ItemAsString)
                 {
                     spnl_Buttons.Children.Remove(item);
                     break; //important step

@@ -35,5 +35,11 @@ namespace TraderForPoe.ViewModel
         {
             Lines.Add(e.Line);
         }
+        public LogReader LogReader
+        {
+            get { return logReader; }
+            set { logReader = value; }
+        }
+
     }
 }

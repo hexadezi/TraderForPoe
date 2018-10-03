@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:TraderForPoe"
              xmlns:properties="clr-namespace:TraderForPoe.Properties"
-             StartupUri="MainWindow.xaml">
+             >
     <Application.Resources>
         <!-- merge NotifyIcon and related stuff into the application -->
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/NotifyIconResources.xaml" />
+                <ResourceDictionary Source="/Dictionaries/NotifyIconResources.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

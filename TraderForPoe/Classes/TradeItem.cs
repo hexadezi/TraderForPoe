@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using TraderForPoe.Classes;
 
 namespace TraderForPoe
 {
@@ -819,18 +820,18 @@ namespace TraderForPoe
 
         }
 
-        public static void RemoveItemFromList(TradeItem ti)
-        {
-            for (int i = 0; i < lstTradeItems.Count; i++)
-            {
-                if (lstTradeItems[i].Item == ti.Item && lstTradeItems[i].Customer == ti.Customer &&
-                    lstTradeItems[i].Price == ti.Price && lstTradeItems[i].StashPosition == ti.StashPosition
-                    && lstTradeItems[i].TradeType == ti.TradeType)
-                {
-                    lstTradeItems.RemoveAt(i);
-                }
-            }
-        }
+        //public static void RemoveItemFromList(TradeObject ti)
+        //{
+        //    for (int i = 0; i < lstTradeItems.Count; i++)
+        //    {
+        //        if (lstTradeItems[i].Item == ti.Item && lstTradeItems[i].Customer == ti.Customer &&
+        //            lstTradeItems[i].Price == ti.Price && lstTradeItems[i].StashPosition == ti.StashPosition
+        //            && lstTradeItems[i].TradeType == ti.TradeType)
+        //        {
+        //            lstTradeItems.RemoveAt(i);
+        //        }
+        //    }
+        //}
     }
 
     [Serializable]
