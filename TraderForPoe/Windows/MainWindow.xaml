@@ -13,15 +13,17 @@
         WindowStyle="None"
         AllowsTransparency="True"
         ResizeMode="NoResize"
-        Topmost="True" SnapsToDevicePixels="True"
+        Topmost="True" 
+        SnapsToDevicePixels="True"
         RenderOptions.BitmapScalingMode="NearestNeighbor"
         ShowInTaskbar="False"
         Closing="Window_Closing"
         LocationChanged="Window_LocationChanged"
-        SizeToContent="WidthAndHeight"
+        SizeToContent="Manual"
         Left="{Binding Source={x:Static p:Settings.Default}, Path=PosLeft, Mode=TwoWay}"
         Top="{Binding Source={x:Static p:Settings.Default}, Path=PosTop, Mode=TwoWay}"
-        Background="Transparent" Height="100">
+        Background="Aquamarine" 
+        Height="100">
 
     <Window.Resources>
 

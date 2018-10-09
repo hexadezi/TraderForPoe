@@ -29,10 +29,9 @@ namespace TraderForPoe
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
-            new MainWindow();
+            new MainWindow().Show();
             //create the notifyicon (it's a resource declared in NotifyIconResources.xaml
-            notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
+            //notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
         }
 
         protected override void OnExit(ExitEventArgs e)
