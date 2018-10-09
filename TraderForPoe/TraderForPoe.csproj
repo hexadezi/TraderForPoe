@@ -124,6 +124,7 @@
       <DependentUpon>TradeItemControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="Classes\StartUpClass.cs" />
     <Compile Include="ViewModel\LogMonitorViewModel.cs" />
     <Compile Include="Classes\RelayCommand.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
@@ -208,6 +209,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="Diagrams\ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
