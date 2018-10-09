@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hardcodet.Wpf.TaskbarNotification;
+using System;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
@@ -23,8 +24,16 @@ namespace TraderForPoe
         public static LogMonitorViewModel lmvm;
         public static LogReader logReader;
 
+
+
+
+        private TaskbarIcon notifyIcon;
         public MainWindow()
         {
+
+            notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
+
+
             mvvm = new MainWindowViewModel();
 
             this.DataContext = mvvm;

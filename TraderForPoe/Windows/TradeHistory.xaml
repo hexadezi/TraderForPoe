@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TraderForPoe.Windows"
         mc:Ignorable="d"
-        Title="TradeHistory" Height="450" Width="800">
+        Title="TradeHistory" Height="250" Width="622.5">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="MinWidth" Value="70"></Setter>
@@ -15,25 +15,25 @@
     <Grid>
         <DockPanel>
             <WrapPanel DockPanel.Dock="Bottom" FlowDirection="RightToLeft">
-                <Button Content="Add TestObject" Command="{Binding CmdTestObject}"></Button>
+                <Button Content="Add TestObject" Command="{Binding CmdTestObject}" Width="100" Height="25"></Button>
                 <Button Content="Clear" Command="{Binding CmdClear}"></Button>
             </WrapPanel>
             <ListView ItemsSource="{Binding TradeObjectsList}">
                 <ListView.View>
                     <GridView x:Name="grdNames">
-                        <GridViewColumn Header="Type"  DisplayMemberBinding="{Binding TradeType}"/>
-                        <GridViewColumn Header="Customer"  DisplayMemberBinding="{Binding Customer}"/>
-                        <GridViewColumn Header="Item">
+                        <GridViewColumn Header="Type" Width="50" DisplayMemberBinding="{Binding TradeType}"/>
+                        <GridViewColumn Header="Customer" Width="120"  DisplayMemberBinding="{Binding Customer}"/>
+                        <GridViewColumn Header="Item" Width="250">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" >
+                                    <StackPanel Orientation="Horizontal">
                                         <TextBlock VerticalAlignment="Center" Text="{Binding Item.Amount, StringFormat='{}{0}\ x '}"/>
                                         <TextBlock VerticalAlignment="Center" Text="{Binding Item.ItemAsString}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Price" >
+                        <GridViewColumn Header="Price" Width="150">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" >
