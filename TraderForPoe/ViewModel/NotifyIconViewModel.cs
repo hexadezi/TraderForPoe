@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using TraderForPoe.Classes;
@@ -12,7 +13,7 @@ namespace TraderForPoe.ViewModel
         {
             CmdHistory = new RelayCommand(() => new TradeHistory().Show());
             CmdLog = new RelayCommand(() => new LogMonitor(MainWindow.lmvm).Show());
-            CmdSettings = new RelayCommand(() => new UserSettings().Show());
+            CmdSettings = new RelayCommand(() => OpenSettings());
 
             CmdRestart = new RelayCommand(() => RestartApp());
             CmdUpdate = new RelayCommand(() => Updater.CheckForUpdate());
@@ -40,6 +41,13 @@ namespace TraderForPoe.ViewModel
         {
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
             System.Windows.Application.Current.Shutdown();
+        }
+
+        private void OpenSettings()
+        {
+            UserSettings us = new UserSettings();
+            us.ShowActivated = true;
+            us.ShowDialog();
         }
 
         //private bool isRunning = MainWindow.logReader.IsRunning;

@@ -13,6 +13,7 @@
     <ContextMenu x:Shared="false" x:Key="SysTrayMenu">
         <MenuItem Header="Clip Monitor" IsCheckable="True" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=UseClipboardMonitor}" />
         <MenuItem Header="Log Monitor" IsCheckable="True"  IsChecked="{Binding IsRunning}" />
+        <Separator />
         <MenuItem Header="History" Command="{Binding CmdHistory}" />
         <MenuItem Header="Log file" Command="{Binding CmdLog}" />
         <MenuItem Header="Settings" Command="{Binding CmdSettings}" />
@@ -28,7 +29,6 @@
                     x:Key="NotifyIcon"
                     IconSource="/Resources/application.ico"
                     MenuActivation="LeftOrRightClick"
-                    ToolTipText="Double-click for settings, right-click for menu"
                     DoubleClickCommand="{Binding CmdSettings}"
                     ContextMenu="{StaticResource SysTrayMenu}">
 
