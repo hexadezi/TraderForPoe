@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Hardcodet.Wpf.TaskbarNotification;
+using System;
+using System.Windows;
 using TraderForPoe.Classes;
 using TraderForPoe.Properties;
 using TraderForPoe.ViewModel;
@@ -17,6 +19,7 @@ namespace TraderForPoe
         public static TradeHistoryViewModel VM_TradeHistory { get; set; }
 
         public static UserSettingsViewModel VM_UserSettings { get; set; }
+
         public static NotifyIconViewModel VM_NotifyIcon { get; set; }
 
         public static void Initialize()
@@ -29,6 +32,8 @@ namespace TraderForPoe
             VM_UserSettings = new UserSettingsViewModel();
             VM_NotifyIcon = new NotifyIconViewModel();
 
+            
         }
+        
     }
 }

@@ -46,8 +46,9 @@ namespace TraderForPoe.ViewModel
         private void OpenSettings()
         {
             UserSettings us = new UserSettings();
-            us.ShowActivated = true;
-            us.ShowDialog();
+            us.Activate();
+            us.Show();
+            us.Activate();
         }
 
         //private bool isRunning = MainWindow.logReader.IsRunning;

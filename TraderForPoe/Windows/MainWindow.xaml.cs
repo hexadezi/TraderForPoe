@@ -7,6 +7,7 @@ using TraderForPoe.Classes;
 using TraderForPoe.Controls;
 using TraderForPoe.Properties;
 using TraderForPoe.ViewModel;
+using TraderForPoe.Windows;
 
 namespace TraderForPoe
 {
@@ -24,16 +25,15 @@ namespace TraderForPoe
         public static LogMonitorViewModel lmvm;
         public static LogReader logReader;
 
-
-
-
-        private TaskbarIcon notifyIcon;
         public MainWindow()
         {
 
-            notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
-
-
+            TestFenster tFen = new TestFenster();
+            tFen.tctrlItems.Items.Add(new CustomTabItem());
+            tFen.tctrlItems.Items.Add(new CustomTabItem());
+            tFen.tctrlItems.Items.Add(new CustomTabItem());
+            tFen.Show();
+            
             mvvm = new MainWindowViewModel();
 
             this.DataContext = mvvm;
@@ -66,7 +66,7 @@ namespace TraderForPoe
         {
             if (TradeObject.IsLogTradeWhisper(e.Line))
             {
-                new TradeObject(e.Line);
+                //new TradeObject(e.Line);
                 TradeObject tItem = new TradeObject(e.Line);
                 CustomTestCtrl uc = new CustomTestCtrl(tItem);
                 //stk_MainPnl.Children.Add(uc);

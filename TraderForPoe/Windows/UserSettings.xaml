@@ -37,7 +37,7 @@
     <Grid>
         <DockPanel>
             <WrapPanel DockPanel.Dock="Bottom" FlowDirection="RightToLeft">
-                <Button>Save</Button>
+                <Button Click="Click_SaveSettings">Save</Button>
                 <Button>Restart</Button>
             </WrapPanel>
             <TabControl Margin="5,5,5,0">

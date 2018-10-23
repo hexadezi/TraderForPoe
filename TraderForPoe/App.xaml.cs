@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using TraderForPoe.Properties;
 using Hardcodet.Wpf.TaskbarNotification;
+using TraderForPoe.Windows;
+using TraderForPoe.Controls;
 
 namespace TraderForPoe
 {
@@ -15,8 +17,11 @@ namespace TraderForPoe
     /// </summary>
     public partial class App : Application
     {
+        private TaskbarIcon notifyIcon;
+
         public App()
         {
+            // Check if settings upgrade is needed
             if (Settings.Default.UpgradeSettingsRequired)
             {
                 Settings.Default.Upgrade();
@@ -25,19 +30,19 @@ namespace TraderForPoe
             }
 
         }
-        private TaskbarIcon notifyIcon;
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            new MainWindow().Show();
-            //create the notifyicon (it's a resource declared in NotifyIconResources.xaml
+
+            StartUpClass.Initialize();
+
             notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
+
+            new MainWindow().Show();
+
+
         }
 
-        protected override void OnExit(ExitEventArgs e)
-        {
-            notifyIcon.Dispose(); //the icon would clean up automatically, but this is cleaner
-            base.OnExit(e);
-        }
     }
 }

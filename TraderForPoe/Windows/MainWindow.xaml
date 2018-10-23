@@ -19,11 +19,10 @@
         ShowInTaskbar="False"
         Closing="Window_Closing"
         LocationChanged="Window_LocationChanged"
-        SizeToContent="Manual"
         Left="{Binding Source={x:Static p:Settings.Default}, Path=PosLeft, Mode=TwoWay}"
         Top="{Binding Source={x:Static p:Settings.Default}, Path=PosTop, Mode=TwoWay}"
         Background="Aquamarine" 
-        Height="100">
+        SizeToContent="WidthAndHeight">
 
     <Window.Resources>
 
