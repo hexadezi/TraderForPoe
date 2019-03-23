@@ -32,6 +32,9 @@ namespace TraderForPoe.Windows
         [DllImport("USER32.DLL", CharSet = CharSet.Unicode)]
         public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
+        [DllImport("USER32.DLL", CharSet = CharSet.Unicode)]
+        public static extern bool IsWindow(IntPtr hWnd);
+
         // Used to get the client area of POE and the height and widht
         [DllImport("user32.dll")]
         static extern bool GetClientRect(IntPtr hWnd, out RECT lpRect);
@@ -60,6 +63,8 @@ namespace TraderForPoe.Windows
 
         public StashGridHighlight()
         {
+            CheckAndUpdate();
+
             // Verify that POE is a running process.
             if (poeHandle == IntPtr.Zero)
             {
@@ -74,25 +79,6 @@ namespace TraderForPoe.Windows
             UpdateLocationAndSize();
 
             WinEventDelegate = new Hook.WinEventDelegate(WinEventCallback);
-
-            try
-            {
-                if (poeHandle != IntPtr.Zero)
-                {
-                    uint TargetThreadId = Hook.GetWindowThread(poeHandle);
-                    UnsafeNativeMethods.GetWindowThreadProcessId(poeHandle, out poeProcessId);
-                    hWinEventHook = Hook.WinEventHookOne(Hook.SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE,
-                                                         WinEventDelegate,
-                                                         poeProcessId,
-                                                         TargetThreadId);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                //ErrorManager.Logger(this, this.InitializeComponent(), ex.HResult, ex.Data, DateTime.Now);
-                throw ex;
-            }
         }
 
         protected void WinEventCallback(IntPtr hWinEventHook, Hook.SWEH_Events eventType, IntPtr hWnd, Hook.SWEH_ObjectId idObject, long idChild, uint dwEventThread, uint dwmsEventTime)
@@ -100,13 +86,13 @@ namespace TraderForPoe.Windows
             if (hWnd == poeHandle && eventType == Hook.SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE && idObject == (Hook.SWEH_ObjectId)Hook.SWEH_CHILDID_SELF)
             {
                 // Occurs when POE window is moved or size changed
+                CheckAndUpdate();
                 UpdateLocationAndSize();
             }
         }
 
         private void UpdateLocationAndSize()
         {
-
             GetClientRect(poeHandle, out RECT clientRect);
             GetWindowRect(poeHandle, out RECT windowRect);
 
@@ -218,6 +204,7 @@ namespace TraderForPoe.Windows
 
         public void AddButton(TradeItem tItemArgs)
         {
+            CheckAndUpdate();
             UpdateLocationAndSize();
 
             if (ContainsItem(tItemArgs) == false && !String.IsNullOrEmpty(tItemArgs.Stash))
@@ -352,6 +339,32 @@ namespace TraderForPoe.Windows
         {
             // Unhook event when closing
             Hook.WinEventUnhook(hWinEventHook);
+        }
+
+        private void CheckAndUpdate()
+        {
+            if (poeHandle == IntPtr.Zero || !IsWindow(poeHandle))
+            {
+                poeHandle = FindWindow("POEWindowClass", "Path of Exile");
+                try
+                {
+                    if (poeHandle != IntPtr.Zero)
+                    {
+                        uint TargetThreadId = Hook.GetWindowThread(poeHandle);
+                        UnsafeNativeMethods.GetWindowThreadProcessId(poeHandle, out poeProcessId);
+                        hWinEventHook = Hook.WinEventHookOne(Hook.SWEH_Events.EVENT_OBJECT_LOCATIONCHANGE,
+                                                             WinEventDelegate,
+                                                             poeProcessId,
+                                                             TargetThreadId);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    //ErrorManager.Logger(this, this.InitializeComponent(), ex.HResult, ex.Data, DateTime.Now);
+                    throw ex;
+                }
+            }
         }
     }
 }
