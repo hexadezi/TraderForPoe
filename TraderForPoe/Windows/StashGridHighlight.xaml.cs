@@ -283,22 +283,23 @@ namespace TraderForPoe.Windows
             // Set rectangle size by dividing canvas by number of columns
             double rectDimensionX = ((front_canvas.Width) / 12);
 
+            // Check settings if the stashtab is quad or not
+            foreach (var item in Settings.Default.QuadStash)
+            {
+                if (item == stashControl.GetTItem.Stash)
+                {
+                    rectDimensionX = rectDimensionX / 2;
+                    nbrRectStash = nbrRectStash * 2;
+                }
+            }
+                
             // Check if stash is quad. If true divide rectangle size and multiply number of columns by 2
             if ((x > 12 && x < 25) || (y > 12 && y < 25))
             {
                 rectDimensionX = rectDimensionX / 2;
                 nbrRectStash = nbrRectStash * 2;
-            }
-            else
-            {
-                foreach (var item in Settings.Default.QuadStash)
-                {
-                    if (item == stashControl.GetTItem.Stash)
-                    {
-                        rectDimensionX = rectDimensionX / 2;
-                        nbrRectStash = nbrRectStash * 2;
-                    }
-                }
+                Settings.Default.QuadStash.Add(stashControl.GetTItem.Stash);
+                Settings.Default.Save();
             }
 
 
