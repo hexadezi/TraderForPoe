@@ -271,11 +271,11 @@ namespace TraderForPoe.Classes
 
         private TradeTypeEnum GetTradeType(string arg)
         {
-            if (arg.ToLower() == "to")
+            if (arg.ToLower().StartsWith("to"))
             {
                 return TradeTypeEnum.BUY;
             }
-            else if (arg.ToLower() == "from")
+            else if (arg.ToLower().StartsWith("from"))
             {
                 return TradeTypeEnum.SELL;
             }
