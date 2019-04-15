@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TraderForPoe.Controls;
 
 namespace TraderForPoe.Windows
 {
@@ -22,6 +23,9 @@ namespace TraderForPoe.Windows
         public TestFenster()
         {
             InitializeComponent();
+            tctrlItems.Items.Add(new CustomTabItem());
+            tctrlItems.Items.Add(new CustomTabItem());
+            tctrlItems.Items.Add(new CustomTabItem());
         }
 
         private void TabControl_MouseDown(object sender, MouseButtonEventArgs e)
@@ -78,6 +82,11 @@ namespace TraderForPoe.Windows
         }
 
         private void mainBrd_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
 
         }

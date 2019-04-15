@@ -6,8 +6,28 @@
         xmlns:local="clr-namespace:TraderForPoe.Windows"
         xmlns:classes="clr-namespace:TraderForPoe.Classes"
         xmlns:ctrl="clr-namespace:TraderForPoe.Controls"
+        xmlns:p="clr-namespace:TraderForPoe.Properties"
         mc:Ignorable="d"
-        Title="TestFenster" Height="184.626" Width="370.565">
+        Title="TestFenster" 
+        Height="180" 
+        Width="370"
+        Background="#FF23272B"
+        SizeToContent="Height"
+        MouseDown="Window_MouseDown"
+        MouseWheel="TabControl_MouseWheel"
+        
+        
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        Topmost="True" 
+        SnapsToDevicePixels="True"
+        RenderOptions.BitmapScalingMode="NearestNeighbor"
+        ShowInTaskbar="False"
+        Left="{Binding Source={x:Static p:Settings.Default}, Path=PosLeft, Mode=TwoWay}"
+        Top="{Binding Source={x:Static p:Settings.Default}, Path=PosTop, Mode=TwoWay}"
+
+        >
 
     <Window.Resources>
         <PopupAnimation x:Key="{x:Static SystemParameters.ToolTipPopupAnimationKey}">None</PopupAnimation>
@@ -19,7 +39,7 @@
         <Style TargetType="Window">
             <Setter Property="FontFamily" Value="Segoe UI" />
         </Style>
-        <Style TargetType="Button">
+        <Style TargetType="Button" >
 
 
             <Setter Property="Template">
@@ -94,7 +114,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TabItem}">
-                        <Border Cursor="Hand" x:Name="tab" Background="#FF23272B" BorderThickness="0" BorderBrush="Transparent" Padding="5,2,5,2">
+                        <Border x:Name="tab" Background="#FF23272B" BorderThickness="0" BorderBrush="Transparent" Padding="5,2,5,2">
                             <Grid>
                                 <ContentPresenter   x:Name="contentPresenter" 
                                                     ContentSource="Header"
@@ -149,65 +169,69 @@
     </Window.Resources>
 
 
-    <Grid>
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <!--<DockPanel>-->
 
-        <TabControl Grid.Row="0" Name="tctrlItems" MouseDown="TabControl_MouseDown" Background="#FF23272B" Template="{DynamicResource TabControlControlTemplate1}" IsSynchronizedWithCurrentItem="True">
-            
+        <TabControl Grid.Row="0" Name="tctrlItems" MouseDown="TabControl_MouseDown" Background="Transparent" Template="{DynamicResource TabControlControlTemplate1}" IsSynchronizedWithCurrentItem="True">
+
+            <ctrl:CustomTabItem></ctrl:CustomTabItem>
+
         </TabControl>
 
-        <StackPanel Grid.Row="1" Name="stpCmds" DockPanel.Dock="Bottom" Visibility="Visible" >
-            <UniformGrid Rows="1" DockPanel.Dock="Bottom" Background="#FF23272B" Margin="0" >
-                <Button Cursor="Hand"  Margin="5,5,0,5" Padding="3" >
+        <StackPanel Grid.Row="1" Name="stpCmds" DockPanel.Dock="Bottom" Visibility="Visible" Margin="2">
+            <StackPanel.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                    <Setter Property="Margin" Value="2" />
+                </Style>
+            </StackPanel.Resources>
+            <UniformGrid Rows="1" DockPanel.Dock="Bottom">
+                <Button>
                     <TextBlock>Invite</TextBlock>
                 </Button>
-                <Button Cursor="Hand" Margin="5,5,0,5" Padding="3" >
+                <Button>
                     <TextBlock>Hideout</TextBlock>
                 </Button>
-                <Button Cursor="Hand" Margin="5,5,0,5" Padding="3" >
+                <Button>
                     <TextBlock>Home</TextBlock>
                 </Button>
-                <Button Cursor="Hand" Margin="5,5,0,5" Padding="3" >
+                <Button>
                     <TextBlock>Trade</TextBlock>
                 </Button>
-                <Button Cursor="Hand" Margin="5,5,0,5" Padding="3" >
+                <Button>
                     <TextBlock>Busy</TextBlock>
                 </Button>
-                <Button Cursor="Hand" Margin="5,5,5,5" Padding="3" >
+                <Button>
                     <TextBlock>Resend</TextBlock>
                 </Button>
 
             </UniformGrid>
-            <UniformGrid Rows="1" DockPanel.Dock="Bottom" Margin="0" Background="#FF23272B">
-                <Button Cursor="Hand"  Margin="5,2,0,5" Padding="3" >
+            <UniformGrid Rows="1" DockPanel.Dock="Bottom">
+                <Button>
                     <TextBlock>Invite</TextBlock>
                 </Button>
 
-                <Button Cursor="Hand" Margin="5,2,0,5" Padding="3" >
+                <Button>
                     <TextBlock>Hideout</TextBlock>
                 </Button>
-                <Button Cursor="Hand" Margin="5,2,0,5" Padding="3" >
+                <Button>
                     <TextBlock>Home</TextBlock>
                 </Button>
-                <Button Cursor="Hand" Margin="5,2,0,5" Padding="3" >
+                <Button>
                     <TextBlock>Trade</TextBlock>
                 </Button>
-                <Button Cursor="Hand" Margin="5,2,0,5" Padding="3" >
+                <Button>
                     <TextBlock>Busy</TextBlock>
                 </Button>
-                <UniformGrid Rows="1" Margin="5,2,5,0">
-                    <Button Margin="0,0,2.5,5" Click="Button_Click_1">X</Button>
-                    <Button Margin="2.5,0,0,5" Click="Button_Click">^</Button>
+                <UniformGrid Rows="1">
+                    <Button Click="Button_Click_1">X</Button>
+                    <Button Click="Button_Click">^</Button>
                 </UniformGrid>
             </UniformGrid>
         </StackPanel>
 
-
-        <!--</DockPanel>-->
     </Grid>
 </Window>

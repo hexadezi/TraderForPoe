@@ -21,7 +21,7 @@
         LocationChanged="Window_LocationChanged"
         Left="{Binding Source={x:Static p:Settings.Default}, Path=PosLeft, Mode=TwoWay}"
         Top="{Binding Source={x:Static p:Settings.Default}, Path=PosTop, Mode=TwoWay}"
-        Background="Aquamarine" 
+        Background="Transparent" 
         SizeToContent="WidthAndHeight">
 
     <Window.Resources>

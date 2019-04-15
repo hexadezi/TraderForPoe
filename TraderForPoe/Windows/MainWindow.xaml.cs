@@ -13,17 +13,13 @@ namespace TraderForPoe
 {
     public partial class MainWindow : NotActivatableWindow
     {
-        public MainWindowViewModel mvvm;
+        //public MainWindowViewModel mvvm;
 
         private ClipboardMonitor clipMoni = new ClipboardMonitor();
 
-        private Regex customerJoinedRegEx = new Regex(".* : (.*) has joined the area");
+        //private Regex customerJoinedRegEx = new Regex(".* : (.*) has joined the area");
 
-        private Regex customerLeftRegEx = new Regex(".* : (.*) has left the area");
-        
-        public static UserSettingsViewModel usvm;
-        public static LogMonitorViewModel lmvm;
-        public static LogReader logReader;
+        //private Regex customerLeftRegEx = new Regex(".* : (.*) has left the area");
 
         public MainWindow()
         {
@@ -33,24 +29,19 @@ namespace TraderForPoe
             tFen.tctrlItems.Items.Add(new CustomTabItem());
             tFen.tctrlItems.Items.Add(new CustomTabItem());
             tFen.Show();
-            
-            mvvm = new MainWindowViewModel();
 
-            this.DataContext = mvvm;
+            //this.DataContext = StartUpClass.VM_MainWindow;
 
             InitializeComponent();
 
-            SubscribeToEvents();
+            //SubscribeToEvents();
 
-            logReader = new LogReader(Settings.Default.PathToClientTxt, TimeSpan.FromMilliseconds(200));
-            lmvm = new LogMonitorViewModel(logReader);
-            usvm = new UserSettingsViewModel();
-                        
-            logReader.Start();
 
-            logReader.OnLineAddition += LogReader_OnLineAddition;
+            StartUpClass.LogFileReader.Start();
 
-            clipMoni.OnChange += ClipMoni_OnChange;
+            StartUpClass.LogFileReader.OnLineAddition += LogReader_OnLineAddition;
+
+            //clipMoni.OnChange += ClipMoni_OnChange;
 
         }
 
@@ -78,10 +69,14 @@ namespace TraderForPoe
         {
             if (Settings.Default.HideIfPoeNotForeGround)
             {
-                //if (GetForegroundWindow() != FindWindow("POEWindowClass", "Path of Exile"))
-                //    Hide();
-                //else
-                //    Show();
+                if (Poe.IsForegroundWindow())
+                {
+                    Show();
+                }
+                else
+                {
+                    Hide();
+                }
             }
         }
 
@@ -105,23 +100,14 @@ namespace TraderForPoe
         }
 
 
-        private void SubscribeToEvents()
-        {
-            TradeItemControl.MoreThanThreeItems += TradeItemControl_MoreThanThreeItems;
-            TradeItemControl.EqualThreeItems += TradeItemControl_LessThanThreeItems;
-        }
 
-        private void TradeItemControl_LessThanThreeItems(object sender, EventArgs e)
-        {
-            btn_collapseMainWindow.Visibility = Visibility.Collapsed;
-            brd_collapseMainWindow.Visibility = Visibility.Collapsed;
-        }
 
-        private void TradeItemControl_MoreThanThreeItems(object sender, EventArgs e)
-        {
-            btn_collapseMainWindow.Visibility = Visibility.Visible;
-            brd_collapseMainWindow.Visibility = Visibility.Visible;
-        }
+
+
+
+
+
+
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {

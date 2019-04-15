@@ -18,6 +18,13 @@ namespace TraderForPoe.Classes
         private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
         /// <summary>
+        /// Retrieves a handle to the foreground window (the window with which the user is currently working). The system assigns a slightly higher priority to the thread that creates the foreground window than it does to other threads.
+        /// </summary>
+        /// <returns></returns>
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+
+        /// <summary>
         /// Brings the thread that created the specified window into the foreground and activates the window
         /// </summary>
         /// <param name="hWnd"></param>
@@ -40,6 +47,25 @@ namespace TraderForPoe.Classes
                 return true;
             }
         }
+
+        /// <summary>
+        /// Verify that POE is a running process.
+        /// </summary>
+        /// <returns>True if PoE is running</returns>
+        public static bool IsForegroundWindow()
+        {
+            if (GetForegroundWindow() == GetHandle())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+
 
         /// <summary>
         /// Returns the current handle of PoE

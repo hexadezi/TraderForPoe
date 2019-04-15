@@ -39,9 +39,6 @@ namespace TraderForPoe
 
             notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
 
-            new MainWindow().Show();
-
-
         }
 
     }
