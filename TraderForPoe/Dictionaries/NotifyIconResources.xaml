@@ -5,7 +5,6 @@
                     xmlns:vm="clr-namespace:TraderForPoe.ViewModel"
                     xmlns:p="clr-namespace:TraderForPoe.Properties">
 
-    <!-- The taskbar context menu - the first row is a dummy to show off simple data binding -->
     <!--
         The "shared" directive is needed if we reopen the sample window a few times - WPF will otherwise
         reuse the same context menu (which is a resource) again (which will have its DataContext set to the old TaskbarIcon)

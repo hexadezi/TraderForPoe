@@ -144,9 +144,6 @@
     <Compile Include="Windows\StashGridHighlight.xaml.cs">
       <DependentUpon>StashGridHighlight.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\TestFenster.xaml.cs">
-      <DependentUpon>TestFenster.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\TradeHistory.xaml.cs">
       <DependentUpon>TradeHistory.xaml</DependentUpon>
     </Compile>
@@ -194,10 +191,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\StashGridHighlight.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\TestFenster.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

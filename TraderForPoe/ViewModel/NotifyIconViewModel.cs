@@ -11,6 +11,7 @@ namespace TraderForPoe.ViewModel
     {
         public NotifyIconViewModel()
         {
+
             CmdHistory = new RelayCommand(() => new TradeHistory().Show());
             CmdLog = new RelayCommand(() => new LogMonitor(MainWindow.lmvm).Show());
             CmdSettings = new RelayCommand(() => OpenSettings());

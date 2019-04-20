@@ -29,19 +29,15 @@ namespace TraderForPoe
                 Settings.Default.Save();
             }
 
+
+
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
-            StartUpClass.Initialize();
-
             notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
-
             new MainWindow().Show();
-
-
         }
 
     }

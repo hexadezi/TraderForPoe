@@ -20,37 +20,47 @@ namespace TraderForPoe
         private Regex customerJoinedRegEx = new Regex(".* : (.*) has joined the area");
 
         private Regex customerLeftRegEx = new Regex(".* : (.*) has left the area");
-        
+
         public static UserSettingsViewModel usvm;
         public static LogMonitorViewModel lmvm;
         public static LogReader logReader;
 
+
+
+
+
+
+
         public MainWindow()
         {
-
-            TestFenster tFen = new TestFenster();
-            tFen.tctrlItems.Items.Add(new CustomTabItem());
-            tFen.tctrlItems.Items.Add(new CustomTabItem());
-            tFen.tctrlItems.Items.Add(new CustomTabItem());
-            tFen.Show();
-            
-            mvvm = new MainWindowViewModel();
-
-            this.DataContext = mvvm;
-
             InitializeComponent();
 
-            SubscribeToEvents();
+            //this.DataContext = new MainWindowViewModel();
 
-            logReader = new LogReader(Settings.Default.PathToClientTxt, TimeSpan.FromMilliseconds(200));
-            lmvm = new LogMonitorViewModel(logReader);
-            usvm = new UserSettingsViewModel();
-                        
-            logReader.Start();
 
-            logReader.OnLineAddition += LogReader_OnLineAddition;
 
-            clipMoni.OnChange += ClipMoni_OnChange;
+
+
+
+
+
+
+
+
+
+
+
+            ////SubscribeToEvents();
+
+            //logReader = new LogReader(Settings.Default.PathToClientTxt, TimeSpan.FromMilliseconds(200));
+            //lmvm = new LogMonitorViewModel(logReader);
+            //usvm = new UserSettingsViewModel();
+
+            //logReader.Start();
+
+            //logReader.OnLineAddition += LogReader_OnLineAddition;
+
+            //clipMoni.OnChange += ClipMoni_OnChange;
 
         }
 
@@ -85,43 +95,43 @@ namespace TraderForPoe
             }
         }
 
-        private void ClickCollapseExpandMainwindow(object sender, RoutedEventArgs e)
-        {
-            var mainWindowCollapsed = false;
-            if (mainWindowCollapsed == false)
-            {
-                btn_collapseMainWindow.Width = this.Width;
-                btn_collapseMainWindow.Content = "⏷";
-                //stk_MainPnl.Visibility = Visibility.Collapsed;
-                mainWindowCollapsed = true;
-            }
-            else
-            {
-                btn_collapseMainWindow.Width = btn_collapseMainWindow.MinWidth;
-                btn_collapseMainWindow.Content = "⏶";
-                //stk_MainPnl.Visibility = Visibility.Visible;
-                mainWindowCollapsed = false;
-            }
-        }
+        //private void ClickCollapseExpandMainwindow(object sender, RoutedEventArgs e)
+        //{
+        //    var mainWindowCollapsed = false;
+        //    if (mainWindowCollapsed == false)
+        //    {
+        //        btn_collapseMainWindow.Width = this.Width;
+        //        btn_collapseMainWindow.Content = "⏷";
+        //        //stk_MainPnl.Visibility = Visibility.Collapsed;
+        //        mainWindowCollapsed = true;
+        //    }
+        //    else
+        //    {
+        //        btn_collapseMainWindow.Width = btn_collapseMainWindow.MinWidth;
+        //        btn_collapseMainWindow.Content = "⏶";
+        //        //stk_MainPnl.Visibility = Visibility.Visible;
+        //        mainWindowCollapsed = false;
+        //    }
+        //}
 
 
-        private void SubscribeToEvents()
-        {
-            TradeItemControl.MoreThanThreeItems += TradeItemControl_MoreThanThreeItems;
-            TradeItemControl.EqualThreeItems += TradeItemControl_LessThanThreeItems;
-        }
+        //private void SubscribeToEvents()
+        //{
+        //    TradeItemControl.MoreThanThreeItems += TradeItemControl_MoreThanThreeItems;
+        //    TradeItemControl.EqualThreeItems += TradeItemControl_LessThanThreeItems;
+        //}
 
-        private void TradeItemControl_LessThanThreeItems(object sender, EventArgs e)
-        {
-            btn_collapseMainWindow.Visibility = Visibility.Collapsed;
-            brd_collapseMainWindow.Visibility = Visibility.Collapsed;
-        }
+        //private void TradeItemControl_LessThanThreeItems(object sender, EventArgs e)
+        //{
+        //    btn_collapseMainWindow.Visibility = Visibility.Collapsed;
+        //    brd_collapseMainWindow.Visibility = Visibility.Collapsed;
+        //}
 
-        private void TradeItemControl_MoreThanThreeItems(object sender, EventArgs e)
-        {
-            btn_collapseMainWindow.Visibility = Visibility.Visible;
-            brd_collapseMainWindow.Visibility = Visibility.Visible;
-        }
+        //private void TradeItemControl_MoreThanThreeItems(object sender, EventArgs e)
+        //{
+        //    btn_collapseMainWindow.Visibility = Visibility.Visible;
+        //    brd_collapseMainWindow.Visibility = Visibility.Visible;
+        //}
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -133,10 +143,43 @@ namespace TraderForPoe
             Properties.Settings.Default.Save();
         }
 
+
+        
+
+
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == System.Windows.Input.MouseButton.Left)
                 this.DragMove();
         }
+
+        private void NotActivatableWindow_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (mainTabControl != null)
+            {
+                if (e.Delta < 0)
+                {
+                    if (mainTabControl.SelectedIndex + 1 < mainTabControl.Items.Count)
+                        mainTabControl.SelectedItem = mainTabControl.Items[mainTabControl.SelectedIndex + 1];
+                }
+                else
+                {
+                    if (mainTabControl.SelectedIndex - 1 > -1)
+                        mainTabControl.SelectedItem = mainTabControl.Items[mainTabControl.SelectedIndex - 1];
+                }
+            }
+        }
+
+        //private void TabControl_MouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    if (e.ChangedButton == MouseButton.Middle && e.ButtonState == MouseButtonState.Pressed)
+        //    {
+        //        MessageBox.Show("Middle button clicked");
+        //    }
+        //}
+
+
+
+
     }
 }
