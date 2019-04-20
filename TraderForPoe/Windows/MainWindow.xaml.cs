@@ -169,6 +169,17 @@ namespace TraderForPoe
                 }
             }
         }
+        
+        
+        private void Button_Click_Remove(object sender, RoutedEventArgs e)
+        {
+            mainTabControl.Items.Remove(mainTabControl.SelectedItem);
+        }
+
+        private void Button_Click_Collapse(object sender, RoutedEventArgs e)
+        {
+            
+        }
 
         //private void TabControl_MouseDown(object sender, MouseButtonEventArgs e)
         //{
