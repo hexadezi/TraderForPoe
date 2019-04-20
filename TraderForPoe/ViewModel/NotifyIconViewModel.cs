@@ -13,7 +13,7 @@ namespace TraderForPoe.ViewModel
         {
 
             CmdHistory = new RelayCommand(() => new TradeHistory().Show());
-            CmdLog = new RelayCommand(() => new LogMonitor(MainWindow.lmvm).Show());
+            CmdLog = new RelayCommand(() => new LogMonitor(StartUpClass.VM_LogMonitor).Show());
             CmdSettings = new RelayCommand(() => OpenSettings());
 
             CmdRestart = new RelayCommand(() => RestartApp());
