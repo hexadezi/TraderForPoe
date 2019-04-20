@@ -28,16 +28,13 @@ namespace TraderForPoe
                 Settings.Default.UpgradeSettingsRequired = false;
                 Settings.Default.Save();
             }
-
-
-
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
-            new MainWindow().Show();
+            //notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
+            FindResource("NotifyIcon");
         }
 
     }

@@ -19,10 +19,15 @@
             <StackPanel Margin="5">
                 <TextBlock Padding="5,0,0,0">Icons from:</TextBlock>
                 <TextBlock Padding="10,0,0,10"><Hyperlink  NavigateUri="https://materialdesignicons.com/" RequestNavigate="OnRequestNavigate">https://materialdesignicons.com/</Hyperlink></TextBlock>
+                
                 <TextBlock Padding="5,0,0,0">Windows Input Simulator Plus from:</TextBlock>
                 <TextBlock Padding="10,0,0,10"><Hyperlink  NavigateUri="https://github.com/TChatzigiannakis/InputSimulatorPlus" RequestNavigate="OnRequestNavigate">https://github.com/TChatzigiannakis/InputSimulatorPlus</Hyperlink></TextBlock>
+                
                 <TextBlock Padding="5,0,0,0">Notification sound from:</TextBlock>
                 <TextBlock Padding="10,0,0,10"><Hyperlink  NavigateUri="https://notificationsounds.com" RequestNavigate="OnRequestNavigate">https://notificationsounds.com</Hyperlink></TextBlock>
+
+                <TextBlock Padding="5,0,0,0">NotifyIcon from:</TextBlock>
+                <TextBlock Padding="10,0,0,10"><Hyperlink  NavigateUri="http://www.hardcodet.net/wpf-notifyicon" RequestNavigate="OnRequestNavigate">http://www.hardcodet.net/wpf-notifyicon</Hyperlink></TextBlock>
             </StackPanel>
         </Canvas>
     </StackPanel>
