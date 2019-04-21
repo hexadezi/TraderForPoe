@@ -5,19 +5,15 @@ namespace TraderForPoe.ViewModel
 {
     public class LogMonitorViewModel
     {
-        private LogReader logReader;
-
-        public LogMonitorViewModel(LogReader logReaderArg)
+        public LogMonitorViewModel()
         {
-            logReader = logReaderArg;
-
-            logReader.OnLineAddition += LogReader_OnLineAddition;
+            LogReader.OnLineAddition += LogReader_OnLineAddition;
 
             CmdStart = new RelayCommand(
-                () => logReader.Start());
+                () => LogReader.Start());
 
             CmdStop = new RelayCommand(
-                () => logReader.Stop());
+                () => LogReader.Stop());
 
             CmdClear = new RelayCommand(
                 () => Lines.Clear());
@@ -35,11 +31,5 @@ namespace TraderForPoe.ViewModel
         {
             Lines.Add(e.Line);
         }
-        public LogReader LogReader
-        {
-            get { return logReader; }
-            set { logReader = value; }
-        }
-
     }
 }

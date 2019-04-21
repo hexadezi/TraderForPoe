@@ -21,13 +21,6 @@ namespace TraderForPoe
 
         private Regex customerLeftRegEx = new Regex(".* : (.*) has left the area");
 
-        public static UserSettingsViewModel usvm;
-        public static LogMonitorViewModel lmvm;
-        public static LogReader logReader;
-
-
-
-
 
 
 

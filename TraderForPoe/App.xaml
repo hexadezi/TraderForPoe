@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:TraderForPoe"
              xmlns:properties="clr-namespace:TraderForPoe.Properties"
              xmlns:tb="http://www.hardcodet.net/taskbar"
-             StartupUri="Windows/MainWindow.xaml"
+             ShutdownMode="OnExplicitShutdown"
              >
     <Application.Resources>
          <!-- merge NotifyIcon and related stuff into the application --> 

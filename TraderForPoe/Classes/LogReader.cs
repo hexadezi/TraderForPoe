@@ -1,132 +1,117 @@
 ﻿using System;
-using System.ComponentModel;
 using System.IO;
 using System.Text;
 using System.Windows.Threading;
+using TraderForPoe.Properties;
 
 namespace TraderForPoe.Classes
 {
-    public class LogReader : INotifyPropertyChanged
+    public static class LogReader
     {
-        private readonly string delimiter;
-        private readonly string path;
-        private readonly DispatcherTimer timer;
-        private string buffer;
-        private bool isRunning;
-        private bool monitoring;
-        private long size;
-        public LogReader(string path, TimeSpan interval, string delimiter = "\n")
+        #region Fields
+
+        private static readonly string delimiter = "\n";
+        private static readonly string path = Settings.Default.PathToClientTxt;
+        private static readonly DispatcherTimer timer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(200) };
+        private static string buffer;
+        private static bool monitoring;
+        private static long size = new FileInfo(path).Length;
+
+        #endregion Fields
+
+        #region MyRegion
+
+        static LogReader()
         {
-            this.path = path;
-
-            this.delimiter = delimiter;
-
-            this.timer = new DispatcherTimer
-            {
-                Interval = interval,
-            };
-            timer.Tick += this.Check;
+            path = Settings.Default.PathToClientTxt;
+            timer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(200) };
+            timer.Tick += Check;
+            Start();
         }
 
-        public event EventHandler<LogReaderLineEventArgs> OnLineAddition;
+        #endregion MyRegion
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        #region Events
 
-        public TimeSpan Interval
+        public static event EventHandler<LogReaderLineEventArgs> OnLineAddition;
+
+        #endregion Events
+
+        #region Methods
+
+        public static void Start()
         {
-            get { return this.timer.Interval; }
-            set { this.timer.Interval = value; }
-        }
-        public bool IsRunning
-        {
-            get { return this.isRunning; }
-            set
+            if (timer.IsEnabled)
             {
-                if (this.isRunning != value)
-                {
-                    this.isRunning = value;
-                    this.NotifyPropertyChanged("IsRunning");
-                }
+                return;
             }
+
+            timer.Start();
         }
 
-        public void NotifyPropertyChanged(string propName)
+        public static void Stop()
         {
-            if (this.PropertyChanged != null)
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
-        }
-        public void Start()
-        {
-            this.size = new FileInfo(this.path).Length;
-
-            this.timer.Start();
-
-            this.isRunning = true;
+            timer.Stop();
         }
 
-        public void Stop()
+        private static void Check(object sender, EventArgs e)
         {
-            this.timer.Stop();
-            this.isRunning = false;
-        }
+            if (!StartMonitoring()) return;
 
-        private void Check(object sender, EventArgs e)
-        {
-            if (!this.StartMonitoring()) return;
+            var newSize = new FileInfo(path).Length;
 
-            var newSize = new FileInfo(this.path).Length;
+            if (size >= newSize) return;
 
-            if (this.size >= newSize) return;
-
-            using (var stream = File.Open(this.path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (var stream = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (var sr = new StreamReader(stream, Encoding.UTF8))
             {
-                sr.BaseStream.Seek(this.size, SeekOrigin.Begin);
+                sr.BaseStream.Seek(size, SeekOrigin.Begin);
 
-                var data = this.buffer + sr.ReadToEnd();
+                var data = buffer + sr.ReadToEnd();
 
-                if (!data.EndsWith(this.delimiter))
+                if (!data.EndsWith(delimiter))
                 {
-                    if (data.IndexOf(this.delimiter, StringComparison.Ordinal) == -1)
+                    if (data.IndexOf(delimiter, StringComparison.Ordinal) == -1)
                     {
-                        this.buffer += data;
+                        buffer += data;
 
                         data = string.Empty;
                     }
                     else
                     {
-                        var pos = data.LastIndexOf(this.delimiter, StringComparison.Ordinal) + this.delimiter.Length;
+                        var pos = data.LastIndexOf(delimiter, StringComparison.Ordinal) + delimiter.Length;
 
-                        this.buffer = data.Substring(pos);
+                        buffer = data.Substring(pos);
 
                         data = data.Substring(0, pos);
                     }
                 }
 
-                var lines = data.Split(new[] { this.delimiter }, StringSplitOptions.RemoveEmptyEntries);
+                var lines = data.Split(new[] { delimiter }, StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (var line in lines)
                 {
-                    this.OnLineAddition(this, new LogReaderLineEventArgs { Line = line.Trim() });
+                    OnLineAddition(null, new LogReaderLineEventArgs { Line = line.Trim() });
                 }
             }
 
-            this.size = newSize;
+            size = newSize;
 
-            lock (this.timer) this.monitoring = false;
+            lock (timer) monitoring = false;
         }
 
-        private bool StartMonitoring()
+        private static bool StartMonitoring()
         {
-            lock (this.timer)
+            lock (timer)
             {
-                if (this.monitoring) return true;
-
-                this.monitoring = true;
+                if (monitoring) return true;
+                monitoring = true;
                 return false;
             }
         }
     }
+
+    #endregion Methods
 
     public class LogReaderLineEventArgs : EventArgs
     {

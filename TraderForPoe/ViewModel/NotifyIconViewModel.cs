@@ -9,21 +9,31 @@ namespace TraderForPoe.ViewModel
 {
     public class NotifyIconViewModel : INotifyPropertyChanged
     {
+        #region Constructor
         public NotifyIconViewModel()
         {
+            CmdHistory = new RelayCommand(() => WindowViewLoaderService.Show(typeof(TradeHistoryViewModel)));
 
-            CmdHistory = new RelayCommand(() => new TradeHistory().Show());
-            CmdLog = new RelayCommand(() => new LogMonitor(StartUpClass.VM_LogMonitor).Show());
-            CmdSettings = new RelayCommand(() => OpenSettings());
+            CmdLog = new RelayCommand(() => WindowViewLoaderService.Show(typeof(LogMonitorViewModel)));
+
+            CmdSettings = new RelayCommand(() => WindowViewLoaderService.Show(typeof(UserSettingsViewModel)));
 
             CmdRestart = new RelayCommand(() => RestartApp());
+
             CmdUpdate = new RelayCommand(() => Updater.CheckForUpdate());
+
             CmdAbout = new RelayCommand(() => new About().Show());
+
             CmdQuit = new RelayCommand(() => Application.Current.Shutdown());
+
         }
+        #endregion
 
+        #region Events
         public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
 
+        #region Properties
         public RelayCommand CmdAbout { get; private set; }
         public RelayCommand CmdHistory { get; private set; }
         public RelayCommand CmdLog { get; private set; }
@@ -32,40 +42,14 @@ namespace TraderForPoe.ViewModel
         public RelayCommand CmdRestart { get; private set; }
         public RelayCommand CmdSettings { get; private set; }
         public RelayCommand CmdUpdate { get; private set; }
+        #endregion
 
-        public void NotifyPropertyChanged(string propName)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
-        }
-
+        #region Methods
         private void RestartApp()
         {
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
             System.Windows.Application.Current.Shutdown();
         }
-
-        private void OpenSettings()
-        {
-            UserSettings us = new UserSettings();
-            us.Activate();
-            us.Show();
-            us.Activate();
-        }
-
-        //private bool isRunning = MainWindow.logReader.IsRunning;
-
-        //public bool IsRunning
-        //{
-        //    get { return this.isRunning; }
-        //    set
-        //    {
-        //        if (this.isRunning != value)
-        //        {
-        //            this.isRunning = value;
-        //            this.NotifyPropertyChanged("IsRunning");
-        //        }
-        //    }
-        //}
-
+        #endregion
     }
 }
