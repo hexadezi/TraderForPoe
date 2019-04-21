@@ -11,7 +11,7 @@ namespace TraderForPoe.Classes
     static class WindowViewLoaderService
     {
         private static Dictionary<Type, Type> viewDictionary = new Dictionary<Type, Type>();
-        
+
         public static void Register(Type viewmodel, Type view)
         {
             viewDictionary.Add(viewmodel, view);
@@ -21,6 +21,28 @@ namespace TraderForPoe.Classes
         {
             try
             {
+                Window tmpWindows = (Window)Activator.CreateInstance(viewDictionary[viewmodel]);
+                tmpWindows.Show();
+                tmpWindows.Activate();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error while creating View in WindowsViewLoaderService\n" + e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        public static void ShowSingle(Type viewmodel)
+        {
+            try
+            {
+                foreach (Window item in Application.Current.Windows)
+                {
+                    if (item.GetType() == viewDictionary[viewmodel])
+                    {
+                        item.Activate();
+                        return;
+                    }
+                }
                 Window tmpWindows = (Window)Activator.CreateInstance(viewDictionary[viewmodel]);
                 tmpWindows.Show();
                 tmpWindows.Activate();

@@ -12,11 +12,11 @@ namespace TraderForPoe.ViewModel
         #region Constructor
         public NotifyIconViewModel()
         {
-            CmdHistory = new RelayCommand(() => WindowViewLoaderService.Show(typeof(TradeHistoryViewModel)));
+            CmdHistory = new RelayCommand(() => WindowViewLoaderService.ShowSingle(typeof(TradeHistoryViewModel)));
 
-            CmdLog = new RelayCommand(() => WindowViewLoaderService.Show(typeof(LogMonitorViewModel)));
+            CmdLog = new RelayCommand(() => WindowViewLoaderService.ShowSingle(typeof(LogMonitorViewModel)));
 
-            CmdSettings = new RelayCommand(() => WindowViewLoaderService.Show(typeof(UserSettingsViewModel)));
+            CmdSettings = new RelayCommand(() => WindowViewLoaderService.ShowSingle(typeof(UserSettingsViewModel)));
 
             CmdRestart = new RelayCommand(() => RestartApp());
 
