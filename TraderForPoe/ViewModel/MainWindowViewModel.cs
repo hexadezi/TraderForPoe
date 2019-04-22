@@ -1,14 +1,15 @@
 ﻿using System.Collections.ObjectModel;
 using TraderForPoe.Classes;
 using TraderForPoe.Controls;
+using TraderForPoe.ViewModel.Base;
 
 namespace TraderForPoe.ViewModel
 {
-    public class MainWindowViewModel
+    public class MainWindowViewModel : ViewModelBase
     {
         #region Fields
 
-        private ClipboardMonitor clipMoni = new ClipboardMonitor();
+        private ClipboardMonitor clipMonitor = new ClipboardMonitor();
 
         #endregion Fields
 
@@ -25,17 +26,32 @@ namespace TraderForPoe.ViewModel
 
         #region Methods
 
-        private void ClipMoni_OnChange(object sender, ClipboardTextEventArgs e)
+        private void ClipMonitor_OnChange(object sender, ClipboardTextEventArgs e)
         {
-            if (TradeObject.IsTradeWhisper(e.Line))
+            if (Properties.Settings.Default.UseClipboardMonitor == true)
             {
-                Poe.SendCommand(e.Line);
+                if (TradeObject.IsTradeWhisper(e.Line))
+                {
+                    Poe.SendCommand(e.Line);
+                }
+            }
+        }
+
+        private void LogReader_OnLineAddition(object sender, LogReaderLineEventArgs e)
+        {
+            //TODO Implementieren
+            //throw new System.NotImplementedException();
+
+            if (TradeObject.IsLogTradeWhisper(e.Line))
+            {
+                TradeObject tItem = new TradeObject(e.Line);
             }
         }
 
         private void SubscribeToEvents()
         {
-            clipMoni.OnChange += ClipMoni_OnChange;
+            clipMonitor.OnChange += ClipMonitor_OnChange;
+            LogReader.OnLineAddition += LogReader_OnLineAddition;
         }
 
         #endregion Methods

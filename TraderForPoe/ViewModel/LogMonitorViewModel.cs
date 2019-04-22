@@ -3,10 +3,11 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
 using TraderForPoe.Classes;
+using TraderForPoe.ViewModel.Base;
 
 namespace TraderForPoe.ViewModel
 {
-    public class LogMonitorViewModel : INotifyPropertyChanged
+    public class LogMonitorViewModel : ViewModelBase
     {
         #region Fields
 
@@ -66,7 +67,7 @@ namespace TraderForPoe.ViewModel
                 {
                     filter = value;
                     linesView.Refresh();
-                    NotifyPropertyChanged(nameof(Filter));
+                    OnPropertyChanged();
                 }
             }
         }
@@ -74,12 +75,6 @@ namespace TraderForPoe.ViewModel
         #endregion Properties
 
         #region Methods
-
-        public void NotifyPropertyChanged(string propName)
-        {
-            if (this.PropertyChanged != null)
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
-        }
 
         private void LogReader_OnLineAddition(object sender, LogReaderLineEventArgs e)
         {

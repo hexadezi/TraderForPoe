@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using TraderForPoe.Properties;
+using TraderForPoe.ViewModel.Base;
 
 namespace TraderForPoe.ViewModel
 {
-    public class UserSettingsViewModel : INotifyPropertyChanged
+    public class UserSettingsViewModel : ViewModelBase
     {
         #region Fields
 
@@ -27,12 +28,6 @@ namespace TraderForPoe.ViewModel
 
         #endregion Constructors
 
-        #region Events
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion Events
-
         #region Properties
 
         public RelayCommand CmdRestart { get; private set; }
@@ -47,7 +42,7 @@ namespace TraderForPoe.ViewModel
                     path = value;
                     Settings.Default.PathToClientTxt = value;
                     Settings.Default.Save();
-                    this.NotifyPropertyChanged(nameof(Path));
+                    this.OnPropertyChanged();
                 }
             }
         }
@@ -62,7 +57,7 @@ namespace TraderForPoe.ViewModel
                     playerName = value;
                     Settings.Default.PlayerName = value;
                     Settings.Default.Save();
-                    this.NotifyPropertyChanged(nameof(Path));
+                    this.OnPropertyChanged();
                 }
             }
         }
@@ -77,7 +72,7 @@ namespace TraderForPoe.ViewModel
                     playNotificationSound = value;
                     Settings.Default.PlayNotificationSound = value;
                     Settings.Default.Save();
-                    this.NotifyPropertyChanged(nameof(PlayNotificationSound));
+                    this.OnPropertyChanged();
                 }
             }
         }
@@ -92,7 +87,7 @@ namespace TraderForPoe.ViewModel
                     closeItemAfterTrade = value;
                     Settings.Default.CloseItemAfterTrade = value;
                     Settings.Default.Save();
-                    this.NotifyPropertyChanged(nameof(CloseItemAfterTrade));
+                    this.OnPropertyChanged();
                 }
             }
         }
@@ -107,7 +102,7 @@ namespace TraderForPoe.ViewModel
                     checkForUpdatesOnStart = value;
                     Settings.Default.CheckForUpdatesOnStart = value;
                     Settings.Default.Save();
-                    this.NotifyPropertyChanged(nameof(CheckForUpdatesOnStart));
+                    this.OnPropertyChanged();
                 }
             }
         }
@@ -122,7 +117,7 @@ namespace TraderForPoe.ViewModel
                     hideIfPoeNotForeGround = value;
                     Settings.Default.HideIfPoeNotForeGround = value;
                     Settings.Default.Save();
-                    this.NotifyPropertyChanged(nameof(HideIfPoeNotForeGround));
+                    this.OnPropertyChanged();
                 }
             }
         }
@@ -137,7 +132,7 @@ namespace TraderForPoe.ViewModel
                     collapsedItems = value;
                     Settings.Default.CollapsedItems = value;
                     Settings.Default.Save();
-                    this.NotifyPropertyChanged(nameof(CollapsedItems));
+                    this.OnPropertyChanged();
                 }
             }
         }
@@ -146,17 +141,11 @@ namespace TraderForPoe.ViewModel
 
         #region Methods
 
-        public void NotifyPropertyChanged(string propName)
-        {
-            if (this.PropertyChanged != null)
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
-        }
-
         private void RestartApp()
         {
             //TODO is this mvvm?
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-            System.Windows.Application.Current.Shutdown();
+            Application.Current.Shutdown();
         }
 
         #endregion Methods

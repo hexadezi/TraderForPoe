@@ -8,7 +8,7 @@
         xmlns:p="clr-namespace:TraderForPoe.Properties"
         mc:Ignorable="d"
         Title="Trade Items"
-        Height="132.333" Width="327" 
+        Height="134.333" Width="327" 
         WindowStyle="None"
         ResizeMode="NoResize"
         Topmost="True" 
@@ -39,7 +39,8 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="0" MinHeight="22">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="{TemplateBinding BorderThickness}" 
+                                MinHeight="25" Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -49,7 +50,10 @@
             <Setter Property="Background" Value="#FF5C656D"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="1"/>
+            
             <Style.Triggers>
 
                 <EventTrigger RoutedEvent="PreviewMouseDown">
@@ -79,8 +83,9 @@
             </Setter>
 
             <Setter Property="Background" Value="#FF23272B"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderThickness" Value="1"/>
+
             <Style.Triggers>
 
                 <EventTrigger RoutedEvent="PreviewMouseDown">
@@ -233,9 +238,9 @@
                                 </StackPanel>
 
                                 <WrapPanel Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                    <TextBlock TextWrapping="Wrap" Foreground="White" FontWeight="Bold" FontSize="20" VerticalAlignment="Stretch" >
+                                    <TextBlock TextWrapping="Wrap" Foreground="White" FontWeight="Bold" FontSize="20" VerticalAlignment="Stretch" Margin="0,0,3,0">
                                         <Run Text="256"/>
-                                        <Run Text=" "/>
+                                        <Run Text="x"/>
                                     </TextBlock>
                                     <Image Source="pack://application:,,,/Resources/Currency/curr_ex.png" MaxHeight="32" RenderOptions.BitmapScalingMode="HighQuality" />
                                 </WrapPanel>
@@ -246,47 +251,50 @@
 
                                 <StackPanel>
                                     <UniformGrid Rows="1">
-                                        <Button Margin="1">
+                                        <Button >
                                             <TextBlock>Invite</TextBlock>
                                         </Button>
-                                        <Button Margin="1">
+                                        <Button>
                                             <TextBlock>Visit</TextBlock>
                                         </Button>
-                                        <Button Margin="1">
-                                            <TextBlock>Hideout</TextBlock>
+                                        <Button>
+                                            <TextBlock>Thank</TextBlock>
                                         </Button>
-                                        <Button Margin="1">
-                                            <TextBlock>Trade</TextBlock>
+                                        <Button>
+                                            <TextBlock>Home</TextBlock>
                                         </Button>
-                                        <Button Margin="1">
+                                        <Button>
                                             <TextBlock>Leave</TextBlock>
                                         </Button>
-                                        <Button Margin="1">
-                                            <TextBlock>Resend</TextBlock>
+                                        <Button>
+                                            <TextBlock>x</TextBlock>
+                                        </Button>
+                                        <Button>
+                                            <TextBlock>x</TextBlock>
                                         </Button>
 
                                     </UniformGrid>
                                     <UniformGrid Rows="1">
-                                        <Button Margin="1">
-                                            <TextBlock>Home</TextBlock>
-                                        </Button>
-                                        <Button Margin="1">
+                                        <Button>
                                             <TextBlock>Trade</TextBlock>
                                         </Button>
-                                        <Button Margin="1">
-                                            <TextBlock>Busy</TextBlock>
+                                        <Button>
+                                            <TextBlock>Kick</TextBlock>
+                                        </Button>
+                                        <Button>
+                                            <TextBlock>Repeat</TextBlock>
                                         </Button>
                                         <UniformGrid Rows="1">
-                                            <Button Margin="1">1</Button>
-                                            <Button Margin="1">2</Button>
+                                            <Button>1</Button>
+                                            <Button>2</Button>
                                         </UniformGrid>
                                         <UniformGrid Rows="1">
-                                            <Button Margin="1">3</Button>
-                                            <Button Margin="1">4</Button>
-                                        </UniformGrid>
+                                            <Button>3</Button>
+                                            <Button>4</Button>
+                                        </UniformGrid>                                       
                                         <UniformGrid Rows="1">
-                                            <Button Margin="1" Click="Button_Click_Collapse">^</Button>
-                                            <Button Margin="1" Click="Button_Click_Remove">X</Button>
+                                            <Button>^</Button>
+                                            <Button>X</Button>
                                         </UniformGrid>
                                     </UniformGrid>
                                 </StackPanel>

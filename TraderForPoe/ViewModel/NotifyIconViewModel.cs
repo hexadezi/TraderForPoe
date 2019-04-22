@@ -2,11 +2,12 @@
 using System.Windows;
 using TraderForPoe.Classes;
 using TraderForPoe.Properties;
+using TraderForPoe.ViewModel.Base;
 using TraderForPoe.Windows;
 
 namespace TraderForPoe.ViewModel
 {
-    public class NotifyIconViewModel : INotifyPropertyChanged
+    public class NotifyIconViewModel : ViewModelBase
     {
         #region Fields
 
@@ -35,12 +36,6 @@ namespace TraderForPoe.ViewModel
 
         #endregion Constructor
 
-        #region Events
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion Events
-
         #region Properties
 
         public RelayCommand CmdAbout { get; private set; }
@@ -62,7 +57,7 @@ namespace TraderForPoe.ViewModel
                     useClipboardMonitor = value;
                     Settings.Default.UseClipboardMonitor = value;
                     Settings.Default.Save();
-                    this.NotifyPropertyChanged(nameof(UseClipboardMonitor));
+                    this.OnPropertyChanged();
                 }
             }
         }
@@ -70,12 +65,6 @@ namespace TraderForPoe.ViewModel
         #endregion Properties
 
         #region Methods
-
-        public void NotifyPropertyChanged(string propName)
-        {
-            if (this.PropertyChanged != null)
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
-        }
 
         private void RestartApp()
         {

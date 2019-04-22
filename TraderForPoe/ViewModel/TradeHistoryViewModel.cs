@@ -4,10 +4,11 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 using TraderForPoe.Classes;
+using TraderForPoe.ViewModel.Base;
 
 namespace TraderForPoe.ViewModel
 {
-    public class TradeHistoryViewModel
+    public class TradeHistoryViewModel : ViewModelBase
     {
         public ObservableCollection<TradeObject> TradeObjectsList { get; set; } = TradeObject.TradeObjectList;
 
