@@ -13,7 +13,7 @@ namespace TraderForPoe.ViewModel
     {
         public MainWindowViewModel()
         {
-            LogFileCheck.CheckForClientTxt();
+            
         }
         
         public static ObservableCollection<CustomTestCtrl> TradeControlList { get; set; } = CustomTestCtrl.TradeControlList;

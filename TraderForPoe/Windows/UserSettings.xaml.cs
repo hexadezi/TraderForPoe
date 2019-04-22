@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System.Windows;
 using TraderForPoe.Properties;
+using TraderForPoe.ViewModel;
 
 namespace TraderForPoe.Windows
 {
@@ -12,6 +13,7 @@ namespace TraderForPoe.Windows
         public UserSettings()
         {
             InitializeComponent();
+            DataContext = new UserSettingsViewModel();
         }
 
         private void Click_SaveSettings(object sender, RoutedEventArgs e)
@@ -21,17 +23,12 @@ namespace TraderForPoe.Windows
             System.Windows.MessageBox.Show("Settings saved successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        private void Click_RestartApp(object sender, RoutedEventArgs e)
-        {
-            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-            System.Windows.Application.Current.Shutdown();
-        }
-
         private void Click_DeleteQuadStash(object sender, RoutedEventArgs e)
         {
             Settings.Default.QuadStash.Remove(lsb_QuadStash.SelectedItem.ToString());
         }
 
+        //TODO Implement mvvm 
         private void Click_SearchFile(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog

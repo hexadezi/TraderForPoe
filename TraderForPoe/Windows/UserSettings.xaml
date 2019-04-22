@@ -5,13 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:properties="clr-namespace:TraderForPoe.Properties"
         mc:Ignorable="d"
-        Title="Settings" Height="410" Width="800"
+        Title="Settings" Height="380" Width="650"
         WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        
         >
 
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="MinWidth" Value="70"></Setter>
+            <Setter Property="Height" Value="25"></Setter>
             <Setter Property="Margin" Value="5,5,10,5"></Setter>
         </Style>
         <Style TargetType="Label">
@@ -22,7 +25,7 @@
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="Margin" Value="10,5,0,5" ></Setter>
-            <Setter Property="Height" Value="30" ></Setter>
+            <Setter Property="Height" Value="25" ></Setter>
             <Setter Property="VerticalAlignment" Value="Center" ></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center" ></Setter>
             <Setter Property="Padding" Value="5,0,5,0" ></Setter>
@@ -37,35 +40,33 @@
     <Grid>
         <DockPanel>
             <WrapPanel DockPanel.Dock="Bottom" FlowDirection="RightToLeft">
-                <Button Click="Click_SaveSettings">Save</Button>
-                <Button>Restart</Button>
+                <Button Height="25" Command="{Binding CmdRestart}">Restart</Button>
             </WrapPanel>
             <TabControl Margin="5,5,5,0">
                 <TabItem Header="General">
                     <StackPanel Margin="5">
                         <GroupBox Header="Path to Client.txt">
                             <DockPanel>
-                                <Button DockPanel.Dock="Right">Open</Button>
-                                <TextBox Name="txt_PathToClientTxt" Text="{Binding Source={x:Static properties:Settings.Default}, Path=PathToClientTxt}" />
+                                <Button DockPanel.Dock="Right" Click="Click_SearchFile">Open</Button>
+                                <TextBox Name="txt_PathToClientTxt" Text="{Binding Path}" />
                             </DockPanel>
                         </GroupBox>
                         <GroupBox Header="Character name">
-                            <TextBox Text="{Binding Source={x:Static properties:Settings.Default}, Path=PlayerName}" />
+                            <TextBox Margin="10,5,10,5" Text="{Binding PlayerName}"/>
                         </GroupBox>
                         <GroupBox Header="Various Settings">
-                            <StackPanel>
+                            <StackPanel Margin="10,5,10,5">
                                 <StackPanel.Resources>
                                     <Style TargetType="CheckBox">
                                         <Setter Property="HorizontalAlignment" Value="Left" ></Setter>
                                         <Setter Property="Margin" Value="0,10,0,0" ></Setter>
                                     </Style>
                                 </StackPanel.Resources>
-                                <CheckBox Content="Use clipboard monitor" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=UseClipboardMonitor}"/>
-                                <CheckBox Content="Play notification sound" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=PlayNotificationSound}"/>
-                                <CheckBox Content="Remove item after trade" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterTrade}"/>
-                                <CheckBox Content="Check for updates on start" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CheckForUpdatesOnStart}"/>
-                                <CheckBox Content="Hide if not foreground" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=HideIfPoeNotForeGround}"/>
-                                <CheckBox Content="Collapse items" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CollapsedItems}"/>
+                                <CheckBox Content="Play notification sound" IsChecked="{Binding PlayNotificationSound}"/>
+                                <CheckBox Content="Remove item after trade" IsChecked="{Binding CloseItemAfterTrade}"/>
+                                <CheckBox Content="Check for updates on start" IsChecked="{Binding CheckForUpdatesOnStart}"/>
+                                <CheckBox Content="Hide if not foreground" IsChecked="{Binding HideIfPoeNotForeGround}"/>
+                                <CheckBox Content="Collapse items" IsChecked="{Binding CollapsedItems}"/>
                             </StackPanel>
 
                         </GroupBox>

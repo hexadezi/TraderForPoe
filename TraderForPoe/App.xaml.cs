@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Hardcodet.Wpf.TaskbarNotification;
+using System;
 using System.Windows;
-using TraderForPoe.Properties;
-using Hardcodet.Wpf.TaskbarNotification;
-using TraderForPoe.Windows;
-using TraderForPoe.Controls;
 using TraderForPoe.Classes;
+using TraderForPoe.Properties;
 using TraderForPoe.ViewModel;
+using TraderForPoe.Windows;
 
 namespace TraderForPoe
 {
@@ -23,6 +17,19 @@ namespace TraderForPoe
 
         public App()
         {
+            CheckForSettingsUpgrade();
+            RegisterViewModel();
+            CheckForLogFile();
+        }
+
+        private void CheckForLogFile()
+        {
+            //TODO Add option to turn off check
+            LogFileCheck.CheckForClientTxt();
+        }
+
+        private void CheckForSettingsUpgrade()
+        {
             // Check if settings upgrade is needed
             if (Settings.Default.UpgradeSettingsRequired)
             {
@@ -30,8 +37,6 @@ namespace TraderForPoe
                 Settings.Default.UpgradeSettingsRequired = false;
                 Settings.Default.Save();
             }
-
-            RegisterViewModel();
         }
 
         private void RegisterViewModel()
@@ -48,6 +53,5 @@ namespace TraderForPoe
             //notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
             FindResource("NotifyIcon");
         }
-
     }
 }
