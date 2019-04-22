@@ -61,7 +61,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>TFP_SIG.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Unclassified\TFP_SIG.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <DelaySign>false</DelaySign>
@@ -127,7 +127,7 @@
     <Compile Include="Controls\TradeItemControl.xaml.cs">
       <DependentUpon>TradeItemControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs" />
+    <Compile Include="Properties\Settings.cs" />
     <Compile Include="Classes\StartUpClass.cs" />
     <Compile Include="ViewModel\AboutViewModel.cs" />
     <Compile Include="ViewModel\Base\ViewModelBase.cs" />
@@ -221,15 +221,15 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Diagrams\ClassDiagram1.cd" />
-    <None Include="packages.config" />
+    <None Include="Unclassified\packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="TFP_SIG.snk" />
+    <None Include="Unclassified\TFP_SIG.snk" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
+    <None Include="Properties\App.config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -297,55 +297,10 @@
     <Resource Include="Resources\Currency\curr_wis.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\askifinterested.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Currency\curr_divine_vessel.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\notification.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\invite.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\trade.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\thanks.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\leave.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\home.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\customerHideout.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\clock.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\message-text.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\remove.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\customMessage1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\customMessage2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\magnify.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\repeat.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\comment-question.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Currency\curr_offering_to_the_goddess.png" />
@@ -366,10 +321,6 @@
     <None Include="Resources\arrowSell.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\customMessage3.png" />
-    <Resource Include="Resources\Images\customMessage4.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\application.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -383,7 +334,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resources\Images\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

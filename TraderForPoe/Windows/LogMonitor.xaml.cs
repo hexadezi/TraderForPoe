@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows;
-using System.Windows.Threading;
-using TraderForPoe.Classes;
+﻿using System.Windows;
 using TraderForPoe.ViewModel;
 
 namespace TraderForPoe.Windows
@@ -16,7 +11,7 @@ namespace TraderForPoe.Windows
         public LogMonitor()
         {
             InitializeComponent();
-            this.DataContext = new LogMonitorViewModel();
+            DataContext = new LogMonitorViewModel();
         }
     }
 }

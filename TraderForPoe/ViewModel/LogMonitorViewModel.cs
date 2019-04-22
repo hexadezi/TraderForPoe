@@ -10,8 +10,8 @@ namespace TraderForPoe.ViewModel
     {
         #region Fields
 
-        private ICollectionView linesView;
         private string filter;
+        private ICollectionView linesView;
 
         #endregion Fields
 
@@ -32,18 +32,10 @@ namespace TraderForPoe.ViewModel
 
             linesView = CollectionViewSource.GetDefaultView(Lines);
             linesView.Filter = UserFilter;
-
-
         }
 
         #endregion Contructors
-
-        #region Events
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion Events
-
+        
         #region Properties
 
         public RelayCommand CmdClear { get; private set; }
@@ -51,8 +43,6 @@ namespace TraderForPoe.ViewModel
         public RelayCommand CmdStart { get; private set; }
 
         public RelayCommand CmdStop { get; private set; }
-
-        public ObservableCollection<string> Lines { get; } = new ObservableCollection<string>();
 
         public string Filter
         {
@@ -70,6 +60,8 @@ namespace TraderForPoe.ViewModel
                 }
             }
         }
+
+        public ObservableCollection<string> Lines { get; } = new ObservableCollection<string>();
 
         #endregion Properties
 

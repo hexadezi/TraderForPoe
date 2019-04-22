@@ -6,7 +6,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Log Reader" Height="300" Width="380" MinHeight="300" MinWidth="380">
+        Title="{Binding Path=Filter, UpdateSourceTrigger=PropertyChanged, TargetNullValue='Log Viewer'}" Height="300" Width="380" MinHeight="300" MinWidth="380">
 
     <Window.Resources>
         <Style TargetType="Button">

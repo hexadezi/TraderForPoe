@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Windows;
+using TraderForPoe.ViewModel;
 
 namespace TraderForPoe.Windows
 {
@@ -11,13 +12,8 @@ namespace TraderForPoe.Windows
         public About()
         {
             InitializeComponent();
+            DataContext = new AboutViewModel();
             appName.Text += " " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = true;
-            this.Visibility = Visibility.Hidden;
         }
 
         private void OnRequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
