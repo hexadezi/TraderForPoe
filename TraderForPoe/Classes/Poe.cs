@@ -89,7 +89,7 @@ namespace TraderForPoe.Classes
                 //Make POE the foreground application and send input
                 SetForegroundWindow(GetHandle());
 
-                Thread.Sleep(50);
+                Thread.Sleep(200);
 
                 // Need to press ALT because the SetForegroundWindow sometimes does not work
                 iSim.Keyboard.KeyPress(VirtualKeyCode.MENU);

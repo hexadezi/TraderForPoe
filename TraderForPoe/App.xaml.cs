@@ -20,6 +20,14 @@ namespace TraderForPoe
             CheckForSettingsUpgrade();
             RegisterViewModel();
             CheckForLogFile();
+            OpenMainWindow();
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            //notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
+            FindResource("NotifyIcon");
         }
 
         private void CheckForLogFile()
@@ -39,19 +47,17 @@ namespace TraderForPoe
             }
         }
 
+        private void OpenMainWindow()
+        {
+            WindowViewLoaderService.Show(typeof(MainWindowViewModel));
+        }
+
         private void RegisterViewModel()
         {
             WindowViewLoaderService.Register(typeof(LogMonitorViewModel), typeof(LogMonitor));
             WindowViewLoaderService.Register(typeof(MainWindowViewModel), typeof(MainWindow));
             WindowViewLoaderService.Register(typeof(TradeHistoryViewModel), typeof(TradeHistory));
             WindowViewLoaderService.Register(typeof(UserSettingsViewModel), typeof(UserSettings));
-        }
-
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
-            //notifyIcon = (TaskbarIcon)FindResource("NotifyIcon");
-            FindResource("NotifyIcon");
         }
     }
 }

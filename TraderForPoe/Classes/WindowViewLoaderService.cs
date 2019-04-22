@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Interop;
 
 namespace TraderForPoe.Classes
 {
@@ -39,13 +40,14 @@ namespace TraderForPoe.Classes
                 {
                     if (item.GetType() == viewDictionary[viewmodel])
                     {
+                        item.WindowState = WindowState.Normal;
                         item.Activate();
                         return;
                     }
                 }
-                Window tmpWindows = (Window)Activator.CreateInstance(viewDictionary[viewmodel]);
-                tmpWindows.Show();
-                tmpWindows.Activate();
+                Window tmpWindow = (Window)Activator.CreateInstance(viewDictionary[viewmodel]);
+                tmpWindow.Show();
+                tmpWindow.Activate();
             }
             catch (Exception e)
             {

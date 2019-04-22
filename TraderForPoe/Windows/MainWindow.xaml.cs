@@ -28,26 +28,11 @@ namespace TraderForPoe
         {
             InitializeComponent();
 
-            //this.DataContext = new MainWindowViewModel();
+            this.DataContext = new MainWindowViewModel();
 
-
-
-
-
-
-
-
-
-
-
-
-
+            
 
             ////SubscribeToEvents();
-
-            //logReader = new LogReader(Settings.Default.PathToClientTxt, TimeSpan.FromMilliseconds(200));
-            //lmvm = new LogMonitorViewModel(logReader);
-            //usvm = new UserSettingsViewModel();
 
             //logReader.Start();
 

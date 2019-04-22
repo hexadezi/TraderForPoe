@@ -1,19 +1,26 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using TraderForPoe.Classes;
+using TraderForPoe.Properties;
 using TraderForPoe.Windows;
 
 namespace TraderForPoe.ViewModel
 {
     public class NotifyIconViewModel : INotifyPropertyChanged
     {
+        #region Fields
+
+        private bool useClipboardMonitor = Settings.Default.UseClipboardMonitor;
+
+        #endregion Fields
+
         #region Constructor
 
         public NotifyIconViewModel()
         {
             CmdHistory = new RelayCommand(() => WindowViewLoaderService.ShowSingle(typeof(TradeHistoryViewModel)));
 
-            CmdLog = new RelayCommand(() => WindowViewLoaderService.ShowSingle(typeof(LogMonitorViewModel)));
+            CmdLog = new RelayCommand(() => WindowViewLoaderService.Show(typeof(LogMonitorViewModel)));
 
             CmdSettings = new RelayCommand(() => WindowViewLoaderService.ShowSingle(typeof(UserSettingsViewModel)));
 
@@ -45,9 +52,30 @@ namespace TraderForPoe.ViewModel
         public RelayCommand CmdSettings { get; private set; }
         public RelayCommand CmdUpdate { get; private set; }
 
+        public bool UseClipboardMonitor
+        {
+            get { return useClipboardMonitor; }
+            set
+            {
+                if (useClipboardMonitor != value)
+                {
+                    useClipboardMonitor = value;
+                    Settings.Default.UseClipboardMonitor = value;
+                    Settings.Default.Save();
+                    this.NotifyPropertyChanged(nameof(UseClipboardMonitor));
+                }
+            }
+        }
+
         #endregion Properties
 
         #region Methods
+
+        public void NotifyPropertyChanged(string propName)
+        {
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+        }
 
         private void RestartApp()
         {

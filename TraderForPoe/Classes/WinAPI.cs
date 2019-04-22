@@ -9,40 +9,25 @@ namespace TraderForPoe.Classes
 {
     public class WinAPI
     {
+        public static long SWEH_CHILDID_SELF = 0;
+
         // Needed to prevent window getting focus
         private const int GWL_EXSTYLE = -20;
 
         private const int LSFW_LOCK = 1;
 
         private const int WS_EX_NOACTIVATE = 134217728;
+        private static readonly SWEH_dwFlags WinEventHookInternalFlags = SWEH_dwFlags.WINEVENT_OUTOFCONTEXT |
+                                                                SWEH_dwFlags.WINEVENT_SKIPOWNPROCESS |
+                                                                SWEH_dwFlags.WINEVENT_SKIPOWNTHREAD;
 
-        public static long SWEH_CHILDID_SELF = 0;
-
-
-        public static void SetNoActiveWindow(Window windowArg)
-        {
-            WindowInteropHelper helper = new WindowInteropHelper(windowArg);
-            SetWindowLong(helper.Handle, GWL_EXSTYLE, WS_EX_NOACTIVATE);
-            LockSetForegroundWindow(LSFW_LOCK);
-        }
-
-        // Get a handle to an application window.
-        [DllImport("USER32.DLL", CharSet = CharSet.Unicode)]
-        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
-
-        // Needed to prevent Application taking focus
-        [DllImport("user32")]
-        public static extern bool LockSetForegroundWindow(uint UINT);
-
-        // Activate an application window.
-        [DllImport("USER32.DLL")]
-        public static extern bool SetForegroundWindow(IntPtr hWnd);
-
-        [DllImport("user32")]
-        public static extern IntPtr SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
-
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetForegroundWindow();
+        public delegate void WinEventDelegate(IntPtr hWinEventHook,
+                                              SWEH_Events eventType,
+                                              IntPtr hwnd,
+                                              SWEH_ObjectId idObject,
+                                              long idChild,
+                                              uint dwEventThread,
+                                              uint dwmsEventTime);
 
         //SetWinEventHook() flags
         public enum SWEH_dwFlags : uint
@@ -144,17 +129,41 @@ namespace TraderForPoe.Classes
             OBJID_NATIVEOM = 0xFFFFFFF0
         }
 
-        private static readonly SWEH_dwFlags WinEventHookInternalFlags = SWEH_dwFlags.WINEVENT_OUTOFCONTEXT |
-                                                                SWEH_dwFlags.WINEVENT_SKIPOWNPROCESS |
-                                                                SWEH_dwFlags.WINEVENT_SKIPOWNTHREAD;
+        // Get a handle to an application window.
+        [DllImport("USER32.DLL", CharSet = CharSet.Unicode)]
+        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
-        public delegate void WinEventDelegate(IntPtr hWinEventHook,
-                                              SWEH_Events eventType,
-                                              IntPtr hwnd,
-                                              SWEH_ObjectId idObject,
-                                              long idChild,
-                                              uint dwEventThread,
-                                              uint dwmsEventTime);
+        public static uint GetWindowThread(IntPtr hWnd)
+        {
+            new UIPermission(UIPermissionWindow.AllWindows).Demand();
+            return UnsafeNativeMethods.GetWindowThreadProcessId(hWnd, IntPtr.Zero);
+        }
+
+        // Needed to prevent Application taking focus
+        [DllImport("user32")]
+        public static extern bool LockSetForegroundWindow(uint UINT);
+
+        // Activate an application window.
+        [DllImport("USER32.DLL")]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        public static void SetNoActiveWindow(Window windowArg)
+        {
+            WindowInteropHelper helper = new WindowInteropHelper(windowArg);
+            SetWindowLong(helper.Handle, GWL_EXSTYLE, WS_EX_NOACTIVATE);
+            LockSetForegroundWindow(LSFW_LOCK);
+        }
+        [DllImport("user32")]
+        public static extern IntPtr SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+
+        public static IntPtr WinEventHookOne(SWEH_Events _event, WinEventDelegate _delegate, uint idProcess, uint idThread)
+        {
+            new UIPermission(UIPermissionWindow.AllWindows).Demand();
+            return UnsafeNativeMethods.SetWinEventHook(_event, _event,
+                                                       IntPtr.Zero, _delegate,
+                                                       idProcess, idThread,
+                                                       WinEventHookInternalFlags);
+        }
 
         public static IntPtr WinEventHookRange(SWEH_Events _eventFrom,
                                                SWEH_Events _eventTo,
@@ -168,25 +177,13 @@ namespace TraderForPoe.Classes
                                                        WinEventHookInternalFlags);
         }
 
-        public static IntPtr WinEventHookOne(SWEH_Events _event, WinEventDelegate _delegate, uint idProcess, uint idThread)
-        {
-            new UIPermission(UIPermissionWindow.AllWindows).Demand();
-            return UnsafeNativeMethods.SetWinEventHook(_event, _event,
-                                                       IntPtr.Zero, _delegate,
-                                                       idProcess, idThread,
-                                                       WinEventHookInternalFlags);
-        }
-
         public static bool WinEventUnhook(IntPtr hWinEventHook)
         {
             return UnsafeNativeMethods.UnhookWinEvent(hWinEventHook);
         }
 
-        public static uint GetWindowThread(IntPtr hWnd)
-        {
-            new UIPermission(UIPermissionWindow.AllWindows).Demand();
-            return UnsafeNativeMethods.GetWindowThreadProcessId(hWnd, IntPtr.Zero);
-        }
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
     }
 
     [SuppressUnmanagedCodeSecurityAttribute]

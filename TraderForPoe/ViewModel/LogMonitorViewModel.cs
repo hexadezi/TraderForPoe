@@ -1,10 +1,22 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Data;
 using TraderForPoe.Classes;
 
 namespace TraderForPoe.ViewModel
 {
-    public class LogMonitorViewModel
+    public class LogMonitorViewModel : INotifyPropertyChanged
     {
+        #region Fields
+
+        private ICollectionView linesView;
+        private string filter;
+
+        #endregion Fields
+
+        #region Contructors
+
         public LogMonitorViewModel()
         {
             LogReader.OnLineAddition += LogReader_OnLineAddition;
@@ -17,7 +29,22 @@ namespace TraderForPoe.ViewModel
 
             CmdClear = new RelayCommand(
                 () => Lines.Clear());
+
+            linesView = CollectionViewSource.GetDefaultView(Lines);
+            linesView.Filter = UserFilter;
+
+
         }
+
+        #endregion Contructors
+
+        #region Events
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion Events
+
+        #region Properties
 
         public RelayCommand CmdClear { get; private set; }
 
@@ -27,9 +54,46 @@ namespace TraderForPoe.ViewModel
 
         public ObservableCollection<string> Lines { get; } = new ObservableCollection<string>();
 
+        public string Filter
+        {
+            get
+            {
+                return filter;
+            }
+            set
+            {
+                if (value != filter)
+                {
+                    filter = value;
+                    linesView.Refresh();
+                    NotifyPropertyChanged(nameof(Filter));
+                }
+            }
+        }
+
+        #endregion Properties
+
+        #region Methods
+
+        public void NotifyPropertyChanged(string propName)
+        {
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+        }
+
         private void LogReader_OnLineAddition(object sender, LogReaderLineEventArgs e)
         {
             Lines.Add(e.Line);
         }
+
+        private bool UserFilter(object item)
+        {
+            if (String.IsNullOrEmpty(Filter))
+                return true;
+            else
+                return ((string)item).ToLower().Contains(Filter.ToLower());
+        }
+
+        #endregion Methods
     }
 }

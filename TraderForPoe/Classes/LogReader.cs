@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 using System.Windows.Threading;
@@ -10,6 +11,7 @@ namespace TraderForPoe.Classes
     {
         #region Fields
 
+        public static ObservableCollection<string> Lines { get; } = new ObservableCollection<string>();
         private static readonly string delimiter = "\n";
         private static readonly string path = Settings.Default.PathToClientTxt;
         private static readonly DispatcherTimer timer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(200) };
@@ -91,7 +93,12 @@ namespace TraderForPoe.Classes
 
                 foreach (var line in lines)
                 {
-                    OnLineAddition(null, new LogReaderLineEventArgs { Line = line.Trim() });
+                    if (OnLineAddition != null)
+                    {
+                        OnLineAddition(null, new LogReaderLineEventArgs { Line = line.Trim() });
+                    }
+
+                    Lines.Add(line.Trim());
                 }
             }
 
