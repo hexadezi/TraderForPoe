@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:properties="clr-namespace:TraderForPoe.Properties"
         mc:Ignorable="d"
-        Title="Settings" Height="380" Width="650"
+        Title="Settings" Height="316" Width="650"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         
@@ -13,27 +13,28 @@
 
     <Window.Resources>
         <Style TargetType="Button">
-            <Setter Property="MinWidth" Value="70"></Setter>
-            <Setter Property="Height" Value="25"></Setter>
-            <Setter Property="Margin" Value="5,5,10,5"></Setter>
+            <Setter Property="MinWidth" Value="70"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Margin" Value="5"/>
         </Style>
         <Style TargetType="Label">
-            <Setter Property="Margin" Value="0" ></Setter>
-            <Setter Property="FontWeight" Value="Bold" ></Setter>
-            <Setter Property="HorizontalAlignment" Value="Right" ></Setter>
-            <Setter Property="VerticalAlignment" Value="Center" ></Setter>
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
         <Style TargetType="TextBox">
-            <Setter Property="Margin" Value="10,5,0,5" ></Setter>
-            <Setter Property="Height" Value="25" ></Setter>
-            <Setter Property="VerticalAlignment" Value="Center" ></Setter>
-            <Setter Property="VerticalContentAlignment" Value="Center" ></Setter>
-            <Setter Property="Padding" Value="5,0,5,0" ></Setter>
-            <Setter Property="TextWrapping" Value="NoWrap" ></Setter>
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="5,0,5,0" />
+            <Setter Property="TextWrapping" Value="NoWrap" />
         </Style>
         <Style TargetType="CheckBox">
-            <Setter Property="HorizontalAlignment" Value="Center" ></Setter>
-            <Setter Property="VerticalAlignment" Value="Center" ></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="5" />
         </Style>
     </Window.Resources>
 
@@ -44,33 +45,31 @@
             </WrapPanel>
             <TabControl Margin="5,5,5,0">
                 <TabItem Header="General">
-                    <StackPanel Margin="5">
-                        <GroupBox Header="Path to Client.txt">
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <GroupBox Header="Path to Client.txt" Grid.Row="0">
                             <DockPanel>
                                 <Button DockPanel.Dock="Right" Click="Click_SearchFile">Open</Button>
                                 <TextBox Name="txt_PathToClientTxt" Text="{Binding Path}" />
                             </DockPanel>
                         </GroupBox>
-                        <GroupBox Header="Character name">
-                            <TextBox Margin="10,5,10,5" Text="{Binding PlayerName}"/>
+                        <GroupBox Header="Character name" Grid.Row="1">
+                            <TextBox Text="{Binding PlayerName}"/>
                         </GroupBox>
-                        <GroupBox Header="Various Settings">
-                            <StackPanel Margin="10,5,10,5">
-                                <StackPanel.Resources>
-                                    <Style TargetType="CheckBox">
-                                        <Setter Property="HorizontalAlignment" Value="Left" ></Setter>
-                                        <Setter Property="Margin" Value="0,10,0,0" ></Setter>
-                                    </Style>
-                                </StackPanel.Resources>
-                                <CheckBox Content="Play notification sound" IsChecked="{Binding PlayNotificationSound}"/>
-                                <CheckBox Content="Remove item after trade" IsChecked="{Binding CloseItemAfterTrade}"/>
-                                <CheckBox Content="Check for updates on start" IsChecked="{Binding CheckForUpdatesOnStart}"/>
-                                <CheckBox Content="Hide if not foreground" IsChecked="{Binding HideIfPoeNotForeGround}"/>
-                                <CheckBox Content="Collapse items" IsChecked="{Binding CollapsedItems}"/>
-                            </StackPanel>
-
+                        <GroupBox Header="Various Settings" Grid.Row="2">
+                            <WrapPanel  Orientation="Vertical">
+                                <CheckBox HorizontalAlignment="Left" Content="Play notification sound" IsChecked="{Binding PlayNotificationSound}"/>
+                                <CheckBox HorizontalAlignment="Left" Content="Remove item after trade" IsChecked="{Binding CloseItemAfterTrade}"/>
+                                <CheckBox HorizontalAlignment="Left" Content="Check for updates on start" IsChecked="{Binding CheckForUpdatesOnStart}"/>
+                                <CheckBox HorizontalAlignment="Left" Content="Hide if not foreground" IsChecked="{Binding HideIfPoeNotForeGround}"/>
+                                <CheckBox HorizontalAlignment="Left" Content="Collapse items" IsChecked="{Binding CollapsedItems}"/>
+                            </WrapPanel>
                         </GroupBox>
-                    </StackPanel>
+                    </Grid>
                 </TabItem>
                 <TabItem Header="Whispers">
                     <Grid Margin="5">

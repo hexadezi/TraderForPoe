@@ -5,9 +5,9 @@
                     xmlns:p="clr-namespace:TraderForPoe.Properties">
 
     <!--
-        The "shared" directive is needed if we reopen the sample window a few times - WPF will otherwise
-        reuse the same context menu (which is a resource) again (which will have its DataContext set to the old TaskbarIcon)
-  -->
+         The "shared" directive is needed if we reopen the sample window a few times - WPF will otherwise
+         reuse the same context menu (which is a resource) again (which will have its DataContext set to the old TaskbarIcon)
+    -->
     <ContextMenu x:Shared="false" x:Key="SysTrayMenu">
         <MenuItem Header="Clip Monitor" IsCheckable="True" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=UseClipboardMonitor}" />
         <MenuItem Header="Log Monitor" IsCheckable="True"  IsChecked="{Binding IsRunning}" />
@@ -37,5 +37,5 @@
     </tb:TaskbarIcon>
 
     <PopupAnimation x:Key="{x:Static SystemParameters.MenuPopupAnimationKey}">None</PopupAnimation>
-    
+
 </ResourceDictionary>

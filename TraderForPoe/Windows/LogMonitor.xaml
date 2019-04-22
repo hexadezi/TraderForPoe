@@ -1,14 +1,16 @@
 ﻿<Window x:Class="TraderForPoe.Windows.LogMonitor"
+        xmlns:classes="clr-namespace:TraderForPoe.Classes"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Log Reader" Height="300" Width="505.724">
-   
+
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="MinWidth" Value="70"></Setter>
+            <Setter Property="Height" Value="25"></Setter>
             <Setter Property="Margin" Value="5,5,10,5"></Setter>
         </Style>
     </Window.Resources>
@@ -19,7 +21,14 @@
                 <Button Content="Stop" Command="{Binding CmdStop}"></Button>
                 <Button Content="Clear" Command="{Binding CmdClear}"></Button>
             </WrapPanel>
-            <ListBox Name="lbLines" FontFamily="Consolas" ItemsSource="{Binding Lines}"/>
+            <ListBox Name="lbLines" FontFamily="Consolas" ItemsSource="{Binding Lines}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" TextWrapping="Wrap"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
         </DockPanel>
     </Grid>
 </Window>
