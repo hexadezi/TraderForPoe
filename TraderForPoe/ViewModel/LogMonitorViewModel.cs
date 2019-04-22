@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
 using TraderForPoe.Classes;
-using TraderForPoe.ViewModel.Base;
 
 namespace TraderForPoe.ViewModel
 {

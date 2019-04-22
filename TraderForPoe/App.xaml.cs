@@ -54,6 +54,7 @@ namespace TraderForPoe
 
         private void RegisterViewModel()
         {
+            WindowViewLoaderService.Register(typeof(AboutViewModel), typeof(About));
             WindowViewLoaderService.Register(typeof(LogMonitorViewModel), typeof(LogMonitor));
             WindowViewLoaderService.Register(typeof(MainWindowViewModel), typeof(MainWindow));
             WindowViewLoaderService.Register(typeof(TradeHistoryViewModel), typeof(TradeHistory));

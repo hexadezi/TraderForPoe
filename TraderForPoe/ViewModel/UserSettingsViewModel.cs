@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using TraderForPoe.Properties;
-using TraderForPoe.ViewModel.Base;
 
 namespace TraderForPoe.ViewModel
 {

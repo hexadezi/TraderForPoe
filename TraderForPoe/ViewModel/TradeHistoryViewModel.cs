@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 using TraderForPoe.Classes;
-using TraderForPoe.ViewModel.Base;
 
 namespace TraderForPoe.ViewModel
 {

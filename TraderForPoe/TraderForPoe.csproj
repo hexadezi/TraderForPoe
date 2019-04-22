@@ -129,6 +129,7 @@
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Classes\StartUpClass.cs" />
+    <Compile Include="ViewModel\AboutViewModel.cs" />
     <Compile Include="ViewModel\Base\ViewModelBase.cs" />
     <Compile Include="ViewModel\LogMonitorViewModel.cs" />
     <Compile Include="ViewModel\Base\RelayCommand.cs" />

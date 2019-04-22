@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using TraderForPoe.Classes;
 using TraderForPoe.Controls;
-using TraderForPoe.ViewModel.Base;
 
 namespace TraderForPoe.ViewModel
 {

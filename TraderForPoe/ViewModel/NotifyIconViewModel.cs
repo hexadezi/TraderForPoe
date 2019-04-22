@@ -1,9 +1,6 @@
-﻿using System.ComponentModel;
-using System.Windows;
+﻿using System.Windows;
 using TraderForPoe.Classes;
 using TraderForPoe.Properties;
-using TraderForPoe.ViewModel.Base;
-using TraderForPoe.Windows;
 
 namespace TraderForPoe.ViewModel
 {
@@ -29,7 +26,7 @@ namespace TraderForPoe.ViewModel
 
             CmdUpdate = new RelayCommand(() => Updater.CheckForUpdate());
 
-            CmdAbout = new RelayCommand(() => new About().Show());
+            CmdAbout = new RelayCommand(() => WindowViewLoaderService.ShowSingle(typeof(AboutViewModel)));
 
             CmdQuit = new RelayCommand(() => Application.Current.Shutdown());
         }
