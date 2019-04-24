@@ -1,27 +1,29 @@
 ﻿<classes:NotActivatableWindow
-        xmlns:classes="clr-namespace:TraderForPoe.Classes"
-        x:Class="TraderForPoe.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:p="clr-namespace:TraderForPoe.Properties"
-        mc:Ignorable="d"
-        Title="Trade Items"
-        Height="148" Width="327" 
-        WindowStyle="None"
-        ResizeMode="NoResize"
-        Topmost="True" 
-        SnapsToDevicePixels="True"
-        RenderOptions.BitmapScalingMode="NearestNeighbor"
-        ShowInTaskbar="False"
-        Left="{Binding Source={x:Static p:Settings.Default}, Path=PosLeft, Mode=TwoWay}"
-        Top="{Binding Source={x:Static p:Settings.Default}, Path=PosTop, Mode=TwoWay}"
-        Background="Transparent" 
-        SizeToContent="Height"
-        Closing="Window_Closing"
-        MouseWheel="NotActivatableWindow_MouseWheel"
-        MouseDown="Window_MouseDown"
+    xmlns:classes="clr-namespace:TraderForPoe.Classes"
+    x:Class="TraderForPoe.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:p="clr-namespace:TraderForPoe.Properties"
+    mc:Ignorable="d"
+    Title="Trade Items"
+    Height="148" Width="327" 
+    WindowStyle="None"
+    ResizeMode="NoResize"
+    Topmost="True" 
+    SnapsToDevicePixels="True"
+    RenderOptions.BitmapScalingMode="NearestNeighbor"
+    ShowInTaskbar="False"
+    Left="{Binding Source={x:Static p:Settings.Default}, Path=PosLeft, Mode=TwoWay}"
+    Top="{Binding Source={x:Static p:Settings.Default}, Path=PosTop, Mode=TwoWay}"
+    Background="Transparent" 
+    SizeToContent="Height"
+    Closing="Window_Closing"
+    MouseWheel="NotActivatableWindow_MouseWheel"
+    MouseDown="Window_MouseDown"
+    Opacity="{Binding ControlOpacity}"
+    AllowsTransparency="True"
     >
 
     <Window.Resources>
@@ -85,6 +87,7 @@
             <Setter Property="Background" Value="#FF23272B"/>
             <Setter Property="Foreground" Value="White" />
             <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="2"/>
 
             <Style.Triggers>
 
@@ -162,9 +165,9 @@
                                       ContentTemplateSelector="{TemplateBinding SelectedContentTemplateSelector}" ContentSource="SelectedContent" />
                 </Border>
                 <!--<Border Grid.Row="1" Grid.Column="0" x:Name="ContentPanel" BorderBrush="#FFD0CEBF" BorderThickness="0" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local" KeyboardNavigation.DirectionalNavigation="Contained">
-                    <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                    </Border>
-                </Border>-->
+                     <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                     </Border>
+                     </Border>-->
                 <classes:SqueezeTabPanel IsItemsHost="true" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" Background="#FF5C656D"/>
             </Grid>
         </ControlTemplate>
@@ -172,7 +175,7 @@
     </Window.Resources>
 
     <!--<Border BorderBrush="#FF5C656D" BorderThickness="1" Name="mainBrd">-->
-    <Border BorderBrush="#FF151719" BorderThickness="1" Name="mainBrd">
+    <Border BorderBrush="#FF151719" BorderThickness="1" Name="mainBrd"     >
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
@@ -218,31 +221,35 @@
                                                     </WrapPanel>
                                                 </StackPanel>
                                             </TextBlock.ToolTip>
-                                        <Run Text="▼ 1 x Cybil's Paw Thresher Claw" />
-                                </TextBlock>
+                                            <Run Text="▼ 1 x Cybil's Paw Thresher Claw" />
+                                        </TextBlock>
                                     </Border>
                                     <WrapPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
-                                        <TextBlock Grid.Column="0" Grid.Row="1" Foreground="White">👤</TextBlock>
 
                                         <Button Grid.Column="1" Grid.Row="1"  HorizontalAlignment="Left" Cursor="Hand" Style="{DynamicResource inlineStyle}">
-                                            <TextBlock FontSize="15">Laboooo</TextBlock>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock >👤</TextBlock>
+                                                <TextBlock >Laboooo</TextBlock>
+                                            </StackPanel>
                                         </Button>
-                                        <TextBlock Grid.Column="2" Grid.Row="1" Foreground="White">💼</TextBlock>
                                         <Button HorizontalAlignment="Left" Cursor="Hand" Style="{DynamicResource inlineStyle}">
-                                            <TextBlock>Teststash [12/12]</TextBlock>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock>💼</TextBlock>
+                                                <TextBlock>Teststash [12/12]</TextBlock>
+                                            </StackPanel>
                                         </Button>
                                     </WrapPanel>
                                     <!--<StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
-                                        <Button Margin="5,0,0,0" HorizontalAlignment="Left" Cursor="Hand" Style="{DynamicResource inlineStyle}">
-                                            <TextBlock>Delve</TextBlock>
-                                        </Button>
-                                    </StackPanel>-->
+                                         <Button Margin="5,0,0,0" HorizontalAlignment="Left" Cursor="Hand" Style="{DynamicResource inlineStyle}">
+                                         <TextBlock>Delve</TextBlock>
+                                         </Button>
+                                         </StackPanel>-->
 
                                     <Border Padding="3,2,3,2" BorderThickness="1" BorderBrush="OrangeRed" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="1" HorizontalAlignment="Right" VerticalAlignment="Center">
                                         <WrapPanel Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="1" HorizontalAlignment="Right" VerticalAlignment="Center">
                                             <TextBlock TextWrapping="Wrap" Foreground="OrangeRed" FontWeight="Bold" FontSize="15" VerticalAlignment="Stretch" Margin="0,0,3,0">
-                                        <Run Text="▲ 256"/>
-                                        <Run Text="x"/>
+                                                <Run Text="▲ 256"/>
+                                                <Run Text="x"/>
                                             </TextBlock>
                                             <Image Source="pack://application:,,,/Resources/Currency/curr_ex.png" MaxHeight="20" RenderOptions.BitmapScalingMode="HighQuality" />
                                         </WrapPanel>

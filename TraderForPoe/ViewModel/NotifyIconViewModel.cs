@@ -8,8 +8,6 @@ namespace TraderForPoe.ViewModel
     {
         #region Fields
 
-        private bool useClipboardMonitor = Settings.Default.UseClipboardMonitor;
-
         #endregion Fields
 
         #region Constructor
@@ -46,12 +44,11 @@ namespace TraderForPoe.ViewModel
 
         public bool UseClipboardMonitor
         {
-            get { return useClipboardMonitor; }
+            get { return Settings.Default.UseClipboardMonitor; }
             set
             {
-                if (useClipboardMonitor != value)
+                if (Settings.Default.UseClipboardMonitor != value)
                 {
-                    useClipboardMonitor = value;
                     Settings.Default.UseClipboardMonitor = value;
                     Settings.Default.Save();
                     this.OnPropertyChanged();

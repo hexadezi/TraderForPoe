@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using TraderForPoe.Classes;
 using TraderForPoe.Controls;
+using TraderForPoe.Properties;
 
 namespace TraderForPoe.ViewModel
 {
@@ -20,6 +21,11 @@ namespace TraderForPoe.ViewModel
         #region Properties
 
         public static ObservableCollection<CustomTestCtrl> TradeControlList { get; set; } = CustomTestCtrl.TradeControlList;
+
+        public float ControlOpacity
+        {
+            get { return Settings.Default.ControlOpacity; }
+        }
 
         #endregion Properties
 

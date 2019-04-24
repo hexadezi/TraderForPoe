@@ -87,7 +87,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Label Grid.Column="0" Content="Thank you whisper:"/>
-                        <TextBox Grid.Column="1"  Text="{Binding Source={x:Static properties:Settings.Default}, Path=ThankYouWhisper}" />
+                        <TextBox Grid.Column="1"  Text="{Binding ThankYouWhisper}" />
                         <CheckBox Grid.Column="2" ToolTip="Close item after clicking Thank You whisper?" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterThankYouWhisper}"/>
 
                         <Label Grid.Column="0" Grid.Row="1" Content="I am busy whisper:"/>
@@ -114,16 +114,17 @@
                 <TabItem Header="Misc">
                     <DockPanel Margin="5">
                         <GroupBox DockPanel.Dock="Bottom" Header="Control Opacity">
-                            <Slider Margin="5,5,5,5" TickPlacement="BottomRight" Maximum="1" Minimum="0.1" IsSnapToTickEnabled="True" TickFrequency="0.1" Value="{Binding Source={x:Static properties:Settings.Default}, Path=ControlOpacity}"/>
+                            <Slider Margin="5,5,5,5" TickPlacement="BottomRight" Maximum="1" Minimum="0.1" 
+                                    IsSnapToTickEnabled="True" TickFrequency="0.1" Value="{Binding ControlOpacity}"/>
                         </GroupBox>
                         <GroupBox Header="Quad tabs" MinWidth="140">
                             <DockPanel>
                                 <DockPanel DockPanel.Dock="Bottom">
-                                    <Button DockPanel.Dock="Right" Click="Click_DeleteQuadStash" Margin="5">Delete</Button>
-                                    <Button DockPanel.Dock="Right" Click="Click_AddQuadStash" Margin="5,5,0,5">Add</Button>
-                                    <TextBox Name="txt_QuadStash" Margin="5,5,0,5"></TextBox>
+                                    <Button DockPanel.Dock="Right" Command="{Binding CmdDeleteQuadStash}" Margin="5">Delete</Button>
+                                    <Button DockPanel.Dock="Right" Command="{Binding CmdAddToQuadStashList}" Margin="5,5,0,5" IsDefault="True">Add</Button>
+                                    <TextBox Margin="5,5,0,5" Text="{Binding QuadStashText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
                                 </DockPanel>
-                                <ListBox Name="lsb_QuadStash" Margin="5" ItemsSource="{Binding Source={x:Static properties:Settings.Default}, Path=QuadStash}"/>
+                                <ListBox Margin="5" ItemsSource="{Binding QuadStashList}" SelectedItem="{Binding SelectedQuadStashListItem}"/>
                             </DockPanel>
                         </GroupBox>
 
