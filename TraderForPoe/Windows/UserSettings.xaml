@@ -7,7 +7,6 @@
         Title="Settings" Height="315" Width="650"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize"
-        
         >
 
     <Window.Resources>
@@ -56,7 +55,7 @@
                                 <TextBox Name="txt_PathToClientTxt" Text="{Binding Path}" />
                             </DockPanel>
                         </GroupBox>
-                        <GroupBox Header="Character name" Grid.Row="1">
+                        <GroupBox Header="Character Name" Grid.Row="1">
                             <TextBox Text="{Binding PlayerName}"/>
                         </GroupBox>
                         <GroupBox Header="Various Settings" Grid.Row="2">
@@ -88,36 +87,36 @@
 
                         <Label Grid.Column="0" Content="Thank you whisper:"/>
                         <TextBox Grid.Column="1"  Text="{Binding ThankYouWhisper}" />
-                        <CheckBox Grid.Column="2" ToolTip="Close item after clicking Thank You whisper?" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterThankYouWhisper}"/>
+                        <CheckBox Grid.Column="2" ToolTip="Close item after clicking Thank You whisper?" IsChecked="{Binding CloseItemAfterThankYouWhisper}"/>
 
                         <Label Grid.Column="0" Grid.Row="1" Content="I am busy whisper:"/>
-                        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Source={x:Static properties:Settings.Default}, Path=ImBusyWhisper}"/>
-                        <CheckBox Grid.Column="2" Grid.Row="1" ToolTip="Close item after clicking Im Busy whisper?" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterImBusyWhisper}"/>
+                        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding ImBusyWhisper}"/>
+                        <CheckBox Grid.Column="2" Grid.Row="1" ToolTip="Close item after clicking Im Busy whisper?" IsChecked="{Binding CloseItemAfterImBusyWhisper}"/>
 
                         <Label Grid.Column="0" Grid.Row="2" Content="Custom whisper 1:"/>
-                        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper1}"/>
-                        <CheckBox Grid.Column="2" Grid.Row="2" ToolTip="Close item after clicking Custom whisper 1?" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterCustomWhisper1}"/>
+                        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding CustomWhisper1}"/>
+                        <CheckBox Grid.Column="2" Grid.Row="2" ToolTip="Close item after clicking Custom whisper 1?" IsChecked="{Binding CloseItemAfterCustomWhisper1}"/>
 
                         <Label Grid.Column="0" Grid.Row="3" Content="Custom whisper 2:"/>
-                        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper2}"/>
-                        <CheckBox Grid.Column="2" Grid.Row="3" ToolTip="Close item after clicking Custom whisper 2?" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterCustomWhisper2}"/>
+                        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding CustomWhisper2}"/>
+                        <CheckBox Grid.Column="2" Grid.Row="3" ToolTip="Close item after clicking Custom whisper 2?" IsChecked="{Binding CloseItemAfterCustomWhisper2}"/>
 
                         <Label Grid.Column="0" Grid.Row="4" Content="Custom whisper 3:"/>
-                        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper3}"/>
-                        <CheckBox Grid.Column="2" Grid.Row="4" ToolTip="Close item after clicking Custom whisper 3?" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterCustomWhisper3}"/>
+                        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding CustomWhisper3}"/>
+                        <CheckBox Grid.Column="2" Grid.Row="4" ToolTip="Close item after clicking Custom whisper 3?" IsChecked="{Binding CloseItemAfterCustomWhisper3}"/>
 
                         <Label Grid.Column="0" Grid.Row="5" Content="Custom whisper 4:"/>
-                        <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper4}"/>
-                        <CheckBox Grid.Column="2" Grid.Row="5" ToolTip="Close item after clicking Custom whisper 4?" IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterCustomWhisper4}"/>
+                        <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding CustomWhisper4}"/>
+                        <CheckBox Grid.Column="2" Grid.Row="5" ToolTip="Close item after clicking Custom whisper 4?" IsChecked="{Binding CloseItemAfterCustomWhisper4}"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Misc">
                     <DockPanel Margin="5">
-                        <GroupBox DockPanel.Dock="Bottom" Header="Control Opacity">
+                        <GroupBox DockPanel.Dock="Bottom" Header="Change Opacity">
                             <Slider Margin="5,5,5,5" TickPlacement="BottomRight" Maximum="1" Minimum="0.1" 
                                     IsSnapToTickEnabled="True" TickFrequency="0.1" Value="{Binding ControlOpacity}"/>
                         </GroupBox>
-                        <GroupBox Header="Quad tabs" MinWidth="140">
+                        <GroupBox Header="Quad Stash Tabs" MinWidth="140">
                             <DockPanel>
                                 <DockPanel DockPanel.Dock="Bottom">
                                     <Button DockPanel.Dock="Right" Command="{Binding CmdDeleteQuadStash}" Margin="5">Delete</Button>

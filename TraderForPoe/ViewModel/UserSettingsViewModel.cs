@@ -70,7 +70,7 @@ namespace TraderForPoe.ViewModel
         public float ControlOpacity
         {
             get { return Settings.Default.ControlOpacity; }
-            set { Settings.Default.ControlOpacity = value; OnPropertyChanged(); }
+            set { Settings.Default.ControlOpacity = value; OnPropertyChanged();  }
         }
 
         public bool HideIfPoeNotForeGround
@@ -100,24 +100,6 @@ namespace TraderForPoe.ViewModel
                 }
             }
         }
-
-
-
-        public string ThankYouWhisper
-        {
-            get { return Settings.Default.ThankYouWhisper; }
-            set
-            {
-                if (Settings.Default.ThankYouWhisper != value)
-                {
-                    Settings.Default.ThankYouWhisper = value;
-                    Settings.Default.Save();
-                    this.OnPropertyChanged();
-                }
-            }
-        }
-
-
 
         public string PlayerName
         {
@@ -156,6 +138,174 @@ namespace TraderForPoe.ViewModel
         public string QuadStashText { get; set; }
 
         public string SelectedQuadStashListItem { get; set; }
+
+        public string ThankYouWhisper
+        {
+            get { return Settings.Default.ThankYouWhisper; }
+            set
+            {
+                if (Settings.Default.ThankYouWhisper != value)
+                {
+                    Settings.Default.ThankYouWhisper = value;
+                    Settings.Default.Save();
+                    this.OnPropertyChanged();
+                }
+            }
+        }
+
+        public string ImBusyWhisper
+        {
+            get { return Settings.Default.ImBusyWhisper; }
+            set
+            {
+                if (Settings.Default.ImBusyWhisper != value)
+                {
+                    Settings.Default.ImBusyWhisper = value;
+                    Settings.Default.Save();
+                    this.OnPropertyChanged();
+                }
+            }
+        }
+
+        public string CustomWhisper1
+        {
+            get { return Settings.Default.CustomWhisper1; }
+            set
+            {
+                if (Settings.Default.CustomWhisper1 != value)
+                {
+                    Settings.Default.CustomWhisper1 = value;
+                    Settings.Default.Save();
+                    this.OnPropertyChanged();
+                }
+            }
+        }
+
+        public string CustomWhisper2
+        {
+            get { return Settings.Default.CustomWhisper2; }
+            set
+            {
+                if (Settings.Default.CustomWhisper2 != value)
+                {
+                    Settings.Default.CustomWhisper2 = value;
+                    Settings.Default.Save();
+                    this.OnPropertyChanged();
+                }
+            }
+        }
+
+        public string CustomWhisper3
+        {
+            get { return Settings.Default.CustomWhisper3; }
+            set
+            {
+                if (Settings.Default.CustomWhisper3 != value)
+                {
+                    Settings.Default.CustomWhisper3 = value;
+                    Settings.Default.Save();
+                    this.OnPropertyChanged();
+                }
+            }
+        }
+
+        public string CustomWhisper4
+        {
+            get { return Settings.Default.CustomWhisper4; }
+            set
+            {
+                if (Settings.Default.CustomWhisper4 != value)
+                {
+                    Settings.Default.CustomWhisper4 = value;
+                    Settings.Default.Save();
+                    this.OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool CloseItemAfterThankYouWhisper
+        {
+            get { return Settings.Default.CloseItemAfterThankYouWhisper; }
+            set
+            {
+                if (Settings.Default.CloseItemAfterThankYouWhisper != value)
+                {
+                    Settings.Default.CloseItemAfterThankYouWhisper = value;
+                    Settings.Default.Save();
+                    this.OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool CloseItemAfterImBusyWhisper
+        {
+            get { return Settings.Default.CloseItemAfterImBusyWhisper; }
+            set
+            {
+                if (Settings.Default.CloseItemAfterImBusyWhisper != value)
+                {
+                    Settings.Default.CloseItemAfterImBusyWhisper = value;
+                    Settings.Default.Save();
+                    this.OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool CloseItemAfterCustomWhisper1
+        {
+            get { return Settings.Default.CloseItemAfterCustomWhisper1; }
+            set
+            {
+                if (Settings.Default.CloseItemAfterCustomWhisper1 != value)
+                {
+                    Settings.Default.CloseItemAfterCustomWhisper1 = value;
+                    Settings.Default.Save();
+                    this.OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool CloseItemAfterCustomWhisper2
+        {
+            get { return Settings.Default.CloseItemAfterCustomWhisper2; }
+            set
+            {
+                if (Settings.Default.CloseItemAfterCustomWhisper2 != value)
+                {
+                    Settings.Default.CloseItemAfterCustomWhisper2 = value;
+                    Settings.Default.Save();
+                    this.OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool CloseItemAfterCustomWhisper3
+        {
+            get { return Settings.Default.CloseItemAfterCustomWhisper3; }
+            set
+            {
+                if (Settings.Default.CloseItemAfterCustomWhisper3 != value)
+                {
+                    Settings.Default.CloseItemAfterCustomWhisper3 = value;
+                    Settings.Default.Save();
+                    this.OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool CloseItemAfterCustomWhisper4
+        {
+            get { return Settings.Default.CloseItemAfterCustomWhisper4; }
+            set
+            {
+                if (Settings.Default.CloseItemAfterCustomWhisper4 != value)
+                {
+                    Settings.Default.CloseItemAfterCustomWhisper4 = value;
+                    Settings.Default.Save();
+                    this.OnPropertyChanged();
+                }
+            }
+        }
 
         #endregion Properties
 
