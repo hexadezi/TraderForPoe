@@ -182,7 +182,18 @@
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <TabControl Grid.Row="0" BorderThickness="0" Name="mainTabControl" Background="#FF23272B" Padding="1" Template="{DynamicResource TabControlControlTemplate1}" IsSynchronizedWithCurrentItem="True">
+            <TabControl Grid.Row="0" BorderThickness="0" Name="mainTabControl" Background="#FF23272B" Padding="1" 
+                        Template="{DynamicResource TabControlControlTemplate1}" IsSynchronizedWithCurrentItem="True"
+                        ItemsSource="{Binding TradeObjects}">
+                <TabControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding Amount, Mode=OneWay}" ToolTip="{Binding Amount}"></Run>
+                            <Run> x </Run>
+                            <Run Text="{Binding ItemName, Mode=OneWay}" ToolTip="{Binding ItemName}"></Run>
+                        </TextBlock>
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
                 <TabControl.ContentTemplate>
                     <DataTemplate>
 
@@ -314,8 +325,6 @@
                     </DataTemplate>
                 </TabControl.ContentTemplate>
 
-                <TabItem Header="Cybil's Paw Thresher Claw"></TabItem>
-                <TabItem Header="Darkscorn Assassin Bow"></TabItem>
 
             </TabControl>
 

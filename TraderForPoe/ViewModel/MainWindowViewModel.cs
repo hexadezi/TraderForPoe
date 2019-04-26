@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using TraderForPoe.Classes;
-using TraderForPoe.Controls;
 using TraderForPoe.Properties;
 
 namespace TraderForPoe.ViewModel
@@ -13,14 +12,18 @@ namespace TraderForPoe.ViewModel
 
         #endregion Fields
 
+        #region Constructors
+
         public MainWindowViewModel()
         {
             SubscribeToEvents();
         }
 
+        #endregion Constructors
+
         #region Properties
 
-        public static ObservableCollection<CustomTestCtrl> TradeControlList { get; set; } = CustomTestCtrl.TradeControlList;
+        public ObservableCollection<TradeObjectViewModel> TradeObjects { get; set; } = new ObservableCollection<TradeObjectViewModel>();
 
         public float ControlOpacity
         {
@@ -33,7 +36,7 @@ namespace TraderForPoe.ViewModel
 
         private void ClipMonitor_OnChange(object sender, ClipboardTextEventArgs e)
         {
-            if (Properties.Settings.Default.UseClipboardMonitor == true)
+            if (Settings.Default.UseClipboardMonitor == true)
             {
                 if (TradeObject.IsTradeWhisper(e.Line))
                 {
@@ -49,7 +52,9 @@ namespace TraderForPoe.ViewModel
 
             if (TradeObject.IsLogTradeWhisper(e.Line))
             {
-                TradeObject tItem = new TradeObject(e.Line);
+                var to = new TradeObject(e.Line);
+                var tovm = new TradeObjectViewModel(to);
+                TradeObjects.Add(tovm);
             }
         }
 

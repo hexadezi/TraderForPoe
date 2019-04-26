@@ -23,11 +23,11 @@ namespace TraderForPoe.Controls
 
             GetTradeItemCtrl = tradeItemControl;
             Text = GetTradeItemCtrl.tItem.Customer + ": " + GetTradeItemCtrl.tItem.Item;
-            if (GetTradeItemCtrl.tItem.TradeType == TradeItem.TradeTypes.BUY)
+            if (GetTradeItemCtrl.tItem.TradeType == TradeItemOld.TradeTypes.BUY)
             {
                 Image = Properties.Resources.arrowBuy;
             }
-            else if (GetTradeItemCtrl.tItem.TradeType == TradeItem.TradeTypes.SELL)
+            else if (GetTradeItemCtrl.tItem.TradeType == TradeItemOld.TradeTypes.SELL)
             {
                 Image = Properties.Resources.arrowSell;
             }

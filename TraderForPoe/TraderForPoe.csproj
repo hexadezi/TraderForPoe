@@ -123,12 +123,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Classes\TradeItem.cs" />
+    <Compile Include="Classes\TradeItemOld.cs" />
     <Compile Include="Controls\TradeItemControl.xaml.cs">
       <DependentUpon>TradeItemControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.cs" />
-    <Compile Include="Classes\StartUpClass.cs" />
     <Compile Include="ViewModel\AboutViewModel.cs" />
     <Compile Include="ViewModel\Base\ViewModelBase.cs" />
     <Compile Include="ViewModel\LogMonitorViewModel.cs" />
@@ -136,6 +135,7 @@
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\NotifyIconViewModel.cs" />
     <Compile Include="ViewModel\TradeHistoryViewModel.cs" />
+    <Compile Include="ViewModel\TradeObjectViewModel.cs" />
     <Compile Include="ViewModel\UserSettingsViewModel.cs" />
     <Compile Include="Windows\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>

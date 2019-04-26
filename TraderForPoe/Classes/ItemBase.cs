@@ -438,7 +438,7 @@ namespace TraderForPoe.Classes
             get { return itemAsString; }
         }
 
-        private readonly decimal amount;
+        private decimal amount;
         public decimal Amount
         {
             get { return amount; }

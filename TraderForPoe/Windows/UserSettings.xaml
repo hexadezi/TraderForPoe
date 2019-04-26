@@ -17,7 +17,7 @@
         </Style>
         <Style TargetType="Label">
             <Setter Property="Margin" Value="0" />
-            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontWeight" Value="SemiBold" />
             <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
@@ -39,7 +39,8 @@
     <Grid>
         <DockPanel>
             <WrapPanel DockPanel.Dock="Bottom" FlowDirection="RightToLeft">
-                <Button Height="25" Command="{Binding CmdRestart}">Restart</Button>
+                <Button Command="{Binding CmdRestart}">Restart</Button>
+                <Button Command="{Binding CmdQuit}" Margin="0">Quit</Button>
             </WrapPanel>
             <TabControl Margin="5,5,5,0">
                 <TabItem Header="General">
@@ -113,7 +114,7 @@
                 <TabItem Header="Misc">
                     <DockPanel Margin="5">
                         <GroupBox DockPanel.Dock="Bottom" Header="Change Opacity">
-                            <Slider Margin="5,5,5,5" TickPlacement="BottomRight" Maximum="1" Minimum="0.1" 
+                            <Slider Margin="5" TickPlacement="BottomRight" Maximum="1" Minimum="0.1" 
                                     IsSnapToTickEnabled="True" TickFrequency="0.1" Value="{Binding ControlOpacity}"/>
                         </GroupBox>
                         <GroupBox Header="Quad Stash Tabs" MinWidth="140">

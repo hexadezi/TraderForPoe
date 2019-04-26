@@ -38,13 +38,13 @@ namespace TraderForPoe
 
         private static StashGridHighlight stashGridHighlight;
 
-        public TradeItem tItem;
+        public TradeItemOld tItem;
 
         Stopwatch stopwatch = new Stopwatch();
 
         //-----------------------------------------------------------------------------------------
 
-        public TradeItemControl(TradeItem tItemArg)
+        public TradeItemControl(TradeItemOld tItemArg)
         {
             tItem = tItemArg;
 
@@ -121,7 +121,7 @@ namespace TraderForPoe
             }
         }
 
-        private void SetupControls(TradeItem tItemArg)
+        private void SetupControls(TradeItemOld tItemArg)
         {
             if (!String.IsNullOrEmpty(tItem.Item.ToString()))
             {
@@ -133,7 +133,7 @@ namespace TraderForPoe
                 btn_Price.ToolTip = tItem.Price.ToString();
             }
 
-            if (tItem.TradeType == TradeItem.TradeTypes.BUY)
+            if (tItem.TradeType == TradeItemOld.TradeTypes.BUY)
             {
                 txt_Item.Foreground = System.Windows.Media.Brushes.GreenYellow;
                 btn_InviteCustomer.Visibility = Visibility.Collapsed;
@@ -144,7 +144,7 @@ namespace TraderForPoe
                 btn_stash.Click -= ClickStashIsQuad;
             }
 
-            else if (tItem.TradeType == TradeItem.TradeTypes.SELL)
+            else if (tItem.TradeType == TradeItemOld.TradeTypes.SELL)
             {
                 txt_Item.Foreground = System.Windows.Media.Brushes.OrangeRed;
                 btn_VisitCustomerHideout.Visibility = Visibility.Collapsed;
@@ -164,7 +164,7 @@ namespace TraderForPoe
 
                 try
                 {
-                    txt_Price.Text = TradeItem.ExtractPointNumberFromString(tItem.Price);
+                    txt_Price.Text = TradeItemOld.ExtractPointNumberFromString(tItem.Price);
                 }
                 catch (Exception)
                 { }
@@ -185,8 +185,8 @@ namespace TraderForPoe
                 double dblItemPrice = 0;
                 try
                 {
-                    dblPrice = Double.Parse(TradeItem.ExtractPointNumberFromString(tItem.Price));
-                    dblItemPrice = Double.Parse(TradeItem.ExtractPointNumberFromString(tItem.ItemCurrencyQuant));
+                    dblPrice = Double.Parse(TradeItemOld.ExtractPointNumberFromString(tItem.Price));
+                    dblItemPrice = Double.Parse(TradeItemOld.ExtractPointNumberFromString(tItem.ItemCurrencyQuant));
                 }
                 catch (Exception) { }
 
@@ -224,7 +224,7 @@ namespace TraderForPoe
                 spnl_CurrencyRatio.Visibility = Visibility.Collapsed;
                 try
                 {
-                    txt_Price.Text = TradeItem.ExtractPointNumberFromString(tItem.Price);
+                    txt_Price.Text = TradeItemOld.ExtractPointNumberFromString(tItem.Price);
                 }
                 catch (Exception)
                 { }
@@ -360,7 +360,7 @@ namespace TraderForPoe
         private void ClickInviteCustomer(object sender, RoutedEventArgs e)
         {
             SendInputToPoe("/invite " + tItem.Customer);
-            if (tItem.TradeType == TradeItem.TradeTypes.SELL && tItem.Stash != "")
+            if (tItem.TradeType == TradeItemOld.TradeTypes.SELL && tItem.Stash != "")
             {
                 //stashGridHighlight.AddButton(tItem);
             }
@@ -436,7 +436,7 @@ namespace TraderForPoe
 
             SendInputToPoe("/kick " + Settings.Default.PlayerName);
 
-            if (tItem.TradeType == TradeItem.TradeTypes.SELL && Settings.Default.CloseItemAfterTrade == true)
+            if (tItem.TradeType == TradeItemOld.TradeTypes.SELL && Settings.Default.CloseItemAfterTrade == true)
             {
                 RemoveItem();
             }
@@ -460,7 +460,7 @@ namespace TraderForPoe
         private void ClickVisitOwnHideout(object sender, RoutedEventArgs e)
         {
             SendInputToPoe("/hideout");
-            if (tItem.TradeType == TradeItem.TradeTypes.BUY && Settings.Default.CloseItemAfterTrade == true)
+            if (tItem.TradeType == TradeItemOld.TradeTypes.BUY && Settings.Default.CloseItemAfterTrade == true)
             {
                 RemoveItem();
             }
@@ -501,7 +501,7 @@ namespace TraderForPoe
 
         private void ClickShowStashOverlay(object sender, RoutedEventArgs e)
         {
-            if (tItem.TradeType == TradeItem.TradeTypes.SELL)
+            if (tItem.TradeType == TradeItemOld.TradeTypes.SELL)
             {
                 //stashGridHighlight.AddButton(tItem);
             }

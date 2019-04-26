@@ -19,84 +19,35 @@ namespace TraderForPoe.Classes
         /// </summary>
         public TradeObject(string whisper)
         {
-            this.whisper = whisper;
+            this.Whisper = whisper;
             ParseWhisper(whisper);
             TradeObjectList.Add(this);
         }
 
-        private TradeTypeEnum tradeType;
+        public TradeTypeEnum TradeType { get; set; }
 
-        public TradeTypeEnum TradeType
-        {
-            get { return tradeType; }
-            set { tradeType = value; }
-        }
+        public string Whisper { get; set; }
 
-        private string whisper;
+        public string Customer { get; set; }
 
-        public string Whisper
-        {
-            get { return whisper; }
-            set { whisper = value; }
-        }
+        public string League { get; set; }
 
-
-        private string customer;
-
-        public string Customer
-        {
-            get { return customer; }
-            set { customer = value; }
-        }
-
-        private string league;
-
-        public string League
-        {
-            get { return league; }
-            set { league = value; }
-        }
-
-        private string stash;
-
-        public string Stash
-        {
-            get { return stash; }
-            set { stash = value; }
-        }
-
-        private Point position;
+        public string Stash { get; set; }
 
         /// <summary>
         /// The item position in stash as point
         /// </summary>
-        public Point Position
-        {
-            get { return position; }
-            set { position = value; }
-        }
+        public Point Position { get; set; }
 
-        private Item item;
+        public Item Item { get; set; }
 
-        public Item Item
-        {
-            get { return item; }
-            set { item = value; }
-        }
-
-        private string additionalText;
-
-        public string AdditionalText
-        {
-            get { return additionalText; }
-            set { additionalText = value; }
-        }
+        public string AdditionalText { get; set; }
 
         private void ParseWhisper(string whisper)
         {
             Regex poeTradeRegex = new Regex("@(?<messageType>.*) (?<customer>.*): Hi, I would like to buy your (?<item>.*) listed for (?<amountPrice>[0-9]*[.]?[0-9]+) (?<itemPrice>.*) in (?<league>.*) [(]stash tab \"(?<stashName>.*)[\"]; position: left (?<stashPositionX>[0-9]*), top (?<stashPositionY>[0-9]*)[)](?<additionalText>.*)");
             Regex poeTradeUnpricedRegex = new Regex("@(?<messageType>.*) (?<customer>.*): Hi, I would like to buy your (?<item>.*) in (?<league>.*) [(]stash tab \"(?<stashName>.*)[\"]; position: left (?<stashPositionX>[0-9]*), top (?<stashPositionY>[0-9]*)[)](?<additionalText>.*)");
-            Regex poeTradeNoLocationRegex = new Regex("@(?<messageType>.*) (?<customer>.*): Hi, I would like to buy your (?<item>.*) listed for (?<amountPrice>[0-9]*[.]?[0-9]+) (?<itemPrice>.*) in (?<league>.*) (?<additionalText>.*)");
+            Regex poeTradeNoLocationRegex = new Regex("@(?<messageType>.*) (?<customer>.*): Hi, I would like to buy your (?<item>.*) listed for (?<amountPrice>[0-9]*[.]?[0-9]+) (?<itemPrice>.*) in (?<league>[^\\s]+)(?<additionalText>.*)");
             Regex poeTradeCurrencyRegex = new Regex("@(?<messageType>.*) (?<customer>.*): Hi, I'd like to buy your (?<amountItem>[0-9]*[.]?[0-9]+) (?<item>.*) for my (?<amountPrice>[0-9]*[.]?[0-9]+) (?<itemPrice>.*) in (?<league>.*)[.](?<additionalText>.*)");
 
             Regex poeAppRegEx = new Regex("@(?<messageType>.*) (?<customer>.*): wtb (?<item>.*) listed for (?<amountPrice>[0-9]*[.]?[0-9]+) (?<itemPrice>.*) in (?<league>.*) [(]stash \"(?<stashName>.*)[\"]; left (?<stashPositionX>[0-9]*), top (?<stashPositionY>[0-9]*)[)](?<additionalText>.*)");
@@ -109,23 +60,23 @@ namespace TraderForPoe.Classes
 
                 foreach (Match match in matches)
                 {
-                    this.tradeType = GetTradeType(match.Groups["messageType"].Value);
+                    this.TradeType = GetTradeType(match.Groups["messageType"].Value);
 
-                    this.customer = match.Groups["customer"].Value;
+                    this.Customer = match.Groups["customer"].Value;
 
-                    this.item = new Item(match.Groups["item"].Value, 1)
+                    this.Item = new Item(match.Groups["item"].Value, 1)
                     {
                         // Set price
                         Price = new ItemBase(match.Groups["itemPrice"].Value, decimal.Parse(match.Groups["amountPrice"].Value, NumberStyles.Any, CultureInfo.InvariantCulture))
                     };
 
-                    this.league = match.Groups["league"].Value;
+                    this.League = match.Groups["league"].Value;
 
-                    this.stash = match.Groups["stashName"].Value;
+                    this.Stash = match.Groups["stashName"].Value;
 
-                    this.position = new Point(Convert.ToInt16(match.Groups["stashPositionX"].Value), Convert.ToInt16(match.Groups["stashPositionY"].Value));
+                    this.Position = new Point(Convert.ToInt16(match.Groups["stashPositionX"].Value), Convert.ToInt16(match.Groups["stashPositionY"].Value));
 
-                    this.additionalText = match.Groups["additionalText"].Value.Trim();
+                    this.AdditionalText = match.Groups["additionalText"].Value.Trim();
                 }
             }
             else if (poeTradeUnpricedRegex.IsMatch(whisper) && !whisper.Contains("listed for"))
@@ -134,19 +85,19 @@ namespace TraderForPoe.Classes
 
                 foreach (Match match in matches)
                 {
-                    this.tradeType = GetTradeType(match.Groups["messageType"].Value);
+                    this.TradeType = GetTradeType(match.Groups["messageType"].Value);
 
-                    this.customer = match.Groups["customer"].Value;
+                    this.Customer = match.Groups["customer"].Value;
 
-                    this.item = new Item(match.Groups["item"].Value, 1);
+                    this.Item = new Item(match.Groups["item"].Value, 1);
 
-                    this.league = match.Groups["league"].Value;
+                    this.League = match.Groups["league"].Value;
 
-                    this.stash = match.Groups["stashName"].Value;
+                    this.Stash = match.Groups["stashName"].Value;
 
-                    this.position = new Point(Convert.ToInt16(match.Groups["stashPositionX"].Value), Convert.ToInt16(match.Groups["stashPositionY"].Value));
+                    this.Position = new Point(Convert.ToInt16(match.Groups["stashPositionX"].Value), Convert.ToInt16(match.Groups["stashPositionY"].Value));
 
-                    this.additionalText = match.Groups["additionalText"].Value.Trim();
+                    this.AdditionalText = match.Groups["additionalText"].Value.Trim();
                 }
             }
             else if (poeTradeNoLocationRegex.IsMatch(whisper))
@@ -155,19 +106,19 @@ namespace TraderForPoe.Classes
 
                 foreach (Match match in matches)
                 {
-                    this.tradeType = GetTradeType(match.Groups["messageType"].Value);
+                    this.TradeType = GetTradeType(match.Groups["messageType"].Value);
 
-                    this.customer = match.Groups["customer"].Value;
+                    this.Customer = match.Groups["customer"].Value;
 
-                    this.item = new Item(match.Groups["item"].Value, 1)
+                    this.Item = new Item(match.Groups["item"].Value, 1)
                     {
                         // Set price
                         Price = new ItemBase(match.Groups["itemPrice"].Value, decimal.Parse(match.Groups["amountPrice"].Value, NumberStyles.Any, CultureInfo.InvariantCulture))
                     };
 
-                    this.league = match.Groups["league"].Value;
+                    this.League = match.Groups["league"].Value;
 
-                    this.additionalText = match.Groups["additionalText"].Value.Trim();
+                    this.AdditionalText = match.Groups["additionalText"].Value.Trim();
                 }
 
             }
@@ -177,19 +128,19 @@ namespace TraderForPoe.Classes
 
                 foreach (Match match in matches)
                 {
-                    this.tradeType = GetTradeType(match.Groups["messageType"].Value);
+                    this.TradeType = GetTradeType(match.Groups["messageType"].Value);
 
-                    this.customer = match.Groups["customer"].Value;
+                    this.Customer = match.Groups["customer"].Value;
 
-                    this.item = new Item(match.Groups["item"].Value, decimal.Parse(match.Groups["amountItem"].Value, NumberStyles.Any, CultureInfo.InvariantCulture))
+                    this.Item = new Item(match.Groups["item"].Value, decimal.Parse(match.Groups["amountItem"].Value, NumberStyles.Any, CultureInfo.InvariantCulture))
                     {
                         // Set price
                         Price = new ItemBase(match.Groups["itemPrice"].Value, decimal.Parse(match.Groups["amountPrice"].Value, NumberStyles.Any, CultureInfo.InvariantCulture))
                     };
 
-                    this.league = match.Groups["league"].Value;
+                    this.League = match.Groups["league"].Value;
 
-                    this.additionalText = match.Groups["additionalText"].Value.Trim();
+                    this.AdditionalText = match.Groups["additionalText"].Value.Trim();
                 }
 
 
@@ -200,23 +151,23 @@ namespace TraderForPoe.Classes
 
                 foreach (Match match in matches)
                 {
-                    this.tradeType = GetTradeType(match.Groups["messageType"].Value);
+                    this.TradeType = GetTradeType(match.Groups["messageType"].Value);
 
-                    this.customer = match.Groups["customer"].Value;
+                    this.Customer = match.Groups["customer"].Value;
 
-                    this.item = new Item(match.Groups["item"].Value, 1)
+                    this.Item = new Item(match.Groups["item"].Value, 1)
                     {
                         // Set price
                         Price = new ItemBase(match.Groups["itemPrice"].Value, decimal.Parse(match.Groups["amountPrice"].Value, NumberStyles.Any, CultureInfo.InvariantCulture))
                     };
 
-                    this.league = match.Groups["league"].Value;
+                    this.League = match.Groups["league"].Value;
 
-                    this.stash = match.Groups["stashName"].Value;
+                    this.Stash = match.Groups["stashName"].Value;
 
-                    this.position = new Point(Convert.ToInt16(match.Groups["stashPositionX"].Value), Convert.ToInt16(match.Groups["stashPositionY"].Value));
+                    this.Position = new Point(Convert.ToInt16(match.Groups["stashPositionX"].Value), Convert.ToInt16(match.Groups["stashPositionY"].Value));
 
-                    this.additionalText = match.Groups["additionalText"].Value.Trim();
+                    this.AdditionalText = match.Groups["additionalText"].Value.Trim();
                 }
             }
             else if (!whisper.Contains("listed for") && poeAppUnpricedRegex.IsMatch(whisper))
@@ -225,19 +176,19 @@ namespace TraderForPoe.Classes
 
                 foreach (Match match in matches)
                 {
-                    this.tradeType = GetTradeType(match.Groups["messageType"].Value);
+                    this.TradeType = GetTradeType(match.Groups["messageType"].Value);
 
-                    this.customer = match.Groups["customer"].Value;
+                    this.Customer = match.Groups["customer"].Value;
 
-                    this.item = new Item(match.Groups["item"].Value, 1);
+                    this.Item = new Item(match.Groups["item"].Value, 1);
 
-                    this.league = match.Groups["league"].Value;
+                    this.League = match.Groups["league"].Value;
 
-                    this.stash = match.Groups["stashName"].Value;
+                    this.Stash = match.Groups["stashName"].Value;
 
-                    this.position = new Point(Convert.ToInt16(match.Groups["stashPositionX"].Value), Convert.ToInt16(match.Groups["stashPositionY"].Value));
+                    this.Position = new Point(Convert.ToInt16(match.Groups["stashPositionX"].Value), Convert.ToInt16(match.Groups["stashPositionY"].Value));
 
-                    this.additionalText = match.Groups["additionalText"].Value.Trim();
+                    this.AdditionalText = match.Groups["additionalText"].Value.Trim();
                 }
             }
             else if (!whisper.Contains("Hi, ") && poeAppCurrencyRegex.IsMatch(whisper))
@@ -246,25 +197,26 @@ namespace TraderForPoe.Classes
 
                 foreach (Match match in matches)
                 {
-                    this.tradeType = GetTradeType(match.Groups["messageType"].Value);
+                    this.TradeType = GetTradeType(match.Groups["messageType"].Value);
 
-                    this.customer = match.Groups["customer"].Value;
+                    this.Customer = match.Groups["customer"].Value;
 
-                    this.item = new Item(match.Groups["item"].Value, decimal.Parse(match.Groups["amountItem"].Value, NumberStyles.Any, CultureInfo.InvariantCulture))
+                    this.Item = new Item(match.Groups["item"].Value, decimal.Parse(match.Groups["amountItem"].Value, NumberStyles.Any, CultureInfo.InvariantCulture))
                     {
                         // Set price
                         Price = new ItemBase(match.Groups["itemPrice"].Value, decimal.Parse(match.Groups["amountPrice"].Value, NumberStyles.Any, CultureInfo.InvariantCulture))
                     };
 
-                    this.league = match.Groups["league"].Value;
+                    this.League = match.Groups["league"].Value;
 
-                    this.additionalText = match.Groups["additionalText"].Value.Trim();
+                    this.AdditionalText = match.Groups["additionalText"].Value.Trim();
                 }
 
 
             }
             else
             {
+                //TODO Korrekt implementieren
                 throw new NotImplementedException();
             }
         }
@@ -288,7 +240,7 @@ namespace TraderForPoe.Classes
         public override string ToString()
         {
             //TODO Korrekt implementieren
-            return customer + "\n" + item.ItemAsString + "\n" + tradeType + "\n" + Stash;
+            return Customer + "\n" + Item.ItemAsString + "\n" + TradeType + "\n" + Stash;
         }
 
         public static bool IsLogTradeWhisper(string arg)
@@ -305,7 +257,7 @@ namespace TraderForPoe.Classes
 
         public static bool IsTradeWhisper(string arg)
         {
-            if (arg.StartsWith("@") && (arg.Contains("d like to buy your ") || arg.Contains(": wtb ")))
+            if (arg.StartsWith("@") && (arg.Contains("d like to buy your ") || arg.Contains(" wtb ")))
             {
                 return true;
             }
