@@ -57,6 +57,7 @@ namespace TraderForPoe
             WindowViewLoaderService.Register(typeof(AboutViewModel), typeof(About));
             WindowViewLoaderService.Register(typeof(LogMonitorViewModel), typeof(LogMonitor));
             WindowViewLoaderService.Register(typeof(MainWindowViewModel), typeof(MainWindow));
+            WindowViewLoaderService.Register(typeof(StashGridViewModel), typeof(StashGrid));
             WindowViewLoaderService.Register(typeof(TradeHistoryViewModel), typeof(TradeHistory));
             WindowViewLoaderService.Register(typeof(UserSettingsViewModel), typeof(UserSettings));
         }

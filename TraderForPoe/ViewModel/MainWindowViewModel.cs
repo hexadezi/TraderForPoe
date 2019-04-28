@@ -1,6 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using TraderForPoe.Classes;
 using TraderForPoe.Properties;
+using TraderForPoe.Windows;
 
 namespace TraderForPoe.ViewModel
 {
@@ -8,7 +10,8 @@ namespace TraderForPoe.ViewModel
     {
         #region Fields
 
-        private ClipboardMonitor clipMonitor = new ClipboardMonitor();
+        private ClipboardMonitor clipboardMonitor = new ClipboardMonitor();
+        private StashGridViewModel stashGridViewModel = StashGridViewModel.Instance;
 
         #endregion Fields
 
@@ -17,8 +20,8 @@ namespace TraderForPoe.ViewModel
         public MainWindowViewModel()
         {
             SubscribeToEvents();
+            SetUpStashGrid();
         }
-
         #endregion Constructors
 
         #region Properties
@@ -48,8 +51,6 @@ namespace TraderForPoe.ViewModel
         private void LogReader_OnLineAddition(object sender, LogReaderLineEventArgs e)
         {
             //TODO Implementieren
-            //throw new System.NotImplementedException();
-
             if (TradeObject.IsLogTradeWhisper(e.Line))
             {
                 var to = new TradeObject(e.Line);
@@ -60,8 +61,13 @@ namespace TraderForPoe.ViewModel
 
         private void SubscribeToEvents()
         {
-            clipMonitor.OnChange += ClipMonitor_OnChange;
+            clipboardMonitor.OnChange += ClipMonitor_OnChange;
             LogReader.OnLineAddition += LogReader_OnLineAddition;
+        }
+
+        private void SetUpStashGrid()
+        {
+            WindowViewLoaderService.Show(typeof(StashGridViewModel));
         }
 
         #endregion Methods

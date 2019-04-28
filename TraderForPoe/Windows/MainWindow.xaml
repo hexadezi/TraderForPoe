@@ -73,6 +73,51 @@
 
         </Style>
 
+        <Style TargetType="ToggleButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="{TemplateBinding BorderThickness}" 
+                                MinHeight="25" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="#FF5C656D"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="1"/>
+
+            <Style.Triggers>
+
+                <EventTrigger RoutedEvent="PreviewMouseDown">
+                    <SoundPlayerAction Source="pack://application:,,,/Resources/click.wav" />
+                </EventTrigger>
+
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF474E55" />
+                </Trigger>
+
+                <Trigger Property="Button.IsPressed" Value="True">
+                    <Setter Property="Control.Background" Value="#FF3B4046" />
+                </Trigger>
+
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="#FF474E55"/>
+                    <Setter Property="Content" Value="⏷"/>
+                </Trigger>
+
+                <Trigger Property="IsChecked" Value="False">
+                    <Setter Property="Background" Value="#FF5C656D"/>
+                    <Setter Property="Content" Value="⏶"/>
+                </Trigger>
+            </Style.Triggers>
+
+        </Style>
+
         <Style TargetType="Button" x:Key="inlineStyle">
             <Setter Property="Template">
                 <Setter.Value>
@@ -185,6 +230,7 @@
             <TabControl Grid.Row="0" BorderThickness="0" Name="mainTabControl" Background="#FF23272B" Padding="1" 
                         Template="{DynamicResource TabControlControlTemplate1}" IsSynchronizedWithCurrentItem="True"
                         ItemsSource="{Binding TradeObjects}">
+                <!--ItemsSource="{Binding TradeObjects}"-->
                 <TabControl.ItemTemplate>
                     <DataTemplate>
                         <TextBlock>
@@ -232,7 +278,10 @@
                                                     </WrapPanel>
                                                 </StackPanel>
                                             </TextBlock.ToolTip>
-                                            <Run Text="▼ 1 x Cybil's Paw Thresher Claw" />
+                                            <Run Text="▼ "/>
+                                            <Run Text="{Binding Amount, Mode=OneWay}"/>
+                                            <Run Text=" x "/>
+                                            <Run Text="{Binding ItemName, Mode=OneWay}"/>
                                         </TextBlock>
                                     </Border>
                                     <WrapPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
@@ -314,7 +363,7 @@
                                         <Button>4</Button>
                                     </UniformGrid>
                                     <UniformGrid Rows="1">
-                                        <Button>^</Button>
+                                        <ToggleButton></ToggleButton>
                                         <Button>X</Button>
                                     </UniformGrid>
                                 </UniformGrid>
@@ -325,7 +374,7 @@
                     </DataTemplate>
                 </TabControl.ContentTemplate>
 
-
+                <!--<TabItem Header="Test"></TabItem>-->
             </TabControl>
 
         </Grid>

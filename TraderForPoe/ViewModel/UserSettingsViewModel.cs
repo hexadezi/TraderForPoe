@@ -309,6 +309,7 @@ namespace TraderForPoe.ViewModel
                 }
             }
         }
+
         #endregion Properties
 
         #region Methods

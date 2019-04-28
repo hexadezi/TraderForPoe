@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
@@ -17,6 +18,7 @@ namespace TraderForPoe.Classes
         private const int LSFW_LOCK = 1;
 
         private const int WS_EX_NOACTIVATE = 134217728;
+
         private static readonly SWEH_dwFlags WinEventHookInternalFlags = SWEH_dwFlags.WINEVENT_OUTOFCONTEXT |
                                                                 SWEH_dwFlags.WINEVENT_SKIPOWNPROCESS |
                                                                 SWEH_dwFlags.WINEVENT_SKIPOWNTHREAD;
@@ -133,6 +135,9 @@ namespace TraderForPoe.Classes
         [DllImport("USER32.DLL", CharSet = CharSet.Unicode)]
         public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
+        [DllImport("user32.dll")]
+        public static extern int GetWindowRect(IntPtr hwnd, out Rectangle rect);
+
         public static uint GetWindowThread(IntPtr hWnd)
         {
             new UIPermission(UIPermissionWindow.AllWindows).Demand();
@@ -142,7 +147,6 @@ namespace TraderForPoe.Classes
         // Needed to prevent Application taking focus
         [DllImport("user32")]
         public static extern bool LockSetForegroundWindow(uint UINT);
-
         // Activate an application window.
         [DllImport("USER32.DLL")]
         public static extern bool SetForegroundWindow(IntPtr hWnd);
@@ -153,6 +157,7 @@ namespace TraderForPoe.Classes
             SetWindowLong(helper.Handle, GWL_EXSTYLE, WS_EX_NOACTIVATE);
             LockSetForegroundWindow(LSFW_LOCK);
         }
+
         [DllImport("user32")]
         public static extern IntPtr SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
@@ -166,9 +171,9 @@ namespace TraderForPoe.Classes
         }
 
         public static IntPtr WinEventHookRange(SWEH_Events _eventFrom,
-                                               SWEH_Events _eventTo,
-                                               WinEventDelegate _delegate,
-                                               uint idProcess, uint idThread)
+                                                       SWEH_Events _eventTo,
+                                                       WinEventDelegate _delegate,
+                                                       uint idProcess, uint idThread)
         {
             new UIPermission(UIPermissionWindow.AllWindows).Demand();
             return UnsafeNativeMethods.SetWinEventHook(_eventFrom, _eventTo,
@@ -181,6 +186,52 @@ namespace TraderForPoe.Classes
         {
             return UnsafeNativeMethods.UnhookWinEvent(hWinEventHook);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+        // Used to get the client area of POE and the height and widht
+        [DllImport("user32.dll")]
+        public static extern bool GetClientRect(IntPtr hWnd, out RECT lpRect);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct RECT
+        {
+            public int Left;        // x position of upper-left corner
+            public int Top;         // y position of upper-left corner
+            public int Right;       // x position of lower-right corner
+            public int Bottom;      // y position of lower-right corner
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         [DllImport("user32.dll")]
         private static extern IntPtr GetForegroundWindow();

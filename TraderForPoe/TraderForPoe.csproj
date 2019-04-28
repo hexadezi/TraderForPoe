@@ -144,9 +144,13 @@
       <DependentUpon>LogMonitor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\SqueezeTabPanel.cs" />
+    <Compile Include="Windows\StashGrid.xaml.cs">
+      <DependentUpon>StashGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\StashGridHighlight.xaml.cs">
       <DependentUpon>StashGridHighlight.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\StashGridViewModel.cs" />
     <Compile Include="Windows\TradeHistory.xaml.cs">
       <DependentUpon>TradeHistory.xaml</DependentUpon>
     </Compile>
@@ -190,6 +194,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\LogMonitor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\StashGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
