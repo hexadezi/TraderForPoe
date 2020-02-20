@@ -67,9 +67,9 @@ namespace TraderForPoe.ViewModel
 
         private void SetUpStashGrid()
         {
-            WindowViewLoaderService.Show(typeof(StashGridViewModel));
+            WindowViewLoaderService.ShowView(typeof(StashGridViewModel));
         }
-
+        
         #endregion Methods
     }
 }

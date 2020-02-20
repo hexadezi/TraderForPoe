@@ -18,7 +18,7 @@ namespace TraderForPoe.Classes
             viewDictionary.Add(viewmodel, view);
         }
 
-        public static void Show(Type viewmodel)
+        public static void ShowView(Type viewmodel)
         {
             try
             {
@@ -32,7 +32,7 @@ namespace TraderForPoe.Classes
             }
         }
 
-        public static void ShowSingle(Type viewmodel)
+        public static void ShowSingleView(Type viewmodel)
         {
             try
             {

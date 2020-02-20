@@ -49,7 +49,7 @@ namespace TraderForPoe
 
         private void OpenMainWindow()
         {
-            WindowViewLoaderService.Show(typeof(MainWindowViewModel));
+            WindowViewLoaderService.ShowView(typeof(MainWindowViewModel));
         }
 
         private void RegisterViewModel()

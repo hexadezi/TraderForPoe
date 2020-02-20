@@ -14,17 +14,17 @@ namespace TraderForPoe.ViewModel
 
         public NotifyIconViewModel()
         {
-            CmdHistory = new RelayCommand(() => WindowViewLoaderService.ShowSingle(typeof(TradeHistoryViewModel)));
+            CmdHistory = new RelayCommand(() => WindowViewLoaderService.ShowSingleView(typeof(TradeHistoryViewModel)));
 
-            CmdLog = new RelayCommand(() => WindowViewLoaderService.Show(typeof(LogMonitorViewModel)));
+            CmdLog = new RelayCommand(() => WindowViewLoaderService.ShowView(typeof(LogMonitorViewModel)));
 
-            CmdSettings = new RelayCommand(() => WindowViewLoaderService.ShowSingle(typeof(UserSettingsViewModel)));
+            CmdSettings = new RelayCommand(() => WindowViewLoaderService.ShowSingleView(typeof(UserSettingsViewModel)));
 
             CmdRestart = new RelayCommand(() => RestartApp());
 
             CmdUpdate = new RelayCommand(() => Updater.CheckForUpdate());
 
-            CmdAbout = new RelayCommand(() => WindowViewLoaderService.ShowSingle(typeof(AboutViewModel)));
+            CmdAbout = new RelayCommand(() => WindowViewLoaderService.ShowSingleView(typeof(AboutViewModel)));
 
             CmdQuit = new RelayCommand(() => Application.Current.Shutdown());
         }
