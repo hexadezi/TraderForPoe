@@ -21,17 +21,25 @@ namespace TraderForPoe.Classes
 
         private const int WS_EX_NOACTIVATE = 0x08000000;
 
+        private IntPtr windowHandle;
+
+        public NotActivatableWindow()
+        {
+            Loaded += NotActivatableWindow_Loaded;
+        }
+
+        private void NotActivatableWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            windowHandle = new WindowInteropHelper(this).Handle;
+        }
+
         protected override void OnActivated(EventArgs e)
         {
             base.OnActivated(e);
 
             //Set the window style to noactivate.
-
-            WindowInteropHelper helper = new WindowInteropHelper(this);
-
-            SetWindowLong(helper.Handle, GWL_EXSTYLE,
-
-            GetWindowLong(helper.Handle, GWL_EXSTYLE) | WS_EX_NOACTIVATE);
+            SetWindowLong(windowHandle, GWL_EXSTYLE,
+            GetWindowLong(windowHandle, GWL_EXSTYLE) | WS_EX_NOACTIVATE);
         }
     }
 }
