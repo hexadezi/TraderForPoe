@@ -16,7 +16,9 @@ namespace TraderForPoe.ViewModel
 
         DispatcherTimer timerPoeLocation = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(500) };
 
-        public StashGridViewModel()
+        // Constructor is private, because  there is no need for many instances.
+        // An instance can be recieved with the Instance property.
+        private StashGridViewModel()
         {
             timerPoeLocation.Tick += TimerPoeLocation_Tick;
             timerPoeLocation.Start();
