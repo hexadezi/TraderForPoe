@@ -226,7 +226,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Diagrams\ClassDiagram1.cd" />
-    <None Include="Unclassified\packages.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -343,5 +343,4 @@
     <Folder Include="Resources\Images\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-
 </Project>
