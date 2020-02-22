@@ -1,5 +1,8 @@
 # TraderForPoe
-This tool makes trading in Path of Exile easy. It parses all incoming and outgoing trade whispers and shows a notification with usefull buttons.
+## The tool is currently not in development
+This tool makes trading in Path of Exile easy. 
+
+It parses all incoming and outgoing trade whispers and shows a notification with usefull buttons.
 
 ## Getting Started
 
