@@ -13,8 +13,7 @@
 8. Disable running second copy
 
 ## Download link
-https://github.com/deltaone/TraderForPoe/blob/master/TraderForPoe.exe
-https://github.com/deltaone/TraderForPoe/blob/master/TraderForPoe.exe.config
+https://github.com/deltaone/TraderForPoe/releases/download/2.1a/TraderForPoe-2.1a.zip
 
 ## Getting Started
 
