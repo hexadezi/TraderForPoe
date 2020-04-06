@@ -12,12 +12,15 @@
 7. Aded button for clear all trade data
 8. Disable running second copy
 
+## Download link
+https://github.com/deltaone/TraderForPoe/blob/master/TraderForPoe.exe
+https://github.com/deltaone/TraderForPoe/blob/master/TraderForPoe.exe.config
+
+## Getting Started
 
 This tool makes trading in Path of Exile easy. 
 
 It parses all incoming and outgoing trade whispers and shows a notification with usefull buttons.
-
-## Getting Started
 
 ### Features
 - Monitors the clipboard for trade whispers
