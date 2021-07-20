@@ -16,10 +16,10 @@ It parses all incoming and outgoing trade whispers and shows a notification with
 
 
 ### Download
-Download here: [TraderForPoe Releases](https://github.com/labo89/TraderForPoe/releases)
+Download here: [TraderForPoe Releases](https://github.com/hexadezi/TraderForPoe/releases)
 
 ### Screenshots
-![](https://github.com/labo89/TraderForPoe/blob/master/Screenshots/screen_05.PNG?raw=true "")
+![](https://github.com/hexadezi/TraderForPoe/blob/master/Screenshots/screen_05.PNG?raw=true "")
 
 ### Prerequisites
 
