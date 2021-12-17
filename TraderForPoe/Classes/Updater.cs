@@ -20,7 +20,7 @@ namespace TraderForPoe.Classes
         {
             WebClient webClient = new WebClient();
 
-            string[] updateString = webClient.DownloadString("https://raw.githubusercontent.com/labo89/TraderForPoe/master/update").Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+            string[] updateString = webClient.DownloadString("https://raw.githubusercontent.com/hexadezi/TraderForPoe/master/update").Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
 
             double thisVersion = Convert.ToDouble(Assembly.GetEntryAssembly().GetName().Version.ToString().Substring(0, 3), System.Globalization.CultureInfo.InvariantCulture);
 
