@@ -108,93 +108,53 @@ namespace TraderForPoe.Windows
             row_2.Height = new GridLength(h * 0.035);
             row_3.Height = GridLength.Auto;
 
+
+
+            this.Top = y + (h * 0.062);
+
+            this.Height = (h * 0.585) + row_1.Height.Value + row_2.Height.Value;
+
+            this.Width = (h * 0.585);
+
+
             if ((w / h) < 1.35)
             {
-                this.Top = y + (h * 0.094);
-
                 this.Left = x + (w * 0.011);
-
-                this.Height = (h * 0.585) + row_1.Height.Value + row_2.Height.Value;
-
-                this.Width = (h * 0.585);
             }
             else if ((w / h) < 1.9)
             {
-                this.Top = y + (h * 0.094);
-
                 this.Left = x + (w * 0.0088);
-
-                this.Height = (h * 0.585) + row_1.Height.Value + row_2.Height.Value;
-
-                this.Width = (h * 0.585);
             }
             else if ((w / h) < 1.99)
             {
-                this.Top = y + (h * 0.097);
-
                 this.Left = x + (w * 0.008);
-
-                this.Height = (h * 0.585) + row_1.Height.Value + row_2.Height.Value;
-
-                this.Width = (h * 0.585);
             }
 
             else if ((w / h) < 2.3)
             {
-
-                this.Top = y + (h * 0.097);
-
                 this.Left = x + (w * 0.007);
-
-                this.Height = (h * 0.585) + row_1.Height.Value + row_2.Height.Value;
-
-                this.Width = (h * 0.585);
             }
 
             else if ((w / h) < 2.58)
             {
-                this.Top = y + (h * 0.096);
-
                 this.Left = x + (w * 0.006);
-
-                this.Height = (h * 0.585) + row_1.Height.Value + row_2.Height.Value;
-
-                this.Width = (h * 0.585);
 
             }
 
             else if ((w / h) < 2.8)
             {
-                this.Top = y + (h * 0.0959);
-
                 this.Left = x + (w * 0.0055);
-
-                this.Height = (h * 0.585) + row_1.Height.Value + row_2.Height.Value;
-
-                this.Width = (h * 0.585);
 
             }
 
             else if ((w / h) < 3.1)
             {
-                this.Top = y + (h * 0.0955);
-
                 this.Left = x + (w * 0.005);
-
-                this.Height = (h * 0.585) + row_1.Height.Value + row_2.Height.Value;
-
-                this.Width = (h * 0.585);
             }
 
             else
             {
-                this.Top = y + (h * 0.094);
-
                 this.Left = x + (w * 0.004);
-
-                this.Height = (h * 0.585) + row_1.Height.Value + row_2.Height.Value;
-
-                this.Width = (h * 0.585);
             }
 
             front_canvas.Width = this.Width;
