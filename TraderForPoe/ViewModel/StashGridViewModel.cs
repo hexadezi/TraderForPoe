@@ -36,99 +36,53 @@ namespace TraderForPoe.ViewModel
             double y = windowRect.Top + titleBarSize;
             double h = clientRect.Bottom;
             double w = clientRect.Right;
-            
+
+            WindowLocationTop = y + (h * 0.118);
+            WindowHeight = (h * 0.585);
+            WindowWidth = (h * 0.585);
+
             if ((w / h) < 1.35)
-            {
-                WindowLocationTop = y + (h * 0.1500);
+			{
+				WindowLocationLeft = x + (w * 0.011);
+			}
 
-                WindowLocationLeft = x + (w * 0.011);
+			else if ((w / h) < 1.9)
+			{
+				WindowLocationLeft = x + (w * 0.0081);
+			}
 
-                WindowHeight = (h * 0.585);
+			else if ((w / h) < 1.99)
+			{
+				WindowLocationLeft = x + (w * 0.008);
+			}
 
-                WindowWidth = (h * 0.585);
-            }
+			else if ((w / h) < 2.3)
+			{
+				WindowLocationLeft = x + (w * 0.0075);
+			}
 
-            else if ((w / h) < 1.9)
-            {
-                WindowLocationTop = y + (h * 0.1500);
+			else if ((w / h) < 2.58)
+			{
+				WindowLocationLeft = x + (w * 0.0065);
 
-                WindowLocationLeft = x + (w * 0.0081);
+			}
 
-                WindowHeight = (h * 0.585);
+			else if ((w / h) < 2.8)
+			{
+				WindowLocationLeft = x + (w * 0.0055);
 
-                WindowWidth = (h * 0.585);
-            }
-            else if ((w / h) < 1.99)
-            {
-                WindowLocationTop = y + (h * 0.1500);
+			}
 
-                WindowLocationLeft = x + (w * 0.008);
+			else if ((w / h) < 3.1)
+			{
+				WindowLocationLeft = x + (w * 0.0055);
+			}
 
-                WindowHeight = (h * 0.585);
-
-                WindowWidth = (h * 0.585);
-            }
-
-            else if ((w / h) < 2.3)
-            {
-
-                WindowLocationTop = y + (h * 0.1500);
-
-                WindowLocationLeft = x + (w * 0.0075);
-
-                WindowHeight = (h * 0.585);
-
-                WindowWidth = (h * 0.585);
-            }
-
-            else if ((w / h) < 2.58)
-            {
-                WindowLocationTop = y + (h * 0.1500);
-
-                WindowLocationLeft = x + (w * 0.0065);
-
-                WindowHeight = (h * 0.585);
-
-                WindowWidth = (h * 0.585);
-
-            }
-
-            else if ((w / h) < 2.8)
-            {
-                WindowLocationTop = y + (h * 0.1500);
-
-                WindowLocationLeft = x + (w * 0.0055);
-
-                WindowHeight = (h * 0.585);
-
-                WindowWidth = (h * 0.585);
-
-            }
-
-            else if ((w / h) < 3.1)
-            {
-                WindowLocationTop = y + (h * 0.1500);
-
-                WindowLocationLeft = x + (w * 0.0055);
-
-                WindowHeight = (h * 0.585);
-
-                WindowWidth = (h * 0.585);
-            }
-
-            else
-            {
-                WindowLocationTop = y + (h * 0.1500);
-
-                WindowLocationLeft = x + (w * 0.005);
-
-                WindowHeight = (h * 0.585);
-
-                WindowWidth = (h * 0.585);
-            }
-
-
-        }
+			else
+			{
+				WindowLocationLeft = x + (w * 0.005);
+			}
+		}
 
         public static StashGridViewModel Instance
         {
