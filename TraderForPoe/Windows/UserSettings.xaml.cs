@@ -19,11 +19,6 @@ namespace TraderForPoe.Windows
             InitializeComponent();
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = true;
-            this.Visibility = Visibility.Hidden;
-        }
 
         private void Click_SaveSettings(object sender, RoutedEventArgs e)
         {

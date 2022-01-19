@@ -14,12 +14,6 @@ namespace TraderForPoe.Windows
             appName.Text += " " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = true;
-            this.Visibility = Visibility.Hidden;
-        }
-
         private void OnRequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
             System.Diagnostics.Process.Start(e.Uri.AbsoluteUri);
