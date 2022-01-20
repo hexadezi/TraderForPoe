@@ -6,325 +6,258 @@
 	xmlns:local="clr-namespace:TraderForPoe.Windows"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:properties="clr-namespace:TraderForPoe.Properties"
-	Title="UserSettings"
-	Width="722.035"
-	Height="522.876"
-	ResizeMode="NoResize"
+	Title="Settings"
+	Width="600"
+	Height="341"
+	ResizeMode="CanMinimize"
 	WindowStartupLocation="CenterScreen"
 	WindowStyle="SingleBorderWindow"
 	mc:Ignorable="d">
+	<Window.Resources>
+		<Style TargetType="{x:Type Button}">
+			<Setter Property="Padding" Value="4,3,4,3" />
+			<Setter Property="Margin" Value="4" />
+		</Style>
+		<Style TargetType="{x:Type TextBox}">
+			<Setter Property="Padding" Value="4,3,4,3" />
+			<Setter Property="Margin" Value="2" />
+			<Setter Property="VerticalAlignment" Value="Center" />
+		</Style>
+		<Style TargetType="{x:Type CheckBox}">
+			<Setter Property="Margin" Value="2,3,2,3" />
+		</Style>
+	</Window.Resources>
+	<DockPanel>
+		<UniformGrid
+			HorizontalAlignment="Right"
+			DockPanel.Dock="Bottom"
+			Rows="1">
+			<Button Click="Click_RestartApp" Content="Restart" />
+			<Button Margin="2,4,2,4" Click="Click_SaveSettings" Content="Save" />
+		</UniformGrid>
+		<TabControl Margin="2">
+			<TabItem Header="General">
+				<StackPanel>
+					<GroupBox Header="Path to Client.txt">
+						<DockPanel>
+							<Button
+								HorizontalAlignment="Right"
+								Click="Click_SearchFile"
+								DockPanel.Dock="Right">
+								Open
+							</Button>
+							<TextBox Name="txt_PathToClientTxt" Text="{Binding Source={x:Static properties:Settings.Default}, Path=PathToClientTxt}" />
+						</DockPanel>
+					</GroupBox>
+					<GroupBox Margin="3" Header="Character name">
+						<TextBox
+							Name="txt_PlayerName"
+							Margin="0,2,0,0"
+							HorizontalAlignment="Stretch"
+							VerticalAlignment="Stretch"
+							Text="{Binding Source={x:Static properties:Settings.Default}, Path=PlayerName}" />
+					</GroupBox>
+					<StackPanel Margin="3">
+						<CheckBox
+							Name="cbx_UseClipBoardMonitor"
+							Content="Use clipboard monitor"
+							IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=UseClipboardMonitor}" />
+						<CheckBox
+							Name="cbx_CollapseItems"
+							Content="Collapse trade items"
+							IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CollapsedItems}" />
+						<CheckBox
+							Name="cbx_PlaySound"
+							Content="Play notification sound"
+							IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=PlayNotificationSound}" />
+						<CheckBox
+							Name="cbx_RemoveAfterTrade"
+							Content="Remove item after trade"
+							IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterTrade}" />
+						<CheckBox
+							Name="cbx_HideIfPoeNotForeground"
+							Content="Hide if not foreground"
+							IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=HideIfPoeNotForeGround}" />
+						<CheckBox
+							Name="cbx_CheckForUpdatesOnStart"
+							Content="Check for updates on start"
+							IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CheckForUpdatesOnStart}" />
+					</StackPanel>
 
-	<Canvas>
 
-		<GroupBox
-			Canvas.Left="10"
-			Canvas.Top="10"
-			Width="690"
-			Height="214"
-			Header="Whisper Messages">
-			<Grid>
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="Auto" />
-				</Grid.RowDefinitions>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto" />
-					<ColumnDefinition Width="*" />
-				</Grid.ColumnDefinitions>
+				</StackPanel>
+			</TabItem>
+			<TabItem Header="Whispers">
+				<Grid Margin="10">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
 
-				<Label
-					Grid.Column="0"
-					Margin="0,0,0,5"
-					HorizontalAlignment="Left"
-					Content="Thank you whisper" />
-				<TextBox
-					Name="txt_ThankYouWhisper"
-					Grid.Column="1"
-					Margin="0,0,0,5"
-					VerticalContentAlignment="Center"
-					Text="{Binding Source={x:Static properties:Settings.Default}, Path=ThankYouWhisper}"
-					TextWrapping="NoWrap" />
-				<CheckBox
-					Name="cbx_ThankYouWhisper"
-					Grid.Column="2"
-					Margin="0,2,5,5"
-					HorizontalAlignment="Right"
-					VerticalAlignment="Center"
-					IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterThankYouWhisper}"
-					ToolTip="Close item after clicking Thank You whisper?" />
+					<Label
+						Grid.Column="0"
+						HorizontalAlignment="Left"
+						Content="Thank you whisper" />
+					<TextBox
+						Name="txt_ThankYouWhisper"
+						Grid.Column="1"
+						VerticalContentAlignment="Center"
+						Text="{Binding Source={x:Static properties:Settings.Default}, Path=ThankYouWhisper}"
+						TextWrapping="NoWrap" />
+					<CheckBox
+						Name="cbx_ThankYouWhisper"
+						Grid.Column="2"
+						Margin="0,2,5,5"
+						HorizontalAlignment="Right"
+						VerticalAlignment="Center"
+						IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterThankYouWhisper}"
+						ToolTip="Close item after clicking Thank You whisper?" />
 
-				<Label
-					Grid.Row="1"
-					Grid.Column="0"
-					Margin="0,0,0,5"
-					HorizontalAlignment="Left"
-					Content="I am busy whisper" />
-				<TextBox
-					Name="txt_ImBusyWhisper"
-					Grid.Row="1"
-					Grid.Column="1"
-					Margin="0,0,0,5"
-					VerticalContentAlignment="Center"
-					Text="{Binding Source={x:Static properties:Settings.Default}, Path=ImBusyWhisper}"
-					TextWrapping="NoWrap" />
-				<CheckBox
-					Name="cbx_ImBusyWhisper"
-					Grid.Row="1"
-					Grid.Column="2"
-					Margin="0,2,5,5"
-					HorizontalAlignment="Right"
-					VerticalAlignment="Center"
-					IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterImBusyWhisper}"
-					ToolTip="Close item after clicking Im Busy whisper?" />
+					<Label
+						Grid.Row="1"
+						Grid.Column="0"
+						HorizontalAlignment="Left"
+						Content="I am busy whisper" />
+					<TextBox
+						Name="txt_ImBusyWhisper"
+						Grid.Row="1"
+						Grid.Column="1"
+						VerticalContentAlignment="Center"
+						Text="{Binding Source={x:Static properties:Settings.Default}, Path=ImBusyWhisper}"
+						TextWrapping="NoWrap" />
+					<CheckBox
+						Name="cbx_ImBusyWhisper"
+						Grid.Row="1"
+						Grid.Column="2"
+						Margin="0,2,5,5"
+						HorizontalAlignment="Right"
+						VerticalAlignment="Center"
+						IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterImBusyWhisper}"
+						ToolTip="Close item after clicking Im Busy whisper?" />
 
-				<Label
-					Grid.Row="2"
-					Grid.Column="0"
-					Margin="0,0,0,5"
-					HorizontalAlignment="Left"
-					Content="Custom whisper 1" />
-				<TextBox
-					Name="txt_CustomWhisper1"
-					Grid.Row="2"
-					Grid.Column="1"
-					Margin="0,0,0,5"
-					VerticalContentAlignment="Center"
-					Text="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper1}"
-					TextWrapping="NoWrap" />
-				<CheckBox
-					Name="cbx_CustomWhisper1"
-					Grid.Row="2"
-					Grid.Column="2"
-					Margin="0,2,5,5"
-					HorizontalAlignment="Right"
-					VerticalAlignment="Center"
-					IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterCustomWhisper1}"
-					ToolTip="Close item after clicking Custom whisper 1?" />
+					<Label
+						Grid.Row="2"
+						Grid.Column="0"
+						HorizontalAlignment="Left"
+						Content="Custom whisper 1" />
+					<TextBox
+						Name="txt_CustomWhisper1"
+						Grid.Row="2"
+						Grid.Column="1"
+						VerticalContentAlignment="Center"
+						Text="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper1}"
+						TextWrapping="NoWrap" />
+					<CheckBox
+						Name="cbx_CustomWhisper1"
+						Grid.Row="2"
+						Grid.Column="2"
+						Margin="0,2,5,5"
+						HorizontalAlignment="Right"
+						VerticalAlignment="Center"
+						IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterCustomWhisper1}"
+						ToolTip="Close item after clicking Custom whisper 1?" />
 
-				<Label
-					Grid.Row="3"
-					Grid.Column="0"
-					Margin="0,0,0,5"
-					HorizontalAlignment="Left"
-					Content="Custom whisper 2" />
-				<TextBox
-					Name="txt_CustomWhisper2"
-					Grid.Row="3"
-					Grid.Column="1"
-					Margin="0,0,0,5"
-					VerticalContentAlignment="Center"
-					Text="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper2}"
-					TextWrapping="NoWrap" />
-				<CheckBox
-					Name="cbx_CustomWhisper2"
-					Grid.Row="3"
-					Grid.Column="2"
-					Margin="0,2,5,5"
-					HorizontalAlignment="Right"
-					VerticalAlignment="Center"
-					IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterCustomWhisper2}"
-					ToolTip="Close item after clicking Custom whisper 2?" />
+					<Label
+						Grid.Row="3"
+						Grid.Column="0"
+						HorizontalAlignment="Left"
+						Content="Custom whisper 2" />
+					<TextBox
+						Name="txt_CustomWhisper2"
+						Grid.Row="3"
+						Grid.Column="1"
+						VerticalContentAlignment="Center"
+						Text="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper2}"
+						TextWrapping="NoWrap" />
+					<CheckBox
+						Name="cbx_CustomWhisper2"
+						Grid.Row="3"
+						Grid.Column="2"
+						Margin="0,2,5,5"
+						HorizontalAlignment="Right"
+						VerticalAlignment="Center"
+						IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterCustomWhisper2}"
+						ToolTip="Close item after clicking Custom whisper 2?" />
 
-				<Label
-					Grid.Row="4"
-					Grid.Column="0"
-					Margin="0,0,0,5"
-					HorizontalAlignment="Left"
-					Content="Custom whisper 3" />
-				<TextBox
-					Name="txt_CustomWhisper3"
-					Grid.Row="4"
-					Grid.Column="1"
-					Margin="0,0,0,5"
-					VerticalContentAlignment="Center"
-					Text="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper3}"
-					TextWrapping="NoWrap" />
-				<CheckBox
-					Name="cbx_CustomWhisper3"
-					Grid.Row="4"
-					Grid.Column="2"
-					Margin="0,2,5,5"
-					HorizontalAlignment="Right"
-					VerticalAlignment="Center"
-					IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterCustomWhisper3}"
-					ToolTip="Close item after clicking Custom whisper 3?" />
+					<Label
+						Grid.Row="4"
+						Grid.Column="0"
+						HorizontalAlignment="Left"
+						Content="Custom whisper 3" />
+					<TextBox
+						Name="txt_CustomWhisper3"
+						Grid.Row="4"
+						Grid.Column="1"
+						VerticalContentAlignment="Center"
+						Text="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper3}"
+						TextWrapping="NoWrap" />
+					<CheckBox
+						Name="cbx_CustomWhisper3"
+						Grid.Row="4"
+						Grid.Column="2"
+						Margin="0,2,5,5"
+						HorizontalAlignment="Right"
+						VerticalAlignment="Center"
+						IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterCustomWhisper3}"
+						ToolTip="Close item after clicking Custom whisper 3?" />
 
-				<Label
-					Grid.Row="5"
-					Grid.Column="0"
-					Margin="0,0,0,5"
-					HorizontalAlignment="Left"
-					Content="Custom whisper 4" />
-				<TextBox
-					Name="txt_CustomWhisper4"
-					Grid.Row="5"
-					Grid.Column="1"
-					Margin="0,0,0,5"
-					VerticalContentAlignment="Center"
-					Text="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper4}"
-					TextWrapping="NoWrap" />
-				<CheckBox
-					Name="cbx_CustomWhisper4"
-					Grid.Row="5"
-					Grid.Column="2"
-					Margin="0,2,5,5"
-					HorizontalAlignment="Right"
-					VerticalAlignment="Center"
-					IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterCustomWhisper4}"
-					ToolTip="Close item after clicking Custom whisper 4?" />
+					<Label
+						Grid.Row="5"
+						Grid.Column="0"
+						HorizontalAlignment="Left"
+						Content="Custom whisper 4" />
+					<TextBox
+						Name="txt_CustomWhisper4"
+						Grid.Row="5"
+						Grid.Column="1"
+						VerticalContentAlignment="Center"
+						Text="{Binding Source={x:Static properties:Settings.Default}, Path=CustomWhisper4}"
+						TextWrapping="NoWrap" />
+					<CheckBox
+						Name="cbx_CustomWhisper4"
+						Grid.Row="5"
+						Grid.Column="2"
+						Margin="0,4,5,5"
+						HorizontalAlignment="Right"
+						VerticalAlignment="Center"
+						IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterCustomWhisper4}"
+						ToolTip="Close item after clicking Custom whisper 4?" />
 
-			</Grid>
-		</GroupBox>
-		<GroupBox
-			Canvas.Left="10"
-			Canvas.Top="233"
-			Width="187"
-			Height="186"
-			Header="Quad tabs">
-			<Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition />
-				</Grid.ColumnDefinitions>
-				<Grid.RowDefinitions>
-					<RowDefinition />
-					<RowDefinition Height="20" />
-				</Grid.RowDefinitions>
-				<ListBox
-					Name="lsb_QuadStash"
-					Grid.Row="0"
-					Grid.Column="0"
-					Margin="0,2,0,5"
-					ItemsSource="{Binding Source={x:Static properties:Settings.Default}, Path=QuadStash}" />
-				<Button
-					Grid.Row="1"
-					Grid.Column="0"
-					Click="Click_DeleteQuadStash">
-					Delete
-				</Button>
-			</Grid>
-		</GroupBox>
-		<Button
-			Canvas.Left="625"
-			Canvas.Top="463"
-			Width="75"
-			Click="Click_SaveSettings"
-			Content="Save" />
-		<Button
-			Canvas.Left="625"
-			Canvas.Top="438"
-			Width="75"
-			Click="Click_RestartApp"
-			Content="Restart" />
-		<GroupBox
-			Canvas.Left="202"
-			Canvas.Top="274"
-			Width="498"
-			Height="Auto"
-			Header="Character name">
-			<TextBox
-				Name="txt_PlayerName"
-				Margin="0,2,0,0"
-				HorizontalAlignment="Stretch"
-				VerticalAlignment="Stretch"
-				Text="{Binding Source={x:Static properties:Settings.Default}, Path=PlayerName}" />
-		</GroupBox>
-		<GroupBox
-			Canvas.Left="202"
-			Canvas.Top="322"
-			Width="498"
-			Height="97"
-			Header="Various Settings">
-			<WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-				<CheckBox
-					Name="cbx_UseClipBoardMonitor"
-					Margin="0,2,5,5"
-					HorizontalAlignment="Stretch"
-					VerticalAlignment="Stretch"
-					Content="Use clipboard monitor"
-					IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=UseClipboardMonitor}" />
-				<CheckBox
-					Name="cbx_CollapseItems"
-					Margin="0,0,5,5"
-					HorizontalAlignment="Stretch"
-					VerticalAlignment="Stretch"
-					Content="Collapse items"
-					IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CollapsedItems}" />
-				<CheckBox
-					Name="cbx_PlaySound"
-					Margin="0,0,5,5"
-					HorizontalAlignment="Stretch"
-					VerticalAlignment="Stretch"
-					Content="Play sound"
-					IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=PlayNotificationSound}" />
-				<CheckBox
-					Name="cbx_RemoveAfterTrade"
-					Margin="0,0,5,5"
-					HorizontalAlignment="Stretch"
-					VerticalAlignment="Stretch"
-					Content="Remove item after trade"
-					IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CloseItemAfterTrade}" />
-				<CheckBox
-					Name="cbx_HideIfPoeNotForeground"
-					Margin="0,0,5,5"
-					HorizontalAlignment="Stretch"
-					VerticalAlignment="Stretch"
-					Content="Hide if not foreground"
-					IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=HideIfPoeNotForeGround}" />
-				<CheckBox
-					Name="cbx_CheckForUpdatesOnStart"
-					Margin="0,0,5,5"
-					HorizontalAlignment="Stretch"
-					VerticalAlignment="Stretch"
-					Content="Check for updates on start"
-					IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=CheckForUpdatesOnStart}" />
-			</WrapPanel>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Various">
 
-		</GroupBox>
+				<StackPanel>
+					<GroupBox Header="Quad tabs">
+						<StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+							<ListBox
+								Name="lsb_QuadStash"
+								Height="100"
+								Margin="0,2,0,5"
+								ItemsSource="{Binding Source={x:Static properties:Settings.Default}, Path=QuadStash}" />
+							<Button Click="Click_DeleteQuadStash" Content="Delete" />
+						</StackPanel>
+					</GroupBox>
+					<GroupBox Header="Control Opacity">
+						<Slider
+							IsSnapToTickEnabled="True"
+							Maximum="1"
+							Minimum="0.1"
+							TickFrequency="0.1"
+							TickPlacement="BottomRight"
+							Value="{Binding Source={x:Static properties:Settings.Default}, Path=ControlOpacity}" />
+					</GroupBox>
+				</StackPanel>
+			</TabItem>
+		</TabControl>
 
-		<GroupBox
-			Canvas.Left="202"
-			Canvas.Top="233"
-			Width="498"
-			Height="Auto"
-			Header="Path to Client.txt">
-			<DockPanel>
-				<Button
-					Margin="5,0,0,0"
-					Padding="5,0,5,0"
-					HorizontalAlignment="Right"
-					Click="Click_SearchFile"
-					DockPanel.Dock="Right">
-					Open
-				</Button>
-				<TextBox
-					Name="txt_PathToClientTxt"
-					VerticalAlignment="Stretch"
-					Text="{Binding Source={x:Static properties:Settings.Default}, Path=PathToClientTxt}" />
-			</DockPanel>
-		</GroupBox>
-		<GroupBox
-			Canvas.Left="10"
-			Canvas.Top="424"
-			Width="187"
-			Height="59"
-			Header="Control Opacity">
-			<Slider
-				Width="142"
-				Height="24"
-				Margin="10,10,0,0"
-				HorizontalAlignment="Left"
-				VerticalAlignment="Top"
-				IsSnapToTickEnabled="True"
-				Maximum="1"
-				Minimum="0.1"
-				TickFrequency="0.1"
-				TickPlacement="BottomRight"
-				Value="{Binding Source={x:Static properties:Settings.Default}, Path=ControlOpacity}" />
-		</GroupBox>
-
-	</Canvas>
+	</DockPanel>
 </Window>
