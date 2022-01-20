@@ -329,6 +329,7 @@ namespace TraderForPoe
 				T newwindow = new T();
 				newwindow.Topmost = topMost;
 				newwindow.Show();
+				newwindow.Activate();
 			}
 		}
 		private void CMenu_Settings(object sender, EventArgs e)
