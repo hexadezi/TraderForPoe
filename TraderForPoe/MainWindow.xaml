@@ -39,10 +39,10 @@
 			</Setter>
 			<Style.Triggers>
 				<Trigger Property="IsMouseOver" Value="True">
-					<Setter Property="Background" Value="#474747" />
+					<Setter Property="Background" Value="#515151" />
 				</Trigger>
 				<Trigger Property="IsPressed" Value="True">
-					<Setter Property="Background" Value="#515151" />
+					<Setter Property="Background" Value="#474747" />
 				</Trigger>
 			</Style.Triggers>
 		</Style>
