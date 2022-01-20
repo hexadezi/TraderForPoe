@@ -560,7 +560,7 @@ namespace TraderForPoe
 		{
 			if (mainWindowCollapsed == false)
 			{
-				btn_collapseMainWindow.Width = this.Width;
+				btn_collapseMainWindow.Width = this.Width - (brd_collapseMainWindow.BorderThickness.Left + brd_collapseMainWindow.BorderThickness.Right + brd_collapseMainWindow.Margin.Left);
 				btn_collapseMainWindow.Content = "⏷";
 				stk_MainPnl.Visibility = Visibility.Collapsed;
 				mainWindowCollapsed = true;

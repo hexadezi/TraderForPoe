@@ -53,28 +53,32 @@
 	<StackPanel Orientation="Horizontal">
 		<StackPanel
 			x:Name="stk_MainPnl"
+			Margin="0,0,0,-2"
 			CanVerticallyScroll="True"
 			MouseDown="Window_MouseDown">
 			<StackPanel.Resources>
 				<Style TargetType="{x:Type local:TradeItemControl}">
-					<Setter Property="Margin" Value="0,0,2,2" />
+					<Setter Property="Margin" Value="0,0,0,2" />
 				</Style>
 			</StackPanel.Resources>
 		</StackPanel>
+
 		<Border
 			Name="brd_collapseMainWindow"
-			Margin="0,0,0,2"
+			Margin="2,0,0,0"
 			BorderBrush="#474747"
 			BorderThickness="1"
 			Visibility="Collapsed">
 			<Button
 				Name="btn_collapseMainWindow"
 				Width="20"
+				HorizontalAlignment="Stretch"
 				VerticalAlignment="Stretch"
 				Click="ClickCollapseExpandMainwindow"
 				Visibility="Collapsed">
 				⏶
 			</Button>
 		</Border>
+
 	</StackPanel>
 </Window>
